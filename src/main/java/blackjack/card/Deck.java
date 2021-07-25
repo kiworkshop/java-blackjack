@@ -1,6 +1,5 @@
 package blackjack.card;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,18 +14,17 @@ public class Deck {
     private final List<Card> cards;
 
     public Deck() {
-        this.cards = Collections.unmodifiableList(generateCards());
+        this.cards = generateCards();
     }
 
     private List<Card> generateCards() {
-        List<Card> cards = new ArrayList<>();
-
         for (Suit suit : Suit.values()) {
             cards.addAll(generateNumberCards(suit));
             cards.addAll(generateMajorCards(suit));
             cards.add(new AceCard(suit));
         }
 
+        Collections.shuffle(cards);
         return cards;
     }
 
@@ -44,5 +42,11 @@ public class Deck {
 
     public int size() {
         return cards.size();
+    }
+
+    public Card draw() {
+        Card randomCard = cards.get(0);
+        cards.remove(randomCard);
+        return randomCard;
     }
 }

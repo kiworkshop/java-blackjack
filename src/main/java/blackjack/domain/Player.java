@@ -15,4 +15,8 @@ public class Player {
         this.name = name;
         this.cards = new ArrayList<>();
     }
+
+    public void receiveCard(Card card) {
+        cards.add(card);
+    }
 }

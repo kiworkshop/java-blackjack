@@ -1,7 +1,7 @@
-package blackjack.participant;
+package blackjack.domain.participant;
 
-import blackjack.card.Card;
-import blackjack.card.Hands;
+import blackjack.domain.card.Card;
+import blackjack.domain.card.Hands;
 
 public class Player {
     private final String name;

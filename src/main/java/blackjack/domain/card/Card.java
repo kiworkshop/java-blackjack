@@ -1,4 +1,4 @@
-package blackjack.card;
+package blackjack.domain.card;
 
 public class Card {
     static final int MAJOR_CARD_RANK  = 10;

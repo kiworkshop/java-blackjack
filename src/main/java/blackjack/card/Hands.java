@@ -24,4 +24,8 @@ public class Hands {
                 .mapToInt(Card::getRank)
                 .sum();
     }
+
+    public Card getFirstHand() {
+        return hands.get(0);
+    }
 }

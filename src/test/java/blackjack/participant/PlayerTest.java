@@ -43,7 +43,7 @@ class PlayerTest {
         assertThat(player.countHands()).isEqualTo(3);
     }
 
-    public Hands generateHands() {
+    private Hands generateHands() {
         List<Card> cards = new ArrayList<>();
         cards.add(new Card(Suit.DIAMOND, 1));
         cards.add(new Card(Suit.DIAMOND, "K"));

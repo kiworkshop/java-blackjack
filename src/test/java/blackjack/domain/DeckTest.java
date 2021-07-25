@@ -30,4 +30,19 @@ class DeckTest {
         //when //then
         assertTrue(deck.getDeck().contains(new Card(Denomination.ACE, Type.SPADE)));
     }
+
+    @DisplayName("덱에서 플레이어에게 카드를 한 장 넘겨준다")
+    @Test
+    void giveCard() {
+        //given
+        Deck deck = new Deck();
+        Player player = new Player("John Doe");
+
+        //when
+        player.receiveCard(deck.drawCard(0));
+
+        //then
+        assertTrue(player.getCards().contains(new Card(Denomination.ACE, Type.SPADE)));
+        assertFalse(deck.getDeck().contains(new Card(Denomination.ACE, Type.SPADE)));
+    }
 }

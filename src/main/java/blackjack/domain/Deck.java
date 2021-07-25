@@ -20,4 +20,8 @@ public class Deck {
         }
     }
 
+    public Card drawCard(int index) {
+        return deck.remove(index);
+    }
+
 }

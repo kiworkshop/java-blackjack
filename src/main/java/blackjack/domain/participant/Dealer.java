@@ -1,7 +1,7 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.game.Hands;
+import blackjack.domain.game.Hands;
 
 public class Dealer {
     private static final int ADD_HAND_THRESHOLD = 16;

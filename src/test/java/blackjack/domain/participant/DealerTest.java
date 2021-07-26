@@ -1,7 +1,7 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.game.Hands;
+import blackjack.domain.game.Hands;
 import blackjack.domain.card.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DealerTest {
@@ -23,7 +24,7 @@ class DealerTest {
         Dealer dealer = new Dealer(hands);
 
         //then
-        assertThat(dealer.countHands()).isEqualTo(2);
+        assertThat(dealer.countHands()).isEqualTo(INITIAL_DEAL_COUNT);
     }
 
     @Test
@@ -32,7 +33,7 @@ class DealerTest {
         //given
         Hands hands = generateHands();
 
-        //when
+        // when
         Dealer dealer = new Dealer(hands);
         Card faceUpCard = dealer.getFaceUpCard();
 
@@ -65,7 +66,7 @@ class DealerTest {
         Hands finalHands = dealer.finalDeal(new Card(Suit.CLUB, 6));
 
         //then
-        assertThat(finalHands.size()).isEqualTo(2);
+        assertThat(finalHands.size()).isEqualTo(INITIAL_DEAL_COUNT);
     }
 
     private Hands generateHands() {

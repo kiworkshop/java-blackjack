@@ -1,4 +1,4 @@
-package blackjack.game;
+package blackjack.domain.game;
 
 import blackjack.domain.card.AceCard;
 import blackjack.domain.card.Card;
@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Deck {
+    public static final int INITIAL_DEAL_COUNT = 2;
+    public static final int TOTAL_CARD_COUNT = 52;
     private static final int MIN_NUMBER_RANK = 2;
     private static final int MAX_NUMBER_RANK = 10;
     private static final List<String> majorSignature = Arrays.asList("K", "Q", "J");
@@ -52,5 +54,12 @@ public class Deck {
         Card randomCard = cards.get(0);
         cards.remove(randomCard);
         return randomCard;
+    }
+
+    public Hands drawInitialHands() {
+        List<Card> deals = new ArrayList<>();
+        IntStream.range(0, INITIAL_DEAL_COUNT)
+                .forEach(n -> deals.add(draw()));
+        return new Hands(deals);
     }
 }

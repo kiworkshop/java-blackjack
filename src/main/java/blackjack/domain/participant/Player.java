@@ -1,15 +1,15 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.game.Hands;
+import blackjack.domain.game.Hands;
 
 public class Player {
     private final String name;
     private Hands hands;
 
-    public Player(String name) {
+    public Player(String name, Hands hands) {
         this.name = name;
-        this.hands = new Hands();
+        this.hands = hands;
     }
 
     public String getName() {
@@ -23,4 +23,6 @@ public class Player {
     public void hit(Card card) {
         hands.addCard(card);
     }
+
+
 }

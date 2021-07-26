@@ -8,6 +8,7 @@ public class BlackjackController {
 
     public void run() {
         List<String> players = InputView.getPlayers();
-
+//        Blackjack blackjack = new Blackjack(players);
+//        blackjack.run();  // TODO Blackjack 구현
     }
 }

@@ -1,10 +1,11 @@
 package blackjack.domain.game;
 
 import blackjack.domain.card.Card;
-import blackjack.game.Deck;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
+import static blackjack.domain.game.Deck.TOTAL_CARD_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DeckTest {
@@ -16,11 +17,11 @@ class DeckTest {
         Deck deck = new Deck();
 
         //then
-        assertThat(deck.size()).isEqualTo(52);
+        assertThat(deck.size()).isEqualTo(TOTAL_CARD_COUNT);
     }
 
     @Test
-    @DisplayName("랜덤으로 카드를 한 장을 반환한다.")
+    @DisplayName("중복되지 않는 카드를 한 장 반환한다.")
     void random_card() {
         //given
         Deck deck = new Deck();
@@ -30,5 +31,17 @@ class DeckTest {
 
         //then
         assertThat(deck.size()).isEqualTo(51);
+    }
+
+    @Test
+    void initial_deal() {
+        // given
+        Deck deck = new Deck();
+
+        // when
+        Hands hands = deck.drawInitialHands();
+
+        // then
+        assertThat(hands.size()).isEqualTo(INITIAL_DEAL_COUNT);
     }
 }

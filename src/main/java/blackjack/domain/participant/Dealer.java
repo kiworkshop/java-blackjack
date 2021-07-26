@@ -26,4 +26,8 @@ public class Dealer {
         }
         return this.hands;
     }
+
+    public Card getFirstHand() {
+        return hands.getFirstHand();
+    }
 }

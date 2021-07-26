@@ -28,4 +28,8 @@ public class Card {
     public String getSignature() {
         return signature;
     }
+
+    public Suit getSuit() {
+        return suit;
+    }
 }

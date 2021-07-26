@@ -29,6 +29,10 @@ public class Table {
         return players.getPlayers();
     }
 
+    public Dealer getDealer() {
+        return dealer;
+    }
+
     public int getCardSize() {
         return deck.size();
     }

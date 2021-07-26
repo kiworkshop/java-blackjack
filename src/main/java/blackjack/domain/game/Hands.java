@@ -34,4 +34,8 @@ public class Hands {
     public Card getFirstHand() {
         return hands.get(0);
     }
+
+    public List<Card> getHands() {
+        return hands;
+    }
 }

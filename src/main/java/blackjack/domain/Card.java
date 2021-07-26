@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 public class Card {
 
     private final Denomination denomination;

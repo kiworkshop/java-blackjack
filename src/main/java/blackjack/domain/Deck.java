@@ -24,8 +24,12 @@ public class Deck {
         }
     }
 
-    public Card drawCard(int index) {
-        return deck.remove(index);
+    public Card drawCard() {
+        return deck.remove(generateRandomNumber());
+    }
+
+    private int generateRandomNumber() {
+        return RANDOM.nextInt(deck.size());
     }
 
 }

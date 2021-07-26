@@ -1,7 +1,8 @@
 package blackjack.domain;
 
-import blackjack.constant.Denomination;
-import blackjack.constant.Type;
+import blackjack.enums.Denomination;
+import blackjack.enums.Type;
+import lombok.Getter;
 
 import java.util.Objects;
 
@@ -35,6 +36,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return denomination.getValue() + type.getType();
+        return denomination.getScore() + type.getType();
+
     }
 }

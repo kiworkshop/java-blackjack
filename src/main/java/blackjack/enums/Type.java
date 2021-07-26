@@ -1,4 +1,4 @@
-package blackjack.constant;
+package blackjack.enums;
 
 public enum Type {
     SPADE("스페이드"),

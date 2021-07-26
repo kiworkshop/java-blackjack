@@ -1,5 +1,8 @@
-package blackjack.constant;
+package blackjack.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Denomination {
 
     ACE(1),
@@ -16,13 +19,9 @@ public enum Denomination {
     QUEEN(10),
     KING(10);
 
-    private final int value;
+    private final int score;
 
-    Denomination(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return value;
+    Denomination(int score) {
+        this.score = score;
     }
 }

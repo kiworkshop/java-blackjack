@@ -1,13 +1,12 @@
 package blackjack.domain;
 
-import blackjack.constant.Denomination;
-import blackjack.constant.Type;
+import blackjack.enums.Denomination;
+import blackjack.enums.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
 

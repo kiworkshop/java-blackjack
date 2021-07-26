@@ -5,9 +5,11 @@ import blackjack.domain.game.Hands;
 
 import java.util.List;
 
+import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
+
 public class Player {
     private final String name;
-    private Hands hands;
+    private final Hands hands;
 
     public Player(String name, Hands hands) {
         this.name = name;
@@ -24,6 +26,10 @@ public class Player {
 
     public void hit(Card card) {
         hands.addCard(card);
+    }
+
+    public boolean isNeverHit() {
+        return this.countHands() == INITIAL_DEAL_COUNT;
     }
 
     public List<Card> getCards() {

@@ -1,7 +1,7 @@
 package blackjack.domain.card;
 
 public class Card {
-    static final int MAJOR_CARD_RANK  = 10;
+    static final int MAJOR_CARD_RANK = 10;
 
     private final Suit suit;
     private final int rank;

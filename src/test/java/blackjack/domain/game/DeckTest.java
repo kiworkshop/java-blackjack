@@ -34,6 +34,7 @@ class DeckTest {
     }
 
     @Test
+    @DisplayName("초기 딜을 위한 중복되지 않는 카드 2장을 반환한다.")
     void initial_deal() {
         // given
         Deck deck = new Deck();

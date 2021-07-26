@@ -1,6 +1,8 @@
 package blackjack.controller;
 
 import blackjack.domain.game.Blackjack;
+import blackjack.domain.participant.Player;
+import blackjack.dto.PlayerDto;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
@@ -17,5 +19,20 @@ public class BlackjackController {
         Blackjack blackjack = new Blackjack(players);
 
         OutputView.initialDeal(blackjack.getParticipants());
+
+        for (Player player : blackjack.getPlayers()) {
+            hitOrStand(blackjack, player);
+        }
+    }
+
+    private void hitOrStand(Blackjack blackjack, Player player) {
+        while (InputView.isHitOrStand(player.getName())) {
+            PlayerDto playerDto = blackjack.hit(player);
+            OutputView.printPlayerHands(playerDto);
+        }
+
+        if (player.isNeverHit()) {
+            OutputView.printPlayerHands(new PlayerDto(player));
+        }
     }
 }

@@ -17,6 +17,7 @@ public class OutputView {
         printDealerHands(participants.getDealerDto());
         participants.getPlayers()
                 .forEach(OutputView::printPlayerHands);
+        System.out.println();
     }
 
     private static void printDealMessage(ParticipantDto participants) {

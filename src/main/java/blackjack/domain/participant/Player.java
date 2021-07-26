@@ -5,11 +5,11 @@ import blackjack.domain.card.Hands;
 
 public class Player {
     private final String name;
-    private final Hands hands;
+    private Hands hands;
 
-    public Player(String name, Hands hands) {
+    public Player(String name) {
         this.name = name;
-        this.hands = hands;
+        this.hands = new Hands();
     }
 
     public String getName() {

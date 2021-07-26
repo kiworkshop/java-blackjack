@@ -17,6 +17,7 @@ public class Deck {
     public Deck() {
         this.cards = new ArrayList<>();
         generateCards();
+        Collections.shuffle(cards);
     }
 
     private void generateCards() {
@@ -25,8 +26,6 @@ public class Deck {
             cards.addAll(generateMajorCards(suit));
             cards.add(new AceCard(suit));
         }
-
-        Collections.shuffle(cards);
     }
 
     private List<Card> generateMajorCards(Suit suit) {

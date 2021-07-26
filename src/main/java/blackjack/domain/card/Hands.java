@@ -11,6 +11,10 @@ public class Hands {
         this.hands.addAll(cards);
     }
 
+    public Hands() {
+        this.hands = new ArrayList<>();
+    }
+
     public void addCard(Card card) {
         this.hands.add(card);
     }

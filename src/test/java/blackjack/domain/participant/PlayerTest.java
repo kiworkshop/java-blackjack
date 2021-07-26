@@ -1,13 +1,9 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.card.Hands;
 import blackjack.domain.card.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,14 +14,12 @@ class PlayerTest {
     void create() {
         //given
         String name = "pobi";
-        Hands hands = generateHands();
 
         //when
-        Player player = new Player(name, hands);
+        Player player = new Player(name);
 
         //then
         assertThat(player.getName()).isEqualTo(name);
-        assertThat(player.countHands()).isEqualTo(2);
     }
 
     @Test
@@ -33,21 +27,12 @@ class PlayerTest {
     void hit() {
         //given
         String name = "pobi";
-        Hands hands = generateHands();
 
         //when
-        Player player = new Player(name, hands);
+        Player player = new Player(name);
         player.hit(new Card(Suit.CLUB, 8));
 
         //then
-        assertThat(player.countHands()).isEqualTo(3);
-    }
-
-    private Hands generateHands() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.DIAMOND, 1));
-        cards.add(new Card(Suit.DIAMOND, "K"));
-
-        return new Hands(cards);
+        assertThat(player.countHands()).isEqualTo(1);
     }
 }

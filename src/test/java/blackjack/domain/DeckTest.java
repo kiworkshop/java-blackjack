@@ -1,7 +1,7 @@
 package blackjack.domain;
 
-import blackjack.constant.Denomination;
-import blackjack.constant.Type;
+import blackjack.enums.Denomination;
+import blackjack.enums.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,6 @@ class DeckTest {
     @DisplayName("생성된 덱에 포함된 카드 숫자가 52장인지 확인한다")
     @Test
     void createTest() {
-
         // given
         Deck deck = new Deck();
 
@@ -39,10 +38,10 @@ class DeckTest {
         Player player = new Player("John Doe");
 
         //when
-        player.receiveCard(deck.drawCard(0));
+        player.receiveCard(deck.drawCard());
 
         //then
-        assertTrue(player.getCards().contains(new Card(Denomination.ACE, Type.SPADE)));
-        assertFalse(deck.getDeck().contains(new Card(Denomination.ACE, Type.SPADE)));
+        assertThat(deck.getDeck()).hasSize(51);
+        assertThat(player.getCards()).hasSize(1);
     }
 }

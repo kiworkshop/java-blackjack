@@ -10,6 +10,7 @@ public enum CardScore {
     SEVEN("7", 7),
     EIGHT("8", 8),
     NINE("9", 9),
+    TEN("10", 10),
     J("J", 10),
     Q("Q", 10),
     K("K", 10);

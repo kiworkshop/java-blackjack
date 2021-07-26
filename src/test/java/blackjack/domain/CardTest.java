@@ -1,27 +1,26 @@
 package blackjack.domain;
 
+import blackjack.enums.CardScore;
+import blackjack.enums.CardType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CardTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"동그라미", "네모"})
-    @DisplayName("카드의 타입이 다이아몬드,스페이스,클로버,하트 중 하나가 아니면 에러를 리턴한다")
-    void validateType(String type) {
-        //when //then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Card("1", type));
-    }
+    @CsvSource(value = {"TWO, 2", "THREE, 3", "FOUR, 4", "FIVE, 5", "SIX, 6", "A, 1", "K, 10", "Q, 10", "J, 10"})
+    @DisplayName("카드의 점수를 반환한다.")
+    void getScore(String inputScore, int expectedValue) {
+        //given
+        Card card = new Card(CardScore.valueOf(inputScore), CardType.DIAMOND);
 
-    @ParameterizedTest
-    @ValueSource(strings = {"B", "10", "1"})
-    @DisplayName("카드의 스코어가 a,j,q,k,2~9 외의 값이면 에러를 리턴한다")
-    void validateScore(String score) {
-        //when //then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Card(score, "하트"));
-    }
+        //when
+        int score = card.getScore();
 
+        //then
+        assertThat(score).isEqualTo(expectedValue);
+    }
 }

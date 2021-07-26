@@ -1,22 +1,32 @@
-//package blackjack.enums;
-//
-//public enum CardScore {
-//    A(new int{1,11}),
-//    TWO(2),
-//    THREE(3),
-//    FOUR(4),
-//    FIVE(5),
-//    SIX(6),
-//    SEVEN(7),
-//    EIGHT(8),
-//    NINE(9),
-//    J(10),
-//    Q(10),
-//    K(10);
-//
-//    private final int[] score;
-//
-//    CardScore(int score){
-//        this.score = score;
-//    }
-//}
+package blackjack.enums;
+
+public enum CardScore {
+    A("A", 1),
+    TWO("2", 2),
+    THREE("3", 3),
+    FOUR("4", 4),
+    FIVE("5", 5),
+    SIX("6", 6),
+    SEVEN("7", 7),
+    EIGHT("8", 8),
+    NINE("9", 9),
+    J("J", 10),
+    Q("Q", 10),
+    K("K", 10);
+
+    private final String denomination;
+    private final int score;
+
+    CardScore(String denomination, int score) {
+        this.denomination = denomination;
+        this.score = score;
+    }
+
+    public String getDenomination() {
+        return denomination;
+    }
+
+    public int getScore() {
+        return score;
+    }
+}

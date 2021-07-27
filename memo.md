@@ -69,3 +69,45 @@ Ace, 7, 9, 4
 
 -> 21
 
+## 카드 뽑기
+
+<딜러>
+처음에 2장의 카드를 받고 카드합이 16 이하이면 한 장을 더 뽑는다. 에이스 1장은 11로 계산하고 나머지 에이스는 1로 계산한다. -> 에이스가 포함되어 있을 경우 카드합에 10을 더해준다
+
+<에이스가 포함되어 있지 않을 경우>
+
+카드합이 16 이하이면 카드를 뽑음.
+
+<에이스가 포함되어 있는 경우>
+
+카드합에 10을 더한 값이 16 이하이면 카드를 뽑음.
+
+## 카드 뽑기 및 에이스가 여러개 포함될 가능성이 있는 카드덱의 합 계산
+
+// 카드값의 합(ace가 11)
+int scoreOfAceAsEleven; // 에이스의 개수 int aceCount; // Ace카드값의 차이 int DiFFERENCE_OF_ACE_VALUE = 10;
+
+    calcaluateResult(){
+        while (canCountAceAsOne) {
+            카드값의 합 scoreOfAceAsEleven = scoreOfAceAsOne(scoreOfAsAsEleven);
+            aceCount--;
+        }
+
+		return scoreOfAceAsEleven;
+    }
+
+	boolean canCountAceAsOne(int 카드값의 합, 에이스의 개수){
+		에이스가 하나라도 있음 > 0  && 카드 합이 21(상수선언)을 넘음(ace를 1로 취급가능)}
+	}
+
+	int scoreOfAceAsOne(int 카드값의 합){
+	    (ace를 11로 취급한) scoreOfAceAsEleven 카드값의 합 - 10
+	}
+
+- 17 dealer = threshould
+
+컨트롤러에서 딜러에게 boolean Drawble(){ return calculateResult() < 17 } drawCard()
+
+- 21 player 컨트롤러에서 플레이어에게 더 받을건지 묻는 질문 boolean 플레이어의 답 Yes && Drawable() { return calculateResult() < 21 } drawCard()
+
+

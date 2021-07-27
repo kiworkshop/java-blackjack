@@ -9,7 +9,6 @@ public class Score {
     private Score(int score) {
         this.score = score;
     }
-
     public static Score of(int score) {
         return new Score(score);
     }

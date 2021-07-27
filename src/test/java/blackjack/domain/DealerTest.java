@@ -15,8 +15,8 @@ class DealerTest {
         //given
         Dealer dealer = new Dealer();
         Deck deck = new Deck();
-        dealer.getCards().add(new Card(Denomination.EIGHT, Type.CLUB));
-        dealer.getCards().add(new Card(Denomination.EIGHT, Type.HEART));
+        dealer.receiveCard((new Card(Denomination.EIGHT, Type.CLUB)));
+        dealer.receiveCard((new Card(Denomination.EIGHT, Type.HEART)));
 
         //when
         dealer.drawOrNot(deck);

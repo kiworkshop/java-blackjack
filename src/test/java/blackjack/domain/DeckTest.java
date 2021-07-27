@@ -35,7 +35,7 @@ class DeckTest {
     void giveCardToPlayer() {
         //given
         Deck deck = new Deck();
-        Player player = new Player("John Doe");
+        Participant player = new Player("John Doe");
 
         //when
         player.receiveCard(deck.drawCard());
@@ -43,5 +43,20 @@ class DeckTest {
         //then
         assertThat(deck.getDeck()).hasSize(51);
         assertThat(player.getCards()).hasSize(1);
+    }
+
+    @DisplayName("덱에서 딜러에게 카드를 한 장 넘겨준다")
+    @Test
+    void giveCardToDealer() {
+        //given
+        Deck deck = new Deck();
+        Participant dealer = new Dealer();
+
+        //when
+        dealer.receiveCard(deck.drawCard());
+
+        //then
+        assertThat(deck.getDeck()).hasSize(51);
+        assertThat(dealer.getCards()).hasSize(1);
     }
 }

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class PlayersNameInputDto {
+public class PlayersNameInputDTO {
 
     private final String playersName;
 }

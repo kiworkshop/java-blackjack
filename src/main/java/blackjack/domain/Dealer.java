@@ -19,7 +19,7 @@ public class Dealer extends Participant {
     }
 
     @Override
-    protected boolean drawable() {
+    public boolean drawable() {
         return getCardsSum() < DEALER_DRAW_THRESHOLD;
     }
 }

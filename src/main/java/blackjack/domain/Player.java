@@ -12,7 +12,7 @@ public class Player extends Participant {
     }
 
     @Override
-    protected boolean drawable() {
+    public boolean drawable() {
         return getCardsSum() < PLAYER_DRAW_THRESHOLD;
     }
 }

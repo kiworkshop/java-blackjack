@@ -2,7 +2,7 @@ package blackjack.view;
 
 import blackjack.domain.Player;
 import blackjack.dto.DrawCardResponseDTO;
-import blackjack.dto.PlayersNameInputDto;
+import blackjack.dto.PlayersNameInputDTO;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class InputView {
     private PlayersNameInputDto getPlayersName() {
         System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
         String input = scanner.nextLine();
-        return new PlayersNameInputDto(input);
+        return new PlayersNameInputDTO(input);
     }
 
     private DrawCardResponseDTO getPlayersResponse(Player player) {

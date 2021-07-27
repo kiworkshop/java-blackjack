@@ -17,6 +17,11 @@ public class Card {
         this.type = type;
     }
 
+    public boolean isAce() {
+        return denomination.equals(Denomination.ACE);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

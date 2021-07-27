@@ -1,8 +1,5 @@
 package blackjack.domain;
 
-import blackjack.enums.Denomination;
-
-import java.util.List;
 import java.util.Objects;
 
 public class Score {
@@ -20,16 +17,6 @@ public class Score {
     public int getScore() {
         return score;
     }
-
-    public static Score getCardsSum(List<Card> cards) {
-        int cardsSum = cards.stream()
-                .map(Card::getDenomination)
-                .mapToInt(Denomination::getScore)
-                .sum();
-
-        return new Score(cardsSum);
-    }
-
 
     @Override
     public boolean equals(Object o) {

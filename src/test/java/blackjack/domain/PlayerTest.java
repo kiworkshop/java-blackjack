@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PlayerTest {
 
@@ -36,5 +35,58 @@ public class PlayerTest {
         //then
         assertThat(player.getCards()).contains(card1);
         assertThat(player.getCards()).contains(card2);
+    }
+
+    @Test
+    @DisplayName("Ace, Ace, 8이 포함된 카드 덱의 합이 20이다.")
+    void getCardsSumTest1() {
+        //given
+        Player player = new Player("name");
+
+        player.getCards().add(new Card(Denomination.ACE, Type.CLUB));
+        player.getCards().add(new Card(Denomination.ACE, Type.HEART));
+        player.getCards().add(new Card(Denomination.EIGHT, Type.CLUB));
+
+        //when
+        int result = player.getCardsSum();
+
+        //then
+        assertThat(result).isEqualTo(20);
+    }
+
+    @Test
+    @DisplayName("Ace가 4장 포함된 카드 덱의 합은 14이다.")
+    void getCardsSumTest2() {
+        //given
+        Player player = new Player("name");
+
+        player.getCards().add(new Card(Denomination.ACE, Type.SPADE));
+        player.getCards().add(new Card(Denomination.ACE, Type.CLUB));
+        player.getCards().add(new Card(Denomination.ACE, Type.HEART));
+        player.getCards().add(new Card(Denomination.ACE, Type.DIAMOND));
+
+        //when
+        int result = player.getCardsSum();
+
+        //then
+        assertThat(result).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("Ace 3장과 7이 포함된 카드 덱의 합은 20이다.")
+    void getCardsSumTest3() {
+        //given
+        Player player = new Player("name");
+
+        player.getCards().add(new Card(Denomination.ACE, Type.SPADE));
+        player.getCards().add(new Card(Denomination.ACE, Type.CLUB));
+        player.getCards().add(new Card(Denomination.ACE, Type.HEART));
+        player.getCards().add(new Card(Denomination.SEVEN, Type.HEART));
+
+        //when
+        int result = player.getCardsSum();
+
+        //then
+        assertThat(result).isEqualTo(20);
     }
 }

@@ -19,11 +19,11 @@ public class Dealer {
         this.cards = new ArrayList<>();
     }
 
-    public void drawOrNot(Deck deck) {
-        if (Score.getCardsSum(cards).getScore() <= Score.of(DEALER_DRAW_THRESHOLD).getScore()) {
-            this.cards.add(deck.drawCard());
-        }
-    }
+//    public void drawOrNot(Deck deck) {
+//        if (Score.getCardsSum(cards).getScore() <= Score.of(DEALER_DRAW_THRESHOLD).getScore()) {
+//            this.cards.add(deck.drawCard());
+//        }
+//    }
 
 
 }

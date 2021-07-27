@@ -1,7 +1,7 @@
 package blackjack.domain;
 
+import blackjack.enums.Denomination;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

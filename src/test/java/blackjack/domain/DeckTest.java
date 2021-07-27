@@ -32,7 +32,7 @@ class DeckTest {
 
     @DisplayName("덱에서 플레이어에게 카드를 한 장 넘겨준다")
     @Test
-    void giveCard() {
+    void giveCardToPlayer() {
         //given
         Deck deck = new Deck();
         Player player = new Player("John Doe");

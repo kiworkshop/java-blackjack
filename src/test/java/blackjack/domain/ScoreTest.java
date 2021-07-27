@@ -14,6 +14,4 @@ class ScoreTest {
         assertThat(Score.of(3))
                 .isEqualTo(Score.of(3));
     }
-
-
 }

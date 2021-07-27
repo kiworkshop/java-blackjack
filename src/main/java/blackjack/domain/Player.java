@@ -1,29 +1,18 @@
 package blackjack.domain;
 
-import blackjack.enums.Denomination;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
-public class Player {
+public class Player extends Participant {
 
-    private final String name;
-    private final List<Card> cards;
+    private static final int PLAYER_DRAW_THRESHOLD = 21;
 
     public Player(String name) {
-        this.name = name;
-        this.cards = new ArrayList<>();
+        super(name);
     }
 
-    public void receiveCard(Card card) {
-        cards.add(card);
+    @Override
+    protected boolean drawable() {
+        return getCardsSum() < PLAYER_DRAW_THRESHOLD;
     }
-
-//    public void validateName(String name){
-//        if (StringUtils.isBlank(name)) {
-//            throw new IllegalArgumentException("이름이 빈 칸 혹은 null 값이 아닌지 확인해주세요.");
-//        }
-//    }
 }

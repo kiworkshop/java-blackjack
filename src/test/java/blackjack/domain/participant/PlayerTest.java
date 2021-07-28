@@ -1,7 +1,9 @@
-package blackjack.domain;
+package blackjack.domain.participant;
 
-import blackjack.enums.Denomination;
-import blackjack.enums.Type;
+import blackjack.domain.card.Card;
+import blackjack.domain.participant.Player;
+import blackjack.domain.card.Denomination;
+import blackjack.domain.card.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

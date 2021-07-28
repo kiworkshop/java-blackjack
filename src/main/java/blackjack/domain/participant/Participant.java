@@ -1,6 +1,7 @@
-package blackjack.domain;
+package blackjack.domain.participant;
 
-import blackjack.enums.Denomination;
+import blackjack.domain.card.Card;
+import blackjack.domain.card.Denomination;
 import lombok.Getter;
 
 import java.util.ArrayList;

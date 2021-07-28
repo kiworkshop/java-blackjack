@@ -1,4 +1,4 @@
-package blackjack.enums;
+package blackjack.domain.card;
 
 import lombok.Getter;
 

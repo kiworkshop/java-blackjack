@@ -1,5 +1,6 @@
 package blackjack.domain.game;
 
+import blackjack.domain.card.AceCard;
 import blackjack.domain.card.Card;
 
 import java.util.ArrayList;
@@ -13,10 +14,6 @@ public class Hands {
         this.hands.addAll(cards);
     }
 
-    public Hands() {
-        this.hands = new ArrayList<>();
-    }
-
     public void addCard(Card card) {
         this.hands.add(card);
     }
@@ -26,7 +23,31 @@ public class Hands {
     }
 
     public int sumRanks() {
+        int sumExceptAceCards = calculateSumExceptAceCards();
+        int aceCardCount = countAceCards();
+
+        if (aceCardCount > 0) {
+            return softOrHardSum(sumExceptAceCards, aceCardCount);
+        }
+        return sumExceptAceCards;
+    }
+
+    private int softOrHardSum(int sumExceptAceCards, int aceCardCount) {
+        int threshold = 11 - aceCardCount;
+        if (sumExceptAceCards <= threshold) {
+            return (aceCardCount - 1) + 11 + sumExceptAceCards;
+        }
+        return aceCardCount + sumExceptAceCards;
+    }
+
+    private int countAceCards() {
+        return (int) hands.stream()
+                .filter(AceCard.class::isInstance).count();
+    }
+
+    private int calculateSumExceptAceCards() {
         return hands.stream()
+                .filter(card -> !card.getSignature().equals(AceCard.SIGNATURE))
                 .mapToInt(Card::getRank)
                 .sum();
     }

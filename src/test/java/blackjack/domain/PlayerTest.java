@@ -1,9 +1,12 @@
 package blackjack.domain;
 
+import blackjack.enums.CardScore;
+import blackjack.enums.CardType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,5 +69,19 @@ public class PlayerTest {
 
         //when //then
         assertThatThrownBy(() -> player.addFirstTwoCards(cards)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("플레이어가 가진 카드의 합을 반환한다.")
+    void sumScore() {
+        //given
+        Player player = new Player("pobi");
+        player.addFirstTwoCards(Arrays.asList(new Card(CardScore.J, CardType.CLUB), new Card(CardScore.FIVE, CardType.CLUB)));
+
+        //when
+        int sum = player.sumScore();
+
+        //then
+        assertThat(sum).isEqualTo(15);
     }
 }

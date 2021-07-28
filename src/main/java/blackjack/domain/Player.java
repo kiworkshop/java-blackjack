@@ -32,4 +32,10 @@ public class Player {
 
         cards.addAll(firstTwoCards);
     }
+
+    public int sumScore() {
+        return cards.stream()
+                .mapToInt(Card::getScore)
+                .sum();
+    }
 }

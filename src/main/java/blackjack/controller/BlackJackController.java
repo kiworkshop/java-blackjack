@@ -7,6 +7,7 @@ import blackjack.domain.PlayersFactory;
 import blackjack.dto.DrawCardResponseDTO;
 import blackjack.dto.PlayersNameInputDTO;
 import blackjack.view.InputView;
+import blackjack.view.OutputView;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class BlackJackController {
     private final Dealer dealer;
     private final Deck deck;
     private final InputView inputview = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public BlackJackController() {
         PlayersNameInputDTO namesInput = inputview.getPlayersName();
@@ -36,7 +38,7 @@ public class BlackJackController {
         }
         dealer.receiveCard(deck.drawCard());
         dealer.receiveCard(deck.drawCard());
-        // 딜러랑 플레이어들에게 카드를 나누었다는 안내문 출력
+        OutputView.printFirstCardsGiven(players, dealer);
         // 딜러의 카드 목록을 출력
         // 플레이어의 카드 목록을 출력
     }

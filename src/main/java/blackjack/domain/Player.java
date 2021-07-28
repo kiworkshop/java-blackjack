@@ -52,4 +52,9 @@ public class Player {
         return cards.stream()
                 .anyMatch(Card::isAce);
     }
+
+    public boolean isBurst(int sum) {
+        return sum > BLACKJACK;
+
+    }
 }

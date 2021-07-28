@@ -122,4 +122,45 @@ public class PlayerTest {
         assertThat(score2).isEqualTo(13);
         assertThat(score3).isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("게임에서 A만 연속으로 나오는 경우 21을 초과하지 않는 최대점수를 리턴한다")
+    void sumScoreOnlyWithAce() {
+        //given
+        Player player1 = new Player("pobi1");
+        Player player2 = new Player("pobi2");
+        Player player3 = new Player("pobi3");
+        player1.addFirstTwoCards(Arrays.asList(new Card(CardScore.A, CardType.HEART), new Card(CardScore.A, CardType.CLUB)));
+        player2.addFirstTwoCards(Arrays.asList(new Card(CardScore.A, CardType.HEART), new Card(CardScore.A, CardType.CLUB)));
+        player2.addCard(new Card(CardScore.A, CardType.DIAMOND));
+        player3.addFirstTwoCards(Arrays.asList(new Card(CardScore.A, CardType.HEART), new Card(CardScore.A, CardType.CLUB)));
+        player3.addCard(new Card(CardScore.A, CardType.DIAMOND));
+        player3.addCard(new Card(CardScore.A, CardType.SPADE));
+
+        //when
+        int score1 = player1.sumScore();
+        int score2 = player2.sumScore();
+        int score3 = player3.sumScore();
+
+        //then
+        assertThat(score1).isEqualTo(12);
+        assertThat(score2).isEqualTo(13);
+        assertThat(score3).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("카드 값의 합이 21을 초과할 경우 참을 반환한다.")
+    void isBurst() {
+        //given
+        Player player = new Player("pobi");
+        player.addFirstTwoCards(Arrays.asList(new Card(CardScore.Q, CardType.CLUB), new Card(CardScore.J, CardType.DIAMOND)));
+        player.addCard(new Card(CardScore.TWO, CardType.CLUB));
+        int sum = player.sumScore();
+
+        //when
+        boolean isBurst = player.isBurst(sum);
+
+        //then
+        assertThat(isBurst).isTrue();
+    }
 }

@@ -15,6 +15,13 @@ public class InputView {
         return splitByComma(playerNames);
     }
 
+    public String getAdditionalCard(String playerName) {
+        System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)", playerName);
+        String answer = scanner.nextLine();
+        checkBlank(answer);
+        return answer;
+    }
+
     private void checkBlank(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("한 글자 이상의 사람 이름을 입력해주세요");

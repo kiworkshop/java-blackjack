@@ -42,7 +42,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return denomination.getScore() + type.getType();
+        return denomination.getDenominationName() + type.getType();
 
     }
 }

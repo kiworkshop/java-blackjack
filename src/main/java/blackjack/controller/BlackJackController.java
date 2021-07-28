@@ -15,18 +15,18 @@ public class BlackJackController {
     private final List<Player> players;
     private final Dealer dealer;
     private final Deck deck;
-    private final InputView inputview = new InputView();
+    private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
     public BlackJackController() {
-        PlayersNameInputDTO namesInput = inputview.getPlayersName();
+        PlayersNameInputDTO namesInput = inputView.getPlayersName();
         this.players = PlayersFactory.createPlayers(namesInput.getPlayersName());
         this.dealer = new Dealer();
         this.deck = new Deck();
     }
 
     public void run() {
-        // 시작해서 카드 두 장씩 분배
+        // 시작해서 카드 두 장씩 분배, 카드 목록의 출력
         drawTowCards();
         // 
     }
@@ -38,9 +38,9 @@ public class BlackJackController {
         }
         dealer.receiveCard(deck.drawCard());
         dealer.receiveCard(deck.drawCard());
-        OutputView.printFirstCardsGiven(players, dealer);
-        // 딜러의 카드 목록을 출력
-        // 플레이어의 카드 목록을 출력
+        outputView.printFirstCardsGiven(players, dealer);
+        outputView.printDealerCard(dealer);
+        outputView.printPlayersCard(players);
     }
 
     private void drawCardToPlayers() {
@@ -50,7 +50,7 @@ public class BlackJackController {
     }
 
     private void drawCardToPlayers(Player player) {
-        DrawCardResponseDTO drawCardResponse = inputview.getPlayersResponse(player);
+        DrawCardResponseDTO drawCardResponse = inputView.getPlayersResponse(player);
         while (player.drawable() && isYes(drawCardResponse)) {
             player.receiveCard(deck.drawCard());
             // 해당 플레이어의 카드 목록을 출력

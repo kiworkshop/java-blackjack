@@ -40,4 +40,19 @@ class DealerTest {
         //then
         assertThat(dealer.getCards().size()).isEqualTo(2);
     }
+
+    @DisplayName("딜러가 갖고 있는 카드를 출력한다.")
+    @Test
+    void DealerPrintTest() {
+        //given
+        Dealer dealer = new Dealer();
+        Deck deck = new Deck();
+        dealer.receiveCard(new Card(Denomination.NINE, Type.CLUB));
+        dealer.receiveCard((new Card(Denomination.EIGHT, Type.HEART)));
+
+        //when
+
+        //then
+        assertThat(dealer.toString()).isEqualTo("딜러: 9클로버, 8하트");
+    }
 }

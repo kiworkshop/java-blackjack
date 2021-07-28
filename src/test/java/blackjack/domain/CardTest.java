@@ -20,7 +20,7 @@ public class CardTest {
 
     @DisplayName("카드 객체의 숫자와 종류를 출력한다")
     @Test
-    void printCard() {
+    void printCardTwoDiamond() {
         //given
         Card card = new Card(Denomination.TWO, Type.DIAMOND);
 
@@ -28,5 +28,17 @@ public class CardTest {
 
         //then
         assertThat(card.toString()).isEqualTo("2다이아몬드");
+    }
+
+    @DisplayName("카드 객체의 숫자와 종류를 출력한다")
+    @Test
+    void printCardAceHeart() {
+        //given
+        Card card = new Card(Denomination.ACE, Type.HEART);
+
+        //when
+
+        //then
+        assertThat(card.toString()).isEqualTo("A하트");
     }
 }

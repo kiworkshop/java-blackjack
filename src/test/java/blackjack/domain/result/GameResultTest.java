@@ -7,20 +7,18 @@ import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.domain.participant.PlayersFactory;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
-class TotalResultTest {
+class GameResultTest {
 
 
     @ParameterizedTest
@@ -43,10 +41,10 @@ class TotalResultTest {
                 .receiveCard((new Card(Denomination.QUEEN, Type.SPADE)));   // 플레이어 승
 
         //when
-        TotalResult totalResult = TotalResult.of(dealer, players);
+        GameResult gameResult = GameResult.of(dealer, players);
 
         //then
-        assertThat(totalResult.getPlayersResult()).containsValues(winningResult);
+        assertThat(gameResult.getPlayersResult()).containsValues(winningResult);
 
     }
 
@@ -70,10 +68,10 @@ class TotalResultTest {
                 .receiveCard((new Card(Denomination.QUEEN, Type.SPADE)));   // 플레이어 승 = 딜러 패2
 
         //when
-        TotalResult totalResult = TotalResult.of(dealer, players);
+        GameResult gameResult = GameResult.of(dealer, players);
 
         //then
-        assertThat(totalResult.getDealerResult()).contains(entry(winningResult, result));
+        assertThat(gameResult.getDealerResult()).contains(entry(winningResult, result));
     }
 
     private static Stream<Arguments> dealerResultTest() {

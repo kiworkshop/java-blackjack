@@ -4,6 +4,7 @@ import blackjack.domain.card.Deck;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.domain.participant.PlayersFactory;
+import blackjack.domain.result.GameResult;
 import blackjack.dto.DrawCardResponseDTO;
 import blackjack.dto.PlayersNameInputDTO;
 import blackjack.view.InputView;
@@ -32,6 +33,10 @@ public class BlackJackController {
         drawCardToPlayers();
         // 딜러에게 한장씩 카드 분배(카드 합이 17미만인 경우만)
         drawCardToDealer();
+        // 플레이어가 가진 카드목록과 카드값의 총합 출력
+        outputView.printCardsResult(dealer, players);
+        // 게임 결과를 출력
+        outputView.printGameResult(GameResult.of(dealer, players));
     }
 
     private void drawTowCards() {

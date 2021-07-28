@@ -5,12 +5,12 @@ import blackjack.domain.participant.Player;
 
 import java.util.*;
 
-public class TotalResult {
+public class GameResult {
 
     private final Map<Player, WinningResult> playersResult = new LinkedHashMap<>();
     private final Map<WinningResult, Integer> dealerResult = new LinkedHashMap<>();
 
-    private TotalResult(Dealer dealer, List<Player> players) {
+    private GameResult(Dealer dealer, List<Player> players) {
         // 플레이어 기준 승패를 가리기
         // winningResult를 넣은 Map에다가 키 값으로 숫자(승패 숫자)
         Arrays.stream(WinningResult.values())
@@ -27,8 +27,8 @@ public class TotalResult {
                 .forEach(winningResult -> dealerResult.computeIfPresent(winningResult.reverse(), (key, value) -> value + 1));
     }
 
-    public static TotalResult of(Dealer dealer, List<Player> players) {
-        return new TotalResult(dealer, players);
+    public static GameResult of(Dealer dealer, List<Player> players) {
+        return new GameResult(dealer, players);
     }
 
     public Map<Player, WinningResult> getPlayersResult() {

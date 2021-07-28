@@ -3,7 +3,11 @@ package blackjack.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CardDeckTest {
     @Test
@@ -13,7 +17,7 @@ class CardDeckTest {
         CardDeck cardDeck = new CardDeck();
 
         //when
-        int size = cardDeck.size();
+        int size = cardDeck.getSize();
 
         //then
         assertThat(size).isEqualTo(52);
@@ -44,5 +48,18 @@ class CardDeckTest {
 
         //then
         assertThat(additionalCard).isNotNull();
+    }
+
+    @Test
+    @DisplayName("카드가 없을때 카드를 뽑으면 예외가 발생한다")
+    void getAdditionlCard_throw_exception_no_cards_left() {
+        //given
+        CardDeck cardDeck = new CardDeck();
+        IntStream.range(0, 52).forEach(i -> cardDeck.getAdditionalCard());
+
+        //when //then
+        assertThatThrownBy(cardDeck::getAdditionalCard)
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessage("더이상 카드가 없습니다.");
     }
 }

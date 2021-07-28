@@ -12,7 +12,8 @@ import java.util.stream.IntStream;
 
 public class CardDeck {
 
-    public static final int FIRST_CARDS_SETTING_COUNT = 2;
+    private static final int FIRST_CARDS_SETTING_COUNT = 2;
+
     private final List<Card> cards = new ArrayList<>();
     private int size;
 
@@ -25,7 +26,6 @@ public class CardDeck {
                 .forEach(cardScore -> {
                     Arrays.stream(CardType.values()).forEach(cardType -> cards.add(new Card(cardScore, cardType)));
                 });
-
         size = cards.size();
         suffleCard();
     }
@@ -45,6 +45,10 @@ public class CardDeck {
     }
 
     public Card getAdditionalCard() {
+        if (size < 1) {
+            throw new IndexOutOfBoundsException("더이상 카드가 없습니다.");
+        }
+
         return cards.get(--size);
     }
 }

@@ -3,22 +3,17 @@ package blackjack.dto;
 import blackjack.domain.card.Card;
 import blackjack.domain.participant.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PlayerDto {
     private final String name;
     private final List<Card> cards;
-
-    public PlayerDto(String name, List<Card> cards) {
-        this.name = name;
-        this.cards = Collections.unmodifiableList(new ArrayList<>(cards));
-    }
+    private int rankSum;
 
     public PlayerDto(Player player) {
         this.name = player.getName();
         this.cards = player.getCards();
+        this.rankSum = cards.stream().mapToInt(Card::getRank).sum();
     }
 
     public String getName() {
@@ -27,5 +22,9 @@ public class PlayerDto {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public int getRankSum() {
+        return rankSum;
     }
 }

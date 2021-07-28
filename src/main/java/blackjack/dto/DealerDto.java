@@ -12,10 +12,12 @@ public class DealerDto {
 
     private final String name;
     private final List<Card> cards;
+    private int rankSum;
 
     public DealerDto(List<Card> cards) {
         this.name = DEALER_NAME;
         this.cards = Collections.unmodifiableList(new ArrayList<>(cards));
+        this.rankSum = cards.stream().mapToInt(Card::getRank).sum();
     }
 
     public DealerDto(Dealer dealer) {
@@ -28,5 +30,9 @@ public class DealerDto {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public int getRankSum() {
+        return rankSum;
     }
 }

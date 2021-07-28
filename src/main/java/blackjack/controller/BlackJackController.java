@@ -31,7 +31,7 @@ public class BlackJackController {
         // 플레이어에게 한장씩 카드를 분배(대답이 Yes인 경우)
         drawCardToPlayers();
         // 딜러에게 한장씩 카드 분배(카드 합이 17미만인 경우만)
-
+        drawCardToDealer();
     }
 
     private void drawTowCards() {
@@ -69,4 +69,10 @@ public class BlackJackController {
         return response.getResponse().equals("y");
     }
 
+    private void drawCardToDealer() {
+        while (dealer.drawable()) {
+            dealer.receiveCard(deck.drawCard());
+            outputView.printDealerCardGiven();
+        }
+    }
 }

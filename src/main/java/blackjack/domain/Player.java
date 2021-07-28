@@ -38,4 +38,9 @@ public class Player {
                 .mapToInt(Card::getScore)
                 .sum();
     }
+
+    public boolean hasAce() {
+        return cards.stream()
+                .anyMatch(Card::isAce);
+    }
 }

@@ -3,6 +3,7 @@ package blackjack.domain;
 import blackjack.enums.CardScore;
 import blackjack.enums.CardType;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -22,5 +23,18 @@ public class CardTest {
 
         //then
         assertThat(score).isEqualTo(expectedValue);
+    }
+
+    @Test
+    @DisplayName("Ace일 경우 참을 반환한다.")
+    void isAce() {
+        //given
+        Card card = new Card(CardScore.A, CardType.CLUB);
+
+        //when
+        boolean isAce = card.isAce();
+
+        //then
+        assertThat(isAce).isTrue();
     }
 }

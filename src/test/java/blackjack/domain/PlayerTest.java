@@ -84,4 +84,18 @@ public class PlayerTest {
         //then
         assertThat(sum).isEqualTo(15);
     }
+
+    @Test
+    @DisplayName("카드 중 Ace가 있을 경우 참을 반환한다.")
+    void hasAce() {
+        //given
+        Player player = new Player("pobi");
+        player.addCard(new Card(CardScore.A, CardType.HEART));
+
+        //when
+        boolean hasAce = player.hasAce();
+
+        //then
+        assertThat(hasAce).isTrue();
+    }
 }

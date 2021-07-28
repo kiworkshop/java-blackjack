@@ -16,6 +16,10 @@ public class TotalResult {
         Arrays.stream(WinningResult.values())
                 .forEach(winningResult ->
                         dealerResult.put(winningResult, 0));
+
+        // 플레이어 점수랑 딜러 점수 비교하는 로직
+        // 플레이어 기준으로 승패가 Map에 입력이 된 상태
+        players.forEach(player -> playersResult.put(player, player.win(dealer)));
     }
 
 
@@ -23,6 +27,8 @@ public class TotalResult {
         return new TotalResult(dealer, players);
     }
 
-
+    public Map<Player, WinningResult> getPlayersResult() {
+        return Collections.unmodifiableMap(playersResult);
+    }
 }
 

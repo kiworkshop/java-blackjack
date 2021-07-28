@@ -33,4 +33,12 @@ public class Player extends Participant {
                         .collect(Collectors.joining(", ")));
         return sb.toString();
     }
+
+    public WinningResult win(Dealer dealer) {
+        return Arrays.stream(Rule.values())
+                .filter(rule -> rule.compare(this, dealer))
+                .findFirst()
+                .get()
+                .getWinningResult();
+    }
 }

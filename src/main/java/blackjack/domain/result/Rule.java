@@ -6,7 +6,7 @@ import blackjack.domain.participant.Player;
 import java.util.function.BiFunction;
 
 public enum Rule {
-    // 카드 값의 합이 21을 넘으면 승패 결정
+    // 카드 값의 합이 21을 넘으면 승패 결정 (플레이어 기준으로 선언)
     PLAYER_BUST(((player, dealer) -> player.isBust()), WinningResult.LOSE),
     DEALER_BUST(((player, dealer) -> dealer.isBust()), WinningResult.WIN),
 
@@ -16,7 +16,6 @@ public enum Rule {
 
     // 무승부 결정
     TIES(((player, dealer) -> player.getCardsSum() == dealer.getCardsSum()), WinningResult.TIE);
-
 
     private BiFunction<Player, Dealer, Boolean> compare;
     private WinningResult winningResult;

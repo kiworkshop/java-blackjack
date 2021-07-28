@@ -44,15 +44,15 @@ public class InputView {
         }
     }
 
-    public static boolean isHitOrStand(String playerName) {
+    public static boolean hit(String playerName) {
         System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)%n", playerName);
         String input = getUserInput();
-        validateHitOrStand(input);
+        validateHit(input);
 
         return input.equals("y");
     }
 
-    private static void validateHitOrStand(String input) {
+    private static void validateHit(String input) {
         if (!VALID_HIT_OR_STAND_INPUTS.contains(input)) {
             throw new IllegalArgumentException(INVALID_HIT_OR_STAND_MESSAGE);
         }

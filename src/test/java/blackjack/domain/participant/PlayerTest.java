@@ -38,7 +38,7 @@ class PlayerTest {
 
         //when
         Player player = new Player(name, hands);
-        player.hit(new Card(Suit.CLUB, 8));
+        player.take(new Card(Suit.CLUB, 8));
 
         //then
         assertThat(player.countHands()).isEqualTo(3);

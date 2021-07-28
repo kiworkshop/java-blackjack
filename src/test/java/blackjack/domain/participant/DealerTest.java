@@ -49,10 +49,9 @@ class DealerTest {
 
         //when
         Dealer dealer = new Dealer(hands);
-        Hands finalHands = dealer.finalDeal(new Card(Suit.CLUB, 6));
 
         //then
-        assertThat(finalHands.size()).isEqualTo(3);
+        assertThat(dealer.hit()).isTrue();
     }
 
     @Test
@@ -63,10 +62,23 @@ class DealerTest {
 
         //when
         Dealer dealer = new Dealer(hands);
-        Hands finalHands = dealer.finalDeal(new Card(Suit.CLUB, 6));
 
         //then
-        assertThat(finalHands.size()).isEqualTo(INITIAL_DEAL_COUNT);
+        assertThat(dealer.hit()).isFalse();
+    }
+
+    @Test
+    @DisplayName("카드를 추가한다.")
+    void take_card() {
+        //given
+        Hands hands = generateStandHands();
+        Dealer dealer = new Dealer(hands);
+
+        //when
+        dealer.take(new Card(Suit.HEART, 3));
+
+        // then
+        assertThat(dealer.countHands()).isEqualTo(3);
     }
 
     private Hands generateHands() {

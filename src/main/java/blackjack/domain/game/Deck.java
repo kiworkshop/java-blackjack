@@ -46,8 +46,11 @@ public class Deck {
                 .collect(Collectors.toList());
     }
 
-    public int size() {
-        return cards.size();
+    public Hands drawInitialHands() {
+        List<Card> deals = new ArrayList<>();
+        IntStream.range(0, INITIAL_DEAL_COUNT)
+                .forEach(n -> deals.add(draw()));
+        return new Hands(deals);
     }
 
     public Card draw() {
@@ -56,10 +59,7 @@ public class Deck {
         return randomCard;
     }
 
-    public Hands drawInitialHands() {
-        List<Card> deals = new ArrayList<>();
-        IntStream.range(0, INITIAL_DEAL_COUNT)
-                .forEach(n -> deals.add(draw()));
-        return new Hands(deals);
+    public int size() {
+        return cards.size();
     }
 }

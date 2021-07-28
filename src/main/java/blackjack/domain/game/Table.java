@@ -17,16 +17,21 @@ public class Table {
         return deck.drawInitialHands();
     }
 
-    public Card deal() {
+    public Card drawCard() {
         return deck.draw();
     }
 
-    public Dealer getDealer() {
-        return dealer;
+    public void finalDeal() {
+        if (dealer.hit()) {
+            dealer.take(deck.draw());
+        }
     }
 
     public int getCardSize() {
         return deck.size();
     }
 
+    public Dealer getDealer() {
+        return dealer;
+    }
 }

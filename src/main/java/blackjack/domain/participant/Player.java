@@ -16,20 +16,20 @@ public class Player {
         this.hands = hands;
     }
 
-    public String getName() {
-        return name;
+    public void take(Card card) {
+        hands.addCard(card);
+    }
+
+    public boolean neverHit() {
+        return this.countHands() == INITIAL_DEAL_COUNT;
     }
 
     public int countHands() {
         return hands.size();
     }
 
-    public void hit(Card card) {
-        hands.addCard(card);
-    }
-
-    public boolean isNeverHit() {
-        return this.countHands() == INITIAL_DEAL_COUNT;
+    public String getName() {
+        return name;
     }
 
     public List<Card> getCards() {

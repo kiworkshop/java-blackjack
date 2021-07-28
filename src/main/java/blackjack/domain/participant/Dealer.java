@@ -3,8 +3,10 @@ package blackjack.domain.participant;
 import blackjack.domain.card.Card;
 import blackjack.domain.game.Hands;
 
+import java.util.List;
+
 public class Dealer {
-    private static final int ADD_HAND_THRESHOLD = 16;
+    private static final int HIT_THRESHOLD = 16;
 
     private final Hands hands;
 
@@ -12,22 +14,23 @@ public class Dealer {
         this.hands = hands;
     }
 
-    public int countHands() {
-        return hands.size();
-    }
-
     public Card getFaceUpCard() {
         return hands.getFirstHand();
     }
 
-    public Hands finalDeal(Card card) {
-        if (hands.sumRanks() < ADD_HAND_THRESHOLD) {
-            hands.addCard(card);
-        }
-        return this.hands;
+    public boolean hit() {
+        return hands.sumRanks() <= HIT_THRESHOLD;
     }
 
-    public Card getFirstHand() {
-        return hands.getFirstHand();
+    public void take(Card card) {
+        hands.addCard(card);
+    }
+
+    public int countHands() {
+        return hands.size();
+    }
+
+    public List<Card> getCards() {
+        return hands.getHands();
     }
 }

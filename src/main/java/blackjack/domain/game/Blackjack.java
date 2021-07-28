@@ -30,18 +30,22 @@ public class Blackjack {
 
     public ParticipantDto getParticipants() {
         Dealer dealer = table.getDealer();
-        DealerDto dealerDto = new DealerDto(Collections.singletonList(dealer.getFirstHand()));
+        DealerDto dealerDto = new DealerDto(Collections.singletonList(dealer.getFaceUpCard()));
 
         List<PlayerDto> playersDto = new ArrayList<>();
-        players.getPlayers().forEach(player -> playersDto.add(new PlayerDto(player.getName(), player.getCards())));
+        players.getPlayers().forEach(player -> playersDto.add(new PlayerDto(player)));
 
         return new ParticipantDto(dealerDto, playersDto);
     }
 
     public PlayerDto hit(Player player) {
-        Card card = table.deal();
-        player.hit(card);
+        Card card = table.drawCard();
+        player.take(card);
         return new PlayerDto(player);
+    }
+
+    public void dealDealer() {
+        table.finalDeal();
     }
 
     public List<Player> getPlayers() {

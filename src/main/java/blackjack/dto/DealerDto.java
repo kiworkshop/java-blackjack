@@ -1,6 +1,7 @@
 package blackjack.dto;
 
 import blackjack.domain.card.Card;
+import blackjack.domain.participant.Dealer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,10 @@ public class DealerDto {
     public DealerDto(List<Card> cards) {
         this.name = DEALER_NAME;
         this.cards = Collections.unmodifiableList(new ArrayList<>(cards));
+    }
+
+    public DealerDto(Dealer dealer) {
+        this(dealer.getCards());
     }
 
     public String getName() {

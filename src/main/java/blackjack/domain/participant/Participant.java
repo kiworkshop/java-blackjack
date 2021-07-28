@@ -69,6 +69,14 @@ public abstract class Participant {
                 .sum();
     }
 
+    public boolean isBust() {
+        return getCardsSum() > BLACKJACK;
+    }
+
+    public int calculateBlackJack() {
+        return 21 - getCardsSum();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

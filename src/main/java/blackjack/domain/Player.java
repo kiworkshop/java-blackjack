@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static blackjack.domain.GameService.ACE_BONUS_SCORE;
+import static blackjack.domain.GameService.BLACKJACK;
+
 public class Player {
 
     private final String name;
@@ -34,9 +37,15 @@ public class Player {
     }
 
     public int sumScore() {
-        return cards.stream()
+        int sum = cards.stream()
                 .mapToInt(Card::getScore)
                 .sum();
+
+        if (hasAce() && sum + ACE_BONUS_SCORE <= BLACKJACK) {
+            sum += ACE_BONUS_SCORE;
+        }
+
+        return sum;
     }
 
     public boolean hasAce() {

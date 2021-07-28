@@ -98,4 +98,28 @@ public class PlayerTest {
         //then
         assertThat(hasAce).isTrue();
     }
+
+    @Test
+    @DisplayName("플레이어가 ace카드를 가지고 있다면 21을 초과하지 않는 최대점수를 리턴한다")
+    void sumScoreWithAce() {
+        //given
+        Player player1 = new Player("jason1");
+        Player player2 = new Player("jason2");
+        Player player3 = new Player("jason3");
+
+        player1.addFirstTwoCards(Arrays.asList(new Card(CardScore.A, CardType.DIAMOND), new Card(CardScore.Q, CardType.HEART)));
+        player2.addFirstTwoCards(Arrays.asList(new Card(CardScore.A, CardType.DIAMOND), new Card(CardScore.TWO, CardType.HEART)));
+        player3.addFirstTwoCards(Arrays.asList(new Card(CardScore.A, CardType.DIAMOND), new Card(CardScore.THREE, CardType.HEART)));
+        player3.addCard(new Card(CardScore.TEN, CardType.HEART));
+
+        //when
+        int score1 = player1.sumScore();
+        int score2 = player2.sumScore();
+        int score3 = player3.sumScore();
+
+        //then
+        assertThat(score1).isEqualTo(21);
+        assertThat(score2).isEqualTo(13);
+        assertThat(score3).isEqualTo(14);
+    }
 }

@@ -24,6 +24,14 @@ public class Player {
         return this.countHands() == INITIAL_DEAL_COUNT;
     }
 
+    public boolean bust() {
+        return hands.bust();
+    }
+
+    public boolean blackjack() {
+        return hands.blackjack();
+    }
+
     public int sumRank() {
         return hands.sumRanks();
     }

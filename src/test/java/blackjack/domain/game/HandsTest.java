@@ -1,8 +1,6 @@
 package blackjack.domain.game;
 
-import blackjack.domain.card.AceCard;
 import blackjack.domain.card.Card;
-import blackjack.domain.card.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,8 +21,8 @@ class HandsTest {
     void sum_hands_without_ace_card() {
         //given
         List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.DIAMOND, 1));
-        cards.add(new Card(Suit.DIAMOND, "K"));
+        cards.add(CARD_1);
+        cards.add(CARD_K);
 
         //when
         Hands hands = new Hands(cards);
@@ -40,9 +38,9 @@ class HandsTest {
     void sum_hands_with_one_ace_card() {
         //given
         List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Suit.DIAMOND, 1));
-        cards.add(new Card(Suit.DIAMOND, "K"));
-        cards.add(new AceCard(Suit.DIAMOND));
+        cards.add(CARD_1);
+        cards.add(CARD_K);
+        cards.add(ACE_1);
 
         //when
         Hands hands = new Hands(cards);

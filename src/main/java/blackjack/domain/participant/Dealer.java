@@ -22,6 +22,10 @@ public class Dealer {
         return hands.sumRanks() <= HIT_THRESHOLD;
     }
 
+    public boolean bust() {
+        return hands.bust();
+    }
+
     public void take(Card card) {
         hands.addCard(card);
     }
@@ -36,5 +40,9 @@ public class Dealer {
 
     public List<Card> getCards() {
         return hands.getHands();
+    }
+
+    public boolean blackjack() {
+        return hands.blackjack();
     }
 }

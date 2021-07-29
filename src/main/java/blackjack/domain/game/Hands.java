@@ -6,6 +6,8 @@ import blackjack.domain.card.Card;
 import java.util.ArrayList;
 import java.util.List;
 
+import static blackjack.domain.prize.PrizeResults.BLACKJACK_RANK;
+
 public class Hands {
     private final List<Card> hands;
 
@@ -50,6 +52,24 @@ public class Hands {
                 .filter(card -> !card.getSignature().equals(AceCard.SIGNATURE))
                 .mapToInt(Card::getRank)
                 .sum();
+    }
+
+    public boolean bust() {
+        return sumRanks() > BLACKJACK_RANK;
+    }
+
+    public boolean blackjack() {
+        if (countAceCards() != 1) {
+            return false;
+        }
+
+        return (majorCardCount() == 1);
+    }
+
+    private int majorCardCount() {
+        return (int) hands.stream()
+                .filter(Card::majorCard)
+                .count();
     }
 
     public Card getFirstHand() {

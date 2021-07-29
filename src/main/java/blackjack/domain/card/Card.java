@@ -21,6 +21,10 @@ public class Card {
         this(suit, MAJOR_CARD_RANK, signature);
     }
 
+    public boolean majorCard() {
+        return rank == MAJOR_CARD_RANK;
+    }
+
     public int getRank() {
         return rank;
     }

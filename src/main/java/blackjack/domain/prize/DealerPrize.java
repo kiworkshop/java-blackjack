@@ -1,14 +1,16 @@
 package blackjack.domain.prize;
 
 public class DealerPrize {
+    private static final int INITIAL_COUNT = 0;
+
     private int winCount;
     private int loseCount;
     private int tieCount;
 
     public DealerPrize() {
-        this.winCount = 0;
-        this.loseCount = 0;
-        this.tieCount = 0;
+        this.winCount = INITIAL_COUNT;
+        this.loseCount = INITIAL_COUNT;
+        this.tieCount = INITIAL_COUNT;
     }
 
     public void incrementWinCount() {

@@ -1,11 +1,11 @@
 package blackjack.domain.prize;
 
 public class PlayerPrize {
-    private final String name;
+    private final String playerName;    // name -> playerName 변경
     private final Prize prize;
 
-    public PlayerPrize(String name, Prize prize) {
-        this.name = name;
+    public PlayerPrize(String playerName, Prize prize) {
+        this.playerName = playerName;
         this.prize = prize;
     }
 
@@ -13,7 +13,7 @@ public class PlayerPrize {
         return prize;
     }
 
-    public String getName() {
-        return name;
+    public String getPlayerName() {
+        return playerName;
     }
 }

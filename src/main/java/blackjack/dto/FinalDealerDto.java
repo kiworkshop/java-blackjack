@@ -3,7 +3,7 @@ package blackjack.dto;
 import blackjack.domain.participant.Dealer;
 
 public class FinalDealerDto extends DealerDto {
-    private int rankSum;
+    private final int rankSum;
 
     public FinalDealerDto(Dealer dealer) {
         super(dealer.getCards());

@@ -3,9 +3,10 @@ package blackjack.service;
 import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
+import blackjack.domain.prize.PrizeResults;
 import blackjack.dto.DealerDto;
 import blackjack.dto.FinalDealerDto;
-import blackjack.dto.ParticipantDto;
+import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 
 import java.util.ArrayList;
@@ -18,18 +19,16 @@ public class BlackjackService {
         this.table = new Table(playerNames);
     }
 
-    public ParticipantDto getParticipants() {
+    public ParticipantsDto getParticipants() {
         DealerDto dealerDto = generateDealerDto();
         List<PlayerDto> playersDto = generatePlayerDto();
-
-        return new ParticipantDto(dealerDto, playersDto);
+        return new ParticipantsDto(dealerDto, playersDto);
     }
 
-    public ParticipantDto getFinalParticipants() {
+    public ParticipantsDto getFinalParticipants() {
         DealerDto finalDealerDto = generateFinalDealerDto();
         List<PlayerDto> playersDto = generatePlayerDto();
-
-        return new ParticipantDto(finalDealerDto, playersDto);
+        return new ParticipantsDto(finalDealerDto, playersDto);
     }
 
     private DealerDto generateDealerDto() {
@@ -48,12 +47,16 @@ public class BlackjackService {
         return playersDto;
     }
 
+    public PlayerDto hit(Player player) {
+        return new PlayerDto(table.hit(player));
+    }
+
     public void dealDealer() {
         table.finalDeal();
     }
 
-    public PlayerDto hit(Player player) {
-        return new PlayerDto(table.hit(player));
+    public PrizeResults calculatePrizeResults() {
+        return new PrizeResults(table);
     }
 
     public List<Player> getPlayers() {

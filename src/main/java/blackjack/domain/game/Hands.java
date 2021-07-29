@@ -5,6 +5,7 @@ import blackjack.domain.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static blackjack.domain.prize.PrizeResults.BLACKJACK_RANK;
 
@@ -12,8 +13,7 @@ public class Hands {
     private final List<Card> hands;
 
     public Hands(List<Card> cards) {
-        this.hands = new ArrayList<>();
-        this.hands.addAll(cards);
+        this.hands = new ArrayList<>(cards);
     }
 
     public void addCard(Card card) {
@@ -29,29 +29,22 @@ public class Hands {
         int aceCardCount = countAceCards();
 
         if (aceCardCount > 0) {
-            return softOrHardSum(sumExceptAceCards, aceCardCount);
+            return AceCard.softOrHardSum(sumExceptAceCards, aceCardCount);
         }
         return sumExceptAceCards;
     }
 
-    private int softOrHardSum(int sumExceptAceCards, int aceCardCount) {
-        int threshold = 11 - aceCardCount;
-        if (sumExceptAceCards <= threshold) {
-            return (aceCardCount - 1) + 11 + sumExceptAceCards;
-        }
-        return aceCardCount + sumExceptAceCards;
+    private int calculateSumExceptAceCards() {
+        return hands.stream()
+                .filter(((Predicate<? super Card>) AceCard.class::isInstance).negate())
+                .mapToInt(Card::getRank)
+                .sum();
     }
 
     private int countAceCards() {
         return (int) hands.stream()
-                .filter(AceCard.class::isInstance).count();
-    }
-
-    private int calculateSumExceptAceCards() {
-        return hands.stream()
-                .filter(card -> !card.getSignature().equals(AceCard.SIGNATURE))
-                .mapToInt(Card::getRank)
-                .sum();
+                .filter(AceCard.class::isInstance)
+                .count();
     }
 
     public boolean bust() {
@@ -59,14 +52,10 @@ public class Hands {
     }
 
     public boolean blackjack() {
-        if (countAceCards() != 1) {
-            return false;
-        }
-
-        return (majorCardCount() == 1);
+        return countAceCards() == 1 && countMajorCards() == 1;
     }
 
-    private int majorCardCount() {
+    private int countMajorCards() {
         return (int) hands.stream()
                 .filter(Card::majorCard)
                 .count();

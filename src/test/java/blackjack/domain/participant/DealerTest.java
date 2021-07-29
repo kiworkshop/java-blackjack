@@ -85,7 +85,6 @@ class DealerTest {
         List<Card> cards = new ArrayList<>();
         cards.add(CARD_1);
         cards.add(CARD_Q);
-
         return new Hands(cards);
     }
 
@@ -93,7 +92,6 @@ class DealerTest {
         List<Card> cards = new ArrayList<>();
         cards.add(CARD_J);
         cards.add(CARD_K);
-
         return new Hands(cards);
     }
 }

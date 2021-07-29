@@ -1,7 +1,8 @@
 package blackjack.controller;
 
 import blackjack.domain.participant.Player;
-import blackjack.dto.ParticipantDto;
+import blackjack.domain.prize.PrizeResults;
+import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 import blackjack.service.BlackjackService;
 import blackjack.view.InputView;
@@ -11,31 +12,29 @@ import java.util.List;
 
 public class BlackjackController {
 
-    // 1. Table 객체를 생성하면 participants가 세팅 된다. 패가 다 돌아감.
-    // 2. 플레이어 마다 hit / stand 여부에 따라 패를 추가한다.
-    // 3. 모든 플레이어가 카드를 받은 경우, 딜러의 카드를 추가 할지 판단한다.
-    // 4. 최종 결과를 표출한다.
     public void run() {
         List<String> players = InputView.getPlayers();
         BlackjackService blackjackService = new BlackjackService(players);
-        OutputView.printInitialDeal(blackjackService.getParticipants());
 
-        ParticipantDto participants = deal(blackjackService);
-        OutputView.printFinalHands(participants);
+        ParticipantsDto initialParticipants = blackjackService.getParticipants();
+        OutputView.printInitialDeal(initialParticipants);
 
+        deal(blackjackService);
+        ParticipantsDto finalParticipants = blackjackService.getFinalParticipants();
+        OutputView.printFinalHands(finalParticipants);
 
+        PrizeResults prizeResults = blackjackService.calculatePrizeResults();
+        OutputView.printPrizeResults(prizeResults);
     }
 
-    private ParticipantDto deal(BlackjackService blackjackService) {
+    private void deal(BlackjackService blackjackService) {
         dealEachPlayer(blackjackService);
         blackjackService.dealDealer();
-        return blackjackService.getFinalParticipants();
     }
 
     private void dealEachPlayer(BlackjackService blackjackService) {
-        for (Player player : blackjackService.getPlayers()) {
-            hitOrStand(blackjackService, player);
-        }
+        blackjackService.getPlayers()
+                .forEach(player -> hitOrStand(blackjackService, player));
     }
 
     private void hitOrStand(BlackjackService blackjackService, Player player) {

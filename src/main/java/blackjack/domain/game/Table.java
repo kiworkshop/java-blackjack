@@ -37,11 +37,12 @@ public class Table {
 
     public void finalDeal() {
         if (dealer.hit()) {
-            dealer.take(deck.draw());
+            Card card = deck.draw();
+            dealer.take(card);
         }
     }
 
-    public int getCardSize() {
+    public int getDeckSize() {
         return deck.size();
     }
 

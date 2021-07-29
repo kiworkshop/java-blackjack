@@ -1,9 +1,12 @@
 package blackjack.view;
 
 import blackjack.domain.card.Card;
+import blackjack.domain.prize.DealerPrize;
+import blackjack.domain.prize.PlayersPrize;
+import blackjack.domain.prize.PrizeResults;
 import blackjack.dto.DealerDto;
 import blackjack.dto.FinalDealerDto;
-import blackjack.dto.ParticipantDto;
+import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 
 import java.util.List;
@@ -17,7 +20,7 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printInitialDeal(ParticipantDto participants) {
+    public static void printInitialDeal(ParticipantsDto participants) {
         printDealMessage(participants);
 
         System.out.println(generateDealerHandsMessage(participants.getDealerDto()));
@@ -25,7 +28,7 @@ public class OutputView {
                 .forEach(player -> System.out.println(generatePlayerHandsMessage(player)));
     }
 
-    private static void printDealMessage(ParticipantDto participants) {
+    private static void printDealMessage(ParticipantsDto participants) {
         List<String> names = participants.getPlayers().stream()
                 .map(PlayerDto::getName)
                 .collect(Collectors.toList());
@@ -51,12 +54,13 @@ public class OutputView {
         return String.join(", ", cardSignatures);
     }
 
-    public static void printFinalHands(ParticipantDto participants) {
+    public static void printFinalHands(ParticipantsDto participants) {
         System.out.println();
         printFinalDealMessage(participants.getDealerDto());
 
         printFinalDealerHands((FinalDealerDto) participants.getDealerDto());
         printFinalPlayersHands(participants.getPlayers());
+        System.out.println();
     }
 
     private static void printFinalDealMessage(DealerDto dealer) {
@@ -76,5 +80,20 @@ public class OutputView {
                 System.out.printf(PARTICIPANTS_FINAL_HANDS,
                         generatePlayerHandsMessage(player),
                         player.getRankSum()));
+    }
+
+    public static void printPrizeResults(PrizeResults prizeResults) {
+        System.out.println();
+        System.out.println("## 최종 승패");
+        printDealerPrize(prizeResults.getDealerPrize());
+        printPlayersPrize(prizeResults.getPlayersPrize());
+    }
+
+    private static void printDealerPrize(DealerPrize dealerPrize) {
+        System.out.printf("딜러: %d승 %d패 %d무%n", dealerPrize.getWinCount(), dealerPrize.getLoseCount(), dealerPrize.getTieCount());
+    }
+
+    private static void printPlayersPrize(PlayersPrize playersPrize) {
+        playersPrize.getPlayerPrizes().forEach(playerPrize -> System.out.printf("%s: %s%n", playerPrize.getPlayerName(), playerPrize.getPrize().getTitle()));
     }
 }

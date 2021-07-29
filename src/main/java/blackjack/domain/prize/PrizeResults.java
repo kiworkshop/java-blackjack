@@ -1,8 +1,8 @@
 package blackjack.domain.prize;
 
+import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
-import blackjack.domain.participant.Players;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +13,18 @@ public class PrizeResults {
     private final DealerPrize dealerPrize;
     private final PlayersPrize playersPrize;
 
-    public PrizeResults(Dealer dealer, Players players) {
+    public PrizeResults(Dealer dealer, List<Player> players) {
         this.dealerPrize = new DealerPrize();
         this.playersPrize = new PlayersPrize(comparePrize(dealer, players));
     }
 
-    private List<PlayerPrize> comparePrize(Dealer dealer, Players players) {
+    public PrizeResults(Table table) {
+        this(table.getDealer(), table.getPlayers());
+    }
+
+    private List<PlayerPrize> comparePrize(Dealer dealer, List<Player> players) {
         List<PlayerPrize> playersPrize = new ArrayList<>();
-        for (Player player : players.getPlayers()) {
+        for (Player player : players) {
             PlayerPrize playerPrize = matchPrize(dealer, player);
             playersPrize.add(playerPrize);
         }
@@ -41,21 +45,20 @@ public class PrizeResults {
         int dealerGapAmount = Math.abs(BLACKJACK_RANK - dealer.sumRank());
         int playerGapAmount = Math.abs(BLACKJACK_RANK - player.sumRank());
         Prize prize = generalPrize(dealerGapAmount, playerGapAmount);
-
         return new PlayerPrize(player.getName(), prize);
     }
 
-    private Prize generalPrize(int dealerGapAmount, int playerGapAmount) {
-        if (dealerGapAmount == playerGapAmount) {
-            dealerPrize.incrementTieCount();
-            return Prize.TIE;
-        }
-        if (dealerGapAmount < playerGapAmount) {
-            dealerPrize.incrementWinCount();
+    private Prize bustPrize(boolean dealerBust, boolean playerBust) {
+        if (dealerBust && playerBust) {
+            dealerPrize.incrementLoseCount();
             return Prize.LOSE;
         }
-        dealerPrize.incrementLoseCount();
-        return Prize.WIN;
+        if (dealerBust) {
+            dealerPrize.incrementLoseCount();
+            return Prize.WIN;
+        }
+        dealerPrize.incrementWinCount();
+        return Prize.LOSE;
     }
 
     private Prize blackjackPrize(boolean dealerBlackjack, boolean playerBlackjack) {
@@ -71,17 +74,17 @@ public class PrizeResults {
         return Prize.WIN;
     }
 
-    private Prize bustPrize(boolean dealerBust, boolean playerBust) {
-        if (dealerBust && playerBust) {
-            dealerPrize.incrementLoseCount();
+    private Prize generalPrize(int dealerGapAmount, int playerGapAmount) {
+        if (dealerGapAmount == playerGapAmount) {
+            dealerPrize.incrementTieCount();
+            return Prize.TIE;
+        }
+        if (dealerGapAmount < playerGapAmount) {
+            dealerPrize.incrementWinCount();
             return Prize.LOSE;
         }
-        if (dealerBust) {
-            dealerPrize.incrementLoseCount();
-            return Prize.WIN;
-        }
-        dealerPrize.incrementWinCount();
-        return Prize.LOSE;
+        dealerPrize.incrementLoseCount();
+        return Prize.WIN;
     }
 
     public DealerPrize getDealerPrize() {

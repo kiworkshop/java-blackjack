@@ -14,9 +14,7 @@ public class CardTest {
     @ValueSource(ints = {2, 3, 4, 5, 6, 7, 8, 9, 10})
     @DisplayName("중복되지 않는 숫자 카드를 생성한다.")
     void generate_number_card(int rank) {
-        //given
-
-        //when
+        //given, when
         Card card = new Card(Suit.DIAMOND, rank);
 
         //then
@@ -32,6 +30,7 @@ public class CardTest {
 
         //then
         assertThat(card.getRank()).isEqualTo(MAJOR_CARD_RANK);
+        assertThat(card.majorCard()).isTrue();
     }
 
     @Test
@@ -42,5 +41,6 @@ public class CardTest {
 
         //then
         assertThat(card.getRank()).isEqualTo(AceCard.ACE_CARD_DEFAULT_RANK);
+        assertThat(card).isInstanceOf(AceCard.class);
     }
 }

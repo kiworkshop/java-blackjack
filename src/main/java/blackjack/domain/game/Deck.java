@@ -16,7 +16,7 @@ public class Deck {
     public static final int TOTAL_CARD_COUNT = 52;
     private static final int MIN_NUMBER_RANK = 2;
     private static final int MAX_NUMBER_RANK = 10;
-    private static final List<String> majorSignature = Arrays.asList("K", "Q", "J");
+    private static final List<String> MAJOR_SIGNATURES = Arrays.asList("K", "Q", "J");
 
     private final List<Card> cards;
 
@@ -35,14 +35,14 @@ public class Deck {
     }
 
     private List<Card> generateMajorCards(Suit suit) {
-        return majorSignature.stream()
-                .map(sig -> new Card(suit, sig))
+        return MAJOR_SIGNATURES.stream()
+                .map(signature -> new Card(suit, signature))
                 .collect(Collectors.toList());
     }
 
     private List<Card> generateNumberCards(Suit suit) {
         return IntStream.rangeClosed(MIN_NUMBER_RANK, MAX_NUMBER_RANK)
-                .mapToObj(n -> new Card(suit, n))
+                .mapToObj(signature -> new Card(suit, signature))
                 .collect(Collectors.toList());
     }
 
@@ -54,6 +54,10 @@ public class Deck {
     }
 
     public Card draw() {
+        if (cards.isEmpty()) {
+            throw new IndexOutOfBoundsException("남아있는 카드가 없습니다.");
+        }
+
         Card randomCard = cards.get(0);
         cards.remove(randomCard);
         return randomCard;

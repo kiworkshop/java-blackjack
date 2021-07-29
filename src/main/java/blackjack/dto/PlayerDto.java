@@ -10,7 +10,7 @@ import java.util.List;
 public class PlayerDto {
     private final String name;
     private final List<Card> cards;
-    private int rankSum;
+    private final int rankSum;
 
     public PlayerDto(Player player) {
         this.name = player.getName();

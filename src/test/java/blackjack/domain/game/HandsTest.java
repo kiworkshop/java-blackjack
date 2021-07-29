@@ -32,48 +32,35 @@ class HandsTest {
         assertThat(sum).isEqualTo(11);
     }
 
-
     @Test
-    @DisplayName("에이스 카드가 하나 있을 때 전체 카드 합을 계산한다.")
-    void sum_hands_with_one_ace_card() {
-        //given
-        List<Card> cards = new ArrayList<>();
-        cards.add(CARD_1);
-        cards.add(CARD_K);
-        cards.add(ACE_1);
+    @DisplayName("블랙잭인 것을 확인한다.")
+    void blackjack() {
+        // given
+        Hands blackjackHands = new Hands(Arrays.asList(ACE_1, CARD_Q));
+        Hands notBlackjackHands = new Hands(Arrays.asList(ACE_1, CARD_9));
 
-        //when
-        Hands hands = new Hands(cards);
-        int sum = hands.sumRanks();
-
-        //then
-        assertThat(sum).isEqualTo(12);
-    }
-
-    @ParameterizedTest
-    @MethodSource({"generateHands"})
-    @DisplayName("에이스 카드 개수와 나머지 카드 합이 주어지면 1 또는 11 값을 반환한다.")
-    void several_ace_cards(Hands hands, int exceptedRankSum) {
-        //given, when
-        int cardRankSum = hands.sumRanks();
+        // when
+        boolean blackjack = blackjackHands.blackjack();
+        boolean notBlackjack = notBlackjackHands.blackjack();
 
         // then
-        assertThat(cardRankSum).isEqualTo(exceptedRankSum);
+        assertThat(blackjack).isTrue();
+        assertThat(notBlackjack).isFalse();
     }
 
-    public static Stream<Arguments> generateHands() {
-        return Stream.of(
-                Arguments.of(new Hands(Arrays.asList(CARD_4, CARD_5, ACE_1, ACE_2)), 21),
-                Arguments.of(new Hands(Arrays.asList(CARD_9, CARD_J, ACE_1, ACE_2)), 21),
-                Arguments.of(new Hands(Arrays.asList(CARD_Q, CARD_J, ACE_1, ACE_2)), 22),
+    @Test
+    @DisplayName("버스트인 것을 확인한다.")
+    void bust() {
+        // given
+        Hands bustHands = new Hands(Arrays.asList(CARD_3, CARD_K, CARD_Q));
+        Hands notBustHands = new Hands(Arrays.asList(ACE_1, CARD_9));
 
-                Arguments.of(new Hands(Arrays.asList(CARD_3, CARD_5, ACE_1, ACE_2, ACE_3)), 21),
-                Arguments.of(new Hands(Arrays.asList(CARD_8, CARD_K, ACE_1, ACE_2, ACE_3)), 21),
-                Arguments.of(new Hands(Arrays.asList(CARD_9, CARD_J, ACE_1, ACE_2, ACE_3)), 22),
+        // when
+        boolean bust = bustHands.bust();
+        boolean notBust = notBustHands.bust();
 
-                Arguments.of(new Hands(Arrays.asList(CARD_3, CARD_4, ACE_1, ACE_2, ACE_3, ACE_4)), 21),
-                Arguments.of(new Hands(Arrays.asList(CARD_7, CARD_K, ACE_1, ACE_2, ACE_3, ACE_4)), 21),
-                Arguments.of(new Hands(Arrays.asList(CARD_8, CARD_K, ACE_1, ACE_2, ACE_3, ACE_4)), 22)
-        );
+        // then
+        assertThat(bust).isTrue();
+        assertThat(notBust).isFalse();
     }
 }

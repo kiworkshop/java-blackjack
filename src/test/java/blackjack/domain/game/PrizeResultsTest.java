@@ -2,7 +2,6 @@ package blackjack.domain.game;
 
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
-import blackjack.domain.participant.Players;
 import blackjack.domain.prize.DealerPrize;
 import blackjack.domain.prize.PlayerPrize;
 import blackjack.domain.prize.PlayersPrize;
@@ -19,14 +18,14 @@ import java.util.stream.Stream;
 import static blackjack.domain.card.TestCard.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PrizeResultsTest {
-
+class PrizeResultsTest {
 
     @ParameterizedTest
     @MethodSource("generateCompareHands")
     @DisplayName("딜러와 플레이어의 카드 합을 비교한다.")
-    void compare_rank_sum(Dealer dealer, Players players,
-                          int winCount, int loseCount, int tieCount, List<String> playersResults) {
+    void compare_rank_sum(Dealer dealer, List<Player> players,
+                          int winCount, int loseCount, int tieCount,
+                          List<String> playersResults) {
         //given, when
         PrizeResults prizeResults = new PrizeResults(dealer, players);
         DealerPrize dealerPrize = prizeResults.getDealerPrize();
@@ -43,16 +42,16 @@ public class PrizeResultsTest {
         }
     }
 
-    private static Players generatePlayers() {
-        List<Player> players = Arrays.asList(
-                new Player("패자", new Hands(Arrays.asList(CARD_2, CARD_8, CARD_6))), // 16
-                new Player("패자", new Hands(Arrays.asList(CARD_K, CARD_7))), // 17
-                new Player("동점자", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))), // 19
-                new Player("동점자", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))), // 19
-                new Player("블랙잭", new Hands(Arrays.asList(CARD_Q, ACE_1))), // blackjack
-                new Player("패자", new Hands(Arrays.asList(CARD_Q, CARD_8, CARD_9))) // 27
+    private static List<Player> generatePlayers() {
+        return Arrays.asList(
+                new Player("1", new Hands(Arrays.asList(CARD_2, CARD_8, CARD_6))),   // 16
+                new Player("2", new Hands(Arrays.asList(CARD_K, CARD_7))),           // 17
+                new Player("3", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))),   // 19
+                new Player("4", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))),   // 19
+                new Player("블랙잭", new Hands(Arrays.asList(CARD_Q, ACE_1))),        // blackjack
+                new Player("5", new Hands(Arrays.asList(CARD_Q, CARD_8, CARD_9)))    // 27
         );
-        return new Players(players);
+//        return new Players(players);
     }
 
     private static Dealer generateDealer() { // 19
@@ -73,14 +72,10 @@ public class PrizeResultsTest {
 
     private static Stream<Arguments> generateCompareHands() {
         return Stream.of(
-                Arguments.of(generateDealer(), generatePlayers(), 3, 1, 2, Arrays.asList("패", "패", "무", "무", "승", "패"))
-//                Arguments.of(generateDealer(), generatePlayers(), 3, 2, 1, Arrays.asList("패", "패", "무", "무", "승", "패")),
-//                Arguments.of(generateDealer(), generatePlayers(), 3, 2, 1, Arrays.asList("패", "패", "무", "무", "승", "패")),
-//                Arguments.of(generateDealer(), generatePlayers(), 3, 2, 1, Arrays.asList("패", "패", "무", "무", "승", "패")),
-//                Arguments.of(generateDealer(), generatePlayers(), 3, 2, 1, Arrays.asList("패", "패", "무", "무", "승", "패")),
-//                Arguments.of(generateDealer(), generatePlayers(), 3, 2, 1, Arrays.asList("패", "패", "무", "무", "승", "패")),
-//                Arguments.of(generateDealer(), generatePlayers(), 3, 2, 1, Arrays.asList("패", "패", "무", "무", "승", "패"));
-
+                Arguments.of(generateDealer(), generatePlayers(), 3, 1, 2, Arrays.asList("패", "패", "무", "무", "승", "패")),
+                Arguments.of(generateWinDealer(), generatePlayers(), 5, 1, 0, Arrays.asList("패", "패", "패", "패", "승", "패")),
+                Arguments.of(generateBlackjackDealer(), generatePlayers(), 6, 0, 0, Arrays.asList("패", "패", "패", "패", "승", "패")),
+                Arguments.of(generateBustDealer(), generatePlayers(), 0, 6, 0, Arrays.asList("승", "승", "승", "승", "승", "패"))
         );
     }
 }

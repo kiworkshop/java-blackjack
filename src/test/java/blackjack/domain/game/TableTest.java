@@ -22,13 +22,13 @@ class TableTest {
         List<Player> players = table.getPlayers();
 
         // then
-        assertThat(table.getCardSize()).isEqualTo(46);
+        assertThat(table.getDeckSize()).isEqualTo(46);
         assertThat(table.getDealer().countHands()).isEqualTo(INITIAL_DEAL_COUNT);
         players.forEach(player -> assertThat(player.countHands()).isEqualTo(INITIAL_DEAL_COUNT));
     }
 
     @Test
-    @DisplayName("플레이어에게 추가 카드 배분을 진행한다.")
+    @DisplayName("플레이어에게 추가 카드를 배분한다.")
     void hit_or_stand() {
         //given
         List<String> playerNames = generatePlayerNames();
@@ -40,6 +40,7 @@ class TableTest {
 
         //then
         assertThat(player.getCards().size()).isEqualTo(3);
+        assertThat(table.getDeckSize()).isEqualTo(45);
     }
 
     private List<String> generatePlayerNames() {

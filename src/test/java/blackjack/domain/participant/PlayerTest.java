@@ -45,6 +45,21 @@ class PlayerTest {
         assertThat(player.countHands()).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("카드를 추가로 받지 않았는지 확인한다.")
+    void never_hit() {
+        //given
+        Player neverHitPlayer = new Player("name", generateHands());
+        Player hitPlayer = new Player("name", generateHands());
+
+        //when
+        hitPlayer.take(CARD_8);
+
+        //then
+        assertThat(neverHitPlayer.neverHit()).isTrue();
+        assertThat(hitPlayer.neverHit()).isFalse();
+    }
+
     private Hands generateHands() {
         List<Card> cards = new ArrayList<>();
         cards.add(CARD_8);

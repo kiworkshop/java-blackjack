@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class StringUtil {
     private static final String COMMA = ",";
+    private static final String RESPONSE_RESTRICT_MESSAGE = "y 혹은 n 만 입력할 수 있습니다.";
 
     public static List<String> splitByComma(String input) {
         List<String> names = Arrays.asList(input.split(COMMA));
@@ -16,7 +17,7 @@ public class StringUtil {
 
     public static String validateYesOrNo(String response) {
         if (!(response.equals("Y") || response.equals("y") || response.equals("N") || response.equals("n"))) {
-            throw new IllegalArgumentException("y 혹은 n 만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(RESPONSE_RESTRICT_MESSAGE);
         }
 
         return response;

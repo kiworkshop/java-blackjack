@@ -33,7 +33,7 @@ class StringUtilTest {
         //given
         String response = "Y";
 
-        //when //then
+        //when, then
         assertThat(StringUtil.validateYesOrNo(response)).isEqualTo("Y");
     }
 
@@ -43,7 +43,7 @@ class StringUtilTest {
         //given
         String response = "y";
 
-        //when //then
+        //when, then
         assertThat(StringUtil.validateYesOrNo(response)).isEqualTo("y");
     }
 
@@ -53,7 +53,7 @@ class StringUtilTest {
         //given
         String response = "N";
 
-        //when //then
+        //when, then
         assertThat(StringUtil.validateYesOrNo(response)).isEqualTo("N");
     }
 
@@ -63,7 +63,7 @@ class StringUtilTest {
         //given
         String response = "n";
 
-        //when //then
+        //when, then
         assertThat(StringUtil.validateYesOrNo(response)).isEqualTo("n");
     }
 
@@ -73,7 +73,7 @@ class StringUtilTest {
         //given
         String response = "U";
 
-        //when //then
+        //when, then
         assertThatThrownBy(() -> StringUtil.validateYesOrNo(response))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("y 혹은 n 만 입력할 수 있습니다.");

@@ -22,9 +22,7 @@ public class CardTest {
         //given
         Card card = new Card(Denomination.TWO, Type.DIAMOND);
 
-        //when
-
-        //then
+        //when, then
         assertThat(card.toString()).isEqualTo("2다이아몬드");
     }
 
@@ -34,9 +32,7 @@ public class CardTest {
         //given
         Card card = new Card(Denomination.ACE, Type.HEART);
 
-        //when
-
-        //then
+        //when, then
         assertThat(card.toString()).isEqualTo("A하트");
     }
 }

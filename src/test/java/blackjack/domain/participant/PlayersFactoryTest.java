@@ -31,10 +31,9 @@ class PlayersFactoryTest {
     @DisplayName("이미 생성된 플레이어의 목록을 바꿀 수 없는지를 확인한다.")
     void playersUnmodifiableTest() {
         //given
-        // when
         List<Player> players = PlayersFactory.createPlayers("Jane, John, Ariel");
 
-        //then
+        //when, then
         assertThatThrownBy(() -> {
             players.add(new Player("ChungHyeon"));
         }).isInstanceOf(RuntimeException.class);
@@ -43,7 +42,7 @@ class PlayersFactoryTest {
     @Test
     @DisplayName("중복이 있는 이름목록을 입력하면 플레이어 리스트가 생성되는지 않는지 테스트한다.")
     void playerDeDuplicateTest() {
-        //given //when //then
+        //given, when, then
         assertThatThrownBy(() -> {
             List<Player> players = PlayersFactory.createPlayers("John, John, Ariel");
         }).isInstanceOf(IllegalArgumentException.class)

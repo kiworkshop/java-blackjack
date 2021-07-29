@@ -52,9 +52,7 @@ class DealerTest {
         dealer.receiveCard(new Card(Denomination.NINE, Type.CLUB));
         dealer.receiveCard((new Card(Denomination.EIGHT, Type.HEART)));
 
-        //when
-
-        //then
+        //when, then
         assertThat(dealer.toString()).isEqualTo("딜러: 9클로버, 8하트");
     }
 }

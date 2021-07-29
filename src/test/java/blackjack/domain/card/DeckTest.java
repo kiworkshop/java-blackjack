@@ -17,7 +17,7 @@ class DeckTest {
         //given
         Deck deck = new Deck();
 
-        //when //then
+        //when, then
         assertTrue(deck.getDeck().contains(new Card(Denomination.ACE, Type.SPADE)));
     }
 

@@ -35,4 +35,18 @@ public class ScoreTest {
         //then
         assertThat(denomination).isEqualTo(expectedDenomiantion);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"A, true", "TWO, false", "TEN, false", "J, false"})
+    @DisplayName("카드가 Ace일 경우 참을 반환한다.")
+    void isAce(String scoreName, boolean expected) {
+        //given
+        Score score = Score.valueOf(scoreName);
+
+        //when
+        boolean actual = score.isAce();
+
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
 }

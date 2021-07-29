@@ -3,6 +3,7 @@ package blackjack.domain.participant;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Denomination;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,22 +14,43 @@ public abstract class Participant {
     private static final int DIFFERENCE_OF_ACE_SCORE = 10;
     private static final int BLACKJACK = 21;
     private static final int ZERO = 0;
+    private static final String CHECK_NULL_OR_EMPTY = "이름이 빈 칸 혹은 null 값이 아닌지 확인해주세요.";
+    private static final String CHECK_CONTAINING_ONLY_LETTERS_AND_DIGITS = "이름은 특수문자를 포함하지 않은 문자와 숫자로 지정해주세요.";
+    private static final String CHECK_SAME_NAME_AS_DEALER = "이름은 딜러와 같을 수 없으니 다른 이름을 지정해주세요.";
 
     private final String name;
     private final List<Card> cards;
 
     public Participant(String name) {
-        // validate(name)
+        validateName(name);
 
         this.name = name;
         this.cards = new ArrayList<>();
     }
 
-//  private void validate(String name){
-//      if (StringUtils.isBlank(name)) {
-//          throw new IllegalArgumentException("이름이 빈 칸 혹은 null 값이 아닌지 확인해주세요.");
-//        }
-//    }
+    private void validateName(String name) {
+        validateNullOrEmpty(name);
+        validateAlphaNumeric(name);
+        validateDealerNameDuplicated(name);
+    }
+
+    private void validateNullOrEmpty(String name) {
+        if (StringUtils.isBlank(name)) {
+            throw new IllegalArgumentException(CHECK_NULL_OR_EMPTY);
+        }
+    }
+
+    private void validateAlphaNumeric(String name) {
+        if (StringUtils.isAlphanumeric(name)) {
+            throw new IllegalArgumentException(CHECK_CONTAINING_ONLY_LETTERS_AND_DIGITS);
+        }
+    }
+
+    private void validateDealerNameDuplicated(String name) {
+        if (name.equals("딜러")) {
+            throw new IllegalArgumentException(CHECK_SAME_NAME_AS_DEALER);
+        }
+    }
 
     protected abstract boolean drawable();
 

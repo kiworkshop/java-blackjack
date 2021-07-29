@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StringUtils {
+public class SplitUtil {
     private static final String COMMA = ",";
 
     public static List<String> splitByComma(String input) {

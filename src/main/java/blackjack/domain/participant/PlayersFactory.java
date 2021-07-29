@@ -1,7 +1,6 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.participant.Player;
-import blackjack.utils.StringUtils;
+import blackjack.utils.SplitUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class PlayersFactory {
     public static List<Player> createPlayers(String input) {
-        List<String> playerNames = StringUtils.splitByComma(input);
+        List<String> playerNames = SplitUtil.splitByComma(input);
 
         List<Player> players = playerNames.stream()
                 .map(Player::new)

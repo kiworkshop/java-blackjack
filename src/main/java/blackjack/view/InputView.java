@@ -1,7 +1,6 @@
 package blackjack.view;
 
 import blackjack.domain.participant.Player;
-import blackjack.dto.DrawCardResponseDTO;
 import blackjack.dto.PlayersNameInputDTO;
 
 import java.util.Scanner;
@@ -15,12 +14,11 @@ public class InputView {
         return new PlayersNameInputDTO(input);
     }
 
-    public DrawCardResponseDTO getPlayersResponse(Player player) {
+    public String getPlayersResponse(Player player) {
         StringBuilder sb = new StringBuilder();
         sb.append(player.getName())
                 .append("는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
         System.out.println(sb);
-        String response = scanner.nextLine();
-        return new DrawCardResponseDTO(response);
+        return scanner.nextLine().trim();
     }
 }

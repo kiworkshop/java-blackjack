@@ -5,7 +5,6 @@ import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.domain.participant.PlayersFactory;
 import blackjack.domain.result.GameResult;
-import blackjack.dto.DrawCardResponseDTO;
 import blackjack.dto.PlayersNameInputDTO;
 import blackjack.utils.StringUtil;
 import blackjack.view.InputView;
@@ -54,17 +53,13 @@ public class BlackJackController {
     }
 
     private void drawCardToPlayer(Player player) {
-        DrawCardResponseDTO drawCardResponse;
-        do {
+        while (player.drawable() && isYes(inputView.getPlayersResponse(player))) {
             player.receiveCard(deck.drawCard());
-
             outputView.printCards(player);
-            drawCardResponse = inputView.getPlayersResponse(player);
-        } while (player.drawable() && isYes(drawCardResponse));
+        }
     }
 
-    private boolean isYes(DrawCardResponseDTO drawCardResponse) {
-        String response = drawCardResponse.getResponse().trim();
+    private boolean isYes(String response) {
         StringUtil.validateYesOrNo(response);
         return response.equalsIgnoreCase("y");
     }

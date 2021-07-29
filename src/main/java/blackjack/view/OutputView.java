@@ -14,7 +14,8 @@ public class OutputView {
 
     public void printFirstCardsGiven(List<Player> players, Dealer dealer) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dealer.getName())
+        sb.append(NEW_LINE)
+                .append(dealer.getName())
                 .append("와 ");
         sb.append(players.stream()
                 .map(Player::getName)
@@ -40,7 +41,7 @@ public class OutputView {
     }
 
     public void printDealerCardGiven() {
-        System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
+        System.out.println("\n딜러는 16이하라 한장의 카드를 더 받았습니다.");
     }
 
     public void printCardsResult(Dealer dealer, List<Player> players) {

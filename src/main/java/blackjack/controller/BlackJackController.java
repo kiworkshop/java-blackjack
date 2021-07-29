@@ -54,13 +54,13 @@ public class BlackJackController {
     }
 
     private void drawCardToPlayer(Player player) {
-        DrawCardResponseDTO drawCardResponse;
-        do {
+        DrawCardResponseDTO drawCardResponse = inputView.getPlayersResponse(player);
+        while (player.drawable() && isYes(drawCardResponse)) {
             player.receiveCard(deck.drawCard());
 
             outputView.printCards(player);
             drawCardResponse = inputView.getPlayersResponse(player);
-        } while (player.drawable() && isYes(drawCardResponse));
+        }
     }
 
     private boolean isYes(DrawCardResponseDTO drawCardResponse) {

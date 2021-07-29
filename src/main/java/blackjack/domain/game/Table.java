@@ -21,12 +21,8 @@ public class Table {
 
     private List<Player> generatePlayers(List<String> playerNames) {
         return playerNames.stream()
-                .map(playerName -> new Player(playerName, drawInitialHands()))
+                .map(playerName -> new Player(playerName, deck.drawInitialHands()))
                 .collect(Collectors.toList());
-    }
-
-    public Hands drawInitialHands() {
-        return deck.drawInitialHands();
     }
 
     public Player hit(Player player) {

@@ -1,9 +1,9 @@
 package blackjack.controller;
 
-import blackjack.service.BlackjackService;
 import blackjack.domain.participant.Player;
 import blackjack.dto.ParticipantDto;
 import blackjack.dto.PlayerDto;
+import blackjack.service.BlackjackService;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
@@ -22,12 +22,14 @@ public class BlackjackController {
 
         ParticipantDto participants = deal(blackjackService);
         OutputView.printFinalHands(participants);
+
+
     }
 
     private ParticipantDto deal(BlackjackService blackjackService) {
         dealEachPlayer(blackjackService);
         blackjackService.dealDealer();
-        return blackjackService.getParticipants();
+        return blackjackService.getFinalParticipants();
     }
 
     private void dealEachPlayer(BlackjackService blackjackService) {

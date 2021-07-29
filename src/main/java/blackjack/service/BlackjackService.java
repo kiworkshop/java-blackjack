@@ -4,11 +4,11 @@ import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.dto.DealerDto;
+import blackjack.dto.FinalDealerDto;
 import blackjack.dto.ParticipantDto;
 import blackjack.dto.PlayerDto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class BlackjackService {
@@ -19,13 +19,33 @@ public class BlackjackService {
     }
 
     public ParticipantDto getParticipants() {
-        Dealer dealer = table.getDealer();
-        DealerDto dealerDto = new DealerDto(Collections.singletonList(dealer.getFaceUpCard()));
-
-        List<PlayerDto> playersDto = new ArrayList<>();
-        table.getPlayers().forEach(player -> playersDto.add(new PlayerDto(player)));
+        DealerDto dealerDto = generateDealerDto();
+        List<PlayerDto> playersDto = generatePlayerDto();
 
         return new ParticipantDto(dealerDto, playersDto);
+    }
+
+    public ParticipantDto getFinalParticipants() {
+        DealerDto finalDealerDto = generateFinalDealerDto();
+        List<PlayerDto> playersDto = generatePlayerDto();
+
+        return new ParticipantDto(finalDealerDto, playersDto);
+    }
+
+    private DealerDto generateDealerDto() {
+        Dealer dealer = table.getDealer();
+        return new DealerDto(dealer.getFaceUpCard());
+    }
+
+    private FinalDealerDto generateFinalDealerDto() {
+        Dealer dealer = table.getDealer();
+        return new FinalDealerDto(dealer);
+    }
+
+    private List<PlayerDto> generatePlayerDto() {
+        List<PlayerDto> playersDto = new ArrayList<>();
+        table.getPlayers().forEach(player -> playersDto.add(new PlayerDto(player)));
+        return playersDto;
     }
 
     public void dealDealer() {

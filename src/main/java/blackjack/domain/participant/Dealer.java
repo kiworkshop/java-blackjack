@@ -26,6 +26,10 @@ public class Dealer {
         hands.addCard(card);
     }
 
+    public int sumRank() {
+        return hands.sumRanks();
+    }
+
     public int countHands() {
         return hands.size();
     }

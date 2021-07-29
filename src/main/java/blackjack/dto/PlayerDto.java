@@ -3,6 +3,8 @@ package blackjack.dto;
 import blackjack.domain.card.Card;
 import blackjack.domain.participant.Player;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PlayerDto {
@@ -12,8 +14,8 @@ public class PlayerDto {
 
     public PlayerDto(Player player) {
         this.name = player.getName();
-        this.cards = player.getCards();
-        this.rankSum = cards.stream().mapToInt(Card::getRank).sum();
+        this.cards = Collections.unmodifiableList(new ArrayList<>(player.getCards()));
+        this.rankSum = player.sumRank();
     }
 
     public String getName() {

@@ -2,6 +2,7 @@ package blackjack.view;
 
 import blackjack.domain.card.Card;
 import blackjack.dto.DealerDto;
+import blackjack.dto.FinalDealerDto;
 import blackjack.dto.ParticipantDto;
 import blackjack.dto.PlayerDto;
 
@@ -22,7 +23,6 @@ public class OutputView {
         System.out.println(generateDealerHandsMessage(participants.getDealerDto()));
         participants.getPlayers()
                 .forEach(player -> System.out.println(generatePlayerHandsMessage(player)));
-        System.out.println();
     }
 
     private static void printDealMessage(ParticipantDto participants) {
@@ -54,7 +54,8 @@ public class OutputView {
     public static void printFinalHands(ParticipantDto participants) {
         System.out.println();
         printFinalDealMessage(participants.getDealerDto());
-        printFinalDealerHands(participants.getDealerDto());
+
+        printFinalDealerHands((FinalDealerDto) participants.getDealerDto());
         printFinalPlayersHands(participants.getPlayers());
     }
 
@@ -64,10 +65,10 @@ public class OutputView {
         }
     }
 
-    private static void printFinalDealerHands(DealerDto dealerDto) {
+    private static void printFinalDealerHands(FinalDealerDto finalDealerDto) {
         System.out.printf(PARTICIPANTS_FINAL_HANDS,
-                generateDealerHandsMessage(dealerDto),
-                dealerDto.getRankSum());
+                generateDealerHandsMessage(finalDealerDto),
+                finalDealerDto.getRankSum());
     }
 
     private static void printFinalPlayersHands(List<PlayerDto> players) {

@@ -24,6 +24,10 @@ public class Player {
         return this.countHands() == INITIAL_DEAL_COUNT;
     }
 
+    public int sumRank() {
+        return hands.sumRanks();
+    }
+
     public int countHands() {
         return hands.size();
     }

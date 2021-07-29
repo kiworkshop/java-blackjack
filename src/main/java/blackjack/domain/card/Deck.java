@@ -12,14 +12,10 @@ public class Deck {
     private static final String ALERT_NO_CARD_LEFT = "사용 가능한 카드를 모두 소진하였습니다.";
 
     @Getter
-    private final List<Card> deck = new LinkedList<>();
+    private final List<Card> deck;
 
     public Deck() {
-        for (Denomination denomination : Denomination.values()) {
-            for (Type type : Type.values()) {
-                deck.add(new Card(denomination, type));
-            }
-        }
+        this.deck = new LinkedList<>(DeckFactory.createDeck());
     }
 
     public Card drawCard() {

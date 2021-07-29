@@ -5,8 +5,6 @@ import blackjack.domain.card.Deck;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Participant;
 import blackjack.domain.participant.Player;
-import blackjack.domain.card.Denomination;
-import blackjack.domain.card.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,16 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeckTest {
-
-    @DisplayName("생성된 덱에 포함된 카드 숫자가 52장인지 확인한다")
-    @Test
-    void createTest() {
-        // given
-        Deck deck = new Deck();
-
-        // when //then
-        assertThat(deck.getDeck()).hasSize(52);
-    }
 
     @DisplayName("생성된 덱에 스페이드 에이스가 포함되어 있다.")
     @Test

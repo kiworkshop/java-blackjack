@@ -7,7 +7,7 @@ import blackjack.domain.participant.PlayersFactory;
 import blackjack.domain.result.GameResult;
 import blackjack.dto.DrawCardResponseDTO;
 import blackjack.dto.PlayersNameInputDTO;
-import blackjack.utils.StringtUtil;
+import blackjack.utils.StringUtil;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
@@ -70,6 +70,7 @@ public class BlackJackController {
 
     private boolean isYes(DrawCardResponseDTO drawCardResponse) {
         String response = drawCardResponse.getResponse().trim();
+        StringUtil.validateYesOrNo(response);
         return response.equalsIgnoreCase("y");
     }
 

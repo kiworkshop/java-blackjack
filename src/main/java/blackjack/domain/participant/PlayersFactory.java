@@ -1,6 +1,6 @@
 package blackjack.domain.participant;
 
-import blackjack.utils.StringtUtil;
+import blackjack.utils.StringUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +11,7 @@ public class PlayersFactory {
     private static final String CHECK_DUPLICATED_PLAYER_NAME = "플레이어가 중복된 이름을 가지고 있는지 확인해주세요.";
 
     public static List<Player> createPlayers(String input) {
-        List<String> playerNames = StringtUtil.splitByComma(input);
+        List<String> playerNames = StringUtil.splitByComma(input);
         checkDuplication(playerNames);
 
         List<Player> players = playerNames.stream()

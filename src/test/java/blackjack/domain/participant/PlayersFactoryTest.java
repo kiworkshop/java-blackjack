@@ -39,4 +39,15 @@ class PlayersFactoryTest {
             players.add(new Player("ChungHyeon"));
         }).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    @DisplayName("중복이 있는 이름목록을 입력하면 플레이어 리스트가 생성되는지 않는지 테스트한다.")
+    void playerDeDuplicateTest() {
+        //given //when //then
+        assertThatThrownBy(() -> {
+            List<Player> players = PlayersFactory.createPlayers("John, John, Ariel");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("플레이어가 중복된 이름을 가지고 있는지 확인해주세요.");
+
+    }
 }

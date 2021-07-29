@@ -19,6 +19,9 @@ public class Deck {
     }
 
     public Card drawCard() {
+        if (deck.isEmpty()) {
+            throw new RuntimeException(ALERT_NO_CARD_LEFT);
+        }
         return deck.remove(generateRandomNumber());
     }
 

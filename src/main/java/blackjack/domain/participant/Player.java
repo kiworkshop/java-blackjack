@@ -1,7 +1,6 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.participant.Participant;
 import blackjack.domain.result.Rule;
 import blackjack.domain.result.WinningResult;
 import lombok.Getter;

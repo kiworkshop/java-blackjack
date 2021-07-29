@@ -2,7 +2,6 @@ package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
-import blackjack.domain.participant.Dealer;
 import blackjack.domain.card.Denomination;
 import blackjack.domain.card.Type;
 import org.junit.jupiter.api.DisplayName;

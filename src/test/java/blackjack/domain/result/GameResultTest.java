@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.entry;
 
 class GameResultTest {
 
-
     @ParameterizedTest
     @EnumSource(WinningResult.class)
     @DisplayName("각 플레이어의 승패를 확인한다.")

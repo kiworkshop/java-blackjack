@@ -2,7 +2,6 @@ package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
-import blackjack.domain.participant.Participant;
 import lombok.Getter;
 
 import java.util.stream.Collectors;

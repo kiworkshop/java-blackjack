@@ -3,14 +3,10 @@ package blackjack.domain.game;
 import blackjack.domain.card.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static blackjack.domain.card.TestCard.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +26,23 @@ class HandsTest {
 
         //then
         assertThat(sum).isEqualTo(11);
+    }
+
+    @Test
+    @DisplayName("에이스 카드가 하나 있을 때 전체 카드 합을 계산한다.")
+    void sum_hands_with_one_ace_card() {
+        //given
+        List<Card> cards = new ArrayList<>();
+        cards.add(CARD_1);
+        cards.add(CARD_K);
+        cards.add(ACE_1);
+
+        //when
+        Hands hands = new Hands(cards);
+        int sum = hands.sumRanks();
+
+        //then
+        assertThat(sum).isEqualTo(12);
     }
 
     @Test

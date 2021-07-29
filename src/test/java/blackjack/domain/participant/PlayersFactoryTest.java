@@ -1,6 +1,6 @@
 package blackjack.domain.participant;
 
-import blackjack.utils.SplitUtil;
+import blackjack.utils.StringtUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +19,7 @@ class PlayersFactoryTest {
     void playerGenerateTest(String input) {
         //when
         List<Player> players = PlayersFactory.createPlayers(input);
-        List<String> names = SplitUtil.splitByComma(input);
+        List<String> names = StringtUtil.splitByComma(input);
 
         //then
         for (String name : names) {

@@ -1,13 +1,13 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.participant.Player;
 import blackjack.domain.card.Denomination;
 import blackjack.domain.card.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PlayerTest {
 
@@ -91,4 +91,17 @@ public class PlayerTest {
         //then
         assertThat(result).isEqualTo(20);
     }
+
+    @Test
+    @DisplayName("플레이어의 이름은 '딜러'가 될 수 없다.")
+    void dealerNameDuplicatedTest() {
+        //given
+        String playerName = "딜러";
+
+        //when //then
+        assertThatThrownBy(() -> new Player(playerName))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("이름은 딜러와 같을 수 없으니 다른 이름을 지정해주세요.");
+    }
+
 }

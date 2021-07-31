@@ -15,6 +15,8 @@ public enum Score {
     Q("Q", 10),
     K("K", 10);
 
+    public static final int ACE_BONUS = 10;
+
     private final String denomination;
     private final int score;
 

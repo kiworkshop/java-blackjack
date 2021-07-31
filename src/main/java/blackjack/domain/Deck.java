@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Deck {
+    static final int TWO_CARDS = 2;
     private static final Deque<Card> cards = new ArrayDeque<>();
 
     static {
@@ -34,9 +35,9 @@ public class Deck {
         return cards.pop();
     }
 
-    public static List<Card> getTwoCards() {
-        return Collections.unmodifiableList(IntStream.range(0, 2)
+    public static GivenCards getTwoCards() {
+        return new GivenCards(Collections.unmodifiableList(IntStream.range(0, TWO_CARDS)
                 .mapToObj(i -> cards.pop())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
     }
 }

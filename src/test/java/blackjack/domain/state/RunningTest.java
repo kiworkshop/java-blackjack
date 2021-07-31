@@ -23,7 +23,7 @@ class RunningTest {
     }
 
     @Test
-    @DisplayName("게임 진행 중 게임 종료 여부를 물어볼 경우, 거짓을 반환한다.")
+    @DisplayName("게임 진행 중 참여 종료 여부를 물어볼 경우, 거짓을 반환한다.")
     void isFinished() {
         //given
         State runningState = createRunningState();

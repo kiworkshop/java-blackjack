@@ -46,10 +46,14 @@ public class GivenCards {
     }
 
     public boolean isBurst() {
-        return BLACKJACK > sum();
+        return BLACKJACK < sum();
     }
 
     public List<Card> list() {
         return Collections.unmodifiableList(cards);
+    }
+
+    public void add(final Card card) {
+        cards.add(card);
     }
 }

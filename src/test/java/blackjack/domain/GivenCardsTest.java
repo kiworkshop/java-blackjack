@@ -104,4 +104,21 @@ public class GivenCardsTest {
         assertThat(cards).hasSize(2)
                 .containsOnly(card1, card2);
     }
+
+    @Test
+    @DisplayName("인자로 받은 카드를 추가한다.")
+    void add() {
+        //given
+        Card card1 = new Card(Score.TEN, Suit.CLUB);
+        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+        Card newCard = new Card(Score.TWO, Suit.CLUB);
+
+        //when
+        givenCards.add(newCard);
+
+        //then
+        assertThat(givenCards.list()).hasSize(3)
+                .containsOnly(card1, card2, newCard);
+    }
 }

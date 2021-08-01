@@ -20,12 +20,12 @@ public class Participant {
         return hands.sumRanks();
     }
 
-    public boolean bust() {
-        return hands.bust();
+    public int countAceCards() {
+        return hands.countAceCards();
     }
 
-    public boolean blackjack() {
-        return hands.blackjack();
+    public int countMajorCards() {
+        return hands.countMajorCards();
     }
 
     public int countHands() {

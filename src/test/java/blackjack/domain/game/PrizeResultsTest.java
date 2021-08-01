@@ -49,7 +49,7 @@ class PrizeResultsTest {
                 new Player("3", Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
                 new Player("4", Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
                 new Player("블랙잭", Arrays.asList(CARD_Q, ACE_1)),        // blackjack
-                new Player("5", Arrays.asList(CARD_Q, CARD_8, CARD_9))    // 27
+                new Player("5", Arrays.asList(CARD_Q, CARD_8, CARD_9))    // bust
         );
     }
 

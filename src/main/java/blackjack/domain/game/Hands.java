@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static blackjack.domain.prize.PrizeResults.BLACKJACK_RANK;
-
 public class Hands {
     private final List<Card> hands;
 
@@ -41,21 +39,13 @@ public class Hands {
                 .sum();
     }
 
-    private int countAceCards() {
+    public int countAceCards() {
         return (int) hands.stream()
                 .filter(AceCard.class::isInstance)
                 .count();
     }
 
-    public boolean bust() {
-        return sumRanks() > BLACKJACK_RANK;
-    }
-
-    public boolean blackjack() {
-        return countAceCards() == 1 && countMajorCards() == 1;
-    }
-
-    private int countMajorCards() {
+    public int countMajorCards() {
         return (int) hands.stream()
                 .filter(Card::majorCard)
                 .count();
@@ -66,6 +56,6 @@ public class Hands {
     }
 
     public List<Card> getHands() {
-        return hands;
+        return new ArrayList<>(hands);
     }
 }

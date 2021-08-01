@@ -1,10 +1,11 @@
-package blackjack.domain;
+package blackjack.domain.participant;
 
+import blackjack.domain.Card;
+import blackjack.domain.GivenCards;
 import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
 import blackjack.domain.state.finished.Blackjack;
 import blackjack.domain.state.finished.Burst;
-import blackjack.domain.state.finished.Stay;
 import blackjack.domain.state.running.Hit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class PlayerTest {
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
-        Player player = new Player("pobi", givenCards);
+        Person player = new Player("pobi", givenCards);
 
         //then
         assertThat(player).extracting("state")
@@ -40,7 +41,7 @@ public class PlayerTest {
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
-        Player player = new Player("pobi", givenCards);
+        Person player = new Player("pobi", givenCards);
 
         //then
         assertThat(player).extracting("state")
@@ -54,7 +55,7 @@ public class PlayerTest {
         Card card1 = new Card(Score.TEN, Suit.DIAMOND);
         Card card2 = new Card(Score.TEN, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        Player player = new Player("pobi", givenCards);
+        Person player = new Player("pobi", givenCards);
         Card card3 = new Card(Score.TWO, Suit.HEART);
 
         //when
@@ -72,7 +73,7 @@ public class PlayerTest {
         Card card1 = new Card(Score.TEN, Suit.DIAMOND);
         Card card2 = new Card(Score.NINE, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        Player player = new Player("pobi", givenCards);
+        Person player = new Player("pobi", givenCards);
         Card card3 = new Card(Score.TWO, Suit.HEART);
 
         //when
@@ -81,54 +82,5 @@ public class PlayerTest {
         //then
         assertThat(player).extracting("state")
                 .isInstanceOf(Hit.class);
-    }
-
-    @Test
-    @DisplayName("추가 카드 발급을 거부할 경우, Stay 상태가 된다.")
-    void stay() {
-        //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.NINE, Suit.DIAMOND);
-        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        Player player = new Player("pobi", givenCards);
-
-        //when
-        player.stay();
-
-        //then
-        assertThat(player).extracting("state")
-                .isInstanceOf(Stay.class);
-    }
-
-    @Test
-    @DisplayName("발급 받은 카드 목록을 반환한다.")
-    void getCards() {
-        //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.NINE, Suit.DIAMOND);
-        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        Player player = new Player("pobi", givenCards);
-
-        //when
-        GivenCards cards = player.getCards();
-
-        //then
-        assertThat(cards).isEqualTo(givenCards);
-    }
-
-    @Test
-    @DisplayName("카드의 합을 반환한다.")
-    void sum() {
-        //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.NINE, Suit.DIAMOND);
-        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        Player player = new Player("pobi", givenCards);
-
-        //when
-        int sum = player.sum();
-
-        //then
-        assertThat(sum).isEqualTo(19);
     }
 }

@@ -21,17 +21,18 @@ public class Deck {
     private final List<Card> cards;
 
     public Deck() {
-        this.cards = new ArrayList<>();
-        generateCards();
+        this.cards = generateCards();
         Collections.shuffle(cards);
     }
 
-    private void generateCards() {
+    private List<Card> generateCards() {
+        List<Card> cards = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             cards.addAll(generateNumberCards(suit));
             cards.addAll(generateMajorCards(suit));
             cards.add(new AceCard(suit));
         }
+        return cards;
     }
 
     private List<Card> generateMajorCards(Suit suit) {

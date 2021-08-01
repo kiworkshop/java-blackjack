@@ -12,6 +12,8 @@ public class InputView {
     private static final String INVALID_PLAYERS_NAME_MESSAGE = "게임에 참여할 사람의 이름을 다시 확인해 주십시오.";
     private static final String INVALID_HIT_OR_STAND_MESSAGE = "예는 y, 아니오는 n 을 입력해 주세요.";
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     private InputView() {
     }
 
@@ -32,8 +34,8 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    private static void validatePlayersSize(List<String> players) {
-        if (players.isEmpty()) {
+    private static void validatePlayersSize(List<String> playerNames) {
+        if (playerNames.isEmpty()) {
             throw new IllegalArgumentException(INVALID_PLAYERS_NAME_MESSAGE);
         }
     }
@@ -59,7 +61,6 @@ public class InputView {
     }
 
     private static String getUserInput() {
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 }

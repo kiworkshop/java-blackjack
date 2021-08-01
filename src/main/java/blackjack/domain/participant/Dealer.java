@@ -8,7 +8,8 @@ import blackjack.domain.state.finished.Stay;
 import blackjack.domain.state.running.Hit;
 
 public class Dealer extends Gamer {
-    public static final int HIT_THRESHOLD = 16;
+    private static final int HIT_THRESHOLD = 16;
+    public static final int BLACKJACK = 21;
 
     public Dealer(final String name, final GivenCards givenCards) {
         super(name);
@@ -30,6 +31,14 @@ public class Dealer extends Gamer {
 
     @Override
     public void hit(final Card card) {
-        state = state.hit(card);
+        State newState = state.hit(card);
+        int sum = newState.sum();
+
+        if (sum > HIT_THRESHOLD && sum <= BLACKJACK) {
+            state = new Stay(newState.getCards());
+            return;
+        }
+
+        state = newState;
     }
 }

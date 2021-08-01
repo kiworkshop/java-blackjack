@@ -10,6 +10,8 @@ import blackjack.domain.state.finished.Stay;
 import blackjack.domain.state.running.Hit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -84,14 +86,14 @@ public class DealerTest {
     }
 
     @Test
-    @DisplayName("발급 받은 카드를 더한 합이 21 이하일 경우, Hit 상태가 된다.")
+    @DisplayName("발급 받은 카드를 더한 합이 16 이하일 경우, Hit 상태가 된다.")
     void hit_remain_hit_state() {
         //given
         Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.SIX, Suit.DIAMOND);
+        Card card2 = new Card(Score.FOUR, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person dealer = new Dealer("pobi", givenCards);
-        Card card3 = new Card(Score.FIVE, Suit.HEART);
+        Card card3 = new Card(Score.TWO, Suit.HEART);
 
         //when
         dealer.hit(card3);
@@ -99,5 +101,24 @@ public class DealerTest {
         //then
         assertThat(dealer).extracting("state")
                 .isInstanceOf(Hit.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"TWO", "SIX"})
+    @DisplayName("발급 받은 카드를 더한 합이 17 이상 21 이하일 경우, Stay 상태가 된다.")
+    void hit_become_stay_state(String score) {
+        //given
+        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
+        Card card2 = new Card(Score.FIVE, Suit.DIAMOND);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+        Person dealer = new Dealer("pobi", givenCards);
+        Card card3 = new Card(Score.valueOf(score), Suit.HEART);
+
+        //when
+        dealer.hit(card3);
+
+        //then
+        assertThat(dealer).extracting("state")
+                .isInstanceOf(Stay.class);
     }
 }

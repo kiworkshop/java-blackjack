@@ -6,10 +6,9 @@ import java.util.List;
 
 import static blackjack.domain.Deck.TWO_CARDS;
 import static blackjack.domain.enums.Score.ACE_BONUS;
+import static blackjack.domain.participant.Dealer.BLACKJACK;
 
 public class GivenCards {
-    private static final int BLACKJACK = 21;
-
     private final List<Card> cards;
 
     public GivenCards(final List<Card> cards) {

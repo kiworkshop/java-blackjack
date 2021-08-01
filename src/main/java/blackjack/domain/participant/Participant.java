@@ -5,10 +5,10 @@ import blackjack.domain.game.Hands;
 
 import java.util.List;
 
-public class Participant {
+public abstract class Participant {
     protected final Hands hands;
 
-    public Participant(List<Card> cards) {
+    protected Participant(List<Card> cards) {
         this.hands = new Hands(cards);
     }
 

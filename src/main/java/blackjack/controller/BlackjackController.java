@@ -16,7 +16,7 @@ public class BlackjackController {
 
     public void run() {
         try {
-            setUpBlackjack();
+            setUp();
             initialDeal();
             deal();
             gameResult();
@@ -25,7 +25,7 @@ public class BlackjackController {
         }
     }
 
-    private void setUpBlackjack() {
+    private void setUp() {
         List<String> playerNames = InputView.getPlayers();
         blackjackService = new BlackjackService(playerNames);
     }

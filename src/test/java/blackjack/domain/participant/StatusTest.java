@@ -18,7 +18,7 @@ class StatusTest {
     void blackjack() {
         // given
         List<Card> blackjackHands = Arrays.asList(ACE_1, CARD_Q);
-        Participant participant = new Participant(blackjackHands);
+        Participant participant = new Dealer(blackjackHands);
 
         // when
         Status blackjack = Status.of(participant);
@@ -32,7 +32,7 @@ class StatusTest {
     void bust() {
         // given
         List<Card> bustHands = Arrays.asList(CARD_K, CARD_Q, CARD_J);
-        Participant participant = new Participant(bustHands);
+        Participant participant = new Dealer(bustHands);
 
         // when
         Status bust = Status.of(participant);
@@ -46,7 +46,7 @@ class StatusTest {
     void hold() {
         // given
         List<Card> holdHands = Arrays.asList(CARD_K, CARD_Q);
-        Participant participant = new Participant(holdHands);
+        Participant participant = new Dealer(holdHands);
 
         // when
         Status hold = Status.of(participant);

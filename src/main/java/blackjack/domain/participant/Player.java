@@ -15,7 +15,7 @@ public class Player extends Participant {
     }
 
     public boolean neverHit() {
-        return this.countHands() == INITIAL_DEAL_COUNT;
+        return countHands() == INITIAL_DEAL_COUNT;
     }
 
     public String getName() {

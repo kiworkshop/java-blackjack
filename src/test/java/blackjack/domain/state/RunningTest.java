@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RunningTest {
 
@@ -24,6 +25,17 @@ class RunningTest {
 
         //then
         assertThat(finished).isFalse();
+    }
+
+    @Test
+    @DisplayName("게임 진행 중 게임 결과를 요청할 경우, 예외가 발생한다.")
+    void result() {
+        //given
+        State runningState = createRunningState();
+
+        //when //then
+        assertThatThrownBy(() -> runningState.result(new GivenCards(Collections.emptyList())))
+                .hasMessage("게임 진행 중에는 결과를 알 수 없습니다.");
     }
 
     private State createRunningState() {

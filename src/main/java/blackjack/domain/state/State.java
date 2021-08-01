@@ -4,6 +4,7 @@ import blackjack.domain.Card;
 import blackjack.domain.GivenCards;
 
 public interface State {
+
     State hit(Card card);
 
     State stay();
@@ -13,4 +14,6 @@ public interface State {
     boolean isFinished();
 
     GivenCards getCards();
+
+    int result(GivenCards givenCards);
 }

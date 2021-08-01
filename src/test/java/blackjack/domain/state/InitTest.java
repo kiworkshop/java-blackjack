@@ -49,6 +49,11 @@ class InitTest {
     private Init createInitState(GivenCards givenCards) {
         return new Init(givenCards) {
             @Override
+            public int result(GivenCards givenCards) {
+                return 0;
+            }
+
+            @Override
             public State hit(Card card) {
                 return null;
             }

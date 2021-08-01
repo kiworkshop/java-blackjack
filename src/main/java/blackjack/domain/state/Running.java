@@ -12,4 +12,9 @@ public abstract class Running extends Init {
     public boolean isFinished() {
         return false;
     }
+
+    @Override
+    public int result(GivenCards givenCards) {
+        throw new IllegalStateException("게임 진행 중에는 결과를 알 수 없습니다.");
+    }
 }

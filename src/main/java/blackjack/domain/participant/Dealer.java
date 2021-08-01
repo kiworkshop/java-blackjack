@@ -8,8 +8,8 @@ import blackjack.domain.state.finished.Stay;
 import blackjack.domain.state.running.Hit;
 
 public class Dealer extends Gamer {
-    private static final int HIT_THRESHOLD = 16;
     public static final int BLACKJACK = 21;
+    private static final int HIT_THRESHOLD = 16;
 
     public Dealer(final String name, final GivenCards givenCards) {
         super(name);

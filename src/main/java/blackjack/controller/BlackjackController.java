@@ -1,5 +1,6 @@
 package blackjack.controller;
 
+import blackjack.domain.GameSystem;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
@@ -16,5 +17,7 @@ public class BlackjackController {
 
     public void run() {
         List<String> playerNames = inputView.getPlayerNames();
+        GameSystem gameSystem = new GameSystem(playerNames);
+        outputView.printGameStart(gameSystem.getPlayerNames());
     }
 }

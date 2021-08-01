@@ -1,6 +1,6 @@
 package blackjack.domain.state;
 
-import blackjack.domain.GivenCards;
+import blackjack.domain.card.GivenCards;
 
 public abstract class Init implements State {
     protected final GivenCards givenCards;

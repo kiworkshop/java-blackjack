@@ -1,10 +1,10 @@
-package blackjack.domain;
+package blackjack.domain.card;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static blackjack.domain.Deck.TWO_CARDS;
+import static blackjack.domain.card.Deck.TWO_CARDS;
 import static blackjack.domain.enums.Score.ACE_BONUS;
 import static blackjack.domain.participant.Dealer.BLACKJACK;
 

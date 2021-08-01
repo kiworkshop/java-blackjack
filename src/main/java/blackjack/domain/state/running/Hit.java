@@ -1,7 +1,7 @@
 package blackjack.domain.state.running;
 
-import blackjack.domain.Card;
-import blackjack.domain.GivenCards;
+import blackjack.domain.card.Card;
+import blackjack.domain.card.GivenCards;
 import blackjack.domain.state.State;
 import blackjack.domain.state.finished.Burst;
 import blackjack.domain.state.finished.Stay;

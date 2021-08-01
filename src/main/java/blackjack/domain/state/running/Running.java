@@ -1,6 +1,6 @@
 package blackjack.domain.state.running;
 
-import blackjack.domain.GivenCards;
+import blackjack.domain.card.GivenCards;
 import blackjack.domain.state.Init;
 
 public abstract class Running extends Init {

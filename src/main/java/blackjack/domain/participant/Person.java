@@ -1,7 +1,7 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.Card;
-import blackjack.domain.GivenCards;
+import blackjack.domain.card.Card;
+import blackjack.domain.card.GivenCards;
 import blackjack.domain.state.State;
 
 public interface Person {

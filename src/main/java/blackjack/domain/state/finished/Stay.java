@@ -1,6 +1,6 @@
 package blackjack.domain.state.finished;
 
-import blackjack.domain.GivenCards;
+import blackjack.domain.card.GivenCards;
 import blackjack.domain.enums.Result;
 
 public class Stay extends Finished {

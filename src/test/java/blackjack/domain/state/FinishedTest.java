@@ -7,6 +7,8 @@ import blackjack.domain.enums.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -51,7 +53,9 @@ class FinishedTest {
     }
 
     private State createFinishedState() {
-        return new Finished() {
+        GivenCards givenCards = new GivenCards(Collections.singletonList(new Card(Score.A, Suit.CLUB)));
+
+        return new Finished(givenCards) {
             @Override
             public int sum() {
                 return 0;

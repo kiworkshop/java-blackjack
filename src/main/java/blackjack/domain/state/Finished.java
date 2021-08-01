@@ -1,8 +1,13 @@
 package blackjack.domain.state;
 
 import blackjack.domain.Card;
+import blackjack.domain.GivenCards;
 
-public abstract class Finished implements State {
+public abstract class Finished extends Init {
+
+    protected Finished(GivenCards givenCards) {
+        super(givenCards);
+    }
 
     @Override
     public State hit(Card card) {

@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class StartedTest {
+class HitTest {
 
     @Test
     @DisplayName("지급받은 카드 포함 합이 21을 초과할 경우, Burst 상태를 반환한다.")
@@ -20,11 +20,11 @@ class StartedTest {
         Card card1 = new Card(Score.TEN, Suit.CLUB);
         Card card2 = new Card(Score.TEN, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        Started started = new Started(givenCards);
+        State hit = new Hit(givenCards);
         Card newCard = new Card(Score.TWO, Suit.CLUB);
 
         //when
-        State state = started.hit(newCard);
+        State state = hit.hit(newCard);
 
         //then
         assertThat(state).isInstanceOf(Burst.class);
@@ -37,11 +37,11 @@ class StartedTest {
         Card card1 = new Card(Score.TEN, Suit.CLUB);
         Card card2 = new Card(Score.TEN, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        State started = new Started(givenCards);
+        State hit = new Hit(givenCards);
         Card newCard = new Card(Score.A, Suit.CLUB);
 
         //when
-        State state = started.hit(newCard);
+        State state = hit.hit(newCard);
 
         //then
         assertThat(state).isInstanceOf(Hit.class);
@@ -54,28 +54,12 @@ class StartedTest {
         Card card1 = new Card(Score.TEN, Suit.CLUB);
         Card card2 = new Card(Score.TEN, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        State started = new Started(givenCards);
+        State hit = new Hit(givenCards);
 
         //when
-        State state = started.stay();
+        State state = hit.stay();
 
         //then
         assertThat(state).isInstanceOf(Stay.class);
-    }
-
-    @Test
-    @DisplayName("모든 카드 목록을 반환한다.")
-    void getCards() {
-        ///given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
-        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        State started = new Started(givenCards);
-
-        //when
-        GivenCards cards = started.getCards();
-
-        //then
-        assertThat(cards).isEqualTo(givenCards);
     }
 }

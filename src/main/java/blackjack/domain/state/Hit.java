@@ -3,15 +3,15 @@ package blackjack.domain.state;
 import blackjack.domain.Card;
 import blackjack.domain.GivenCards;
 
-public class Started extends Running {
-    private final GivenCards givenCards;
+public class Hit extends Running {
 
-    public Started(GivenCards givenCards) {
-        this.givenCards = givenCards;
+    public Hit(final GivenCards givenCards) {
+        super(givenCards);
     }
 
     @Override
     public State hit(final Card card) {
+        GivenCards givenCards = getCards();
         givenCards.add(card);
 
         if (givenCards.isBurst()) {
@@ -23,11 +23,6 @@ public class Started extends Running {
 
     @Override
     public State stay() {
-        return new Stay(givenCards);
-    }
-
-    @Override
-    public GivenCards getCards() {
-        return givenCards;
+        return new Stay(getCards());
     }
 }

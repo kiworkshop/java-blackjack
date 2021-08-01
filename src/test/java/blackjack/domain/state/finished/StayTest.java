@@ -1,9 +1,10 @@
-package blackjack.domain.state;
+package blackjack.domain.state.finished;
 
 import blackjack.domain.Card;
 import blackjack.domain.GivenCards;
 import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
+import blackjack.domain.state.State;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

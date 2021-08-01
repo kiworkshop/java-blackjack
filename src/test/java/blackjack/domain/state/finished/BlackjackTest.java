@@ -1,9 +1,10 @@
-package blackjack.domain.state;
+package blackjack.domain.state.finished;
 
 import blackjack.domain.Card;
 import blackjack.domain.GivenCards;
 import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
+import blackjack.domain.state.State;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,22 +13,22 @@ import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BurstTest {
+class BlackjackTest {
 
     @Test
-    @DisplayName("패배를 의미하는 -1을 반환한다.")
+    @DisplayName("승리를 의미하는 1을 반환한다.")
     void result() {
         //given
         Card card1 = new Card(Score.EIGHT, Suit.CLUB);
         Card card2 = new Card(Score.EIGHT, Suit.HEART);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
-        State burst = new Burst(myCards);
+        State blackjack = new Blackjack(myCards);
         GivenCards otherCards = new GivenCards(Collections.emptyList());
 
         //when
-        int result = burst.result(otherCards);
+        int result = blackjack.result(otherCards);
 
         //then
-        assertThat(result).isEqualTo(-1);
+        assertThat(result).isEqualTo(1);
     }
 }

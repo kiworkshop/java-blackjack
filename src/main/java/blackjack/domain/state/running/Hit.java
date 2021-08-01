@@ -14,7 +14,6 @@ public class Hit extends Running {
 
     @Override
     public State hit(final Card card) {
-        GivenCards givenCards = getCards();
         givenCards.add(card);
 
         if (givenCards.isBurst()) {

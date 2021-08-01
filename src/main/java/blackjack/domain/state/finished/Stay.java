@@ -11,13 +11,11 @@ public class Stay extends Finished {
 
     @Override
     public int result(final GivenCards competitorCards) {
-        GivenCards myCards = getCards();
-
-        if (myCards.isGreaterThan(competitorCards)) {
+        if (givenCards.isGreaterThan(competitorCards)) {
             return Result.WIN.getPoint();
         }
 
-        if (myCards.isLessThan(competitorCards)) {
+        if (givenCards.isLessThan(competitorCards)) {
             return Result.LOSE.getPoint();
         }
 

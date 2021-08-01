@@ -3,7 +3,7 @@ package blackjack.domain.state;
 import blackjack.domain.GivenCards;
 
 public abstract class Init implements State {
-    private final GivenCards givenCards;
+    protected final GivenCards givenCards;
 
     protected Init(final GivenCards givenCards) {
         this.givenCards = givenCards;

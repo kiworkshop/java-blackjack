@@ -56,4 +56,12 @@ public class GivenCards {
     public void add(final Card card) {
         cards.add(card);
     }
+
+    public boolean isGreaterThan(final GivenCards otherCards) {
+        return sum() > otherCards.sum();
+    }
+
+    public boolean isLessThan(final GivenCards otherCards) {
+        return sum() < otherCards.sum();
+    }
 }

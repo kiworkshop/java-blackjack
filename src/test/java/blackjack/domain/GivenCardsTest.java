@@ -121,4 +121,38 @@ public class GivenCardsTest {
         assertThat(givenCards.list()).hasSize(3)
                 .containsOnly(card1, card2, newCard);
     }
+
+    @Test
+    @DisplayName("인자로 받은 카드보다 자신의 카드 합이 더 클 경우, 참을 반환한다.")
+    void isGreaterThan() {
+        //given
+        Card card1 = new Card(Score.TEN, Suit.CLUB);
+        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
+        Card card3 = new Card(Score.SEVEN, Suit.CLUB);
+        GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
+
+        //when
+        boolean result = myCards.isGreaterThan(otherCards);
+
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("인자로 받은 카드보다 자신의 카드 합보다 작을 경우, 참을 반환한다.")
+    void isLessThan() {
+        //given
+        Card card1 = new Card(Score.TEN, Suit.CLUB);
+        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
+        Card card3 = new Card(Score.TEN, Suit.HEART);
+        GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
+
+        //when
+        boolean result = myCards.isLessThan(otherCards);
+
+        //then
+        assertThat(result).isTrue();
+    }
 }

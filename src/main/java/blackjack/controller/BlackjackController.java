@@ -1,5 +1,7 @@
 package blackjack.controller;
 
+import blackjack.domain.game.DeckGenerator;
+import blackjack.domain.game.RandomDeckGenerator;
 import blackjack.domain.participant.Player;
 import blackjack.domain.prize.PrizeResults;
 import blackjack.dto.ParticipantsDto;
@@ -27,7 +29,8 @@ public class BlackjackController {
 
     private void setUp() {
         List<String> playerNames = InputView.getPlayers();
-        blackjackService = new BlackjackService(playerNames);
+        DeckGenerator deckGenerator = new RandomDeckGenerator();
+        blackjackService = new BlackjackService(playerNames, deckGenerator);
     }
 
     private void initialDeal() {

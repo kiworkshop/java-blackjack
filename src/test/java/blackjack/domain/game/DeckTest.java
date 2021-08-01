@@ -15,13 +15,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DeckTest {
 
     @Test
-    @DisplayName("무늬별로 숫자, 메이저, 에이스 카드를 총 52장의 카드를 갖는다.")
+    @DisplayName("총 52장의 카드를 갖는다.")
     void generator() {
-        //given, when
-        Deck deck = new Deck();
+        //given
+        DeckGenerator deckGenerator = new RandomDeckGenerator();
+        Deck deck = new Deck(deckGenerator);
+
+        //when
+        int size = deck.size();
 
         //then
-        assertThat(deck.size()).isEqualTo(TOTAL_CARD_COUNT);
+        assertThat(size).isEqualTo(TOTAL_CARD_COUNT);
     }
 
     @ParameterizedTest
@@ -29,7 +33,8 @@ class DeckTest {
     @DisplayName("카드를 주어진 개수만큼 반환한다.")
     void draw_cards(int cardCount) {
         //given
-        Deck deck = new Deck();
+        DeckGenerator deckGenerator = new RandomDeckGenerator();
+        Deck deck = new Deck(deckGenerator);
 
         //when
         List<Card> cards = deck.drawCards(cardCount);
@@ -42,7 +47,8 @@ class DeckTest {
     @DisplayName("남은 카드가 없을 때 예외를 던진다.")
     void draw_cards_out_of_index_exception() {
         //given
-        Deck deck = new Deck();
+        DeckGenerator deckGenerator = new RandomDeckGenerator();
+        Deck deck = new Deck(deckGenerator);
         int cardCount = TOTAL_CARD_COUNT + 1;
 
         //when, then

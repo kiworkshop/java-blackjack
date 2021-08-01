@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static blackjack.domain.card.TestCard.*;
+import static blackjack.domain.fixture.TestCard.*;
 import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 

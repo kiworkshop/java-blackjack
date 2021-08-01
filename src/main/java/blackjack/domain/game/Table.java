@@ -2,6 +2,7 @@ package blackjack.domain.game;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.participant.Dealer;
+import blackjack.domain.participant.Participant;
 import blackjack.domain.participant.Player;
 
 import java.util.Collections;
@@ -16,8 +17,8 @@ public class Table {
     private final Dealer dealer;
     private final List<Player> players;
 
-    public Table(List<String> playerNames) {
-        this.deck = new Deck();
+    public Table(List<String> playerNames, DeckGenerator deckGenerator) {
+        this.deck = new Deck(deckGenerator);
         this.dealer = new Dealer(deck.drawCards(INITIAL_DEAL_COUNT));
         this.players = Collections.unmodifiableList(generatePlayers(playerNames));
     }
@@ -28,16 +29,14 @@ public class Table {
                 .collect(Collectors.toList());
     }
 
-    public Player hit(Player player) {
+    public void hit(Participant participant) {
         List<Card> card = deck.drawCards(DRAW_CARD_COUNT_ON_HIT);
-        player.take(card);
-        return player;
+        participant.take(card);
     }
 
     public void finalDeal() {
-        if (dealer.hit()) {
-            List<Card> card = deck.drawCards(DRAW_CARD_COUNT_ON_HIT);
-            dealer.take(card);
+        while (dealer.hit()) {
+            hit(dealer);
         }
     }
 

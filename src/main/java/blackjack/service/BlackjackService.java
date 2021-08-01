@@ -1,5 +1,7 @@
 package blackjack.service;
 
+import blackjack.domain.game.DeckGenerator;
+import blackjack.domain.game.RandomDeckGenerator;
 import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
@@ -15,8 +17,8 @@ import java.util.List;
 public class BlackjackService {
     private final Table table;
 
-    public BlackjackService(List<String> playerNames) {
-        this.table = new Table(playerNames);
+    public BlackjackService(List<String> playerNames, DeckGenerator deckGenerator) {
+        this.table = new Table(playerNames, deckGenerator);
     }
 
     public ParticipantsDto getParticipants() {

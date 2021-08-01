@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static blackjack.domain.card.TestCard.*;
+import static blackjack.domain.fixture.TestCard.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HandsTest {
@@ -16,7 +16,7 @@ class HandsTest {
     void sum_hands_without_ace_card() {
         //given
         List<Card> cards = new ArrayList<>();
-        cards.add(CARD_1);
+        cards.add(CARD_2);
         cards.add(CARD_K);
 
         //when
@@ -24,7 +24,7 @@ class HandsTest {
         int sum = hands.sumRanks();
 
         //then
-        assertThat(sum).isEqualTo(11);
+        assertThat(sum).isEqualTo(12);
     }
 
     @Test
@@ -32,7 +32,7 @@ class HandsTest {
     void sum_hands_with_one_ace_card() {
         //given
         List<Card> cards = new ArrayList<>();
-        cards.add(CARD_1);
+        cards.add(CARD_2);
         cards.add(CARD_K);
         cards.add(ACE_1);
 
@@ -41,6 +41,6 @@ class HandsTest {
         int sum = hands.sumRanks();
 
         //then
-        assertThat(sum).isEqualTo(12);
+        assertThat(sum).isEqualTo(13);
     }
 }

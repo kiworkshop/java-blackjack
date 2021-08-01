@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static blackjack.domain.card.TestCard.*;
+import static blackjack.domain.fixture.TestCard.*;
 import static blackjack.domain.participant.Status.*;
 import static org.assertj.core.api.Assertions.assertThat;
 

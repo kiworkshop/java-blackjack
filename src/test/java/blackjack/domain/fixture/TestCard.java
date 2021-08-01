@@ -1,4 +1,8 @@
-package blackjack.domain.card;
+package blackjack.domain.fixture;
+
+import blackjack.domain.card.AceCard;
+import blackjack.domain.card.Card;
+import blackjack.domain.card.Suit;
 
 public class TestCard {
 
@@ -7,7 +11,6 @@ public class TestCard {
     public static final Card ACE_3 = new AceCard(Suit.HEART);
     public static final Card ACE_4 = new AceCard(Suit.SPADE);
 
-    public static final Card CARD_1 = new Card(Suit.SPADE, 1);
     public static final Card CARD_2 = new Card(Suit.SPADE, 2);
     public static final Card CARD_3 = new Card(Suit.SPADE, 3);
     public static final Card CARD_4 = new Card(Suit.SPADE, 4);

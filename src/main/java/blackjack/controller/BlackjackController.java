@@ -12,32 +12,35 @@ import java.util.List;
 
 public class BlackjackController {
 
+    private BlackjackService blackjackService;
+
     public void run() {
-        List<String> players = InputView.getPlayers();
-        BlackjackService blackjackService = new BlackjackService(players);
-
-        ParticipantsDto initialParticipants = blackjackService.getParticipants();
-        OutputView.printInitialDeal(initialParticipants);
-
-        deal(blackjackService);
-        ParticipantsDto finalParticipants = blackjackService.getFinalParticipants();
-        OutputView.printFinalHands(finalParticipants);
-
-        PrizeResults prizeResults = blackjackService.calculatePrizeResults();
-        OutputView.printPrizeResults(prizeResults);
+        try {
+            setUpBlackjack();
+            initialDeal();
+            deal();
+            gameResult();
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+        }
     }
 
-    private void deal(BlackjackService blackjackService) {
-        dealEachPlayer(blackjackService);
+    private void setUpBlackjack() {
+        List<String> playerNames = InputView.getPlayers();
+        blackjackService = new BlackjackService(playerNames);
+    }
+
+    private void initialDeal() {
+        ParticipantsDto initialParticipants = blackjackService.getParticipants();
+        OutputView.printInitialDeal(initialParticipants);
+    }
+
+    private void deal() {
+        blackjackService.getPlayers().forEach(this::hitOrStand);
         blackjackService.dealDealer();
     }
 
-    private void dealEachPlayer(BlackjackService blackjackService) {
-        blackjackService.getPlayers()
-                .forEach(player -> hitOrStand(blackjackService, player));
-    }
-
-    private void hitOrStand(BlackjackService blackjackService, Player player) {
+    private void hitOrStand(Player player) {
         while (InputView.hit(player.getName())) {
             PlayerDto playerDto = blackjackService.hit(player);
             OutputView.printPlayerHandsMessage(playerDto);
@@ -46,5 +49,13 @@ public class BlackjackController {
         if (player.neverHit()) {
             OutputView.printPlayerHandsMessage(new PlayerDto(player));
         }
+    }
+
+    private void gameResult() {
+        ParticipantsDto finalParticipants = blackjackService.getFinalParticipants();
+        OutputView.printFinalHands(finalParticipants);
+
+        PrizeResults prizeResults = blackjackService.calculatePrizeResults();
+        OutputView.printPrizeResults(prizeResults);
     }
 }

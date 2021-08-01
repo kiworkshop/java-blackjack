@@ -57,6 +57,11 @@ class FinishedTest {
 
         return new Finished(givenCards) {
             @Override
+            public int result(GivenCards competitorCards) {
+                return 0;
+            }
+
+            @Override
             public int sum() {
                 return 0;
             }
@@ -67,6 +72,4 @@ class FinishedTest {
             }
         };
     }
-
-
 }

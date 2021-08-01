@@ -5,7 +5,7 @@ import blackjack.domain.GivenCards;
 
 public abstract class Finished extends Init {
 
-    protected Finished(GivenCards givenCards) {
+    protected Finished(final GivenCards givenCards) {
         super(givenCards);
     }
 

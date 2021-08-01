@@ -1,15 +1,16 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.game.Hands;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static blackjack.domain.card.TestCard.*;
-import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
+import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DealerTest {
@@ -18,10 +19,10 @@ class DealerTest {
     @DisplayName("딜러 객체를 생성한다.")
     void create() {
         //given
-        Hands hands = generateHitHands();
+        List<Card> cards = generateHitHands();
 
         //when
-        Dealer dealer = new Dealer(hands);
+        Dealer dealer = new Dealer(cards);
 
         //then
         assertThat(dealer.countHands()).isEqualTo(INITIAL_DEAL_COUNT);
@@ -31,67 +32,70 @@ class DealerTest {
     @DisplayName("오픈할 카드만 반환한다.")
     void get_face_up_card() {
         //given
-        Hands hands = generateHitHands();
+        Card firstCard = CARD_3;
+        List<Card> cards = Arrays.asList(firstCard, CARD_Q);
 
         // when
-        Dealer dealer = new Dealer(hands);
+        Dealer dealer = new Dealer(cards);
         Card faceUpCard = dealer.getFaceUpCard();
 
         //then
-        assertThat(faceUpCard.getRank()).isEqualTo(1);
+        assertThat(faceUpCard.getRank()).isEqualTo(firstCard.getRank());
     }
 
     @Test
-    @DisplayName("카드 합이 16 이하인 경우 한 장의 카드를 추가한다.")
+    @DisplayName("카드 합이 16 이하인 경우 true를 리턴한다.")
     void final_deal_on_hit() {
         //given
-        Hands hands = generateHitHands();
+        List<Card> cards = generateHitHands();
 
         //when
-        Dealer dealer = new Dealer(hands);
+        Dealer dealer = new Dealer(cards);
 
         //then
         assertThat(dealer.hit()).isTrue();
     }
 
     @Test
-    @DisplayName("카드 합이 16 초과인 경우 카드를 추가하지 않는다.")
+    @DisplayName("카드 합이 16 초과인 경우 false를 리턴한다.")
     void final_deal_on_stand() {
         //given
-        Hands hands = generateStandHands();
+        List<Card> cards = generateStandHands();
 
         //when
-        Dealer dealer = new Dealer(hands);
+        Dealer dealer = new Dealer(cards);
 
         //then
         assertThat(dealer.hit()).isFalse();
     }
 
     @Test
-    @DisplayName("카드를 추가한다.")
+    @DisplayName("카드를 여러 장 받는다.")
     void take_card() {
         //given
-        Hands hands = generateStandHands();
-        Dealer dealer = new Dealer(hands);
+        List<Card> initialCards = generateStandHands();
+        List<Card> additionalCards = Arrays.asList(CARD_3, CARD_Q);
+        int handSize = initialCards.size() + additionalCards.size();
+        Dealer dealer = new Dealer(initialCards);
 
         //when
-        dealer.take(CARD_3);
+        dealer.take(additionalCards);
 
         // then
-        assertThat(dealer.countHands()).isEqualTo(3);
+        assertThat(dealer.countHands()).isEqualTo(handSize);
     }
 
-    private Hands generateHitHands() {
+    private List<Card> generateHitHands() {
         List<Card> cards = new ArrayList<>();
         cards.add(CARD_1);
         cards.add(CARD_Q);
-        return new Hands(cards);
+        return cards;
     }
 
-    private Hands generateStandHands() {
+    private List<Card> generateStandHands() {
         List<Card> cards = new ArrayList<>();
         cards.add(CARD_J);
         cards.add(CARD_K);
-        return new Hands(cards);
+        return cards;
     }
 }

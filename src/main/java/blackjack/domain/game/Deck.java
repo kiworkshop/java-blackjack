@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Deck {
-    public static final int INITIAL_DEAL_COUNT = 2;
     public static final int TOTAL_CARD_COUNT = 52;
     private static final int MIN_NUMBER_RANK = 2;
     private static final int MAX_NUMBER_RANK = 10;
@@ -47,14 +46,15 @@ public class Deck {
                 .collect(Collectors.toList());
     }
 
-    public Hands drawInitialHands() {
+    public List<Card> drawCards(int count) {
         List<Card> deals = new ArrayList<>();
-        IntStream.range(0, INITIAL_DEAL_COUNT)
-                .forEach(n -> deals.add(draw()));
-        return new Hands(deals);
+        for (int i = 0; i < count; i++) {
+            deals.add(drawCard());
+        }
+        return deals;
     }
 
-    public Card draw() {
+    private Card drawCard() {
         if (cards.isEmpty()) {
             throw new IndexOutOfBoundsException("남아있는 카드가 없습니다.");
         }

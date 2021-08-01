@@ -48,7 +48,8 @@ public class BlackjackService {
     }
 
     public PlayerDto hit(Player player) {
-        return new PlayerDto(table.hit(player));
+        table.hit(player);
+        return new PlayerDto(player);
     }
 
     public void dealDealer() {

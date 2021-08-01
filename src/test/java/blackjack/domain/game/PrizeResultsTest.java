@@ -44,30 +44,29 @@ class PrizeResultsTest {
 
     private static List<Player> generatePlayers() {
         return Arrays.asList(
-                new Player("1", new Hands(Arrays.asList(CARD_2, CARD_8, CARD_6))),   // 16
-                new Player("2", new Hands(Arrays.asList(CARD_K, CARD_7))),           // 17
-                new Player("3", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))),   // 19
-                new Player("4", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))),   // 19
-                new Player("블랙잭", new Hands(Arrays.asList(CARD_Q, ACE_1))),        // blackjack
-                new Player("5", new Hands(Arrays.asList(CARD_Q, CARD_8, CARD_9)))    // 27
+                new Player("1", Arrays.asList(CARD_2, CARD_8, CARD_6)),   // 16
+                new Player("2", Arrays.asList(CARD_K, CARD_7)),           // 17
+                new Player("3", Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
+                new Player("4", Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
+                new Player("블랙잭", Arrays.asList(CARD_Q, ACE_1)),        // blackjack
+                new Player("5", Arrays.asList(CARD_Q, CARD_8, CARD_9))    // 27
         );
-//        return new Players(players);
     }
 
     private static Dealer generateDealer() { // 19
-        return new Dealer(new Hands(Arrays.asList(CARD_9, CARD_K)));
+        return new Dealer(Arrays.asList(CARD_9, CARD_K));
     }
 
     private static Dealer generateWinDealer() { // 21
-        return new Dealer(new Hands(Arrays.asList(CARD_6, CARD_7, CARD_8)));
+        return new Dealer(Arrays.asList(CARD_6, CARD_7, CARD_8));
     }
 
     private static Dealer generateBlackjackDealer() { // 21
-        return new Dealer(new Hands(Arrays.asList(ACE_3, CARD_Q)));
+        return new Dealer(Arrays.asList(ACE_3, CARD_Q));
     }
 
     private static Dealer generateBustDealer() { // 23
-        return new Dealer(new Hands(Arrays.asList(CARD_6, CARD_7, CARD_Q)));
+        return new Dealer(Arrays.asList(CARD_6, CARD_7, CARD_Q));
     }
 
     private static Stream<Arguments> generateCompareHands() {

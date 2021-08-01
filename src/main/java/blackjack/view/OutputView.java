@@ -94,7 +94,8 @@ public class OutputView {
     }
 
     private static void printPlayersPrize(PlayersPrize playersPrize) {
-        playersPrize.getPlayerPrizes().forEach(playerPrize -> System.out.printf("%s: %s%n", playerPrize.getPlayerName(), playerPrize.getPrize().getTitle()));
+        playersPrize.getPlayerPrizes().forEach(playerPrize ->
+                System.out.printf("%s: %s%n", playerPrize.getPlayerName(), playerPrize.getPrizeTitle()));
     }
 
     public static void printError(String message) {

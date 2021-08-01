@@ -8,12 +8,12 @@ import java.util.List;
 public class Participant {
     protected final Hands hands;
 
-    public Participant(Hands hands) {
-        this.hands = hands;
+    public Participant(List<Card> cards) {
+        this.hands = new Hands(cards);
     }
 
-    public void take(Card card) {
-        hands.addCard(card);
+    public void take(List<Card> cards) {
+        hands.add(cards);
     }
 
     public int sumRank() {

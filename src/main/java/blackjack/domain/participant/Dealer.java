@@ -1,13 +1,14 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.game.Hands;
+
+import java.util.List;
 
 public class Dealer extends Participant {
     private static final int HIT_THRESHOLD = 16;
 
-    public Dealer(Hands hands) {
-        super(hands);
+    public Dealer(List<Card> cards) {
+        super(cards);
     }
 
     public Card getFaceUpCard() {

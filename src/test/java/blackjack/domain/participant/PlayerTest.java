@@ -1,16 +1,16 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.game.Hands;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static blackjack.domain.card.TestCard.CARD_8;
-import static blackjack.domain.card.TestCard.CARD_9;
-import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
+import static blackjack.domain.card.TestCard.*;
+import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PlayerTest {
@@ -20,10 +20,10 @@ class PlayerTest {
     void create() {
         //given
         String name = "pobi";
-        Hands hands = generateHands();
+        List<Card> cards = generateCards();
 
         //when
-        Player player = new Player(name, hands);
+        Player player = new Player(name, cards);
 
         //then
         assertThat(player.getName()).isEqualTo(name);
@@ -31,39 +31,41 @@ class PlayerTest {
     }
 
     @Test
-    @DisplayName("한 장의 카드를 추가한다.")
-    void hit() {
+    @DisplayName("카드를 여러 장 받는다.")
+    void take_card() {
         //given
-        String name = "pobi";
-        Hands hands = generateHands();
+        String name = "name";
+        List<Card> initialCards = generateCards();
+        List<Card> additionalCards = Arrays.asList(CARD_3, CARD_Q);
+        int handSize = initialCards.size() + additionalCards.size();
+        Player player = new Player(name, initialCards);
 
         //when
-        Player player = new Player(name, hands);
-        player.take(CARD_8);
+        player.take(additionalCards);
 
-        //then
-        assertThat(player.countHands()).isEqualTo(3);
+        // then
+        assertThat(player.countHands()).isEqualTo(handSize);
     }
 
     @Test
     @DisplayName("카드를 추가로 받지 않았는지 확인한다.")
     void never_hit() {
         //given
-        Player neverHitPlayer = new Player("name", generateHands());
-        Player hitPlayer = new Player("name", generateHands());
+        Player neverHitPlayer = new Player("name", generateCards());
+        Player hitPlayer = new Player("name", generateCards());
 
         //when
-        hitPlayer.take(CARD_8);
+        hitPlayer.take(generateCards());
 
         //then
         assertThat(neverHitPlayer.neverHit()).isTrue();
         assertThat(hitPlayer.neverHit()).isFalse();
     }
 
-    private Hands generateHands() {
+    private List<Card> generateCards() {
         List<Card> cards = new ArrayList<>();
         cards.add(CARD_8);
         cards.add(CARD_9);
-        return new Hands(cards);
+        return cards;
     }
 }

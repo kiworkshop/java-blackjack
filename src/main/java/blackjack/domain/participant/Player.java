@@ -1,14 +1,16 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.game.Hands;
+import blackjack.domain.card.Card;
 
-import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
+import java.util.List;
+
+import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
 
 public class Player extends Participant {
     private final String name;
 
-    public Player(String name, Hands hands) {
-        super(hands);
+    public Player(String name, List<Card> cards) {
+        super(cards);
         this.name = name;
     }
 

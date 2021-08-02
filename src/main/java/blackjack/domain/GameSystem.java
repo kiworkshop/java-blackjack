@@ -1,6 +1,7 @@
 package blackjack.domain;
 
 import blackjack.domain.card.Deck;
+import blackjack.domain.card.GivenCards;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Gamer;
 import blackjack.domain.participant.Player;
@@ -28,6 +29,16 @@ public class GameSystem {
     public List<String> getPlayerNames() {
         return Collections.unmodifiableList(players.stream()
                 .map(Gamer::getName)
+                .collect(Collectors.toList()));
+    }
+
+    public GivenCards getDealerCards() {
+        return dealer.getCards();
+    }
+
+    public List<GivenCards> getPlayerCards() {
+        return Collections.unmodifiableList(players.stream()
+                .map(Gamer::getCards)
                 .collect(Collectors.toList()));
     }
 }

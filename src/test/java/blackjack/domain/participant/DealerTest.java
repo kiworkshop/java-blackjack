@@ -69,6 +69,22 @@ class DealerTest {
     }
 
     @Test
+    @DisplayName("블랙잭인지 확인한다.")
+    void is_blackjack() {
+        // given
+        List<Card> blackjackCards = new ArrayList<>();
+        blackjackCards.add(ACE_1);
+        blackjackCards.add(CARD_K);
+        Dealer dealer = new Dealer(blackjackCards);
+
+        // when
+        boolean isBlackjack = dealer.isBlackjack();
+
+        // then
+        assertThat(isBlackjack).isTrue();
+    }
+
+    @Test
     @DisplayName("카드를 여러 장 받는다.")
     void take_card() {
         //given

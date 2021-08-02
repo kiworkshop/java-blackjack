@@ -18,6 +18,10 @@ public class Hands {
         this.hands.addAll(card);
     }
 
+    public void add(Card card) {
+        this.hands.add(card);
+    }
+
     public int size() {
         return hands.size();
     }

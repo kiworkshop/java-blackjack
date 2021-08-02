@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 public class Table {
     public static final int INITIAL_DEAL_COUNT = 2;
-    private static final int DRAW_CARD_COUNT_ON_HIT = 1;
 
     private final Deck deck;
     private final Dealer dealer;
@@ -30,7 +29,7 @@ public class Table {
     }
 
     public void hit(Participant participant) {
-        List<Card> card = deck.drawCards(DRAW_CARD_COUNT_ON_HIT);
+        Card card = deck.drawCard();
         participant.take(card);
     }
 

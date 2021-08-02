@@ -4,18 +4,15 @@ import blackjack.domain.card.AceCard;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Suit;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomDeckGenerator implements DeckGenerator {
 
     @Override
-    public List<Card> generateCards() {
+    public Deque<Card> generateCards() {
         List<Card> cards = new ArrayList<>();
-
         for (Suit suit : Suit.values()) {
             cards.addAll(generateNumberCards(suit));
             cards.addAll(generateMajorCards(suit));
@@ -23,7 +20,8 @@ public class RandomDeckGenerator implements DeckGenerator {
         }
 
         Collections.shuffle(cards);
-        return cards;
+
+        return new ArrayDeque<>(cards);
     }
 
     private List<Card> generateMajorCards(Suit suit) {

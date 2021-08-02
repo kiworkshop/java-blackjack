@@ -16,16 +16,16 @@ public abstract class Participant {
         hands.add(cards);
     }
 
+    public void take(Card card) {
+        hands.add(card);
+    }
+
     public int sumRank() {
         return hands.sumRanks();
     }
 
-    public int countAceCards() {
-        return hands.countAceCards();
-    }
-
-    public int countMajorCards() {
-        return hands.countMajorCards();
+    public boolean isBlackjack() {
+        return hands.countAceCards() == 1 && hands.countMajorCards() == 1;
     }
 
     public int countHands() {

@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static blackjack.domain.fixture.TestCard.*;
-import static blackjack.domain.participant.Status.*;
+import static blackjack.domain.participant.HandsStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class StatusTest {
+class HandsStatusTest {
 
     @Test
     @DisplayName("블랙잭인 것을 확인한다.")
@@ -21,7 +21,7 @@ class StatusTest {
         Participant participant = new Dealer(blackjackHands);
 
         // when
-        Status blackjack = Status.of(participant);
+        HandsStatus blackjack = HandsStatus.of(participant);
 
         // then
         assertThat(blackjack).isEqualTo(BLACKJACK);
@@ -35,7 +35,7 @@ class StatusTest {
         Participant participant = new Dealer(bustHands);
 
         // when
-        Status bust = Status.of(participant);
+        HandsStatus bust = HandsStatus.of(participant);
 
         // then
         assertThat(bust).isEqualTo(BUST);
@@ -49,7 +49,7 @@ class StatusTest {
         Participant participant = new Dealer(holdHands);
 
         // when
-        Status hold = Status.of(participant);
+        HandsStatus hold = HandsStatus.of(participant);
 
         // then
         assertThat(hold).isEqualTo(HOLD);

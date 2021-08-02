@@ -3,8 +3,8 @@ package blackjack.domain.fixture;
 import blackjack.domain.card.Card;
 import blackjack.domain.game.DeckGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import static blackjack.domain.fixture.TestCard.*;
 
@@ -13,19 +13,19 @@ public class TestDeckGenerator implements DeckGenerator {
     public static final int TEST_DECK_INITIAL_SIZE = 10;
 
     @Override
-    public List<Card> generateCards() {
-        List<Card> cards = new ArrayList<>();
+    public Deque<Card> generateCards() {
+        Deque<Card> cards = new ArrayDeque<>();
 
-        cards.add(ACE_1);
-        cards.add(CARD_2);
-        cards.add(CARD_K);
-        cards.add(CARD_3);
-        cards.add(CARD_Q);
-        cards.add(CARD_4);
-        cards.add(CARD_J);
-        cards.add(CARD_5);
-        cards.add(CARD_6);
-        cards.add(CARD_7);
+        cards.offerLast(ACE_1);
+        cards.offerLast(CARD_2);
+        cards.offerLast(CARD_K);
+        cards.offerLast(CARD_3);
+        cards.offerLast(CARD_Q);
+        cards.offerLast(CARD_4);
+        cards.offerLast(CARD_J);
+        cards.offerLast(CARD_5);
+        cards.offerLast(CARD_6);
+        cards.offerLast(CARD_7);
 
         return cards;
     }

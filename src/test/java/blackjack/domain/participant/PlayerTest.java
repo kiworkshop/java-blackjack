@@ -61,6 +61,22 @@ class PlayerTest {
         assertThat(hitPlayer.neverHit()).isFalse();
     }
 
+    @Test
+    @DisplayName("블랙잭인지 확인한다.")
+    void is_blackjack() {
+        // given
+        List<Card> blackjackCards = new ArrayList<>();
+        blackjackCards.add(ACE_1);
+        blackjackCards.add(CARD_K);
+        Player player = new Player("name", blackjackCards);
+
+        // when
+        boolean isBlackjack = player.isBlackjack();
+
+        // then
+        assertThat(isBlackjack).isTrue();
+    }
+
     private List<Card> generateCards() {
         List<Card> cards = new ArrayList<>();
         cards.add(CARD_8);

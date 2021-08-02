@@ -2,14 +2,11 @@ package blackjack.domain.prize;
 
 import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
+import blackjack.domain.participant.HandsStatus;
 import blackjack.domain.participant.Player;
-import blackjack.domain.participant.Status;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static blackjack.domain.participant.Status.BLACKJACK;
-import static blackjack.domain.participant.Status.BUST;
 
 public class PrizeResults {
     public static final int BLACKJACK_RANK = 21;
@@ -36,15 +33,15 @@ public class PrizeResults {
     }
 
     private PlayerPrize findPrize(Dealer dealer, Player player) {
-        final Status dealerStatus = Status.of(dealer);
-        final Status playerStatus = Status.of(player);
+        final HandsStatus dealerStatus = HandsStatus.of(dealer);
+        final HandsStatus playerStatus = HandsStatus.of(player);
 
-        if (dealerStatus == BUST || playerStatus == BUST) {
+        if (dealerStatus.isBust() || playerStatus.isBust()) {
             Prize prize = prizeOnBust(dealerStatus, playerStatus);
             return new PlayerPrize(player.getName(), prize);
         }
 
-        if (dealerStatus == BLACKJACK || playerStatus == BLACKJACK) {
+        if (dealerStatus.isBlackjack() || playerStatus.isBlackjack()) {
             Prize prize = prizeOnBlackjack(dealerStatus, playerStatus);
             return new PlayerPrize(player.getName(), prize);
         }
@@ -53,12 +50,12 @@ public class PrizeResults {
         return new PlayerPrize(player.getName(), prize);
     }
 
-    private Prize prizeOnBust(Status dealer, Status player) {
-        if (dealer == BUST && player == BUST) {
+    private Prize prizeOnBust(HandsStatus dealerStatus, HandsStatus playerStatus) {
+        if (dealerStatus.isBust() && playerStatus.isBust()) {
             dealerPrize.incrementLoseCount();
             return Prize.LOSE;
         }
-        if (dealer == BUST) {
+        if (dealerStatus.isBust()) {
             dealerPrize.incrementLoseCount();
             return Prize.WIN;
         }
@@ -66,12 +63,12 @@ public class PrizeResults {
         return Prize.LOSE;
     }
 
-    private Prize prizeOnBlackjack(Status dealer, Status player) {
-        if (dealer == BLACKJACK && player == BLACKJACK) {
+    private Prize prizeOnBlackjack(HandsStatus dealerStatus, HandsStatus playerStatus) {
+        if (dealerStatus.isBlackjack() && playerStatus.isBlackjack()) {
             dealerPrize.incrementWinCount();
             return Prize.WIN;
         }
-        if (dealer == BLACKJACK) {
+        if (dealerStatus.isBlackjack()) {
             dealerPrize.incrementWinCount();
             return Prize.LOSE;
         }

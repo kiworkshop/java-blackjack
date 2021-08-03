@@ -7,4 +7,8 @@ public class Player extends Human{
         super();
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
 }

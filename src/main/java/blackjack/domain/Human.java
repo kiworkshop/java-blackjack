@@ -5,12 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Human {
-    private final String name = null;
-    private final List<Card> cards = new ArrayList<>();
 
-    public String getName() {
-        return name;
-    }
+    private final List<Card> cards = new ArrayList<>();
+    
     public List<Card> getCards() {
         return Collections.unmodifiableList(cards);
     }

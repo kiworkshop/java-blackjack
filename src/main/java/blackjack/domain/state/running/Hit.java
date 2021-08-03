@@ -20,6 +20,10 @@ public class Hit extends Running {
             return new Burst(givenCards);
         }
 
+        if (givenCards.isMaximumThreshold()) {
+            return new Stay(givenCards);
+        }
+
         return new Hit(givenCards);
     }
 

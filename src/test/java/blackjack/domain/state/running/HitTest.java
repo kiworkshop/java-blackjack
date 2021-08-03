@@ -34,11 +34,11 @@ class HitTest {
     }
 
     @Test
-    @DisplayName("지급받은 카드 포함 합이 21을 초과하지 않을 경우, Hit 상태를 반환한다.")
+    @DisplayName("지급받은 카드 포함 합이 21 미만일 경우, Hit 상태를 반환한다.")
     void hit_return_itself() {
         //given
         Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
+        Card card2 = new Card(Score.NINE, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         State hit = new Hit(givenCards);
         Card newCard = new Card(Score.A, Suit.CLUB);
@@ -48,6 +48,23 @@ class HitTest {
 
         //then
         assertThat(state).isInstanceOf(Hit.class);
+    }
+
+    @Test
+    @DisplayName("지급받은 카드 포함 합이 21일 경우, Stay 상태를 반환한다.")
+    void hit_return_stay_state() {
+        //given
+        Card card1 = new Card(Score.TEN, Suit.CLUB);
+        Card card2 = new Card(Score.NINE, Suit.HEART);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+        State hit = new Hit(givenCards);
+        Card newCard = new Card(Score.TWO, Suit.CLUB);
+
+        //when
+        State state = hit.hit(newCard);
+
+        //then
+        assertThat(state).isInstanceOf(Stay.class);
     }
 
     @Test

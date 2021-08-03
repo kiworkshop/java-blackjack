@@ -7,6 +7,8 @@ import blackjack.domain.enums.Suit;
 import blackjack.domain.state.State;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
@@ -14,16 +16,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StayTest {
 
-    @Test
-    @DisplayName("다른 카드의 합보다 클 경우, 승리를 의미하는 1을 반환한다.")
-    void result_win() {
+    @ParameterizedTest
+    @CsvSource(value = {"FIVE, FOUR", "TEN, TWO"})
+    @DisplayName("다른 카드의 합보다 크거나 다른 카드의 합이 21을 초과할 경우, 승리를 의미하는 1을 반환한다.")
+    void result_win(String score1, String score2) {
         //given
-        Card card1 = new Card(Score.EIGHT, Suit.CLUB);
-        Card card2 = new Card(Score.EIGHT, Suit.HEART);
+        Card card1 = new Card(Score.TEN, Suit.CLUB);
+        Card card2 = new Card(Score.TEN, Suit.HEART);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
         State stay = new Stay(myCards);
-        Card card3 = new Card(Score.SEVEN, Suit.DIAMOND);
-        GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
+        Card card3 = new Card(Score.TEN, Suit.DIAMOND);
+        Card card4 = new Card(Score.valueOf(score1), Suit.CLUB);
+        Card card5 = new Card(Score.valueOf(score2), Suit.CLUB);
+        GivenCards otherCards = new GivenCards(Arrays.asList(card3, card4, card5));
 
         //when
         int result = stay.compare(otherCards);

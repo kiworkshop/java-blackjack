@@ -11,7 +11,7 @@ public class Stay extends Finished {
 
     @Override
     public int compare(final GivenCards competitorCards) {
-        if (givenCards.isGreaterThan(competitorCards)) {
+        if (competitorCards.isBurst() || givenCards.isGreaterThan(competitorCards)) {
             return Result.WIN.getPoint();
         }
 

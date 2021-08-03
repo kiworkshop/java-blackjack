@@ -56,4 +56,16 @@ public class GameSystem {
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
+
+    public void hit(final String name) {
+        Player fetchedPlayer = findPlayerBy(name);
+        fetchedPlayer.hit(Deck.getCard());
+    }
+
+    private Player findPlayerBy(final String name) {
+        return players.stream()
+                .filter(player -> player.getName().equals(name))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }

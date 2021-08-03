@@ -106,4 +106,21 @@ public class GameSystemTest {
         //then
         assertThat(player).isEqualTo(expectedPlayer);
     }
+
+    @Test
+    @DisplayName("인자로 전달받은 플레이어의 카드를 추가한다.")
+    void hit() {
+        //given
+        String name = "pobi";
+        Card card1 = new Card(Score.A, Suit.HEART);
+        Card card2 = new Card(Score.A, Suit.CLUB);
+        Player player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
+        GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
+
+        //when
+        gameSystem.hit(name);
+
+        //then
+        assertThat(player.getCards().list()).hasSize(3);
+    }
 }

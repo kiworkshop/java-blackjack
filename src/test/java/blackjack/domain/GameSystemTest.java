@@ -9,12 +9,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GameSystemTest {
 
@@ -107,9 +109,10 @@ public class GameSystemTest {
         assertThat(player).isEqualTo(expectedPlayer);
     }
 
-    @Test
-    @DisplayName("인자로 전달받은 플레이어의 카드를 추가한다.")
-    void hit() {
+    @ParameterizedTest
+    @CsvSource(value = {"y, 3", "n, 2"})
+    @DisplayName("카드 추가 의사와 플레이어 이름을 인자로 전달받아 플레이어의 카드를 추가한다.")
+    void hit(String answer, int expectedSize) {
         //given
         String name = "pobi";
         Card card1 = new Card(Score.A, Suit.HEART);
@@ -118,10 +121,27 @@ public class GameSystemTest {
         GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
 
         //when
-        gameSystem.hit(name);
+        gameSystem.hit(answer, name);
 
         //then
-        assertThat(player.getCards().list()).hasSize(3);
+        assertThat(player.getCards().list()).hasSize(expectedSize);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Y", "N", "y1", "n1", "yes", "no"})
+    @DisplayName("y 또는 n이 아닌 다른 응답을 전달받을 경우, 예외가 발생한다.")
+    void hit_with_invalid_answer(String answer) {
+        //given
+        String name = "pobi";
+        Card card1 = new Card(Score.A, Suit.HEART);
+        Card card2 = new Card(Score.A, Suit.CLUB);
+        Player player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
+        GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
+
+        //when //then
+        assertThatThrownBy(() -> gameSystem.hit(answer, name))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("y 또는 n을 입력해주세요.");
     }
 
     @Test

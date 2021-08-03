@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 public class GameSystem {
     private static final String DEFAULT_DEALER_NAME = "딜러";
+    private static final String ACCEPT_ANSWER = "y";
+    private static final String DECLINE_ANSWER = "n";
 
     private final Dealer dealer = new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards());
     private final List<Player> players;
@@ -57,9 +59,22 @@ public class GameSystem {
                 .orElseThrow(IllegalStateException::new);
     }
 
-    public void hit(final String name) {
+    public void hit(final String answer, final String name) {
+        validate(answer);
         Player fetchedPlayer = findPlayerBy(name);
+
+        if (answer.equals(DECLINE_ANSWER)) {
+            fetchedPlayer.stay();
+            return;
+        }
+
         fetchedPlayer.hit(Deck.getCard());
+    }
+
+    private void validate(final String answer) {
+        if (!answer.equals(ACCEPT_ANSWER) && !answer.equals(DECLINE_ANSWER)) {
+            throw new IllegalArgumentException("y 또는 n을 입력해주세요.");
+        }
     }
 
     private Player findPlayerBy(final String name) {

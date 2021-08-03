@@ -1,7 +1,7 @@
 package blackjack.view;
 
 import blackjack.domain.dto.CardResponse;
-import blackjack.domain.dto.FirstTwoCardsResponse;
+import blackjack.domain.dto.CardsResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,11 +15,11 @@ public class OutputView {
         System.out.printf("딜러와 %s에게 2장의 카드를 나누었습니다.%n", names);
     }
 
-    public void printFirstTwoCards(List<String> playerNames, FirstTwoCardsResponse firstTwoCardsResponse) {
-        System.out.printf("딜러: %s%n", combine(firstTwoCardsResponse.getDealerCards().get(0)));
+    public void printFirstTwoCards(List<String> playerNames, CardsResponse cardsResponse) {
+        System.out.printf("딜러: %s%n", combine(cardsResponse.getDealerCards().get(0)));
 
         IntStream.range(0, playerNames.size())
-                .forEach(i -> System.out.printf("%s카드: %s%n", playerNames.get(i), playerCards(firstTwoCardsResponse.getAllPlayerCards().get(i))));
+                .forEach(i -> System.out.printf("%s카드: %s%n", playerNames.get(i), playerCards(cardsResponse.getAllPlayerCards().get(i))));
     }
 
     private String combine(final CardResponse cardResponse) {

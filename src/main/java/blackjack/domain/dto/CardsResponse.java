@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FirstTwoCardsResponse {
+public class CardsResponse {
     private final List<Card> dealerCards;
     private final List<List<Card>> playerCards;
 
-    public FirstTwoCardsResponse(final List<Card> dealerCards, final List<List<Card>> playerCards) {
+    public CardsResponse(final List<Card> dealerCards, final List<List<Card>> playerCards) {
         this.dealerCards = dealerCards;
         this.playerCards = new ArrayList<>(playerCards);
     }
@@ -21,7 +21,7 @@ public class FirstTwoCardsResponse {
 
     public List<List<CardResponse>> getAllPlayerCards() {
         return playerCards.stream()
-                .map(FirstTwoCardsResponse::convertToCardResponse)
+                .map(CardsResponse::convertToCardResponse)
                 .collect(Collectors.toList());
     }
 

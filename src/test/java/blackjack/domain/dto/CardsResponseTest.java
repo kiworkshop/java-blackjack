@@ -13,10 +13,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class FirstTwoCardsResponseTest {
+public class CardsResponseTest {
 
     @Test
-    @DisplayName("딜러 카드 2장을 반환한다.")
+    @DisplayName("딜러 카드를 반환한다.")
     void getDealerCards() {
         //given
         Score ace = Score.A;
@@ -25,10 +25,10 @@ public class FirstTwoCardsResponseTest {
         Card card1 = new Card(ace, club);
         Card card2 = new Card(ace, diamond);
         List<Card> dealerCards = Arrays.asList(card1, card2);
-        FirstTwoCardsResponse firstTwoCardsResponse = new FirstTwoCardsResponse(dealerCards, Collections.emptyList());
+        CardsResponse cardsResponse = new CardsResponse(dealerCards, Collections.emptyList());
 
         //when
-        List<CardResponse> dealerCard = firstTwoCardsResponse.getDealerCards();
+        List<CardResponse> dealerCard = cardsResponse.getDealerCards();
 
         //then
         assertThat(dealerCard).hasSize(2)
@@ -38,7 +38,7 @@ public class FirstTwoCardsResponseTest {
     }
 
     @Test
-    @DisplayName("모든 플레이어의 카드 2장을 반환한다.")
+    @DisplayName("모든 플레이어의 카드를 반환한다.")
     void getAllPlayerCards() {
         //given
         Score ace = Score.A;
@@ -48,10 +48,10 @@ public class FirstTwoCardsResponseTest {
         Card card2 = new Card(ace, diamond);
         List<Card> playerCards = Arrays.asList(card1, card2);
         List<List<Card>> allPlayerCards = Arrays.asList(playerCards, playerCards, playerCards);
-        FirstTwoCardsResponse firstTwoCardsResponse = new FirstTwoCardsResponse(Collections.emptyList(), allPlayerCards);
+        CardsResponse cardsResponse = new CardsResponse(Collections.emptyList(), allPlayerCards);
 
         //when
-        List<List<CardResponse>> allPlayerCardsResponse = firstTwoCardsResponse.getAllPlayerCards();
+        List<List<CardResponse>> allPlayerCardsResponse = cardsResponse.getAllPlayerCards();
 
         //then
         assertThat(allPlayerCardsResponse).hasSize(3);

@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 
 public class OutputView {
     private static final String SEPARATOR = ", ";
+    private static final String DECLINE_ANSWER = "n";
+    private static final int FIRST_TWO_CARDS = 2;
 
     public void printGameStart(List<String> playerNames) {
         String names = String.join(SEPARATOR, playerNames);
@@ -34,6 +36,14 @@ public class OutputView {
                 .collect(Collectors.toList());
 
         return String.join(SEPARATOR, fullCardNames);
+    }
+
+    public void printPlayerCards(final String playerName, final CardsResponse cardsResponse, String answer) {
+        if (answer.equals(DECLINE_ANSWER) && cardsResponse.getCards().size() != FIRST_TWO_CARDS) {
+            return;
+        }
+
+        System.out.printf("%s카드: %s%n", playerName, join(cardsResponse));
     }
 
     public void printDealerGetAnotherCard() {

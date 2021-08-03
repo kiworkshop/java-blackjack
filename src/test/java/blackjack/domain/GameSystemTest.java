@@ -157,4 +157,22 @@ public class GameSystemTest {
         //then
         assertThat(gameSystem.getDealerCards()).hasSize(3);
     }
+
+    @Test
+    @DisplayName("인자로 받은 플레이어의 카드를 반환한다.")
+    void getCards() {
+        //given
+        String name = "pobi";
+        Card card1 = new Card(Score.A, Suit.HEART);
+        Card card2 = new Card(Score.A, Suit.CLUB);
+        Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
+        GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
+
+        //when
+        List<Card> cards = gameSystem.getCards(name);
+
+        //then
+        assertThat(cards).hasSize(2)
+                .containsOnly(card1, card2);
+    }
 }

@@ -92,4 +92,9 @@ public class GameSystem {
     public boolean isDealerFinished() {
         return dealer.isFinished();
     }
+
+    public List<Card> getCards(final String name) {
+        Person player = findPlayerBy(name);
+        return player.getCards().list();
+    }
 }

@@ -4,7 +4,7 @@ import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.GivenCards;
 import blackjack.domain.participant.Dealer;
-import blackjack.domain.participant.Gamer;
+import blackjack.domain.participant.Person;
 import blackjack.domain.participant.Player;
 
 import java.util.Collections;
@@ -16,10 +16,10 @@ public class GameSystem {
     private static final String ACCEPT_ANSWER = "y";
     private static final String DECLINE_ANSWER = "n";
 
-    private final Dealer dealer = new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards());
-    private final List<Player> players;
+    private final Person dealer = new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards());
+    private final List<Person> players;
 
-    protected GameSystem(final List<Player> players) {
+    protected GameSystem(final List<Person> players) {
         this.players = players;
     }
 
@@ -31,7 +31,7 @@ public class GameSystem {
 
     public List<String> getPlayerNames() {
         return Collections.unmodifiableList(players.stream()
-                .map(Gamer::getName)
+                .map(Person::getName)
                 .collect(Collectors.toList()));
     }
 
@@ -41,27 +41,27 @@ public class GameSystem {
 
     public List<List<Card>> getPlayerCards() {
         return Collections.unmodifiableList(players.stream()
-                .map(Gamer::getCards)
+                .map(Person::getCards)
                 .map(GivenCards::list)
                 .collect(Collectors.toList()));
     }
 
     public boolean allPlayersFinished() {
         return players.stream()
-                .allMatch(Gamer::isFinished);
+                .allMatch(Person::isFinished);
     }
 
     public String getCurrentPlayer() {
         return players.stream()
                 .filter(player -> !player.isFinished())
-                .map(Gamer::getName)
+                .map(Person::getName)
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
     public void hit(final String answer, final String name) {
         validate(answer);
-        Player fetchedPlayer = findPlayerBy(name);
+        Person fetchedPlayer = findPlayerBy(name);
 
         if (answer.equals(DECLINE_ANSWER)) {
             fetchedPlayer.stay();
@@ -77,7 +77,7 @@ public class GameSystem {
         }
     }
 
-    private Player findPlayerBy(final String name) {
+    private Person findPlayerBy(final String name) {
         return players.stream()
                 .filter(player -> player.getName().equals(name))
                 .findFirst()

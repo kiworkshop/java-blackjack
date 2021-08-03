@@ -4,6 +4,7 @@ import blackjack.domain.card.Card;
 import blackjack.domain.card.GivenCards;
 import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
+import blackjack.domain.participant.Person;
 import blackjack.domain.participant.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -75,8 +76,8 @@ public class GameSystemTest {
         Card card2 = new Card(Score.J, Suit.DIAMOND);
         Card card3 = new Card(Score.valueOf(score1), Suit.CLUB);
         Card card4 = new Card(Score.valueOf(score2), Suit.CLUB);
-        Player player1 = new Player("pobi", new GivenCards(Arrays.asList(card1, card2)));
-        Player player2 = new Player("tobi", new GivenCards(Arrays.asList(card3, card4)));
+        Person player1 = new Player("pobi", new GivenCards(Arrays.asList(card1, card2)));
+        Person player2 = new Player("tobi", new GivenCards(Arrays.asList(card3, card4)));
         GameSystem gameSystem = new GameSystem(Arrays.asList(player1, player2));
 
         //when
@@ -97,9 +98,9 @@ public class GameSystemTest {
         Card card4 = new Card(Score.valueOf(score2), Suit.CLUB);
         Card card5 = new Card(Score.valueOf(score3), Suit.HEART);
         Card card6 = new Card(Score.valueOf(score4), Suit.HEART);
-        Player player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
-        Player player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
-        Player player3 = new Player("player3", new GivenCards(Arrays.asList(card5, card6)));
+        Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
+        Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
+        Person player3 = new Player("player3", new GivenCards(Arrays.asList(card5, card6)));
         GameSystem gameSystem = new GameSystem(Arrays.asList(player1, player2, player3));
 
         //when
@@ -117,7 +118,7 @@ public class GameSystemTest {
         String name = "pobi";
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
-        Player player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
+        Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
         GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
 
         //when
@@ -135,7 +136,7 @@ public class GameSystemTest {
         String name = "pobi";
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
-        Player player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
+        Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
         GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
 
         //when //then

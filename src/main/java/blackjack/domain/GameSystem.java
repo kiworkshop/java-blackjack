@@ -87,4 +87,8 @@ public class GameSystem {
     public void hit() {
         dealer.hit(Deck.getCard());
     }
+
+    public boolean isDealerFinished() {
+        return dealer.isFinished();
+    }
 }

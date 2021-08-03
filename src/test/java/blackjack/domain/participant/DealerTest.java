@@ -11,6 +11,7 @@ import blackjack.domain.state.running.Hit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -120,5 +121,24 @@ public class DealerTest {
         //then
         assertThat(dealer).extracting("state")
                 .isInstanceOf(Stay.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"THREE, true", "SEVEN, true", "TWO, false"})
+    @DisplayName("블랙잭이 아니고 17 이상 21 이하일 경우 종료 여부를 참으로 반환한다.")
+    void isFinished(String score, boolean expected) {
+        //given
+        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
+        Card card2 = new Card(Score.FOUR, Suit.DIAMOND);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+        Person dealer = new Dealer("pobi", givenCards);
+        Card card3 = new Card(Score.valueOf(score), Suit.HEART);
+        dealer.hit(card3);
+
+        //when
+        boolean finished = dealer.isFinished();
+
+        //then
+        assertThat(finished).isEqualTo(expected);
     }
 }

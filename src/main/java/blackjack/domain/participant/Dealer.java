@@ -41,4 +41,13 @@ public class Dealer extends Gamer {
 
         state = newState;
     }
+
+    @Override
+    public boolean isFinished() {
+        if (!getCards().isBlackjack() && !getCards().isLessThanEqualTo(HIT_THRESHOLD)) {
+            stay();
+        }
+
+        return super.isFinished();
+    }
 }

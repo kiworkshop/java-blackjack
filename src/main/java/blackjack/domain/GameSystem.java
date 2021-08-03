@@ -17,14 +17,14 @@ public class GameSystem {
     private final Dealer dealer = new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards());
     private final List<Player> players;
 
-    public GameSystem(final List<String> playerNames) {
-        this.players = createPlayers(playerNames);
+    protected GameSystem(final List<Player> players) {
+        this.players = players;
     }
 
-    private List<Player> createPlayers(final List<String> playerNames) {
-        return playerNames.stream()
+    public static GameSystem create(final List<String> playerNames) {
+        return new GameSystem(playerNames.stream()
                 .map(name -> new Player(name, Deck.getTwoCards()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public List<String> getPlayerNames() {
@@ -42,5 +42,10 @@ public class GameSystem {
                 .map(Gamer::getCards)
                 .map(GivenCards::list)
                 .collect(Collectors.toList()));
+    }
+
+    public boolean isFinished() {
+        return players.stream()
+                .allMatch(Gamer::isFinished);
     }
 }

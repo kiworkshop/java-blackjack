@@ -18,7 +18,7 @@ public class BlackjackController {
 
     public void run() {
         List<String> playerNames = inputView.getPlayerNames();
-        GameSystem gameSystem = new GameSystem(playerNames);
+        GameSystem gameSystem = GameSystem.create(playerNames);
         outputView.printGameStart(gameSystem.getPlayerNames());
         FirstTwoCardsResponse firstTwoCardsResponse = new FirstTwoCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
         outputView.printFirstTwoCards(gameSystem.getPlayerNames(), firstTwoCardsResponse);

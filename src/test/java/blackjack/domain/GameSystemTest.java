@@ -1,9 +1,11 @@
 package blackjack.domain;
 
 import blackjack.domain.card.Card;
+import blackjack.domain.card.Deck;
 import blackjack.domain.card.GivenCards;
 import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
+import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Person;
 import blackjack.domain.participant.Player;
 import org.junit.jupiter.api.DisplayName;
@@ -40,8 +42,9 @@ public class GameSystemTest {
     @Test
     @DisplayName("딜러의 모든 카드를 반환한다,")
     void getDealerCards() {
-        //given
-        GameSystem gameSystem = new GameSystem(Collections.emptyList());
+        //give
+        Dealer dealer = new Dealer("딜러", Deck.getTwoCards());
+        GameSystem gameSystem = new GameSystem(dealer, Collections.emptyList());
 
         //when
         List<Card> dealerCards = gameSystem.getDealerCards();
@@ -78,7 +81,7 @@ public class GameSystemTest {
         Card card4 = new Card(Score.valueOf(score2), Suit.CLUB);
         Person player1 = new Player("pobi", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("tobi", new GivenCards(Arrays.asList(card3, card4)));
-        GameSystem gameSystem = new GameSystem(Arrays.asList(player1, player2));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Arrays.asList(player1, player2));
 
         //when
         boolean isFinished = gameSystem.allPlayersFinished();
@@ -101,7 +104,7 @@ public class GameSystemTest {
         Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
         Person player3 = new Player("player3", new GivenCards(Arrays.asList(card5, card6)));
-        GameSystem gameSystem = new GameSystem(Arrays.asList(player1, player2, player3));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Arrays.asList(player1, player2, player3));
 
         //when
         String player = gameSystem.getCurrentPlayer();
@@ -119,7 +122,7 @@ public class GameSystemTest {
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
-        GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Collections.singletonList(player));
 
         //when
         gameSystem.hit(answer, name);
@@ -137,7 +140,7 @@ public class GameSystemTest {
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
-        GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Collections.singletonList(player));
 
         //when //then
         assertThatThrownBy(() -> gameSystem.hit(answer, name))
@@ -149,7 +152,10 @@ public class GameSystemTest {
     @DisplayName("딜러의 카드를 추가한다.")
     void hit_for_dealer() {
         //given
-        GameSystem gameSystem = new GameSystem(Collections.emptyList());
+        Card card1 = new Card(Score.TWO, Suit.CLUB);
+        Card card2 = new Card(Score.TWO, Suit.HEART);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", givenCards), Collections.emptyList());
 
         //when
         gameSystem.hit();
@@ -166,7 +172,7 @@ public class GameSystemTest {
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
-        GameSystem gameSystem = new GameSystem(Collections.singletonList(player));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Collections.singletonList(player));
 
         //when
         List<Card> cards = gameSystem.getCards(name);
@@ -174,5 +180,43 @@ public class GameSystemTest {
         //then
         assertThat(cards).hasSize(2)
                 .containsOnly(card1, card2);
+    }
+
+    @Test
+    @DisplayName("딜러의 점수 합을 반환한다.")
+    void getDealerScore() {
+        //give
+        Card card1 = new Card(Score.A, Suit.CLUB);
+        Card card2 = new Card(Score.TEN, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+        Dealer dealer = new Dealer("딜러", givenCards);
+        GameSystem gameSystem = new GameSystem(dealer, Collections.emptyList());
+
+        //when
+        int dealerScore = gameSystem.getDealerScore();
+
+        //then
+        assertThat(dealerScore).isEqualTo(21);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"A, TEN, A, NINE, 21, 20", "TEN, TEN, A, A, 20, 12"})
+    @DisplayName("플레이어들의 점수를 반환한다.")
+    void getPlayerScores(String score1, String score2, String score3, String score4, int expectedSum1, int expectedSum2) {
+        //given
+        Card card1 = new Card(Score.valueOf(score1), Suit.CLUB);
+        Card card2 = new Card(Score.valueOf(score2), Suit.CLUB);
+        Card card3 = new Card(Score.valueOf(score3), Suit.HEART);
+        Card card4 = new Card(Score.valueOf(score4), Suit.HEART);
+        Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
+        Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Arrays.asList(player1, player2));
+
+        //when
+        List<Integer> playerScores = gameSystem.getPlayerScores();
+
+        //then
+        assertThat(playerScores).hasSize(2)
+                .containsOnly(expectedSum1, expectedSum2);
     }
 }

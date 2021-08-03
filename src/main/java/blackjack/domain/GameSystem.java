@@ -17,15 +17,16 @@ public class GameSystem {
     private static final String ACCEPT_ANSWER = "y";
     private static final String DECLINE_ANSWER = "n";
 
-    private final Person dealer = new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards());
+    private final Person dealer;
     private final List<Person> players;
 
-    protected GameSystem(final List<Person> players) {
+    protected GameSystem(final Person dealer, final List<Person> players) {
+        this.dealer = dealer;
         this.players = players;
     }
 
     public static GameSystem create(final List<String> playerNames) {
-        return new GameSystem(playerNames.stream()
+        return new GameSystem(new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards()), playerNames.stream()
                 .map(name -> new Player(name, Deck.getTwoCards()))
                 .collect(Collectors.toList()));
     }
@@ -96,5 +97,15 @@ public class GameSystem {
     public List<Card> getCards(final String name) {
         Person player = findPlayerBy(name);
         return player.getCards().list();
+    }
+
+    public int getDealerScore() {
+        return dealer.sum();
+    }
+
+    public List<Integer> getPlayerScores() {
+        return players.stream()
+                .map(Person::sum)
+                .collect(Collectors.toList());
     }
 }

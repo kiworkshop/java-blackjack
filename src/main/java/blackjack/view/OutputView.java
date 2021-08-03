@@ -47,6 +47,13 @@ public class OutputView {
     }
 
     public void printDealerGetAnotherCard() {
-        System.out.printf("%n딜러는 16이하라 한장의 카드를 더 받았습니다.");
+        System.out.printf("%n딜러는 16이하라 한장의 카드를 더 받았습니다.%n");
+    }
+
+    public void printCardsAndScores(final List<String> playerNames, DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse, int dealerScore, List<Integer> playerScores) {
+        System.out.printf("%n딜러 카드: %s - 결과: %d%n", join(dealerAndPlayerCardsResponse.getDealerCards()), dealerScore);
+
+        IntStream.range(0, playerNames.size())
+                .forEach(i -> System.out.printf("%s카드: %s - 결과: %d%n", playerNames.get(i), join(dealerAndPlayerCardsResponse.getAllPlayerCards().get(i)), playerScores.get(i)));
     }
 }

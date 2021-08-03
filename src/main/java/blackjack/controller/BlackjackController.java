@@ -18,23 +18,39 @@ public class BlackjackController {
     }
 
     public void run() {
-        List<String> playerNames = inputView.getPlayerNames();
+        GameSystem gameSystem = setup(inputView.getPlayerNames());
+        playerMode(gameSystem);
+        dealerMode(gameSystem);
+        printResult(gameSystem);
+    }
+
+    private GameSystem setup(final List<String> playerNames) {
         GameSystem gameSystem = GameSystem.create(playerNames);
         outputView.printGameStart(gameSystem.getPlayerNames());
         DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
         outputView.printFirstTwoCards(gameSystem.getPlayerNames(), dealerAndPlayerCardsResponse);
+        return gameSystem;
+    }
 
+    private void playerMode(final GameSystem gameSystem) {
         while (!gameSystem.allPlayersFinished()) {
             String currentPlayer = gameSystem.getCurrentPlayer();
             String answer = inputView.getAnswerForAnotherCard(currentPlayer);
-            CardsResponse cardsResponse = new CardsResponse(gameSystem.getCards(currentPlayer));
             gameSystem.hit(answer, currentPlayer);
+            CardsResponse cardsResponse = new CardsResponse(gameSystem.getCards(currentPlayer));
             outputView.printPlayerCards(currentPlayer, cardsResponse, answer);
         }
+    }
 
+    private void dealerMode(final GameSystem gameSystem) {
         while (!gameSystem.isDealerFinished()) {
             outputView.printDealerGetAnotherCard();
             gameSystem.hit();
         }
+    }
+
+    private void printResult(final GameSystem gameSystem) {
+        DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
+        outputView.printCardsAndScores(gameSystem.getPlayerNames(), dealerAndPlayerCardsResponse, gameSystem.getDealerScore(), gameSystem.getPlayerScores());
     }
 }

@@ -83,4 +83,27 @@ public class GameSystemTest {
         //then
         assertThat(isFinished).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"A, TEN, A, NINE, player3", "TEN, TEN, TEN, TEN, player2"})
+    @DisplayName("참여 종료상태가 아닌 플레이어 중 먼저 입력 받았던 플레이어의 이름을 반환한다.")
+    void getCurrentPlayer(String score1, String score2, String score3, String score4, String expectedPlayer) {
+        //given
+        Card card1 = new Card(Score.A, Suit.DIAMOND);
+        Card card2 = new Card(Score.J, Suit.DIAMOND);
+        Card card3 = new Card(Score.valueOf(score1), Suit.CLUB);
+        Card card4 = new Card(Score.valueOf(score2), Suit.CLUB);
+        Card card5 = new Card(Score.valueOf(score3), Suit.HEART);
+        Card card6 = new Card(Score.valueOf(score4), Suit.HEART);
+        Player player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
+        Player player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
+        Player player3 = new Player("player3", new GivenCards(Arrays.asList(card5, card6)));
+        GameSystem gameSystem = new GameSystem(Arrays.asList(player1, player2, player3));
+
+        //when
+        String player = gameSystem.getCurrentPlayer();
+
+        //then
+        assertThat(player).isEqualTo(expectedPlayer);
+    }
 }

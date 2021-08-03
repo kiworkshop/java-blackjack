@@ -48,4 +48,12 @@ public class GameSystem {
         return players.stream()
                 .allMatch(Gamer::isFinished);
     }
+
+    public String getCurrentPlayer() {
+        return players.stream()
+                .filter(player -> !player.isFinished())
+                .map(Gamer::getName)
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
 }

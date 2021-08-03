@@ -22,5 +22,11 @@ public class BlackjackController {
         outputView.printGameStart(gameSystem.getPlayerNames());
         FirstTwoCardsResponse firstTwoCardsResponse = new FirstTwoCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
         outputView.printFirstTwoCards(gameSystem.getPlayerNames(), firstTwoCardsResponse);
+
+        while (!gameSystem.allPlayersFinished()) {
+            String currentPlayer = gameSystem.getCurrentPlayer();
+            String answer = inputView.getAnswerForAnotherCard(currentPlayer);
+            gameSystem.hit(answer, currentPlayer);
+        }
     }
 }

@@ -9,7 +9,7 @@ import blackjack.domain.state.running.Hit;
 
 public class Dealer extends Gamer {
     public static final int BLACKJACK = 21;
-    private static final int HIT_THRESHOLD = 16;
+    public static final int HIT_THRESHOLD = 16;
 
     public Dealer(final String name, final GivenCards givenCards) {
         super(name);
@@ -22,7 +22,7 @@ public class Dealer extends Gamer {
             return new Blackjack(cards);
         }
 
-        if (cards.sum() <= HIT_THRESHOLD) {
+        if (cards.isLessThanEqualTo(HIT_THRESHOLD)) {
             return new Hit(cards);
         }
 

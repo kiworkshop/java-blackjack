@@ -63,4 +63,8 @@ public class GivenCards {
     public boolean isLessThan(final GivenCards otherCards) {
         return sum() < otherCards.sum();
     }
+
+    public boolean isLessThanEqualTo(final int value) {
+        return sum() <= value;
+    }
 }

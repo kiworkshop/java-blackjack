@@ -4,6 +4,8 @@ import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -154,5 +156,21 @@ public class GivenCardsTest {
 
         //then
         assertThat(result).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"18, false", "19, true"})
+    @DisplayName("인자로 받은 값보다 자신의 카드 합이 작거나 같을 경우, 참을 반환한다.")
+    void isLessThanEqualTo(int sum, boolean expected) {
+        //given
+        Card card1 = new Card(Score.TEN, Suit.CLUB);
+        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
+
+        //when
+        boolean result = myCards.isLessThanEqualTo(sum);
+
+        //then
+        assertThat(result).isEqualTo(expected);
     }
 }

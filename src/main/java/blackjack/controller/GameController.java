@@ -34,6 +34,14 @@ public class GameController {
             }
         });
 
+        //딜러 합이 16이하이면 한장 더받기
+        int sum = gameService.getCardScore(dealer);
+        if(sum<=16){
+            gameService.setAdditionalCard(dealer);
+            OutputView.printDealerAdditionCard();
+        }
+
+        //결과
 
     }
 }

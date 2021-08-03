@@ -17,4 +17,10 @@ public class Card {
     public String getName() {
         return name;
     }
+    public int getScore(){
+        return denomination.getScore();
+    }
+    public boolean isAce() {
+        return denomination.equals(Denomination.A);
+    }
 }

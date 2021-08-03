@@ -25,4 +25,8 @@ public class OutputView {
         List<String> cardNames = player.getCards().stream().map(card -> card.getName()).collect(Collectors.toList());
         System.out.printf("%s: %s\n", player.getName(), String.join(COMMA_DELIMITER, cardNames));
     }
+
+    public static void printDealerAdditionCard(){
+        System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
+    }
 }

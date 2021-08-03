@@ -18,6 +18,14 @@ public class Card {
         return score.getScore();
     }
 
+    public String getDenomination() {
+        return score.getDenomination();
+    }
+
+    public String getSuit() {
+        return suit.getSuit();
+    }
+
     public boolean isAce() {
         return score.isAce();
     }

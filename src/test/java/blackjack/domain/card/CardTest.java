@@ -40,6 +40,21 @@ public class CardTest {
         assertThat(score).isEqualTo(jack.getScore());
     }
 
+    @Test
+    @DisplayName("카드의 점수 이름(끗수)를 반환한다.")
+    void getDenomination() {
+        //given
+        Score jack = Score.J;
+        Suit diamond = Suit.DIAMOND;
+        Card card = new Card(jack, diamond);
+
+        //when
+        String denomination = card.getDenomination();
+
+        //then
+        assertThat(denomination).isEqualTo(jack.getDenomination());
+    }
+
     @ParameterizedTest
     @CsvSource(value = {"A, true", "TWO, false", "TEN, false", "J, false"})
     @DisplayName("카드가 Ace일 경우 참을 반환한다.")

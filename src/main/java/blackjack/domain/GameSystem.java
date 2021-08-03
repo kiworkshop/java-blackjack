@@ -108,4 +108,10 @@ public class GameSystem {
                 .map(Person::sum)
                 .collect(Collectors.toList());
     }
+
+    public List<Integer> getResults() {
+        return players.stream()
+                .map(player -> player.compare(dealer.getCards()))
+                .collect(Collectors.toList());
+    }
 }

@@ -36,4 +36,9 @@ public abstract class Gamer implements Person {
     public boolean isFinished() {
         return state.isFinished();
     }
+
+    @Override
+    public int compare(GivenCards otherCards) {
+        return state.compare(otherCards);
+    }
 }

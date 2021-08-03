@@ -19,4 +19,6 @@ public interface Person {
     void stay();
 
     boolean isFinished();
+
+    int compare(GivenCards otherCards);
 }

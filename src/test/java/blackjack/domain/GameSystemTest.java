@@ -219,4 +219,29 @@ public class GameSystemTest {
         assertThat(playerScores).hasSize(2)
                 .containsOnly(expectedSum1, expectedSum2);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"TEN, TEN, n, 1, 1", "TEN, TEN, y, 1, -1", "A, EIGHT, n, 1, 0"})
+    @DisplayName("플레이어의 승패 결과를 반환한다.")
+    void getResults(String score1, String score2, String answer, int expectedResult1, int expectedResult2) {
+        //given
+        Card card1 = new Card(Score.A, Suit.CLUB);
+        Card card2 = new Card(Score.J, Suit.CLUB);
+        Card card3 = new Card(Score.valueOf(score1), Suit.HEART);
+        Card card4 = new Card(Score.valueOf(score2), Suit.HEART);
+        Card card5 = new Card(Score.A, Suit.DIAMOND);
+        Card card6 = new Card(Score.EIGHT, Suit.DIAMOND);
+        Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
+        Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
+        GivenCards dealerCards = new GivenCards(Arrays.asList(card5, card6));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", dealerCards), Arrays.asList(player1, player2));
+        gameSystem.hit(answer, "player2");
+
+        //when
+        List<Integer> results = gameSystem.getResults();
+
+        //then
+        assertThat(results).hasSize(2)
+                .containsOnly(expectedResult1, expectedResult2);
+    }
 }

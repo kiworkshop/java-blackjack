@@ -17,16 +17,21 @@ public class OutputView {
         System.out.printf("딜러: %s\n", dealer.getCards().get(0).getName());
         players.forEach(player -> {
             List<String> cardNames = player.getCards().stream().map(card -> card.getName()).collect(Collectors.toList());
-            System.out.printf("%s: %s\n", player.getName(), String.join(COMMA_DELIMITER, cardNames));
+            System.out.printf("%s카드: %s\n", player.getName(), String.join(COMMA_DELIMITER, cardNames));
         });
     }
 
     public static void printPlayersCards(Player player) {
         List<String> cardNames = player.getCards().stream().map(card -> card.getName()).collect(Collectors.toList());
-        System.out.printf("%s: %s\n", player.getName(), String.join(COMMA_DELIMITER, cardNames));
+        System.out.printf("%s카드: %s\n", player.getName(), String.join(COMMA_DELIMITER, cardNames));
     }
 
     public static void printDealerAdditionCard(){
         System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
+    }
+
+    public static void printCardResult(Human human, int result){
+        List<String> cardNames = human.getCards().stream().map(card -> card.getName()).collect(Collectors.toList());
+        System.out.printf("%s카드: %s - 결과: %d\n", human.getName(), String.join(COMMA_DELIMITER, cardNames), result);
     }
 }

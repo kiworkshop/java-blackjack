@@ -42,6 +42,10 @@ public class GameController {
         }
 
         //결과
-
+        int dealerScore = gameService.getCardScore(dealer);
+        OutputView.printCardResult(dealer,dealerScore);
+        players.forEach(player -> {
+            OutputView.printCardResult(player,gameService.getCardScore(player));
+        });
     }
 }

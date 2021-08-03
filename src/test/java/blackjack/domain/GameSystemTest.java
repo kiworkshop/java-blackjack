@@ -8,6 +8,7 @@ import blackjack.domain.enums.Suit;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Person;
 import blackjack.domain.participant.Player;
+import blackjack.domain.participant.Players;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -44,7 +45,8 @@ public class GameSystemTest {
     void getDealerCards() {
         //give
         Dealer dealer = new Dealer("딜러", Deck.getTwoCards());
-        GameSystem gameSystem = new GameSystem(dealer, Collections.emptyList());
+        Players players = new Players(Collections.emptyList());
+        GameSystem gameSystem = new GameSystem(dealer, players);
 
         //when
         List<Card> dealerCards = gameSystem.getDealerCards();
@@ -81,7 +83,8 @@ public class GameSystemTest {
         Card card4 = new Card(Score.valueOf(score2), Suit.CLUB);
         Person player1 = new Player("pobi", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("tobi", new GivenCards(Arrays.asList(card3, card4)));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Arrays.asList(player1, player2));
+        Players players = new Players(Arrays.asList(player1, player2));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
 
         //when
         boolean isFinished = gameSystem.allPlayersFinished();
@@ -104,7 +107,8 @@ public class GameSystemTest {
         Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
         Person player3 = new Player("player3", new GivenCards(Arrays.asList(card5, card6)));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Arrays.asList(player1, player2, player3));
+        Players players = new Players(Arrays.asList(player1, player2, player3));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
 
         //when
         String player = gameSystem.getCurrentPlayer();
@@ -122,7 +126,8 @@ public class GameSystemTest {
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Collections.singletonList(player));
+        Players players = new Players(Collections.singletonList(player));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
 
         //when
         gameSystem.hit(answer, name);
@@ -140,7 +145,8 @@ public class GameSystemTest {
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Collections.singletonList(player));
+        Players players = new Players(Collections.singletonList(player));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
 
         //when //then
         assertThatThrownBy(() -> gameSystem.hit(answer, name))
@@ -155,7 +161,8 @@ public class GameSystemTest {
         Card card1 = new Card(Score.TWO, Suit.CLUB);
         Card card2 = new Card(Score.TWO, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", givenCards), Collections.emptyList());
+        Players players = new Players(Collections.emptyList());
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", givenCards), players);
 
         //when
         gameSystem.hit();
@@ -172,7 +179,8 @@ public class GameSystemTest {
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Collections.singletonList(player));
+        Players players = new Players(Collections.singletonList(player));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
 
         //when
         List<Card> cards = gameSystem.getCards(name);
@@ -190,7 +198,8 @@ public class GameSystemTest {
         Card card2 = new Card(Score.TEN, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Dealer dealer = new Dealer("딜러", givenCards);
-        GameSystem gameSystem = new GameSystem(dealer, Collections.emptyList());
+        Players players = new Players(Collections.emptyList());
+        GameSystem gameSystem = new GameSystem(dealer, players);
 
         //when
         int dealerScore = gameSystem.getDealerScore();
@@ -210,7 +219,8 @@ public class GameSystemTest {
         Card card4 = new Card(Score.valueOf(score4), Suit.HEART);
         Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", Deck.getTwoCards()), Arrays.asList(player1, player2));
+        Players players = new Players(Arrays.asList(player1, player2));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
 
         //when
         List<Integer> playerScores = gameSystem.getPlayerScores();
@@ -227,14 +237,15 @@ public class GameSystemTest {
         //given
         Card card1 = new Card(Score.A, Suit.CLUB);
         Card card2 = new Card(Score.J, Suit.CLUB);
+        Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
         Card card3 = new Card(Score.valueOf(score1), Suit.HEART);
         Card card4 = new Card(Score.valueOf(score2), Suit.HEART);
+        Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
         Card card5 = new Card(Score.A, Suit.DIAMOND);
         Card card6 = new Card(Score.EIGHT, Suit.DIAMOND);
-        Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
-        Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
         GivenCards dealerCards = new GivenCards(Arrays.asList(card5, card6));
-        GameSystem gameSystem = new GameSystem(new Dealer("딜러", dealerCards), Arrays.asList(player1, player2));
+        Players players = new Players(Arrays.asList(player1, player2));
+        GameSystem gameSystem = new GameSystem(new Dealer("딜러", dealerCards), players);
         gameSystem.hit(answer, "player2");
 
         //when

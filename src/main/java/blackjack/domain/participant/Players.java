@@ -1,0 +1,73 @@
+package blackjack.domain.participant;
+
+import blackjack.domain.card.Card;
+import blackjack.domain.card.GivenCards;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Players {
+    private final Map<String, Person> players = new LinkedHashMap<>();
+
+    public Players(final List<Person> players) {
+        converToMap(players);
+    }
+
+    private void converToMap(List<Person> players) {
+        players.forEach(player -> this.players.put(player.getName(), player));
+    }
+
+    public List<String> getPlayerNames() {
+        return Collections.unmodifiableList(new ArrayList<>(players.keySet()));
+    }
+
+    public List<List<Card>> getPlayerCards() {
+        return Collections.unmodifiableList(players.values()
+                .stream()
+                .map(Person::getCards)
+                .map(GivenCards::list)
+                .collect(Collectors.toList()));
+    }
+
+    public boolean allPlayersFinished() {
+        return players.values()
+                .stream()
+                .allMatch(Person::isFinished);
+    }
+
+    public String getCurrentPlayer() {
+        return players.values()
+                .stream()
+                .filter(player -> !player.isFinished())
+                .map(Person::getName)
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
+
+    public Person findPlayerBy(final String name) {
+        return players.get(name);
+    }
+
+    public List<Card> getCards(final String name) {
+        Person player = findPlayerBy(name);
+        return player.getCards().list();
+    }
+
+    public List<Integer> getPlayerScores() {
+        return players.values()
+                .stream()
+                .map(Person::sum)
+                .collect(Collectors.toList());
+    }
+
+    public List<Integer> getResults(GivenCards dealerCards) {
+        return players.values()
+                .stream()
+                .map(player -> player.compare(dealerCards))
+                .collect(Collectors.toList());
+    }
+}

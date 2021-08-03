@@ -2,10 +2,10 @@ package blackjack.domain;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
-import blackjack.domain.card.GivenCards;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Person;
 import blackjack.domain.participant.Player;
+import blackjack.domain.participant.Players;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,23 +18,21 @@ public class GameSystem {
     private static final String DECLINE_ANSWER = "n";
 
     private final Person dealer;
-    private final List<Person> players;
+    private final Players players;
 
-    protected GameSystem(final Person dealer, final List<Person> players) {
+    protected GameSystem(final Person dealer, final Players players) {
         this.dealer = dealer;
         this.players = players;
     }
 
     public static GameSystem create(final List<String> playerNames) {
-        return new GameSystem(new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards()), playerNames.stream()
+        return new GameSystem(new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards()), new Players(playerNames.stream()
                 .map(name -> new Player(name, Deck.getTwoCards()))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
     }
 
     public List<String> getPlayerNames() {
-        return Collections.unmodifiableList(players.stream()
-                .map(Person::getName)
-                .collect(Collectors.toList()));
+        return players.getPlayerNames();
     }
 
     public List<Card> getDealerCards() {
@@ -42,28 +40,20 @@ public class GameSystem {
     }
 
     public List<List<Card>> getPlayerCards() {
-        return Collections.unmodifiableList(players.stream()
-                .map(Person::getCards)
-                .map(GivenCards::list)
-                .collect(Collectors.toList()));
+        return players.getPlayerCards();
     }
 
     public boolean allPlayersFinished() {
-        return players.stream()
-                .allMatch(Person::isFinished);
+        return players.allPlayersFinished();
     }
 
     public String getCurrentPlayer() {
-        return players.stream()
-                .filter(player -> !player.isFinished())
-                .map(Person::getName)
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
+        return players.getCurrentPlayer();
     }
 
     public void hit(final String answer, final String name) {
         validate(answer);
-        Person player = findPlayerBy(name);
+        Person player = players.findPlayerBy(name);
 
         if (answer.equals(DECLINE_ANSWER)) {
             player.stay();
@@ -79,13 +69,6 @@ public class GameSystem {
         }
     }
 
-    private Person findPlayerBy(final String name) {
-        return players.stream()
-                .filter(player -> player.getName().equals(name))
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
-    }
-
     public void hit() {
         dealer.hit(Deck.getCard());
     }
@@ -95,8 +78,7 @@ public class GameSystem {
     }
 
     public List<Card> getCards(final String name) {
-        Person player = findPlayerBy(name);
-        return player.getCards().list();
+        return players.getCards(name);
     }
 
     public int getDealerScore() {
@@ -104,14 +86,10 @@ public class GameSystem {
     }
 
     public List<Integer> getPlayerScores() {
-        return players.stream()
-                .map(Person::sum)
-                .collect(Collectors.toList());
+        return players.getPlayerScores();
     }
 
     public List<Integer> getResults() {
-        return players.stream()
-                .map(player -> player.compare(dealer.getCards()))
-                .collect(Collectors.toList());
+        return players.getResults(dealer.getCards());
     }
 }

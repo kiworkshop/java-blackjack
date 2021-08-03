@@ -58,7 +58,7 @@ class FinishedTest {
 
         return new Finished(givenCards) {
             @Override
-            public int result(GivenCards competitorCards) {
+            public int compare(GivenCards competitorCards) {
                 return 0;
             }
 

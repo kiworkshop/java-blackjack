@@ -15,7 +15,7 @@ public abstract class Running extends Init {
     }
 
     @Override
-    public int result(GivenCards givenCards) {
+    public int compare(GivenCards givenCards) {
         throw new IllegalStateException("게임 진행 중에는 결과를 알 수 없습니다.");
     }
 }

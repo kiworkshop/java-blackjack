@@ -15,5 +15,5 @@ public interface State {
 
     GivenCards getCards();
 
-    int result(GivenCards givenCards);
+    int compare(GivenCards givenCards);
 }

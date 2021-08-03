@@ -43,13 +43,12 @@ class InitTest {
 
         //then
         assertThat(sum).isEqualTo(20);
-        ;
     }
 
     private Init createInitState(GivenCards givenCards) {
         return new Init(givenCards) {
             @Override
-            public int result(GivenCards givenCards) {
+            public int compare(GivenCards givenCards) {
                 return 0;
             }
 

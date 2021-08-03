@@ -35,7 +35,7 @@ class RunningTest {
         State runningState = createRunningState();
 
         //when //then
-        assertThatThrownBy(() -> runningState.result(new GivenCards(Collections.emptyList())))
+        assertThatThrownBy(() -> runningState.compare(new GivenCards(Collections.emptyList())))
                 .hasMessage("게임 진행 중에는 결과를 알 수 없습니다.");
     }
 

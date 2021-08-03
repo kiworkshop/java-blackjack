@@ -26,7 +26,7 @@ class StayTest {
         GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
 
         //when
-        int result = stay.result(otherCards);
+        int result = stay.compare(otherCards);
 
         //then
         assertThat(result).isEqualTo(1);
@@ -44,7 +44,7 @@ class StayTest {
         GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
 
         //when
-        int result = stay.result(otherCards);
+        int result = stay.compare(otherCards);
 
         //then
         assertThat(result).isEqualTo(-1);
@@ -61,9 +61,9 @@ class StayTest {
         GivenCards otherCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
-        int result = stay.result(otherCards);
+        int result = stay.compare(otherCards);
 
         //then
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isZero();
     }
 }

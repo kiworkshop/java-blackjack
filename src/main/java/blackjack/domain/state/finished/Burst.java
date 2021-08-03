@@ -10,7 +10,7 @@ public class Burst extends Finished {
     }
 
     @Override
-    public int result(final GivenCards competitorCards) {
+    public int compare(final GivenCards competitorCards) {
         return Result.LOSE.getPoint();
     }
 }

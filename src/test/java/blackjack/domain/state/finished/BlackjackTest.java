@@ -26,7 +26,7 @@ class BlackjackTest {
         GivenCards otherCards = new GivenCards(Collections.emptyList());
 
         //when
-        int result = blackjack.result(otherCards);
+        int result = blackjack.compare(otherCards);
 
         //then
         assertThat(result).isEqualTo(1);

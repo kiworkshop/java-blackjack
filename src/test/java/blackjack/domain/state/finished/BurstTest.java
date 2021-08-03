@@ -26,7 +26,7 @@ class BurstTest {
         GivenCards otherCards = new GivenCards(Collections.emptyList());
 
         //when
-        int result = burst.result(otherCards);
+        int result = burst.compare(otherCards);
 
         //then
         assertThat(result).isEqualTo(-1);

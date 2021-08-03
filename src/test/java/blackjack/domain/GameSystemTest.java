@@ -123,4 +123,17 @@ public class GameSystemTest {
         //then
         assertThat(player.getCards().list()).hasSize(3);
     }
+
+    @Test
+    @DisplayName("딜러의 카드를 추가한다.")
+    void hit_for_dealer() {
+        //given
+        GameSystem gameSystem = new GameSystem(Collections.emptyList());
+
+        //when
+        gameSystem.hit();
+
+        //then
+        assertThat(gameSystem.getDealerCards()).hasSize(3);
+    }
 }

@@ -68,4 +68,8 @@ public class GameSystem {
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
+
+    public void hit() {
+        dealer.hit(Deck.getCard());
+    }
 }

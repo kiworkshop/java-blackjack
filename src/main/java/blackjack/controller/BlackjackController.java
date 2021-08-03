@@ -52,5 +52,6 @@ public class BlackjackController {
     private void printResult(final GameSystem gameSystem) {
         DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
         outputView.printCardsAndScores(gameSystem.getPlayerNames(), dealerAndPlayerCardsResponse, gameSystem.getDealerScore(), gameSystem.getPlayerScores());
+        outputView.printResults(gameSystem.getPlayerNames(), gameSystem.getResults());
     }
 }

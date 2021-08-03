@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameSystem {
+    public static final int BLACKJACK = 21;
     private static final String DEFAULT_DEALER_NAME = "딜러";
     private static final String ACCEPT_ANSWER = "y";
     private static final String DECLINE_ANSWER = "n";

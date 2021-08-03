@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,30 +15,8 @@ import static org.assertj.core.api.Assertions.tuple;
 public class CardsResponseTest {
 
     @Test
-    @DisplayName("딜러 카드를 반환한다.")
-    void getDealerCards() {
-        //given
-        Score ace = Score.A;
-        Suit club = Suit.CLUB;
-        Suit diamond = Suit.DIAMOND;
-        Card card1 = new Card(ace, club);
-        Card card2 = new Card(ace, diamond);
-        List<Card> dealerCards = Arrays.asList(card1, card2);
-        CardsResponse cardsResponse = new CardsResponse(dealerCards, Collections.emptyList());
-
-        //when
-        List<CardResponse> dealerCard = cardsResponse.getDealerCards();
-
-        //then
-        assertThat(dealerCard).hasSize(2)
-                .extracting("denomination", "suit")
-                .containsOnly(tuple(ace.getDenomination(), club.getSuit()),
-                        tuple(ace.getDenomination(), diamond.getSuit()));
-    }
-
-    @Test
-    @DisplayName("모든 플레이어의 카드를 반환한다.")
-    void getAllPlayerCards() {
+    @DisplayName("모든 카드를 반환한다.")
+    void getCards() {
         //given
         Score ace = Score.A;
         Suit club = Suit.CLUB;
@@ -47,19 +24,15 @@ public class CardsResponseTest {
         Card card1 = new Card(ace, club);
         Card card2 = new Card(ace, diamond);
         List<Card> playerCards = Arrays.asList(card1, card2);
-        List<List<Card>> allPlayerCards = Arrays.asList(playerCards, playerCards, playerCards);
-        CardsResponse cardsResponse = new CardsResponse(Collections.emptyList(), allPlayerCards);
+        CardsResponse cardsResponse = new CardsResponse(playerCards);
 
         //when
-        List<List<CardResponse>> allPlayerCardsResponse = cardsResponse.getAllPlayerCards();
+        List<CardResponse> cards = cardsResponse.getCards();
 
         //then
-        assertThat(allPlayerCardsResponse).hasSize(3);
-        allPlayerCardsResponse.forEach(
-                playerCardsResponse -> assertThat(playerCardsResponse).hasSize(2)
-                        .extracting("denomination", "suit")
-                        .containsOnly(tuple(ace.getDenomination(), club.getSuit()),
-                                tuple(ace.getDenomination(), diamond.getSuit()))
-        );
+        assertThat(cards).hasSize(2)
+                .extracting("denomination", "suit")
+                .containsOnly(tuple(ace.getDenomination(), club.getSuit()),
+                        tuple(ace.getDenomination(), diamond.getSuit()));
     }
 }

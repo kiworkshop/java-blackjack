@@ -62,14 +62,14 @@ public class GameSystem {
 
     public void hit(final String answer, final String name) {
         validate(answer);
-        Person fetchedPlayer = findPlayerBy(name);
+        Person player = findPlayerBy(name);
 
         if (answer.equals(DECLINE_ANSWER)) {
-            fetchedPlayer.stay();
+            player.stay();
             return;
         }
 
-        fetchedPlayer.hit(Deck.getCard());
+        player.hit(Deck.getCard());
     }
 
     private void validate(final String answer) {

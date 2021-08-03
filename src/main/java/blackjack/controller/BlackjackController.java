@@ -2,6 +2,7 @@ package blackjack.controller;
 
 import blackjack.domain.GameSystem;
 import blackjack.domain.dto.CardsResponse;
+import blackjack.domain.dto.DealerAndPlayerCardsResponse;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
@@ -20,8 +21,8 @@ public class BlackjackController {
         List<String> playerNames = inputView.getPlayerNames();
         GameSystem gameSystem = GameSystem.create(playerNames);
         outputView.printGameStart(gameSystem.getPlayerNames());
-        CardsResponse cardsResponse = new CardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
-        outputView.printFirstTwoCards(gameSystem.getPlayerNames(), cardsResponse);
+        DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
+        outputView.printFirstTwoCards(gameSystem.getPlayerNames(), dealerAndPlayerCardsResponse);
 
         while (!gameSystem.allPlayersFinished()) {
             String currentPlayer = gameSystem.getCurrentPlayer();

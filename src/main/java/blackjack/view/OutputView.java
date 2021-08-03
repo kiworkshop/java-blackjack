@@ -2,6 +2,7 @@ package blackjack.view;
 
 import blackjack.domain.dto.CardResponse;
 import blackjack.domain.dto.CardsResponse;
+import blackjack.domain.dto.DealerAndPlayerCardsResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,22 +13,23 @@ public class OutputView {
 
     public void printGameStart(List<String> playerNames) {
         String names = String.join(SEPARATOR, playerNames);
-        System.out.printf("딜러와 %s에게 2장의 카드를 나누었습니다.%n", names);
+        System.out.printf("%n딜러와 %s에게 2장의 카드를 나누었습니다.%n", names);
     }
 
-    public void printFirstTwoCards(List<String> playerNames, CardsResponse cardsResponse) {
-        System.out.printf("딜러: %s%n", combine(cardsResponse.getDealerCards().get(0)));
+    public void printFirstTwoCards(List<String> playerNames, DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse) {
+        System.out.printf("딜러: %s%n", combine(dealerAndPlayerCardsResponse.getDealerCards().getCards().get(0)));
 
         IntStream.range(0, playerNames.size())
-                .forEach(i -> System.out.printf("%s카드: %s%n", playerNames.get(i), playerCards(cardsResponse.getAllPlayerCards().get(i))));
+                .forEach(i -> System.out.printf("%s카드: %s%n", playerNames.get(i), join(dealerAndPlayerCardsResponse.getAllPlayerCards().get(i))));
+        System.out.println();
     }
 
     private String combine(final CardResponse cardResponse) {
         return cardResponse.getDenomination() + cardResponse.getSuit();
     }
 
-    private String playerCards(final List<CardResponse> cardResponses) {
-        List<String> fullCardNames = cardResponses.stream()
+    private String join(final CardsResponse cardResponses) {
+        List<String> fullCardNames = cardResponses.getCards().stream()
                 .map(this::combine)
                 .collect(Collectors.toList());
 
@@ -35,6 +37,6 @@ public class OutputView {
     }
 
     public void printDealerGetAnotherCard() {
-        System.out.printf("딜러는 16이하라 한장의 카드를 더 받았습니다.%n");
+        System.out.printf("%n딜러는 16이하라 한장의 카드를 더 받았습니다.");
     }
 }

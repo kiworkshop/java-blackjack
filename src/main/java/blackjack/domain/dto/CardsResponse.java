@@ -2,31 +2,18 @@ package blackjack.domain.dto;
 
 import blackjack.domain.card.Card;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CardsResponse {
-    private final List<Card> dealerCards;
-    private final List<List<Card>> playerCards;
+    private final List<Card> cards;
 
-    public CardsResponse(final List<Card> dealerCards, final List<List<Card>> playerCards) {
-        this.dealerCards = dealerCards;
-        this.playerCards = new ArrayList<>(playerCards);
+    public CardsResponse(final List<Card> cards) {
+        this.cards = cards;
     }
 
-    public List<CardResponse> getDealerCards() {
-        return convertToCardResponse(dealerCards);
-    }
-
-    public List<List<CardResponse>> getAllPlayerCards() {
-        return playerCards.stream()
-                .map(CardsResponse::convertToCardResponse)
-                .collect(Collectors.toList());
-    }
-
-    private static List<CardResponse> convertToCardResponse(final List<Card> givenCards) {
-        return givenCards.stream()
+    public List<CardResponse> getCards() {
+        return cards.stream()
                 .map(card -> new CardResponse(card.getDenomination(), card.getSuit()))
                 .collect(Collectors.toList());
     }

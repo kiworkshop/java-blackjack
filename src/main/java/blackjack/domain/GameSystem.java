@@ -46,7 +46,7 @@ public class GameSystem {
                 .collect(Collectors.toList()));
     }
 
-    public boolean isFinished() {
+    public boolean allPlayersFinished() {
         return players.stream()
                 .allMatch(Gamer::isFinished);
     }

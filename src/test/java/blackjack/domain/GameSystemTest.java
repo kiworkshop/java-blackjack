@@ -69,7 +69,7 @@ public class GameSystemTest {
     @ParameterizedTest
     @CsvSource(value = {"A, TEN, true", "TEN, TEN, false"})
     @DisplayName("모든 플레이어가 종료하였는지 여부를 반환한다.")
-    void isFinished(String score1, String score2, boolean expected) {
+    void allPlayersFinished(String score1, String score2, boolean expected) {
         //given
         Card card1 = new Card(Score.A, Suit.DIAMOND);
         Card card2 = new Card(Score.J, Suit.DIAMOND);
@@ -80,7 +80,7 @@ public class GameSystemTest {
         GameSystem gameSystem = new GameSystem(Arrays.asList(player1, player2));
 
         //when
-        boolean isFinished = gameSystem.isFinished();
+        boolean isFinished = gameSystem.allPlayersFinished();
 
         //then
         assertThat(isFinished).isEqualTo(expected);

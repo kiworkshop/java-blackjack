@@ -19,10 +19,21 @@ public class GameController {
         List<String> playersNames = InputView.getPlayerNames();
         List<Player> players = gameService.registPlayer(playersNames);
 
+        //첫장 카드 받기
         dealer = (Dealer) gameService.setFirstTwoCards(dealer);
         players.stream().forEach(GameService::setFirstTwoCards);
-
         OutputView.printFirstTwoCards(dealer,players);
+
+        //더 받을지 묻기
+        players.forEach(player -> {
+            String answer = InputView.getAdditionalCard(player);
+            while (answer.equals("Y")){
+                gameService.setAdditionalCard(player);
+                OutputView.printPlayersCards(player);
+                answer = InputView.getAdditionalCard(player);
+            }
+        });
+
 
     }
 }

@@ -35,4 +35,8 @@ public class GameService {
         return human;
         //players.forEach(player -> player.addCard(cards.getAdditionalCard()));
     }
+    public static Human setAdditionalCard(Human human){
+        human.addCard(cards.getAdditionalCard());
+        return human;
+    }
 }

@@ -41,7 +41,7 @@ public class GivenCards {
     }
 
     public boolean isBlackjack() {
-        return (cards.size() == TWO_CARDS) && (BLACKJACK == sum());
+        return (cards.size() == TWO_CARDS) && isMaximumThreshold();
     }
 
     public boolean isBurst() {
@@ -66,5 +66,9 @@ public class GivenCards {
 
     public boolean isLessThanEqualTo(final int value) {
         return sum() <= value;
+    }
+
+    public boolean isMaximumThreshold() {
+        return sum() == BLACKJACK;
     }
 }

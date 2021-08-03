@@ -61,7 +61,7 @@ public class GivenCardsTest {
     }
 
     @Test
-    @DisplayName("처음 카드 2장이 21일 경우, 참을 반환한다.")
+    @DisplayName("카드 2장이 21일 경우, 참을 반환한다.")
     void isBlackjack() {
         //given
         Card card1 = new Card(Score.TEN, Suit.CLUB);
@@ -169,6 +169,23 @@ public class GivenCardsTest {
 
         //when
         boolean result = myCards.isLessThanEqualTo(sum);
+
+        //then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"TEN, NINE, TWO, true", "TEN, EIGHT, TWO, false"})
+    @DisplayName("카드의 합이 21일 경우, 참을 반환한다.")
+    void isMaximumThreshhold(String score1, String score2, String score3, boolean expected) {
+        //given
+        Card card1 = new Card(Score.valueOf(score1), Suit.CLUB);
+        Card card2 = new Card(Score.valueOf(score2), Suit.CLUB);
+        Card card3 = new Card(Score.valueOf(score3), Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2, card3));
+
+        //when
+        boolean result = myCards.isMaximumThreshold();
 
         //then
         assertThat(result).isEqualTo(expected);

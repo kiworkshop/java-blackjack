@@ -32,4 +32,12 @@ public class CardDeck {
     private void suffleCard() {
         Collections.shuffle(cards);
     }
+
+    public Card getAdditionalCard() {
+        if (size < 1) {
+            throw new IndexOutOfBoundsException("더이상 카드가 없습니다.");
+        }
+
+        return cards.get(--size);
+    }
 }

@@ -28,5 +28,10 @@ public class BlackjackController {
             String answer = inputView.getAnswerForAnotherCard(currentPlayer);
             gameSystem.hit(answer, currentPlayer);
         }
+
+        while (!gameSystem.isDealerFinished()) {
+            outputView.printDealerGetAnotherCard();
+            gameSystem.hit();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package blackjack.domain;
 
+import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.GivenCards;
 import blackjack.domain.participant.Dealer;
@@ -32,13 +33,14 @@ public class GameSystem {
                 .collect(Collectors.toList()));
     }
 
-    public GivenCards getDealerCards() {
-        return dealer.getCards();
+    public List<Card> getDealerCards() {
+        return Collections.unmodifiableList(dealer.getCards().list());
     }
 
-    public List<GivenCards> getPlayerCards() {
+    public List<List<Card>> getPlayerCards() {
         return Collections.unmodifiableList(players.stream()
                 .map(Gamer::getCards)
+                .map(GivenCards::list)
                 .collect(Collectors.toList()));
     }
 }

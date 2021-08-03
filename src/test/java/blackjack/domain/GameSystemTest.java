@@ -1,6 +1,6 @@
 package blackjack.domain;
 
-import blackjack.domain.card.GivenCards;
+import blackjack.domain.card.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,10 +35,10 @@ public class GameSystemTest {
         GameSystem gameSystem = new GameSystem(Collections.emptyList());
 
         //when
-        GivenCards dealerCards = gameSystem.getDealerCards();
+        List<Card> dealerCards = gameSystem.getDealerCards();
 
         //then
-        assertThat(dealerCards.list()).hasSize(2);
+        assertThat(dealerCards).hasSize(2);
     }
 
     @Test
@@ -51,9 +51,9 @@ public class GameSystemTest {
         GameSystem gameSystem = new GameSystem(names);
 
         //when
-        List<GivenCards> givenCards = gameSystem.getPlayerCards();
+        List<List<Card>> playerCards = gameSystem.getPlayerCards();
 
         //then
-        assertThat(givenCards).hasSize(2);
+        assertThat(playerCards).hasSize(2);
     }
 }

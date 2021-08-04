@@ -1,29 +1,19 @@
 package blackjack.service;
 
 import blackjack.domain.*;
-import blackjack.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameService {
-    private List<Player> players = new ArrayList<>();
-    //    private Dealer dealer = new Dealer();
-    private static CardDeck cards = new CardDeck();
+    public static final int DEALER_MIN_SCORE = 16;
     static final int BLACKJACK = 21;
     static final int ACE_BONUS_SCORE = 10;
 
-    public GameService() {
-
-    }
-
-    public GameService(List<Player> players, CardDeck cards) {
-        this.players = players;
-        this.cards = cards;
-    }
+    private static CardDeck cards = new CardDeck();
 
     public List<Player> registPlayer(List<String> playerNames) {
-        players = new ArrayList<>();
+        List<Player> players = new ArrayList<>();
         playerNames.forEach(playerName -> {
             players.add(new Player(playerName));
         });
@@ -34,10 +24,9 @@ public class GameService {
         human.addCard(cards.getAdditionalCard());
         human.addCard(cards.getAdditionalCard());
         return human;
-        //players.forEach(player -> player.addCard(cards.getAdditionalCard()));
     }
 
-    public static Human setAdditionalCard(Human human) {
+    public static Human hit(Human human) {
         human.addCard(cards.getAdditionalCard());
         return human;
     }
@@ -54,24 +43,10 @@ public class GameService {
         return sum;
     }
 
-    public boolean hasAce(List<Card> cards) {
+    private boolean hasAce(List<Card> cards) {
         return cards.stream()
                 .anyMatch(Card::isAce);
     }
-
-    public boolean isBurst(int sum) {
-        return sum > BLACKJACK;
-
-    }
-
-//    public GamePlayerResult getResult(Dealer dealer, List<Player> players) {
-//
-//        int dealerScore = getCardScore(dealer);
-//        players.forEach(player -> {
-//            new GamePlayerResult(player, dealerScore);
-//        });
-//        return
-//    }
 
     public GameTotalReuslt getCameTotalResult(Dealer dealer, List<Player> players) {
         List<GamePlayerResult> playerResults = new ArrayList<>();
@@ -81,5 +56,9 @@ public class GameService {
         });
 
         return new GameTotalReuslt(playerResults);
+    }
+
+    public boolean getMoreCard(Dealer dealer) {
+        return getCardScore(dealer) <= DEALER_MIN_SCORE;
     }
 }

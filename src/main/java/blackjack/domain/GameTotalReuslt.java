@@ -13,10 +13,10 @@ public class GameTotalReuslt {
     public GameTotalReuslt(List<GamePlayerResult> playerResults) {
         this.playerResults = playerResults;
         dealerWinCount = (int) playerResults.stream()
-                        .filter(gamePlayerResult -> gamePlayerResult.getResult().equals("승"))
+                        .filter(gamePlayerResult -> gamePlayerResult.getResult().equals("패"))
                         .count();
         dealerLoseCount = (int) playerResults.stream()
-                        .filter(gamePlayerResult -> gamePlayerResult.getResult().equals("패"))
+                        .filter(gamePlayerResult -> gamePlayerResult.getResult().equals("승"))
                         .count();
         dealerTieCount = (int) playerResults.stream()
                 .filter(gamePlayerResult -> gamePlayerResult.getResult().equals("무"))

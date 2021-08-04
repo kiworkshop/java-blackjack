@@ -2,6 +2,7 @@ package blackjack.domain;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
+import blackjack.domain.card.GivenCards;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Person;
 import blackjack.domain.participant.Player;
@@ -40,7 +41,9 @@ public class GameSystem {
     }
 
     public List<List<Card>> getPlayerCards() {
-        return players.getPlayerCards();
+        return Collections.unmodifiableList(players.getPlayerCards().stream()
+                .map(GivenCards::list)
+                .collect(Collectors.toList()));
     }
 
     public boolean allPlayersFinished() {
@@ -78,7 +81,7 @@ public class GameSystem {
     }
 
     public List<Card> getCards(final String name) {
-        return players.getCards(name);
+        return players.getCards(name).list();
     }
 
     public int getDealerScore() {

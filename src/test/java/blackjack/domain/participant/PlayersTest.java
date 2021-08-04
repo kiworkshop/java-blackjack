@@ -47,11 +47,11 @@ class PlayersTest {
         Players players = new Players(Arrays.asList(player1, player2));
 
         //when
-        List<List<Card>> allPlayerCards = players.getPlayerCards();
+        List<GivenCards> allPlayerCards = players.getPlayerCards();
 
         //then
         assertThat(allPlayerCards).hasSize(2);
-        allPlayerCards.forEach(playerCards -> assertThat(playerCards).hasSize(2));
+        allPlayerCards.forEach(playerCards -> assertThat(playerCards.list()).hasSize(2));
     }
 
     @ParameterizedTest
@@ -105,13 +105,13 @@ class PlayersTest {
         Card card1 = new Card(Score.A, Suit.HEART);
         Card card2 = new Card(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
-        Players players = new Players(Arrays.asList(player));
+        Players players = new Players(Collections.singletonList(player));
 
         //when
-        List<Card> cards = players.getCards(name);
+        GivenCards cards = players.getCards(name);
 
         //then
-        assertThat(cards).hasSize(2)
+        assertThat(cards.list()).hasSize(2)
                 .containsOnly(card1, card2);
     }
 

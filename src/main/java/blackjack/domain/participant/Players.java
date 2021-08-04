@@ -1,6 +1,5 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.card.Card;
 import blackjack.domain.card.GivenCards;
 
 import java.util.ArrayList;
@@ -25,11 +24,10 @@ public class Players {
         return Collections.unmodifiableList(new ArrayList<>(players.keySet()));
     }
 
-    public List<List<Card>> getPlayerCards() {
+    public List<GivenCards> getPlayerCards() {
         return Collections.unmodifiableList(players.values()
                 .stream()
                 .map(Person::getCards)
-                .map(GivenCards::list)
                 .collect(Collectors.toList()));
     }
 
@@ -52,9 +50,9 @@ public class Players {
         return players.get(name);
     }
 
-    public List<Card> getCards(final String name) {
+    public GivenCards getCards(final String name) {
         Person player = findPlayerBy(name);
-        return player.getCards().list();
+        return player.getCards();
     }
 
     public List<Integer> getPlayerScores() {

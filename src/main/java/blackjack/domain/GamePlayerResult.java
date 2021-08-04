@@ -3,6 +3,7 @@ package blackjack.domain;
 import blackjack.service.GameService;
 
 public class GamePlayerResult {
+    public static final int BLACKJACK = 21;
     private String name;
     private int score;
     private String result;
@@ -11,7 +12,7 @@ public class GamePlayerResult {
         this.name = player.getName();
         GameService gameService = new GameService();
         this.score = gameService.getCardScore(player);
-        if (dealerScore < score) {
+        if ((dealerScore < score || dealerScore > BLACKJACK) && score <= BLACKJACK) {
             this.result = "승";
         } else if (dealerScore == score) {
             this.result = "무";

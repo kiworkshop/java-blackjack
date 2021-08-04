@@ -27,7 +27,7 @@ public class GameTotalResultTest {
         gamePlayerResults.add(new GamePlayerResult(player2, 17));
 
         //when
-       ;
+        ;
         GameTotalReuslt gameTotalReuslt = new GameTotalReuslt(gamePlayerResults);
         //then
         assertThat(gameTotalReuslt.getDealerWinCount()).isEqualTo(1);

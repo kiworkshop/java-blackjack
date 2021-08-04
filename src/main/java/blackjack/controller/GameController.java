@@ -1,6 +1,7 @@
 package blackjack.controller;
 
-import blackjack.domain.*;
+import blackjack.domain.Dealer;
+import blackjack.domain.Player;
 import blackjack.service.GameService;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
@@ -12,11 +13,6 @@ public class GameController {
     public static GameService gameService = new GameService();
     public static Dealer dealer = new Dealer();
     public static List<Player> players = new ArrayList<>();
-
-    public static void main(String[] args) {
-        GameController gameController = new GameController();
-        gameController.play();
-    }
 
     public void play() {
         setUp();

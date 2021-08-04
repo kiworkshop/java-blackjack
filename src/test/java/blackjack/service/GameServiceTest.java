@@ -95,20 +95,21 @@ class GameServiceTest {
         player.addCard(new Card(Denomination.TWO, Suit.CLUB));
         player.addCard(new Card(Denomination.THREE, Suit.CLUB));
         players.add(player);
-        
+
         Dealer dealer = new Dealer();
-      
+
         dealer.addCard(new Card(Denomination.TEN, Suit.CLUB));
         dealer.addCard(new Card(Denomination.EIGHT, Suit.CLUB));
         //when
         GameTotalReuslt gameTotalReuslt = gameService.getCameTotalResult(dealer, players);
-        
+
         //then
         assertThat(gameTotalReuslt.getDealerLoseCount()).isEqualTo(0);
         assertThat(gameTotalReuslt.getDealerWinCount()).isEqualTo(1);
         assertThat(gameTotalReuslt.getPlayerResults().get(0).getResult()).isEqualTo("패");
 
     }
+
     @Test
     @DisplayName("딜러 카드 점수가 16이하이면 참을 반환한다")
     void getMoreCard() {

@@ -1,6 +1,6 @@
 package blackjack.domain;
 
-public class Player extends Human{
+public class Player extends Human {
     public Player(String name) {
         super(name);
     }

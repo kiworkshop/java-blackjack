@@ -11,15 +11,17 @@ public class Card {
     public Card(Denomination denomination, Suit suit) {
         this.denomination = denomination;
         this.suit = suit;
-        this.name = denomination.getDenomination()+suit.getType();
+        this.name = denomination.getDenomination() + suit.getType();
     }
 
     public String getName() {
         return name;
     }
-    public int getScore(){
+
+    public int getScore() {
         return denomination.getScore();
     }
+
     public boolean isAce() {
         return denomination.equals(Denomination.A);
     }

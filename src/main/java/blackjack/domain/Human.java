@@ -12,6 +12,7 @@ public class Human {
     public Human() {
         this("딜러");
     }
+
     public Human(String name) {
         this.name = name;
     }

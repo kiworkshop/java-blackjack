@@ -21,6 +21,7 @@ public class CardDeckTest {
         //then
         assertThat(size).isEqualTo(52);
     }
+
     @Test
     @DisplayName("섞인 카드덱에서 1개의 카드를 반환한다")
     void getAdditionalCard() {

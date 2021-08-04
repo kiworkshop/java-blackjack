@@ -5,51 +5,67 @@ import blackjack.service.GameService;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GameController {
+    public static GameService gameService = new GameService();
+    public static Dealer dealer = new Dealer();
+    public static List<Player> players = new ArrayList<>();
+
     public static void main(String[] args) {
-        GameService gameService = new GameService();
-        CardDeck cards = new CardDeck();
-        Dealer dealer = new Dealer();
+        GameController gameController = new GameController();
+        gameController.play();
+    }
 
+    public void play() {
+        setUp();
+        setFirstTwoCards();
+        hitOrStay();
+        dealerCardSetting();
+        printPlayersScore();
+        printGameResult();
+    }
+
+    private void setUp() {
         List<String> playersNames = InputView.getPlayerNames();
-        List<Player> players = gameService.registPlayer(playersNames);
+        players = gameService.registPlayer(playersNames);
 
-        //첫장 카드 받기
+    }
+
+    private void setFirstTwoCards() {
         dealer = (Dealer) gameService.setFirstTwoCards(dealer);
         players.stream().forEach(GameService::setFirstTwoCards);
-        OutputView.printFirstTwoCards(dealer,players);
+        OutputView.printFirstTwoCards(dealer, players);
+    }
 
-        //더 받을지 묻기
+    private void hitOrStay() {
         players.forEach(player -> {
             String answer = InputView.getAdditionalCard(player);
-            while (answer.equals("Y")){
-                gameService.setAdditionalCard(player);
+            while (answer.equals("Y")) {
+                gameService.hit(player);
                 OutputView.printPlayersCards(player);
                 answer = InputView.getAdditionalCard(player);
             }
         });
+    }
 
-        //딜러 합이 16이하이면 한장 더받기
-        int sum = gameService.getCardScore(dealer);
-        if(sum<=16){
-            gameService.setAdditionalCard(dealer);
+    private void dealerCardSetting() {
+        if (gameService.getMoreCard(dealer)) {
+            gameService.hit(dealer);
             OutputView.printDealerAdditionCard();
         }
+    }
 
-        //결과
-        GameTotalReuslt gameTotalReuslt = gameService.getCameTotalResult(dealer, players);
-
+    private void printPlayersScore() {
         int dealerScore = gameService.getCardScore(dealer);
-        OutputView.printCardResult(dealer,dealerScore);
+        OutputView.printCardResult(dealer, dealerScore);
         players.forEach(player -> {
-            OutputView.printCardResult(player,gameService.getCardScore(player));
+            OutputView.printCardResult(player, gameService.getCardScore(player));
         });
+    }
 
-        //승패 출력
-        //gameService.getCameTotalResult(dealer, players);
-        OutputView.printTotalResult(gameTotalReuslt);
+    private void printGameResult() {
+        OutputView.printTotalResult(gameService.getCameTotalResult(dealer, players));
     }
 }

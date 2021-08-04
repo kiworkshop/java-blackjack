@@ -2,6 +2,7 @@ package blackjack.domain.game;
 
 import blackjack.domain.card.AceCard;
 import blackjack.domain.card.Card;
+import blackjack.domain.card.Major;
 import blackjack.domain.card.Suit;
 
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ public class Deck {
     public static final int TOTAL_CARD_COUNT = 52;
     private static final int MIN_NUMBER_RANK = 2;
     private static final int MAX_NUMBER_RANK = 10;
-    private static final List<String> MAJOR_SIGNATURES = Arrays.asList("K", "Q", "J");
 
     private final List<Card> cards;
 
@@ -35,8 +35,8 @@ public class Deck {
     }
 
     private List<Card> generateMajorCards(Suit suit) {
-        return MAJOR_SIGNATURES.stream()
-                .map(signature -> new Card(suit, signature))
+        return Arrays.stream(Major.values())
+                .map(signature -> new Card(suit, signature.name()))
                 .collect(Collectors.toList());
     }
 

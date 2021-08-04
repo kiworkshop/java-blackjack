@@ -1,8 +1,6 @@
 package blackjack.controller;
 
-import blackjack.domain.CardDeck;
-import blackjack.domain.Dealer;
-import blackjack.domain.Player;
+import blackjack.domain.*;
 import blackjack.service.GameService;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
@@ -42,10 +40,16 @@ public class GameController {
         }
 
         //결과
+        GameTotalReuslt gameTotalReuslt = gameService.getCameTotalResult(dealer, players);
+
         int dealerScore = gameService.getCardScore(dealer);
         OutputView.printCardResult(dealer,dealerScore);
         players.forEach(player -> {
             OutputView.printCardResult(player,gameService.getCardScore(player));
         });
+
+        //승패 출력
+        //gameService.getCameTotalResult(dealer, players);
+        OutputView.printTotalResult(gameTotalReuslt);
     }
 }

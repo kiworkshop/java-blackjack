@@ -50,7 +50,7 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("플레이어와 딜러는 는 1 카드를 받는다")
+    @DisplayName("플레이어와 딜러는 카드1장을 받는다")
     void Hit() {
         //given
         GameService gameService = new GameService();

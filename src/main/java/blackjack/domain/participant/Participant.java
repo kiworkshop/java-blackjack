@@ -25,7 +25,7 @@ public abstract class Participant {
     }
 
     public boolean isBlackjack() {
-        return hands.countAceCards() == 1 && hands.countMajorCards() == 1;
+        return hands.hasOneAceCard() && hands.hasOneMajorCard();
     }
 
     public int countHands() {

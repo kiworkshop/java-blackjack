@@ -1,9 +1,8 @@
 package blackjack.view;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.prize.DealerPrize;
-import blackjack.domain.prize.PlayersPrize;
-import blackjack.domain.prize.PrizeResults;
+import blackjack.domain.prize.PlayerPrize;
+import blackjack.domain.prize.ParticipantsPrize;
 import blackjack.dto.DealerDto;
 import blackjack.dto.FinalDealerDto;
 import blackjack.dto.ParticipantsDto;
@@ -16,6 +15,7 @@ public class OutputView {
     private static final int MAX_DEALER_CARDS_COUNT = 3;
     private static final String PARTICIPANTS_HANDS = "%s 카드: %s";
     private static final String PARTICIPANTS_FINAL_HANDS = "%n%s - 결과: %d";
+    private static final String PARTICIPANTS_PROFIT = "%s: %d%n";
 
     private OutputView() {
     }
@@ -82,20 +82,21 @@ public class OutputView {
                         player.getRankSum()));
     }
 
-    public static void printPrizeResults(PrizeResults prizeResults) {
+    public static void printPrizeResults(ParticipantsPrize participantsPrize) {
         System.out.println();
-        System.out.println("## 최종 승패");
-        printDealerPrize(prizeResults.getDealerPrize());
-        printPlayersPrize(prizeResults.getPlayersPrize());
+        System.out.println("## 최종 수익");
+        System.out.printf(PARTICIPANTS_PROFIT, "딜러", participantsPrize.getDealerProfit());
+        printPlayersPrize(participantsPrize.getPlayersPrize());
     }
 
-    private static void printDealerPrize(DealerPrize dealerPrize) {
-        System.out.printf("딜러: %d승 %d패 %d무%n", dealerPrize.getWinCount(), dealerPrize.getLoseCount(), dealerPrize.getTieCount());
+    private static void printPlayersPrize(List<PlayerPrize> playersPrize) {
+        playersPrize.forEach(playerPrize ->
+                System.out.printf(PARTICIPANTS_PROFIT, playerPrize.getPlayerName(), playerPrize.getProfit()));
     }
 
-    private static void printPlayersPrize(PlayersPrize playersPrize) {
-        playersPrize.getPlayerPrizes().forEach(playerPrize ->
-                System.out.printf("%s: %s%n", playerPrize.getPlayerName(), playerPrize.getPrizeTitle()));
+    public static void printDealerBlackjack() {
+        System.out.println();
+        System.out.println("딜러가 블랙잭이므로 딜러가 승리입니다. 게임을 종료합니다.");
     }
 
     public static void printError(String message) {

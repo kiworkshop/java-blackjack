@@ -57,7 +57,7 @@ public class InputView {
     }
 
     private static int getBetAmountInput(String playerName) {
-        System.out.printf("%s의 배팅 금액은?%n", playerName);
+        System.out.printf("%n%s의 배팅 금액은?%n", playerName);
         String input = scanner.nextLine();
         validateInputNullOrEmpty(input);
 

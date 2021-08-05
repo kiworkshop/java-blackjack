@@ -3,7 +3,7 @@ package blackjack.controller;
 import blackjack.domain.game.DeckGenerator;
 import blackjack.domain.game.RandomDeckGenerator;
 import blackjack.domain.participant.Player;
-import blackjack.domain.prize.PrizeResults;
+import blackjack.domain.prize.ParticipantsPrize;
 import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 import blackjack.dto.PlayerInput;
@@ -44,6 +44,11 @@ public class BlackjackController {
     }
 
     private void deal() {
+        if (blackjackService.isDealerBlackjack()) {
+            OutputView.printDealerBlackjack();
+            return;
+        }
+
         blackjackService.getPlayers().forEach(this::hitOrStand);
         blackjackService.dealDealer();
     }
@@ -63,7 +68,7 @@ public class BlackjackController {
         ParticipantsDto finalParticipants = blackjackService.getFinalParticipants();
         OutputView.printFinalHands(finalParticipants);
 
-        PrizeResults prizeResults = blackjackService.calculatePrizeResults();
-        OutputView.printPrizeResults(prizeResults);
+        ParticipantsPrize participantsPrize = blackjackService.getPrizeResults();
+        OutputView.printPrizeResults(participantsPrize);
     }
 }

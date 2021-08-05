@@ -1,20 +1,25 @@
 package blackjack.domain.prize;
 
+import blackjack.domain.participant.Dealer;
+import blackjack.domain.participant.Player;
+
 public class PlayerPrize {
     private final String playerName;
     private final Prize prize;
+    private final Profit profit;
 
-    public PlayerPrize(String playerName, Prize prize) {
-        this.playerName = playerName;
-        this.prize = prize;
+    public PlayerPrize(Player player, Dealer dealer) {
+        this.playerName = player.getName();
+        this.prize = Prize.of(player, dealer);
+        this.profit = new Profit(player.getBetAmount(), this.prize);
     }
 
-    public String getPrizeTitle() {
-        return prize.getTitle();
+    public int getReceiveAmount() {
+        return profit.getReceiveAmount();
     }
 
-    public Prize getPrize() {
-        return prize;
+    public int getProfit() {
+        return profit.getProfit();
     }
 
     public String getPlayerName() {

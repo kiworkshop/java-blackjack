@@ -90,6 +90,33 @@ class TableTest {
         assertThat(dealer.getCards().get(3)).isEqualTo(CARD_5);
     }
 
+    @Test
+    @DisplayName("딜러가 블랙잭인지 확인한다.")
+    void is_dealer_blackjack() {
+        // given
+        Table table = generateTestTable();
+
+        // when
+        boolean isBlackjack = table.isDealerBlackjack();
+
+        // then
+        assertThat(isBlackjack).isFalse();
+    }
+
+    @Test
+    @DisplayName("전체 플레이어의 배팅 금액 합을 구한다.")
+    void total_bet_amount() {
+        // given
+        Table table = generateTestTable();
+        int expectedBetAmount = 2000;
+
+        // when
+        int totalBetAmount = table.calculateTotalBetAmount();
+
+        // then
+        assertThat(totalBetAmount).isEqualTo(expectedBetAmount);
+    }
+
     private Table generateTestTable() {
         List<PlayerInput> playerInputs = generatePlayerInputs();
         DeckGenerator deckGenerator = new TestDeckGenerator();

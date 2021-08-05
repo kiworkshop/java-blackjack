@@ -4,7 +4,7 @@ import blackjack.domain.game.DeckGenerator;
 import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
-import blackjack.domain.prize.PrizeResults;
+import blackjack.domain.prize.ParticipantsPrize;
 import blackjack.dto.*;
 
 import java.util.ArrayList;
@@ -23,26 +23,19 @@ public class BlackjackService {
         return new ParticipantsDto(dealerDto, playersDto);
     }
 
-    public ParticipantsDto getFinalParticipants() {
-        DealerDto finalDealerDto = generateFinalDealerDto();
-        List<PlayerDto> playersDto = generatePlayerDto();
-        return new ParticipantsDto(finalDealerDto, playersDto);
-    }
-
     private DealerDto generateDealerDto() {
         Dealer dealer = table.getDealer();
         return new DealerDto(dealer.getFaceUpCard());
-    }
-
-    private FinalDealerDto generateFinalDealerDto() {
-        Dealer dealer = table.getDealer();
-        return new FinalDealerDto(dealer);
     }
 
     private List<PlayerDto> generatePlayerDto() {
         List<PlayerDto> playersDto = new ArrayList<>();
         table.getPlayers().forEach(player -> playersDto.add(new PlayerDto(player)));
         return playersDto;
+    }
+
+    public boolean isDealerBlackjack() {
+        return table.isDealerBlackjack();
     }
 
     public PlayerDto hit(Player player) {
@@ -54,8 +47,19 @@ public class BlackjackService {
         table.finalDeal();
     }
 
-    public PrizeResults calculatePrizeResults() {
-        return new PrizeResults(table);
+    public ParticipantsDto getFinalParticipants() {
+        DealerDto finalDealerDto = generateFinalDealerDto();
+        List<PlayerDto> playersDto = generatePlayerDto();
+        return new ParticipantsDto(finalDealerDto, playersDto);
+    }
+
+    private FinalDealerDto generateFinalDealerDto() {
+        Dealer dealer = table.getDealer();
+        return new FinalDealerDto(dealer);
+    }
+
+    public ParticipantsPrize getPrizeResults() {
+        return new ParticipantsPrize(table);
     }
 
     public List<Player> getPlayers() {

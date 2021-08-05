@@ -19,6 +19,7 @@ public class TestCard {
     public static final Card CARD_7 = new Card(Suit.SPADE, 7);
     public static final Card CARD_8 = new Card(Suit.SPADE, 8);
     public static final Card CARD_9 = new Card(Suit.SPADE, 9);
+    public static final Card CARD_10 = new Card(Suit.SPADE, 10);
     public static final Card CARD_K = new Card(Suit.SPADE, "K");
     public static final Card CARD_J = new Card(Suit.SPADE, "J");
     public static final Card CARD_Q = new Card(Suit.SPADE, "Q");

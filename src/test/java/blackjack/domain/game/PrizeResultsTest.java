@@ -43,13 +43,14 @@ class PrizeResultsTest {
     }
 
     private static List<Player> generatePlayers() {
+        int betAmount = 1000;
         return Arrays.asList(
-                new Player("1", Arrays.asList(CARD_2, CARD_8, CARD_6)),   // 16
-                new Player("2", Arrays.asList(CARD_K, CARD_7)),           // 17
-                new Player("3", Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
-                new Player("4", Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
-                new Player("블랙잭", Arrays.asList(CARD_Q, ACE_1)),        // blackjack
-                new Player("5", Arrays.asList(CARD_Q, CARD_8, CARD_9))    // bust
+                new Player("1", betAmount, Arrays.asList(CARD_2, CARD_8, CARD_6)),   // 16
+                new Player("2", betAmount, Arrays.asList(CARD_K, CARD_7)),           // 17
+                new Player("3", betAmount, Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
+                new Player("4", betAmount, Arrays.asList(CARD_3, CARD_Q, CARD_6)),   // 19
+                new Player("블랙잭", betAmount, Arrays.asList(CARD_Q, ACE_1)),        // blackjack
+                new Player("5", betAmount, Arrays.asList(CARD_Q, CARD_8, CARD_9))    // bust
         );
     }
 

@@ -6,11 +6,14 @@ import blackjack.domain.participant.Player;
 import blackjack.domain.prize.PrizeResults;
 import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
+import blackjack.dto.PlayerInput;
 import blackjack.service.BlackjackService;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.List;
+
+import static blackjack.exception.ExceptionMessage.INVALID_BET_AMOUNT_MESSAGE;
 
 public class BlackjackController {
 
@@ -22,15 +25,17 @@ public class BlackjackController {
             initialDeal();
             deal();
             gameResult();
-        } catch (IllegalArgumentException e) {
+        } catch (NumberFormatException e) {
+            OutputView.printError(INVALID_BET_AMOUNT_MESSAGE);
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             OutputView.printError(e.getMessage());
         }
     }
 
     private void setUp() {
-        List<String> playerNames = InputView.getPlayers();
+        List<PlayerInput> playerInputs = InputView.getPlayersInput();
         DeckGenerator deckGenerator = new RandomDeckGenerator();
-        blackjackService = new BlackjackService(playerNames, deckGenerator);
+        blackjackService = new BlackjackService(playerInputs, deckGenerator);
     }
 
     private void initialDeal() {

@@ -4,6 +4,7 @@ import blackjack.domain.card.Card;
 import blackjack.domain.fixture.TestDeckGenerator;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
+import blackjack.dto.PlayerInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static blackjack.domain.fixture.TestCard.*;
-import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
 import static blackjack.domain.fixture.TestDeckGenerator.TEST_DECK_INITIAL_SIZE;
+import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TableTest {
@@ -90,15 +91,15 @@ class TableTest {
     }
 
     private Table generateTestTable() {
-        List<String> playerNames = generatePlayerNames();
+        List<PlayerInput> playerInputs = generatePlayerInputs();
         DeckGenerator deckGenerator = new TestDeckGenerator();
-        return new Table(playerNames, deckGenerator);
+        return new Table(playerInputs, deckGenerator);
     }
 
-    private List<String> generatePlayerNames() {
-        List<String> playerNames = new ArrayList<>();
-        playerNames.add("pobi");
-        playerNames.add("jason");
-        return playerNames;
+    private List<PlayerInput> generatePlayerInputs() {
+        List<PlayerInput> playerInputs = new ArrayList<>();
+        playerInputs.add(new PlayerInput("pobi", 1000));
+        playerInputs.add(new PlayerInput("jason", 1000));
+        return playerInputs;
     }
 }

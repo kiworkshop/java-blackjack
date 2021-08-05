@@ -4,6 +4,7 @@ import blackjack.domain.card.Card;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Participant;
 import blackjack.domain.participant.Player;
+import blackjack.dto.PlayerInput;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,15 +17,15 @@ public class Table {
     private final Dealer dealer;
     private final List<Player> players;
 
-    public Table(List<String> playerNames, DeckGenerator deckGenerator) {
+    public Table(List<PlayerInput> playerInputs, DeckGenerator deckGenerator) {
         this.deck = new Deck(deckGenerator);
         this.dealer = new Dealer(deck.drawCards(INITIAL_DEAL_COUNT));
-        this.players = Collections.unmodifiableList(generatePlayers(playerNames));
+        this.players = Collections.unmodifiableList(generatePlayers(playerInputs));
     }
 
-    private List<Player> generatePlayers(List<String> playerNames) {
-        return playerNames.stream()
-                .map(playerName -> new Player(playerName, deck.drawCards(INITIAL_DEAL_COUNT)))
+    private List<Player> generatePlayers(List<PlayerInput> playerInputs) {
+        return playerInputs.stream()
+                .map(playerInput -> new Player(playerInput, deck.drawCards(INITIAL_DEAL_COUNT)))
                 .collect(Collectors.toList());
     }
 

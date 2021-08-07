@@ -19,10 +19,10 @@ public class CardTest {
         Suit diamond = Suit.DIAMOND;
 
         //when
-        Card card = new Card(ace, diamond);
+        Card card = Card.from(ace, diamond);
 
         //then
-        assertThat(card).isEqualTo(new Card(ace, diamond));
+        assertThat(card).isEqualTo(Card.from(ace, diamond));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class CardTest {
         //given
         Score jack = Score.J;
         Suit diamond = Suit.DIAMOND;
-        Card card = new Card(jack, diamond);
+        Card card = Card.from(jack, diamond);
 
         //when
         int score = card.getScore();
@@ -46,7 +46,7 @@ public class CardTest {
         //given
         Score jack = Score.J;
         Suit diamond = Suit.DIAMOND;
-        Card card = new Card(jack, diamond);
+        Card card = Card.from(jack, diamond);
 
         //when
         String denomination = card.getDenomination();
@@ -62,7 +62,7 @@ public class CardTest {
         //given
         Score score = Score.valueOf(scoreName);
         Suit diamond = Suit.DIAMOND;
-        Card card = new Card(score, diamond);
+        Card card = Card.from(score, diamond);
 
         //when
         boolean actual = card.isAce();

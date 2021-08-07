@@ -20,7 +20,7 @@ class FinishedTest {
     void hit() {
         //given
         State finishedState = createFinishedState();
-        Card card = new Card(Score.A, Suit.CLUB);
+        Card card = Card.from(Score.A, Suit.CLUB);
 
         //when //then
         assertThatThrownBy(() -> finishedState.hit(card))
@@ -54,7 +54,7 @@ class FinishedTest {
     }
 
     private State createFinishedState() {
-        GivenCards givenCards = new GivenCards(Collections.singletonList(new Card(Score.A, Suit.CLUB)));
+        GivenCards givenCards = new GivenCards(Collections.singletonList(Card.from(Score.A, Suit.CLUB)));
 
         return new Finished(givenCards) {
             @Override

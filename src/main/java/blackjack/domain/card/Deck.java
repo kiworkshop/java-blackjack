@@ -21,7 +21,7 @@ public class Deck {
 
         for (final Score score : Score.values()) {
             Arrays.stream(Suit.values())
-                    .forEach(suit -> cards.add(new Card(score, suit)));
+                    .forEach(suit -> cards.add(Card.from(score, suit)));
         }
 
         Collections.shuffle(cards);

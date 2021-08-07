@@ -20,8 +20,8 @@ class GamerTest {
     @DisplayName("추가 카드 발급을 거부할 경우, Stay 상태가 된다.")
     void stay() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.NINE, Suit.DIAMOND);
+        Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card2 = Card.from(Score.NINE, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person gamer = createGamer("pobi", givenCards, false);
 
@@ -37,8 +37,8 @@ class GamerTest {
     @DisplayName("발급 받은 카드 목록을 반환한다.")
     void getCards() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.NINE, Suit.DIAMOND);
+        Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card2 = Card.from(Score.NINE, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person gamer = createGamer("pobi", givenCards, false);
 
@@ -53,8 +53,8 @@ class GamerTest {
     @DisplayName("카드의 합을 반환한다.")
     void sum() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.NINE, Suit.DIAMOND);
+        Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card2 = Card.from(Score.NINE, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person gamer = createGamer("pobi", givenCards, false);
 
@@ -84,8 +84,8 @@ class GamerTest {
     @DisplayName("종료 여부를 반환한다.")
     void isFinished() {
         //given
-        Card card1 = new Card(Score.A, Suit.DIAMOND);
-        Card card2 = new Card(Score.TEN, Suit.DIAMOND);
+        Card card1 = Card.from(Score.A, Suit.DIAMOND);
+        Card card2 = Card.from(Score.TEN, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person gamer = createGamer("pobi", givenCards, true);
 

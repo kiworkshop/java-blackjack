@@ -18,8 +18,8 @@ public class GivenCardsTest {
     @DisplayName("가지고 있는 카드의 합을 반환한다.")
     void sum() {
         //given
-        Card card1 = new Card(Score.EIGHT, Suit.CLUB);
-        Card card2 = new Card(Score.TWO, Suit.CLUB);
+        Card card1 = Card.from(Score.EIGHT, Suit.CLUB);
+        Card card2 = Card.from(Score.TWO, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
@@ -33,9 +33,9 @@ public class GivenCardsTest {
     @DisplayName("Ace가 1로 계산된 카드의 합을 반환한다.")
     void sum_with_ace_value_1() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.CLUB);
-        Card card3 = new Card(Score.A, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.CLUB);
+        Card card3 = Card.from(Score.A, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2, card3));
 
         //when
@@ -49,8 +49,8 @@ public class GivenCardsTest {
     @DisplayName("Ace가 11로 계산된 카드의 합을 반환한다.")
     void sum_with_ace_value_11() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.A, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
@@ -64,8 +64,8 @@ public class GivenCardsTest {
     @DisplayName("카드 2장이 21일 경우, 참을 반환한다.")
     void isBlackjack() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.A, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
@@ -79,9 +79,9 @@ public class GivenCardsTest {
     @DisplayName("카드의 합이 21을 초과할 경우, 참을 반환한다.")
     void isBurst() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
-        Card card3 = new Card(Score.TWO, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.HEART);
+        Card card3 = Card.from(Score.TWO, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2, card3));
 
         //when
@@ -95,8 +95,8 @@ public class GivenCardsTest {
     @DisplayName("가지고 있는 카드 목록을 반환한다.")
     void list() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.A, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
@@ -111,10 +111,10 @@ public class GivenCardsTest {
     @DisplayName("인자로 받은 카드를 추가한다.")
     void add() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
-        Card newCard = new Card(Score.TWO, Suit.CLUB);
+        Card newCard = Card.from(Score.TWO, Suit.CLUB);
 
         //when
         givenCards.add(newCard);
@@ -128,10 +128,10 @@ public class GivenCardsTest {
     @DisplayName("인자로 받은 카드보다 자신의 카드 합이 더 클 경우, 참을 반환한다.")
     void isGreaterThan() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
-        Card card3 = new Card(Score.SEVEN, Suit.CLUB);
+        Card card3 = Card.from(Score.SEVEN, Suit.CLUB);
         GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
 
         //when
@@ -145,10 +145,10 @@ public class GivenCardsTest {
     @DisplayName("인자로 받은 카드보다 자신의 카드 합보다 작을 경우, 참을 반환한다.")
     void isLessThan() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
-        Card card3 = new Card(Score.TEN, Suit.HEART);
+        Card card3 = Card.from(Score.TEN, Suit.HEART);
         GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
 
         //when
@@ -163,8 +163,8 @@ public class GivenCardsTest {
     @DisplayName("인자로 받은 값보다 자신의 카드 합이 작거나 같을 경우, 참을 반환한다.")
     void isLessThanEqualTo(int sum, boolean expected) {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.NINE, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
@@ -179,9 +179,9 @@ public class GivenCardsTest {
     @DisplayName("카드의 합이 21일 경우, 참을 반환한다.")
     void isMaximumThreshhold(String score1, String score2, String score3, boolean expected) {
         //given
-        Card card1 = new Card(Score.valueOf(score1), Suit.CLUB);
-        Card card2 = new Card(Score.valueOf(score2), Suit.CLUB);
-        Card card3 = new Card(Score.valueOf(score3), Suit.CLUB);
+        Card card1 = Card.from(Score.valueOf(score1), Suit.CLUB);
+        Card card2 = Card.from(Score.valueOf(score2), Suit.CLUB);
+        Card card3 = Card.from(Score.valueOf(score3), Suit.CLUB);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2, card3));
 
         //when

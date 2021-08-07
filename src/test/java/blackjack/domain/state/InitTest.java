@@ -17,8 +17,8 @@ class InitTest {
     @DisplayName("모든 카드 목록을 반환한다.")
     void getCards() {
         ///given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         State init = createInitState(givenCards);
 
@@ -33,8 +33,8 @@ class InitTest {
     @DisplayName("게임 진행 중 카드의 합을 요청할 경우, 예외가 발생한다.")
     void sum() {
         ///given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         State init = createInitState(givenCards);
 

@@ -20,11 +20,11 @@ class HitTest {
     @DisplayName("지급받은 카드 포함 합이 21을 초과할 경우, Burst 상태를 반환한다.")
     void hit_return_burst_state() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         State hit = new Hit(givenCards);
-        Card newCard = new Card(Score.TWO, Suit.CLUB);
+        Card newCard = Card.from(Score.TWO, Suit.CLUB);
 
         //when
         State state = hit.hit(newCard);
@@ -37,11 +37,11 @@ class HitTest {
     @DisplayName("지급받은 카드 포함 합이 21 미만일 경우, Hit 상태를 반환한다.")
     void hit_return_itself() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.NINE, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         State hit = new Hit(givenCards);
-        Card newCard = new Card(Score.A, Suit.CLUB);
+        Card newCard = Card.from(Score.A, Suit.CLUB);
 
         //when
         State state = hit.hit(newCard);
@@ -54,11 +54,11 @@ class HitTest {
     @DisplayName("지급받은 카드 포함 합이 21일 경우, Stay 상태를 반환한다.")
     void hit_return_stay_state() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.NINE, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         State hit = new Hit(givenCards);
-        Card newCard = new Card(Score.TWO, Suit.CLUB);
+        Card newCard = Card.from(Score.TWO, Suit.CLUB);
 
         //when
         State state = hit.hit(newCard);
@@ -71,8 +71,8 @@ class HitTest {
     @DisplayName("Stay 상태를 반환한다.")
     void stay() {
         ///given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         State hit = new Hit(givenCards);
 

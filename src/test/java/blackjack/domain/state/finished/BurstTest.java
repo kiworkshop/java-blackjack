@@ -19,8 +19,8 @@ class BurstTest {
     @DisplayName("패배를 의미하는 -1을 반환한다.")
     void result() {
         //given
-        Card card1 = new Card(Score.EIGHT, Suit.CLUB);
-        Card card2 = new Card(Score.EIGHT, Suit.HEART);
+        Card card1 = Card.from(Score.EIGHT, Suit.CLUB);
+        Card card2 = Card.from(Score.EIGHT, Suit.HEART);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
         State burst = new Burst(myCards);
         GivenCards otherCards = new GivenCards(Collections.emptyList());

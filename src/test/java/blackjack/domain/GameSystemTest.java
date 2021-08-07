@@ -77,10 +77,10 @@ public class GameSystemTest {
     @DisplayName("모든 플레이어가 종료하였는지 여부를 반환한다.")
     void allPlayersFinished(String score1, String score2, boolean expected) {
         //given
-        Card card1 = new Card(Score.A, Suit.DIAMOND);
-        Card card2 = new Card(Score.J, Suit.DIAMOND);
-        Card card3 = new Card(Score.valueOf(score1), Suit.CLUB);
-        Card card4 = new Card(Score.valueOf(score2), Suit.CLUB);
+        Card card1 = Card.from(Score.A, Suit.DIAMOND);
+        Card card2 = Card.from(Score.J, Suit.DIAMOND);
+        Card card3 = Card.from(Score.valueOf(score1), Suit.CLUB);
+        Card card4 = Card.from(Score.valueOf(score2), Suit.CLUB);
         Person player1 = new Player("pobi", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("tobi", new GivenCards(Arrays.asList(card3, card4)));
         Players players = new Players(Arrays.asList(player1, player2));
@@ -98,12 +98,12 @@ public class GameSystemTest {
     @DisplayName("참여 종료상태가 아닌 플레이어 중 먼저 입력 받았던 플레이어의 이름을 반환한다.")
     void getCurrentPlayer(String score1, String score2, String score3, String score4, String expectedPlayer) {
         //given
-        Card card1 = new Card(Score.A, Suit.DIAMOND);
-        Card card2 = new Card(Score.J, Suit.DIAMOND);
-        Card card3 = new Card(Score.valueOf(score1), Suit.CLUB);
-        Card card4 = new Card(Score.valueOf(score2), Suit.CLUB);
-        Card card5 = new Card(Score.valueOf(score3), Suit.HEART);
-        Card card6 = new Card(Score.valueOf(score4), Suit.HEART);
+        Card card1 = Card.from(Score.A, Suit.DIAMOND);
+        Card card2 = Card.from(Score.J, Suit.DIAMOND);
+        Card card3 = Card.from(Score.valueOf(score1), Suit.CLUB);
+        Card card4 = Card.from(Score.valueOf(score2), Suit.CLUB);
+        Card card5 = Card.from(Score.valueOf(score3), Suit.HEART);
+        Card card6 = Card.from(Score.valueOf(score4), Suit.HEART);
         Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
         Person player3 = new Player("player3", new GivenCards(Arrays.asList(card5, card6)));
@@ -123,8 +123,8 @@ public class GameSystemTest {
     void hit(String answer, int expectedSize) {
         //given
         String name = "pobi";
-        Card card1 = new Card(Score.A, Suit.HEART);
-        Card card2 = new Card(Score.A, Suit.CLUB);
+        Card card1 = Card.from(Score.A, Suit.HEART);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
         Players players = new Players(Collections.singletonList(player));
         GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
@@ -142,8 +142,8 @@ public class GameSystemTest {
     void hit_with_invalid_answer(String answer) {
         //given
         String name = "pobi";
-        Card card1 = new Card(Score.A, Suit.HEART);
-        Card card2 = new Card(Score.A, Suit.CLUB);
+        Card card1 = Card.from(Score.A, Suit.HEART);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
         Players players = new Players(Collections.singletonList(player));
         GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
@@ -158,8 +158,8 @@ public class GameSystemTest {
     @DisplayName("딜러의 카드를 추가한다.")
     void hit_for_dealer() {
         //given
-        Card card1 = new Card(Score.TWO, Suit.CLUB);
-        Card card2 = new Card(Score.TWO, Suit.HEART);
+        Card card1 = Card.from(Score.TWO, Suit.CLUB);
+        Card card2 = Card.from(Score.TWO, Suit.HEART);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Players players = new Players(Collections.emptyList());
         GameSystem gameSystem = new GameSystem(new Dealer("딜러", givenCards), players);
@@ -176,8 +176,8 @@ public class GameSystemTest {
     void getCards() {
         //given
         String name = "pobi";
-        Card card1 = new Card(Score.A, Suit.HEART);
-        Card card2 = new Card(Score.A, Suit.CLUB);
+        Card card1 = Card.from(Score.A, Suit.HEART);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
         Person player = new Player(name, new GivenCards(Arrays.asList(card1, card2)));
         Players players = new Players(Collections.singletonList(player));
         GameSystem gameSystem = new GameSystem(new Dealer("딜러", new GivenCards(Collections.emptyList())), players);
@@ -194,8 +194,8 @@ public class GameSystemTest {
     @DisplayName("딜러의 점수 합을 반환한다.")
     void getDealerScore() {
         //give
-        Card card1 = new Card(Score.A, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.CLUB);
+        Card card1 = Card.from(Score.A, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Dealer dealer = new Dealer("딜러", givenCards);
         Players players = new Players(Collections.emptyList());
@@ -213,10 +213,10 @@ public class GameSystemTest {
     @DisplayName("플레이어들의 점수를 반환한다.")
     void getPlayerScores(String score1, String score2, String score3, String score4, int expectedSum1, int expectedSum2) {
         //given
-        Card card1 = new Card(Score.valueOf(score1), Suit.CLUB);
-        Card card2 = new Card(Score.valueOf(score2), Suit.CLUB);
-        Card card3 = new Card(Score.valueOf(score3), Suit.HEART);
-        Card card4 = new Card(Score.valueOf(score4), Suit.HEART);
+        Card card1 = Card.from(Score.valueOf(score1), Suit.CLUB);
+        Card card2 = Card.from(Score.valueOf(score2), Suit.CLUB);
+        Card card3 = Card.from(Score.valueOf(score3), Suit.HEART);
+        Card card4 = Card.from(Score.valueOf(score4), Suit.HEART);
         Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
         Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
         Players players = new Players(Arrays.asList(player1, player2));
@@ -231,18 +231,18 @@ public class GameSystemTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"TEN, TEN, n, 1, 1", "TEN, TEN, y, 1, -1", "A, EIGHT, n, 1, 0"})
+    @CsvSource(value = {"TEN, TEN, n, 1, 1", "TEN, EIGHT, n, 1, -1", "A, EIGHT, n, 1, 0"})
     @DisplayName("플레이어의 승패 결과를 반환한다.")
     void getResults(String score1, String score2, String answer, int expectedResult1, int expectedResult2) {
         //given
-        Card card1 = new Card(Score.A, Suit.CLUB);
-        Card card2 = new Card(Score.J, Suit.CLUB);
+        Card card1 = Card.from(Score.A, Suit.CLUB);
+        Card card2 = Card.from(Score.J, Suit.CLUB);
         Person player1 = new Player("player1", new GivenCards(Arrays.asList(card1, card2)));
-        Card card3 = new Card(Score.valueOf(score1), Suit.HEART);
-        Card card4 = new Card(Score.valueOf(score2), Suit.HEART);
+        Card card3 = Card.from(Score.valueOf(score1), Suit.HEART);
+        Card card4 = Card.from(Score.valueOf(score2), Suit.HEART);
         Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
-        Card card5 = new Card(Score.A, Suit.DIAMOND);
-        Card card6 = new Card(Score.EIGHT, Suit.DIAMOND);
+        Card card5 = Card.from(Score.A, Suit.DIAMOND);
+        Card card6 = Card.from(Score.EIGHT, Suit.DIAMOND);
         GivenCards dealerCards = new GivenCards(Arrays.asList(card5, card6));
         Players players = new Players(Arrays.asList(player1, player2));
         GameSystem gameSystem = new GameSystem(new Dealer("딜러", dealerCards), players);

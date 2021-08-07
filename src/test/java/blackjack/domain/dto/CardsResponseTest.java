@@ -21,8 +21,8 @@ public class CardsResponseTest {
         Score ace = Score.A;
         Suit club = Suit.CLUB;
         Suit diamond = Suit.DIAMOND;
-        Card card1 = new Card(ace, club);
-        Card card2 = new Card(ace, diamond);
+        Card card1 = Card.from(ace, club);
+        Card card2 = Card.from(ace, diamond);
         List<Card> playerCards = Arrays.asList(card1, card2);
         CardsResponse cardsResponse = new CardsResponse(playerCards);
 

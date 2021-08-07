@@ -22,8 +22,8 @@ public class DealerAndPlayerCardsResponseTest {
         Score ace = Score.A;
         Suit club = Suit.CLUB;
         Suit diamond = Suit.DIAMOND;
-        Card card1 = new Card(ace, club);
-        Card card2 = new Card(ace, diamond);
+        Card card1 = Card.from(ace, club);
+        Card card2 = Card.from(ace, diamond);
         List<Card> dealerCards = Arrays.asList(card1, card2);
         DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(dealerCards, Collections.emptyList());
 
@@ -44,8 +44,8 @@ public class DealerAndPlayerCardsResponseTest {
         Score ace = Score.A;
         Suit club = Suit.CLUB;
         Suit diamond = Suit.DIAMOND;
-        Card card1 = new Card(ace, club);
-        Card card2 = new Card(ace, diamond);
+        Card card1 = Card.from(ace, club);
+        Card card2 = Card.from(ace, diamond);
         List<Card> playerCards = Arrays.asList(card1, card2);
         List<List<Card>> allPlayerCards = Arrays.asList(playerCards, playerCards, playerCards);
         DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(Collections.emptyList(), allPlayerCards);

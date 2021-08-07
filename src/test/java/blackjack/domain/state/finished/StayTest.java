@@ -21,13 +21,13 @@ class StayTest {
     @DisplayName("다른 카드의 합보다 크거나 다른 카드의 합이 21을 초과할 경우, 승리를 의미하는 1을 반환한다.")
     void result_win(String score1, String score2) {
         //given
-        Card card1 = new Card(Score.TEN, Suit.CLUB);
-        Card card2 = new Card(Score.TEN, Suit.HEART);
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.HEART);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
         State stay = new Stay(myCards);
-        Card card3 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card4 = new Card(Score.valueOf(score1), Suit.CLUB);
-        Card card5 = new Card(Score.valueOf(score2), Suit.CLUB);
+        Card card3 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card4 = Card.from(Score.valueOf(score1), Suit.CLUB);
+        Card card5 = Card.from(Score.valueOf(score2), Suit.CLUB);
         GivenCards otherCards = new GivenCards(Arrays.asList(card3, card4, card5));
 
         //when
@@ -41,11 +41,11 @@ class StayTest {
     @DisplayName("다른 카드의 합보다 작을 경우, 패배를 의미하는 -1을 반환한다.")
     void result_lose() {
         //given
-        Card card1 = new Card(Score.EIGHT, Suit.CLUB);
-        Card card2 = new Card(Score.EIGHT, Suit.HEART);
+        Card card1 = Card.from(Score.EIGHT, Suit.CLUB);
+        Card card2 = Card.from(Score.EIGHT, Suit.HEART);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
         State stay = new Stay(myCards);
-        Card card3 = new Card(Score.NINE, Suit.DIAMOND);
+        Card card3 = Card.from(Score.NINE, Suit.DIAMOND);
         GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
 
         //when
@@ -59,8 +59,8 @@ class StayTest {
     @DisplayName("다른 카드의 합과 같은 경우, 무승부를 의미하는 0을 반환한다.")
     void result_draw() {
         //given
-        Card card1 = new Card(Score.EIGHT, Suit.CLUB);
-        Card card2 = new Card(Score.EIGHT, Suit.HEART);
+        Card card1 = Card.from(Score.EIGHT, Suit.CLUB);
+        Card card2 = Card.from(Score.EIGHT, Suit.HEART);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
         State stay = new Stay(myCards);
         GivenCards otherCards = new GivenCards(Arrays.asList(card1, card2));

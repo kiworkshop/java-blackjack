@@ -14,7 +14,7 @@ public class CardResponseTest {
     @DisplayName("카드의 점수 이름(끗수)을 반환한다.")
     void getScore() {
         //given
-        Card card = new Card(Score.A, Suit.CLUB);
+        Card card = Card.from(Score.A, Suit.CLUB);
         CardResponse cardResponse = new CardResponse(card.getDenomination(), card.getSuit());
 
         //when
@@ -28,7 +28,7 @@ public class CardResponseTest {
     @DisplayName("카드의 무늬를 반환한다.")
     void getSuit() {
         //given
-        Card card = new Card(Score.A, Suit.CLUB);
+        Card card = Card.from(Score.A, Suit.CLUB);
         CardResponse cardResponse = new CardResponse(card.getDenomination(), card.getSuit());
 
         //when

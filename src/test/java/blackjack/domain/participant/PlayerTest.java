@@ -21,8 +21,8 @@ public class PlayerTest {
     @DisplayName("처음 받은 카드 두 장의 합이 21일 경우, Blackjack 상태가 된다.")
     void create_state_blackjack() {
         //given
-        Card card1 = new Card(Score.A, Suit.DIAMOND);
-        Card card2 = new Card(Score.TEN, Suit.DIAMOND);
+        Card card1 = Card.from(Score.A, Suit.DIAMOND);
+        Card card2 = Card.from(Score.TEN, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
@@ -37,8 +37,8 @@ public class PlayerTest {
     @DisplayName("처음 받은 카드 두 장의 합이 21 미만일 경우, Hit 상태가 된다.")
     void create_state_hit() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.TEN, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card2 = Card.from(Score.TEN, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
 
         //when
@@ -53,11 +53,11 @@ public class PlayerTest {
     @DisplayName("발급 받은 카드를 더한 합이 21을 초과할 경우, Burst 상태가 된다.")
     void hit_become_burst_state() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.TEN, Suit.CLUB);
+        Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card2 = Card.from(Score.TEN, Suit.CLUB);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person player = new Player("pobi", givenCards);
-        Card card3 = new Card(Score.TWO, Suit.HEART);
+        Card card3 = Card.from(Score.TWO, Suit.HEART);
 
         //when
         player.hit(card3);
@@ -71,11 +71,11 @@ public class PlayerTest {
     @DisplayName("발급 받은 카드를 더한 합이 21 미만일 경우, Hit 상태가 된다.")
     void hit_remain_hit_state() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.EIGHT, Suit.DIAMOND);
+        Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card2 = Card.from(Score.EIGHT, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person player = new Player("pobi", givenCards);
-        Card card3 = new Card(Score.TWO, Suit.HEART);
+        Card card3 = Card.from(Score.TWO, Suit.HEART);
 
         //when
         player.hit(card3);
@@ -89,11 +89,11 @@ public class PlayerTest {
     @DisplayName("발급 받은 카드를 더한 합이 21일 경우, Stay 상태가 된다.")
     void hit_become_stay_state() {
         //given
-        Card card1 = new Card(Score.TEN, Suit.DIAMOND);
-        Card card2 = new Card(Score.NINE, Suit.DIAMOND);
+        Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
+        Card card2 = Card.from(Score.NINE, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person player = new Player("pobi", givenCards);
-        Card card3 = new Card(Score.TWO, Suit.HEART);
+        Card card3 = Card.from(Score.TWO, Suit.HEART);
 
         //when
         player.hit(card3);

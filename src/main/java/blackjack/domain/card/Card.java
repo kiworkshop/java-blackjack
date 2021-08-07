@@ -3,15 +3,42 @@ package blackjack.domain.card;
 import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
 
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Card {
+    private static final Map<String, Card> CARDS = createCards();
+
+    private static Map<String, Card> createCards() {
+        return Arrays.stream(Score.values())
+                .flatMap(Card::createCard)
+                .collect(Collectors.toMap(card -> generateKey(card.score, card.suit), Function.identity()));
+    }
+
+    private static Stream<Card> createCard(final Score cardScore) {
+        return Arrays.stream(Suit.values())
+                .map(cardSuit -> new Card(cardScore, cardSuit));
+    }
+
+    private static String generateKey(final Score score, final Suit suit) {
+        return score.getDenomination() + suit.getSuit();
+    }
+
     private final Score score;
     private final Suit suit;
 
-    public Card(final Score score, final Suit suit) {
+    private Card(final Score score, final Suit suit) {
         this.score = score;
         this.suit = suit;
+    }
+
+    public static Card from(final Score score, final Suit suit) {
+        String key = generateKey(score, suit);
+        return CARDS.get(key);
     }
 
     public int getScore() {

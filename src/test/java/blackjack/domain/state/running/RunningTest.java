@@ -40,7 +40,7 @@ class RunningTest {
     }
 
     private State createRunningState() {
-        GivenCards givenCards = new GivenCards(Collections.singletonList(new Card(Score.A, Suit.CLUB)));
+        GivenCards givenCards = new GivenCards(Collections.singletonList(Card.from(Score.A, Suit.CLUB)));
 
         return new Running(givenCards) {
             @Override

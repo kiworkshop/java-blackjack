@@ -22,10 +22,11 @@ class PlayersTest {
     @DisplayName("플레이어의 이름을 반환한다.")
     void getPlayerNames() {
         //given
+        Deck deck = new Deck();
         String name1 = "pobi";
-        Player player1 = new Player(name1, Deck.getTwoCards());
+        Player player1 = new Player(name1, deck.getTwoCards());
         String name2 = "tobi";
-        Player player2 = new Player(name2, Deck.getTwoCards());
+        Player player2 = new Player(name2, deck.getTwoCards());
         Players players = new Players(Arrays.asList(player1, player2));
 
         //when
@@ -40,10 +41,11 @@ class PlayersTest {
     @DisplayName("플레이어들의 모든 카드를 반환한다.")
     void getPlayerCards() {
         //given
+        Deck deck = new Deck();
         String name1 = "pobi";
-        Player player1 = new Player(name1, Deck.getTwoCards());
+        Player player1 = new Player(name1, deck.getTwoCards());
         String name2 = "tobi";
-        Player player2 = new Player(name2, Deck.getTwoCards());
+        Player player2 = new Player(name2, deck.getTwoCards());
         Players players = new Players(Arrays.asList(player1, player2));
 
         //when

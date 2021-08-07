@@ -1,14 +1,20 @@
 package blackjack.controller;
 
 import blackjack.domain.GameSystem;
+import blackjack.domain.card.Deck;
 import blackjack.domain.dto.CardsResponse;
 import blackjack.domain.dto.DealerAndPlayerCardsResponse;
+import blackjack.domain.participant.Dealer;
+import blackjack.domain.participant.Person;
+import blackjack.domain.participant.Players;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.List;
 
 public class BlackjackController {
+    private final static String DEFAULT_DEALER_NAME = "딜러";
+
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -25,7 +31,10 @@ public class BlackjackController {
     }
 
     private GameSystem setup(final List<String> playerNames) {
-        GameSystem gameSystem = GameSystem.create(playerNames);
+        Deck deck = new Deck();
+        Person dealer = new Dealer(DEFAULT_DEALER_NAME, deck.getTwoCards());
+        Players players = new Players(playerNames, deck);
+        GameSystem gameSystem = new GameSystem(dealer, players, deck);
         outputView.printGameStart(gameSystem.getPlayerNames());
         DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
         outputView.printFirstTwoCards(gameSystem.getPlayerNames(), dealerAndPlayerCardsResponse);

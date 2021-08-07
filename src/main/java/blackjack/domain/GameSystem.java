@@ -3,9 +3,7 @@ package blackjack.domain;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.GivenCards;
-import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Person;
-import blackjack.domain.participant.Player;
 import blackjack.domain.participant.Players;
 
 import java.util.Collections;
@@ -14,22 +12,17 @@ import java.util.stream.Collectors;
 
 public class GameSystem {
     public static final int BLACKJACK = 21;
-    private static final String DEFAULT_DEALER_NAME = "딜러";
     private static final String ACCEPT_ANSWER = "y";
     private static final String DECLINE_ANSWER = "n";
 
+    private final Deck deck;
     private final Person dealer;
     private final Players players;
 
-    protected GameSystem(final Person dealer, final Players players) {
+    public GameSystem(final Person dealer, final Players players, final Deck deck) {
         this.dealer = dealer;
         this.players = players;
-    }
-
-    public static GameSystem create(final List<String> playerNames) {
-        return new GameSystem(new Dealer(DEFAULT_DEALER_NAME, Deck.getTwoCards()), new Players(playerNames.stream()
-                .map(name -> new Player(name, Deck.getTwoCards()))
-                .collect(Collectors.toList())));
+        this.deck = deck;
     }
 
     public List<String> getPlayerNames() {
@@ -63,7 +56,7 @@ public class GameSystem {
             return;
         }
 
-        player.hit(Deck.getCard());
+        player.hit(deck.getCard());
     }
 
     private void validate(final String answer) {
@@ -73,7 +66,7 @@ public class GameSystem {
     }
 
     public void hit() {
-        dealer.hit(Deck.getCard());
+        dealer.hit(deck.getCard());
     }
 
     public boolean isDealerFinished() {

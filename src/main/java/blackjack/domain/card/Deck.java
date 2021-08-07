@@ -1,11 +1,7 @@
 package blackjack.domain.card;
 
-import blackjack.domain.enums.Score;
-import blackjack.domain.enums.Suit;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
@@ -14,30 +10,21 @@ import java.util.stream.IntStream;
 
 public class Deck {
     static final int TWO_CARDS = 2;
-    private static final Deque<Card> cards = new ArrayDeque<>();
+    private final Deque<Card> deck;
 
-    static {
-        List<Card> cards = new ArrayList<>();
-
-        for (final Score score : Score.values()) {
-            Arrays.stream(Suit.values())
-                    .forEach(suit -> cards.add(Card.from(score, suit)));
-        }
-
+    public Deck() {
+        List<Card> cards = new ArrayList<>(Card.getDeck());
         Collections.shuffle(cards);
-        Deck.cards.addAll(cards);
+        this.deck = new ArrayDeque<>(cards);
     }
 
-    private Deck() {
+    public Card getCard() {
+        return deck.pop();
     }
 
-    public static Card getCard() {
-        return cards.pop();
-    }
-
-    public static GivenCards getTwoCards() {
+    public GivenCards getTwoCards() {
         return new GivenCards(Collections.unmodifiableList(IntStream.range(0, TWO_CARDS)
-                .mapToObj(i -> cards.pop())
+                .mapToObj(i -> deck.pop())
                 .collect(Collectors.toList())));
     }
 }

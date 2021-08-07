@@ -1,5 +1,6 @@
 package blackjack.domain.participant;
 
+import blackjack.domain.card.Deck;
 import blackjack.domain.card.GivenCards;
 
 import java.util.ArrayList;
@@ -14,6 +15,16 @@ public class Players {
 
     public Players(final List<Person> players) {
         converToMap(players);
+    }
+
+    public Players(final List<String> playerNames, final Deck deck) {
+        this(createPlayers(playerNames, deck));
+    }
+
+    private static List<Person> createPlayers(final List<String> playerNames, final Deck deck) {
+        return playerNames.stream()
+                .map(playerName -> new Player(playerName, deck.getTwoCards()))
+                .collect(Collectors.toList());
     }
 
     private void converToMap(List<Person> players) {

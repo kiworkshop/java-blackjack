@@ -4,6 +4,7 @@ import blackjack.domain.enums.Score;
 import blackjack.domain.enums.Suit;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -39,6 +40,10 @@ public class Card {
     public static Card from(final Score score, final Suit suit) {
         String key = generateKey(score, suit);
         return CARDS.get(key);
+    }
+
+    public static Collection<Card> getDeck() {
+        return CARDS.values();
     }
 
     public int getScore() {

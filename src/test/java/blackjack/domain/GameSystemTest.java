@@ -32,11 +32,9 @@ public class GameSystemTest {
         String name2 = "tobi";
         List<String> names = Arrays.asList(name1, name2);
         Deck deck = new Deck();
-        Dealer dealer = new Dealer("딜러", new GivenCards(Collections.emptyList()));
-        Players players = new Players(names, deck);
 
         //when
-        GameSystem gameSystem = new GameSystem(dealer, players, deck);
+        GameSystem gameSystem = new GameSystem(names, deck);
 
         //then
         assertThat(gameSystem.getPlayerNames()).hasSize(2)
@@ -48,9 +46,8 @@ public class GameSystemTest {
     void getDealerCards() {
         //give
         Deck deck = new Deck();
-        Dealer dealer = new Dealer("딜러", deck.getTwoCards());
-        Players players = new Players(Collections.emptyList(), deck);
-        GameSystem gameSystem = new GameSystem(dealer, players, deck);
+        List<String> playerNames = Arrays.asList("pobi", "dobi");
+        GameSystem gameSystem = new GameSystem(playerNames, deck);
 
         //when
         List<Card> dealerCards = gameSystem.getDealerCards();
@@ -67,9 +64,7 @@ public class GameSystemTest {
         String name2 = "tobi";
         List<String> names = Arrays.asList(name1, name2);
         Deck deck = new Deck();
-        Dealer dealer = new Dealer("딜러", new GivenCards(Collections.emptyList()));
-        Players players = new Players(names, deck);
-        GameSystem gameSystem = new GameSystem(dealer, players, deck);
+        GameSystem gameSystem = new GameSystem(names, deck);
 
         //when
         List<List<Card>> allPlayerCards = gameSystem.getPlayerCards();

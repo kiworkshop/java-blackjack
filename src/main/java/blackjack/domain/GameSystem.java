@@ -3,6 +3,7 @@ package blackjack.domain;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.GivenCards;
+import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Person;
 import blackjack.domain.participant.Players;
 
@@ -12,12 +13,17 @@ import java.util.stream.Collectors;
 
 public class GameSystem {
     public static final int BLACKJACK = 21;
+    private static final String DEFAULT_DEALER_NAME = "딜러";
     private static final String ACCEPT_ANSWER = "y";
     private static final String DECLINE_ANSWER = "n";
 
     private final Deck deck;
     private final Person dealer;
     private final Players players;
+
+    public GameSystem(final List<String> playerNames, final Deck deck) {
+        this(new Dealer(DEFAULT_DEALER_NAME, deck.getTwoCards()), new Players(playerNames, deck), deck);
+    }
 
     public GameSystem(final Person dealer, final Players players, final Deck deck) {
         this.dealer = dealer;

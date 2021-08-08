@@ -107,13 +107,13 @@ public class DealerTest {
     @ParameterizedTest
     @ValueSource(strings = {"TWO", "SIX"})
     @DisplayName("발급 받은 카드를 더한 합이 17 이상 21 이하일 경우, Stay 상태가 된다.")
-    void hit_become_stay_state(String score) {
+    void hit_become_stay_state(Score score) {
         //given
         Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
         Card card2 = Card.from(Score.FIVE, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person dealer = new Dealer("pobi", givenCards);
-        Card card3 = Card.from(Score.valueOf(score), Suit.HEART);
+        Card card3 = Card.from(score, Suit.HEART);
 
         //when
         dealer.hit(card3);
@@ -126,13 +126,13 @@ public class DealerTest {
     @ParameterizedTest
     @CsvSource(value = {"THREE, true", "SEVEN, true", "TWO, false"})
     @DisplayName("블랙잭이 아니고 17 이상 21 이하일 경우 종료 여부를 참으로 반환한다.")
-    void isFinished(String score, boolean expected) {
+    void isFinished(Score score, boolean expected) {
         //given
         Card card1 = Card.from(Score.TEN, Suit.DIAMOND);
         Card card2 = Card.from(Score.FOUR, Suit.DIAMOND);
         GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
         Person dealer = new Dealer("pobi", givenCards);
-        Card card3 = Card.from(Score.valueOf(score), Suit.HEART);
+        Card card3 = Card.from(score, Suit.HEART);
         dealer.hit(card3);
 
         //when

@@ -58,9 +58,8 @@ public class CardTest {
     @ParameterizedTest
     @CsvSource(value = {"A, true", "TWO, false", "TEN, false", "J, false"})
     @DisplayName("카드가 Ace일 경우 참을 반환한다.")
-    void isAce(String scoreName, boolean expected) {
+    void isAce(Score score, boolean expected) {
         //given
-        Score score = Score.valueOf(scoreName);
         Suit diamond = Suit.DIAMOND;
         Card card = Card.from(score, diamond);
 

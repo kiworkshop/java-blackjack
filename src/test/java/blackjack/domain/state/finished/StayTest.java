@@ -19,15 +19,15 @@ class StayTest {
     @ParameterizedTest
     @CsvSource(value = {"FIVE, FOUR", "TEN, TWO"})
     @DisplayName("다른 카드의 합보다 크거나 다른 카드의 합이 21을 초과할 경우, 승리를 의미하는 1을 반환한다.")
-    void result_win(String score1, String score2) {
+    void result_win(Score score1, Score score2) {
         //given
         Card card1 = Card.from(Score.TEN, Suit.CLUB);
         Card card2 = Card.from(Score.TEN, Suit.HEART);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
         State stay = new Stay(myCards);
         Card card3 = Card.from(Score.TEN, Suit.DIAMOND);
-        Card card4 = Card.from(Score.valueOf(score1), Suit.CLUB);
-        Card card5 = Card.from(Score.valueOf(score2), Suit.CLUB);
+        Card card4 = Card.from(score1, Suit.CLUB);
+        Card card5 = Card.from(score2, Suit.CLUB);
         GivenCards otherCards = new GivenCards(Arrays.asList(card3, card4, card5));
 
         //when

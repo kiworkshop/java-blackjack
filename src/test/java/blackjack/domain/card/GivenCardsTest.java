@@ -177,11 +177,11 @@ public class GivenCardsTest {
     @ParameterizedTest
     @CsvSource(value = {"TEN, NINE, TWO, true", "TEN, EIGHT, TWO, false"})
     @DisplayName("카드의 합이 21일 경우, 참을 반환한다.")
-    void isMaximumThreshhold(String score1, String score2, String score3, boolean expected) {
+    void isMaximumThreshhold(Score score1, Score score2, Score score3, boolean expected) {
         //given
-        Card card1 = Card.from(Score.valueOf(score1), Suit.CLUB);
-        Card card2 = Card.from(Score.valueOf(score2), Suit.CLUB);
-        Card card3 = Card.from(Score.valueOf(score3), Suit.CLUB);
+        Card card1 = Card.from(score1, Suit.CLUB);
+        Card card2 = Card.from(score2, Suit.CLUB);
+        Card card3 = Card.from(score3, Suit.CLUB);
         GivenCards myCards = new GivenCards(Arrays.asList(card1, card2, card3));
 
         //when

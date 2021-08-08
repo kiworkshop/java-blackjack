@@ -11,10 +11,7 @@ class ResultTest {
     @ParameterizedTest
     @CsvSource(value = {"WIN, 1", "LOSE, -1", "DRAW, 0"})
     @DisplayName("게임 결과 포인트를 반환한다.")
-    void getPoint(String resultName, int expectedPoint) {
-        //given
-        Result result = Result.valueOf(resultName);
-
+    void getPoint(Result result, int expectedPoint) {
         //when
         int point = result.getPoint();
 

@@ -1,8 +1,8 @@
 package blackjack.controller;
 
+import blackjack.controller.dto.CardsResponse;
+import blackjack.controller.dto.DealerAndPlayerCardsResponse;
 import blackjack.domain.GameSystem;
-import blackjack.domain.dto.CardsResponse;
-import blackjack.domain.dto.DealerAndPlayerCardsResponse;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 

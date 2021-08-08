@@ -1,8 +1,8 @@
 package blackjack.view;
 
-import blackjack.domain.dto.CardResponse;
-import blackjack.domain.dto.CardsResponse;
-import blackjack.domain.dto.DealerAndPlayerCardsResponse;
+import blackjack.controller.dto.CardResponse;
+import blackjack.controller.dto.CardsResponse;
+import blackjack.controller.dto.DealerAndPlayerCardsResponse;
 
 import java.util.HashMap;
 import java.util.List;

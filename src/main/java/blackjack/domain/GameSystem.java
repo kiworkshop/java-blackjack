@@ -21,14 +21,15 @@ public class GameSystem {
     private final Person dealer;
     private final Players players;
 
-    public GameSystem(final List<String> playerNames, final Deck deck) {
-        this(new Dealer(DEFAULT_DEALER_NAME, deck.getTwoCards()), new Players(playerNames, deck), deck);
-    }
-
-    public GameSystem(final Person dealer, final Players players, final Deck deck) {
+    protected GameSystem(final Person dealer, final Players players, final Deck deck) {
         this.dealer = dealer;
         this.players = players;
         this.deck = deck;
+    }
+
+    public static GameSystem create(final List<String> playerNames) {
+        Deck deck = new Deck();
+        return new GameSystem(new Dealer(DEFAULT_DEALER_NAME, deck.getTwoCards()), new Players(playerNames, deck), deck);
     }
 
     public List<String> getPlayerNames() {

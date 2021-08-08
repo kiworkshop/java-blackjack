@@ -31,10 +31,9 @@ public class GameSystemTest {
         String name1 = "pobi";
         String name2 = "tobi";
         List<String> names = Arrays.asList(name1, name2);
-        Deck deck = new Deck();
 
         //when
-        GameSystem gameSystem = new GameSystem(names, deck);
+        GameSystem gameSystem = GameSystem.create(names);
 
         //then
         assertThat(gameSystem.getPlayerNames()).hasSize(2)
@@ -47,7 +46,7 @@ public class GameSystemTest {
         //give
         Deck deck = new Deck();
         List<String> playerNames = Arrays.asList("pobi", "dobi");
-        GameSystem gameSystem = new GameSystem(playerNames, deck);
+        GameSystem gameSystem = GameSystem.create(playerNames);
 
         //when
         List<Card> dealerCards = gameSystem.getDealerCards();
@@ -64,7 +63,7 @@ public class GameSystemTest {
         String name2 = "tobi";
         List<String> names = Arrays.asList(name1, name2);
         Deck deck = new Deck();
-        GameSystem gameSystem = new GameSystem(names, deck);
+        GameSystem gameSystem = GameSystem.create(names);
 
         //when
         List<List<Card>> allPlayerCards = gameSystem.getPlayerCards();

@@ -1,7 +1,6 @@
 package blackjack.controller;
 
 import blackjack.domain.GameSystem;
-import blackjack.domain.card.Deck;
 import blackjack.domain.dto.CardsResponse;
 import blackjack.domain.dto.DealerAndPlayerCardsResponse;
 import blackjack.view.InputView;
@@ -26,7 +25,7 @@ public class BlackjackController {
     }
 
     private GameSystem setup(final List<String> playerNames) {
-        GameSystem gameSystem = new GameSystem(playerNames, new Deck());
+        GameSystem gameSystem = GameSystem.create(playerNames);
         outputView.printGameStart(gameSystem.getPlayerNames());
         DealerAndPlayerCardsResponse dealerAndPlayerCardsResponse = new DealerAndPlayerCardsResponse(gameSystem.getDealerCards(), gameSystem.getPlayerCards());
         outputView.printFirstTwoCards(gameSystem.getPlayerNames(), dealerAndPlayerCardsResponse);

@@ -44,7 +44,6 @@ public class GameSystemTest {
     @DisplayName("딜러의 모든 카드를 반환한다.")
     void getDealerCards() {
         //give
-        Deck deck = new Deck();
         List<String> playerNames = Arrays.asList("pobi", "dobi");
         GameSystem gameSystem = GameSystem.create(playerNames);
 
@@ -62,7 +61,6 @@ public class GameSystemTest {
         String name1 = "pobi";
         String name2 = "tobi";
         List<String> names = Arrays.asList(name1, name2);
-        Deck deck = new Deck();
         GameSystem gameSystem = GameSystem.create(names);
 
         //when

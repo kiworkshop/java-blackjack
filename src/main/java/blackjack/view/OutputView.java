@@ -1,5 +1,6 @@
 package blackjack.view;
 
+import blackjack.domain.card.Card;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.domain.result.GameResult;
@@ -38,13 +39,13 @@ public class OutputView {
 
     public void printPlayersCard(List<Player> players) {
         for (Player player : players) {
-            System.out.println(player);
+            System.out.println(playerResultToString(player));
         }
         System.out.println();
     }
 
     public void printCards(Player player) {
-        System.out.println(player);
+        System.out.println(playerResultToString(player));
     }
 
     public void printDealerCardGiven() {
@@ -70,7 +71,7 @@ public class OutputView {
     }
 
     private void printPlayerCardsResult(Player player) {
-        StringBuilder sb = new StringBuilder(player.toString());
+        StringBuilder sb = new StringBuilder(playerResultToString(player));
         sb.append(RESULT);
         sb.append(player.getCardsSum());
 
@@ -104,6 +105,16 @@ public class OutputView {
                 .collect(Collectors.joining(NEW_LINE)));
 
         System.out.println(sb);
+    }
+
+    private String playerResultToString(Player player) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(player.getName())
+                .append("카드: ")
+                .append(player.getCards().stream()
+                        .map(Card::toString)
+                        .collect(Collectors.joining(", ")));
+        return sb.toString();
     }
 
 

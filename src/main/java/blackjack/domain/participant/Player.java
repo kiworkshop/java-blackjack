@@ -31,17 +31,6 @@ public class Player extends Participant {
         return getCardsSum() < PLAYER_DRAW_THRESHOLD;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName())
-                .append("카드: ")
-                .append(getCards().stream()
-                        .map(Card::toString)
-                        .collect(Collectors.joining(", ")));
-        return sb.toString();
-    }
-
     public WinningResult win(Dealer dealer) {
         return Arrays.stream(Rule.values())
                 .filter(rule -> rule.compare(this, dealer))

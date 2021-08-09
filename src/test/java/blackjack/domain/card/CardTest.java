@@ -23,7 +23,7 @@ public class CardTest {
         Card card = new Card(Denomination.TWO, Type.DIAMOND);
 
         //when, then
-        assertThat(card.toString()).isEqualTo("2다이아몬드");
+        assertThat(card).hasToString("2다이아몬드");
     }
 
     @DisplayName("카드 객체의 숫자와 종류를 출력한다")

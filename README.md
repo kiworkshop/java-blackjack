@@ -1,5 +1,12 @@
 # java-blackjack
-
+# 상태
+- 시작
+    - 처음 세팅
+    - hit
+    - stay
+    - push
+    - blackjack
+    - bust
 # 규칙
 - 블랙잭게임서비스
   -[x] 속성

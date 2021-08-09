@@ -17,6 +17,12 @@ public class InputView {
         checkBlank(playerNames);
         return splitByComma(playerNames);
     }
+    public static int getBettingMoney(String playerName) {
+        System.out.printf("%s의 배팅 금액은?\n", playerName);
+        String bettingAmount = scanner.nextLine();
+        checkBlank(bettingAmount);
+        return Integer.parseInt(bettingAmount);
+    }
 
     public static String getAdditionalCard(Player player) {
         System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)\n", player.getName());

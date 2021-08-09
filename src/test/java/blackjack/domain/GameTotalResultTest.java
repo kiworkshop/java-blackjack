@@ -17,11 +17,12 @@ public class GameTotalResultTest {
     void getResult() {
         GameService gameService = new GameService();
         Player player = new Player("jason");
-        player.addCard(new Card(Denomination.EIGHT, Suit.CLUB));
-        player.addCard(new Card(Denomination.TWO, Suit.CLUB));
+        player.hit(new Card(Denomination.EIGHT, Suit.CLUB));
+        player.hit(new Card(Denomination.TWO, Suit.CLUB));
+        player.stay();
         Player player2 = new Player("pibo");
-        player2.addCard(new Card(Denomination.Q, Suit.CLUB));
-        player2.addCard(new Card(Denomination.A, Suit.CLUB));
+        player2.hit(new Card(Denomination.Q, Suit.CLUB));
+        player2.hit(new Card(Denomination.A, Suit.CLUB));
         List<GamePlayerResult> gamePlayerResults = new ArrayList<>();
         gamePlayerResults.add(new GamePlayerResult(player, 17));
         gamePlayerResults.add(new GamePlayerResult(player2, 17));

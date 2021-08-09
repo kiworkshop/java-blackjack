@@ -14,19 +14,24 @@ public class GameController {
     public static Dealer dealer = new Dealer();
     public static List<Player> players = new ArrayList<>();
 
+    public static void main(String[] args) {
+        GameController gameController = new GameController();
+        gameController.play();
+    }
     public void play() {
         setUp();
         setFirstTwoCards();
-        hitOrStay();
-        dealerCardSetting();
+        playPlayerTurns();
+        playDealerTurn();
         printPlayersScore();
         printGameResult();
     }
 
     private void setUp() {
         List<String> playersNames = InputView.getPlayerNames();
-        players = gameService.registPlayer(playersNames);
-
+        playersNames.forEach(
+                playersName -> players.add(new Player(playersName,InputView.getBettingMoney(playersName)))
+        );
     }
 
     private void setFirstTwoCards() {
@@ -35,33 +40,36 @@ public class GameController {
         OutputView.printFirstTwoCards(dealer, players);
     }
 
-    private void hitOrStay() {
-        players.forEach(player -> {
-            String answer = InputView.getAdditionalCard(player);
-            while (answer.equals("Y")) {
-                gameService.hit(player);
-                OutputView.printPlayersCards(player);
-                answer = InputView.getAdditionalCard(player);
-            }
-        });
+    private void hitOrStay(Player player){
+        String answer = InputView.getAdditionalCard(player);
+        while (answer.equals("Y")) {
+            gameService.hit(player);
+            OutputView.printPlayersCards(player);
+            answer = InputView.getAdditionalCard(player);
+        }
+        player.stay();
+    }
+    private void playPlayerTurns() {
+        players.forEach(player->hitOrStay(player));
     }
 
-    private void dealerCardSetting() {
-        if (gameService.getMoreCard(dealer)) {
+    private void playDealerTurn() {
+        while (dealer.isUnder16()) {
             gameService.hit(dealer);
             OutputView.printDealerAdditionCard();
         }
+        dealer.stay();
     }
 
     private void printPlayersScore() {
-        int dealerScore = gameService.getCardScore(dealer);
-        OutputView.printCardResult(dealer, dealerScore);
+        int dealerScore = dealer.getScore();
+        OutputView.printCardResult(dealer);
         players.forEach(player -> {
-            OutputView.printCardResult(player, gameService.getCardScore(player));
+            OutputView.printCardResult(player);
         });
     }
 
     private void printGameResult() {
-        OutputView.printTotalResult(gameService.getCameTotalResult(dealer, players));
+        OutputView.printTotalResult(gameService.getGameTotalResult(dealer, players));
     }
 }

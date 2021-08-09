@@ -10,29 +10,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GameServiceTest {
-    @Test
-    @DisplayName("참가자 이름 리스트로 등록하면 게임에 참가자들이 생성된다")
-    void create() {
-        //given
-        GameService gameService = new GameService();
-        List<String> playerNames = Arrays.asList("pobi", "jason");
-
-        //when
-        List<Player> players = gameService.registPlayer(playerNames);
-
-        //then
-        assertThat(players).hasSize(2)
-                .extracting("name")
-                .contains("pobi", "jason");
-        assertThat(players.get(0).getName()).isEqualTo("pobi");
-        assertThat(players.get(1).getName()).isEqualTo("jason");
-    }
 
     @Test
     @DisplayName("플레이어와 딜러는  초기 두장의 카드를 받는다")
@@ -71,16 +53,16 @@ class GameServiceTest {
         GameService gameService = new GameService();
         Player player = new Player("jason");
         Dealer dealer = new Dealer();
-        player.addCard(new Card(Denomination.Q, Suit.CLUB));
-        player.addCard(new Card(Denomination.A, Suit.CLUB));
-        dealer.addCard(new Card(Denomination.THREE, Suit.CLUB));
-        dealer.addCard(new Card(Denomination.FIVE, Suit.CLUB));
+        player.hit(new Card(Denomination.Q, Suit.CLUB));
+        player.hit(new Card(Denomination.A, Suit.CLUB));
+        dealer.hit(new Card(Denomination.THREE, Suit.CLUB));
+        dealer.hit(new Card(Denomination.FIVE, Suit.CLUB));
         //when
-        int playerScore = gameService.getCardScore(player);
-        int dealerScore = gameService.getCardScore(dealer);
+        int playerScore = player.getSum();
+        int dealerScore = dealer.getSum();
         //then
         assertThat(playerScore).isEqualTo(21);
-        assertThat(playerScore).isEqualTo(8);
+        assertThat(dealerScore).isEqualTo(8);
     }
 
     @Test
@@ -92,16 +74,19 @@ class GameServiceTest {
         //when
         List<Player> players = new ArrayList<>();
         Player player = new Player("pobi");
-        player.addCard(new Card(Denomination.TWO, Suit.CLUB));
-        player.addCard(new Card(Denomination.THREE, Suit.CLUB));
+        player.hit(new Card(Denomination.TWO, Suit.CLUB));
+        player.hit(new Card(Denomination.THREE, Suit.CLUB));
+        player.stay();
         players.add(player);
 
         Dealer dealer = new Dealer();
 
-        dealer.addCard(new Card(Denomination.TEN, Suit.CLUB));
-        dealer.addCard(new Card(Denomination.EIGHT, Suit.CLUB));
+
+        dealer.hit(new Card(Denomination.TEN, Suit.CLUB));
+        dealer.hit(new Card(Denomination.EIGHT, Suit.CLUB));
+        dealer.stay();
         //when
-        GameTotalReuslt gameTotalReuslt = gameService.getCameTotalResult(dealer, players);
+        GameTotalReuslt gameTotalReuslt = gameService.getGameTotalResult(dealer, players);
 
         //then
         assertThat(gameTotalReuslt.getDealerLoseCount()).isEqualTo(0);
@@ -116,10 +101,10 @@ class GameServiceTest {
         //given
         GameService gameService = new GameService();
         Dealer dealer = new Dealer();
-        dealer.addCard(new Card(Denomination.FIVE, Suit.CLUB));
-        dealer.addCard(new Card(Denomination.EIGHT, Suit.CLUB));
+        dealer.hit(new Card(Denomination.FIVE, Suit.CLUB));
+        dealer.hit(new Card(Denomination.EIGHT, Suit.CLUB));
         //when
-        boolean result = gameService.getMoreCard(dealer);
+        boolean result = dealer.isUnder16();
         //then
         assertThat(result);
     }

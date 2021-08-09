@@ -14,9 +14,9 @@ public class GamePlayerResultTest {
     void getResult() {
         GameService gameService = new GameService();
         Player player = new Player("jason");
-        player.addCard(new Card(Denomination.EIGHT, Suit.CLUB));
-        player.addCard(new Card(Denomination.A, Suit.CLUB));
-
+        player.hit(new Card(Denomination.EIGHT, Suit.CLUB));
+        player.hit(new Card(Denomination.A, Suit.CLUB));
+        player.stay();
         //when
         GamePlayerResult gamePlayerResult = new GamePlayerResult(player, 20);
         GamePlayerResult gamePlayerResult2 = new GamePlayerResult(player, 17);

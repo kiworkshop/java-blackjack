@@ -21,9 +21,9 @@ public class OutputView {
         System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
     }
 
-    public static void printCardResult(Human human, int result) {
-        List<String> cardNames = human.getCards().stream().map(card -> card.getName()).collect(Collectors.toList());
-        System.out.printf("%s카드: %s - 결과: %d\n", human.getName(), String.join(COMMA_DELIMITER, cardNames), result);
+    public static void printCardResult(Participant participant) {
+        List<String> cardNames = participant.getCards().stream().map(card -> card.getName()).collect(Collectors.toList());
+        System.out.printf("%s카드: %s - 결과: %d\n", participant.getName(), String.join(COMMA_DELIMITER, cardNames), participant.getScore());
     }
 
     public static void printTotalResult(GameTotalReuslt gameTotalReuslt) {

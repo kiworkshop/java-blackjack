@@ -14,12 +14,4 @@ public class StringUtil {
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
-
-    public static String validateYesOrNo(String response) {
-        if (!(response.equals("Y") || response.equals("y") || response.equals("N") || response.equals("n"))) {
-            throw new IllegalArgumentException(RESPONSE_RESTRICT_MESSAGE);
-        }
-
-        return response;
-    }
 }

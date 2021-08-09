@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static blackjack.domain.card.TestCard.*;
@@ -43,37 +42,5 @@ class HandsTest {
 
         //then
         assertThat(sum).isEqualTo(12);
-    }
-
-    @Test
-    @DisplayName("블랙잭인 것을 확인한다.")
-    void blackjack() {
-        // given
-        Hands blackjackHands = new Hands(Arrays.asList(ACE_1, CARD_Q));
-        Hands notBlackjackHands = new Hands(Arrays.asList(ACE_1, CARD_9));
-
-        // when
-        boolean blackjack = blackjackHands.blackjack();
-        boolean notBlackjack = notBlackjackHands.blackjack();
-
-        // then
-        assertThat(blackjack).isTrue();
-        assertThat(notBlackjack).isFalse();
-    }
-
-    @Test
-    @DisplayName("버스트인 것을 확인한다.")
-    void bust() {
-        // given
-        Hands bustHands = new Hands(Arrays.asList(CARD_3, CARD_K, CARD_Q));
-        Hands notBustHands = new Hands(Arrays.asList(ACE_1, CARD_9));
-
-        // when
-        boolean bust = bustHands.bust();
-        boolean notBust = notBustHands.bust();
-
-        // then
-        assertThat(bust).isTrue();
-        assertThat(notBust).isFalse();
     }
 }

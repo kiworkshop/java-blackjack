@@ -6,10 +6,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static blackjack.domain.card.TestCard.CARD_8;
-import static blackjack.domain.card.TestCard.CARD_9;
+import static blackjack.domain.card.TestCard.*;
 import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,6 +58,38 @@ class PlayerTest {
         //then
         assertThat(neverHitPlayer.neverHit()).isTrue();
         assertThat(hitPlayer.neverHit()).isFalse();
+    }
+
+    @Test
+    @DisplayName("블랙잭인 것을 확인한다.")
+    void blackjack() {
+        // given
+        Player blackjackPlayer = new Player("blackjack", new Hands(Arrays.asList(ACE_1, CARD_Q)));
+        Player notBlackjackPlayer = new Player("notBlackjack", new Hands(Arrays.asList(ACE_1, CARD_9)));
+
+        // when
+        boolean blackjack = blackjackPlayer.blackjack();
+        boolean notBlackjack = notBlackjackPlayer.blackjack();
+
+        // then
+        assertThat(blackjack).isTrue();
+        assertThat(notBlackjack).isFalse();
+    }
+
+    @Test
+    @DisplayName("버스트인 것을 확인한다.")
+    void bust() {
+        // given
+        Player bustPlayer = new Player("bust", new Hands(Arrays.asList(CARD_3, CARD_K, CARD_Q)));
+        Player notBustPlayer = new Player("notBust", new Hands(Arrays.asList(ACE_1, CARD_9)));
+
+        // when
+        boolean bust = bustPlayer.bust();
+        boolean notBust = notBustPlayer.bust();
+
+        // then
+        assertThat(bust).isTrue();
+        assertThat(notBust).isFalse();
     }
 
     private Hands generateHands() {

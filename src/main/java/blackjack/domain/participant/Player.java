@@ -1,12 +1,10 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.card.Card;
 import blackjack.domain.result.Rule;
 import blackjack.domain.result.WinningResult;
 import lombok.Getter;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @Getter
 public class Player extends Participant {
@@ -31,7 +29,7 @@ public class Player extends Participant {
         return getCardsSum() < PLAYER_DRAW_THRESHOLD;
     }
 
-    public WinningResult win(Dealer dealer) {
+    public WinningResult resultVersusDealer(Dealer dealer) {
         return Arrays.stream(Rule.values())
                 .filter(rule -> rule.compare(this, dealer))
                 .findFirst()

@@ -19,7 +19,7 @@ public class GameResult {
 
         // 플레이어 점수랑 딜러 점수 비교하는 로직
         // 플레이어 기준으로 승패가 Map에 입력이 된 상태
-        players.forEach(player -> playersResult.put(player, player.win(dealer)));
+        players.forEach(player -> playersResult.put(player, player.resultVersusDealer(dealer)));
 
         // 넣어둔 value가 있으면 apply = computeIfPresent
         // 딜러기준으로 승패를 바꿔주고, 승패 숫자를 하나씩 올려줌

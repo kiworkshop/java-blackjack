@@ -31,7 +31,7 @@ public class Player extends Participant {
 
     public WinningResult resultVersusDealer(Dealer dealer) {
         return Arrays.stream(Rule.values())
-                .filter(rule -> rule.compare(this, dealer))
+                .filter(rule -> rule.findMatchingRule(this, dealer))
                 .findFirst()
                 .get()
                 .getWinningResult();

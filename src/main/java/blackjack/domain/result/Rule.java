@@ -25,7 +25,7 @@ public enum Rule {
         this.winningResult = winningResult;
     }
 
-    public Boolean compare(Player player, Dealer dealer) {
+    public Boolean findMatchingRule(Player player, Dealer dealer) {
         return compare.apply(player, dealer);
     }
 

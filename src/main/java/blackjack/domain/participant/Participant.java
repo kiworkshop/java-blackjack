@@ -7,7 +7,7 @@ import java.util.List;
 
 import static blackjack.domain.prize.PrizeResults.BLACKJACK_RANK;
 
-public class Participant implements BlackJackRule {
+public class Participant implements BlackjackRule {
     protected final Hands hands;
 
     public Participant(Hands hands) {
@@ -15,13 +15,13 @@ public class Participant implements BlackJackRule {
     }
 
     @Override
-    public void take(Card card) {
-        hands.addCard(card);
+    public int sumRank() {
+        return hands.sumRanks();
     }
 
     @Override
-    public int sumRank() {
-        return hands.sumRanks();
+    public void draw(Card card) {
+        hands.addCard(card);
     }
 
     @Override

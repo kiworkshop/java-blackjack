@@ -4,10 +4,10 @@ import blackjack.domain.card.Card;
 
 import java.util.List;
 
-public interface BlackJackRule {
-    void take(Card card);
-
+public interface BlackjackRule {
     int sumRank();
+
+    void draw(Card card);
 
     boolean hit();
 

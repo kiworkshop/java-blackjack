@@ -26,14 +26,14 @@ public class Table {
 
     public Player hit(Player player) {
         Card card = deck.draw();
-        player.take(card);
+        player.draw(card);
         return player;
     }
 
     public void finalDeal() {
         if (dealer.hit()) {
             Card card = deck.draw();
-            dealer.take(card);
+            dealer.draw(card);
         }
     }
 

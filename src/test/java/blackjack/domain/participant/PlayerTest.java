@@ -39,7 +39,7 @@ class PlayerTest {
 
         //when
         Player player = new Player(name, hands);
-        player.take(CARD_8);
+        player.draw(CARD_8);
 
         //then
         assertThat(player.countHands()).isEqualTo(3);
@@ -53,7 +53,7 @@ class PlayerTest {
         Player hitPlayer = new Player("name", generateHands());
 
         //when
-        hitPlayer.take(CARD_8);
+        hitPlayer.draw(CARD_8);
 
         //then
         assertThat(neverHitPlayer.neverHit()).isTrue();

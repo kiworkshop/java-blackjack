@@ -75,7 +75,7 @@ class DealerTest {
         Dealer dealer = new Dealer(hands);
 
         //when
-        dealer.take(CARD_3);
+        dealer.draw(CARD_3);
 
         // then
         assertThat(dealer.countHands()).isEqualTo(3);

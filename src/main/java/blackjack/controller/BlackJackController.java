@@ -5,8 +5,8 @@ import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.domain.participant.PlayersFactory;
 import blackjack.domain.result.GameResult;
-import blackjack.dto.DrawCardResponseDTO;
-import blackjack.dto.PlayersNameInputDTO;
+import blackjack.dto.DrawCardRequestDto;
+import blackjack.dto.PlayersNameInputDto;
 import blackjack.utils.StringUtil;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
@@ -21,7 +21,7 @@ public class BlackJackController {
     private final OutputView outputView = new OutputView();
 
     public BlackJackController() {
-        PlayersNameInputDTO namesInput = inputView.getPlayersName();
+        PlayersNameInputDto namesInput = inputView.getPlayersName();
         this.players = PlayersFactory.createPlayers(namesInput.getPlayersName());
         this.dealer = new Dealer();
         this.deck = new Deck();
@@ -54,19 +54,13 @@ public class BlackJackController {
     }
 
     private void drawCardToPlayer(Player player) {
-        DrawCardResponseDTO drawCardResponse = inputView.getPlayersResponse(player);
-        while (player.drawable() && isYes(drawCardResponse)) {
+        DrawCardRequestDto drawCardRequest = inputView.getPlayersResponse(player);
+        while (player.drawable() && drawCardRequest.isYes()) {
             player.receiveCard(deck.drawCard());
 
             outputView.printCards(player);
-            drawCardResponse = inputView.getPlayersResponse(player);
+            drawCardRequest = inputView.getPlayersResponse(player);
         }
-    }
-
-    private boolean isYes(DrawCardResponseDTO drawCardResponse) {
-        String response = drawCardResponse.getResponse().trim();
-        StringUtil.validateYesOrNo(response);
-        return response.equalsIgnoreCase("y");
     }
 
     private void drawCardToDealer() {

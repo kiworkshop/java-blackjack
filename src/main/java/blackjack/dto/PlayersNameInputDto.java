@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class DrawCardResponseDTO {
+public class PlayersNameInputDto {
 
-    private final String response;
+    private final String playersName;
 }

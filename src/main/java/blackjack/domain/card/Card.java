@@ -5,6 +5,7 @@ import blackjack.domain.enums.Suit;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -43,7 +44,7 @@ public class Card {
     }
 
     public static Collection<Card> getDeck() {
-        return CARDS.values();
+        return Collections.unmodifiableCollection(CARDS.values());
     }
 
     public int getScore() {

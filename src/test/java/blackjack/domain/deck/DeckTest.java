@@ -1,4 +1,4 @@
-package blackjack.domain.game;
+package blackjack.domain.deck;
 
 import blackjack.domain.card.Card;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static blackjack.domain.game.Deck.TOTAL_CARD_COUNT;
+import static blackjack.domain.deck.Deck.TOTAL_CARD_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -41,6 +41,7 @@ class DeckTest {
 
         //then
         assertThat(cards.size()).isEqualTo(cardCount);
+        assertThat(deck.size()).isEqualTo(TOTAL_CARD_COUNT - cardCount);
     }
 
     @Test

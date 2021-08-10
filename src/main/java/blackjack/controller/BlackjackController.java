@@ -1,9 +1,9 @@
 package blackjack.controller;
 
-import blackjack.domain.game.DeckGenerator;
-import blackjack.domain.game.RandomDeckGenerator;
+import blackjack.domain.deck.DeckGenerator;
+import blackjack.domain.deck.RandomDeckGenerator;
 import blackjack.domain.participant.Player;
-import blackjack.domain.prize.ParticipantsPrize;
+import blackjack.domain.profit.ParticipantsProfit;
 import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 import blackjack.dto.PlayerInput;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static blackjack.exception.ExceptionMessage.INVALID_BET_AMOUNT_MESSAGE;
-import static blackjack.exception.ExceptionMessage.INVALID_CARD_KEY_MESSAGE;
+import static blackjack.exception.ExceptionMessage.INVALID_KEY_MESSAGE;
 
 public class BlackjackController {
 
@@ -30,7 +30,7 @@ public class BlackjackController {
         } catch (NumberFormatException e) {
             OutputView.printError(INVALID_BET_AMOUNT_MESSAGE);
         } catch (NoSuchElementException e) {
-            OutputView.printError(INVALID_CARD_KEY_MESSAGE);
+            OutputView.printError(INVALID_KEY_MESSAGE);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             OutputView.printError(e.getMessage());
         }
@@ -72,7 +72,7 @@ public class BlackjackController {
         ParticipantsDto finalParticipants = blackjackService.getFinalParticipants();
         OutputView.printFinalHands(finalParticipants);
 
-        ParticipantsPrize participantsPrize = blackjackService.getPrizeResults();
-        OutputView.printPrizeResults(participantsPrize);
+        ParticipantsProfit participantsProfit = blackjackService.getProfitResults();
+        OutputView.printPrizeResults(participantsProfit);
     }
 }

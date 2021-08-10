@@ -1,9 +1,9 @@
-package blackjack.domain.prize;
+package blackjack.domain.profit;
 
-public class DealerPrize {
+public class DealerProfit {
     private final int profit;
 
-    public DealerPrize(int tableTotalBetAmount, int playersTotalPrizeAmount) {
+    public DealerProfit(int tableTotalBetAmount, int playersTotalPrizeAmount) {
         this.profit = tableTotalBetAmount - playersTotalPrizeAmount;
     }
 

@@ -1,8 +1,8 @@
 package blackjack.view;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.prize.PlayerPrize;
-import blackjack.domain.prize.ParticipantsPrize;
+import blackjack.domain.profit.ParticipantsProfit;
+import blackjack.domain.profit.PlayerProfit;
 import blackjack.dto.DealerDto;
 import blackjack.dto.FinalDealerDto;
 import blackjack.dto.ParticipantsDto;
@@ -82,16 +82,16 @@ public class OutputView {
                         player.getRankSum()));
     }
 
-    public static void printPrizeResults(ParticipantsPrize participantsPrize) {
+    public static void printPrizeResults(ParticipantsProfit participantsProfit) {
         System.out.println();
         System.out.println("## 최종 수익");
-        System.out.printf(PARTICIPANTS_PROFIT, "딜러", participantsPrize.getDealerProfit());
-        printPlayersPrize(participantsPrize.getPlayersPrize());
+        System.out.printf(PARTICIPANTS_PROFIT, "딜러", participantsProfit.getDealerProfit());
+        printPlayersPrize(participantsProfit.getPlayersProfit());
     }
 
-    private static void printPlayersPrize(List<PlayerPrize> playersPrize) {
-        playersPrize.forEach(playerPrize ->
-                System.out.printf(PARTICIPANTS_PROFIT, playerPrize.getPlayerName(), playerPrize.getProfit()));
+    private static void printPlayersPrize(List<PlayerProfit> playersPrize) {
+        playersPrize.forEach(playerProfit ->
+                System.out.printf(PARTICIPANTS_PROFIT, playerProfit.getPlayerName(), playerProfit.getProfit()));
     }
 
     public static void printDealerBlackjack() {

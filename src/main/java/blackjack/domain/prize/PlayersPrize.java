@@ -1,33 +1,34 @@
 package blackjack.domain.prize;
 
-import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
+import blackjack.domain.participant.Player;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class PlayersPrize {
-    private final List<PlayerPrize> playerPrizes;
+    private final Map<String, Prize> prizes;
 
-    public PlayersPrize(Table table) {
-        this.playerPrizes = Collections.unmodifiableList(findPlayersPrize(table));
+    public PlayersPrize(List<Player> players, Dealer dealer) {
+        Map<String, Prize> map = new HashMap<>();
+        players.forEach(player -> {
+            Prize prize = Prize.of(player, dealer);
+            map.put(player.getName(), prize);
+        });
+
+        this.prizes = Collections.unmodifiableMap(map);
     }
 
-    private List<PlayerPrize> findPlayersPrize(Table table) {
-        Dealer dealer = table.getDealer();
-        return table.getPlayers().stream()
-                .map(player -> new PlayerPrize(player, dealer))
-                .collect(Collectors.toList());
+    public Collection<String> getPlayerNames() {
+        return prizes.keySet();
     }
 
-    public int calculateTotalAmount() {
-        return playerPrizes.stream()
-                .mapToInt(PlayerPrize::getReceiveAmount)
-                .sum();
-    }
+    public Prize getPrize(String playerName) {
+        Prize prize = prizes.get(playerName);
 
-    public List<PlayerPrize> getPlayerPrizes() {
-        return playerPrizes;
+        if (Objects.isNull(prize)) {
+            throw new NoSuchElementException();
+        }
+
+        return prize;
     }
 }

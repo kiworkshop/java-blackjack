@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static blackjack.domain.fixture.TestCard.*;
-import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
+import static blackjack.domain.table.Table.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DealerTest {

@@ -1,7 +1,6 @@
-package blackjack.domain.fixture;
+package blackjack.domain.deck;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.game.DeckGenerator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

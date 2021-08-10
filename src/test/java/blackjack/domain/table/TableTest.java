@@ -1,7 +1,8 @@
-package blackjack.domain.game;
+package blackjack.domain.table;
 
 import blackjack.domain.card.Card;
-import blackjack.domain.fixture.TestDeckGenerator;
+import blackjack.domain.deck.DeckGenerator;
+import blackjack.domain.deck.TestDeckGenerator;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.dto.PlayerInput;
@@ -12,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static blackjack.domain.fixture.TestCard.*;
-import static blackjack.domain.fixture.TestDeckGenerator.TEST_DECK_INITIAL_SIZE;
-import static blackjack.domain.game.Table.INITIAL_DEAL_COUNT;
+import static blackjack.domain.table.Table.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TableTest {
@@ -36,8 +36,6 @@ class TableTest {
 
         players.forEach(player ->
                 assertThat(player.countHands()).isEqualTo(INITIAL_DEAL_COUNT));
-        assertThat(table.getDeckSize())
-                .isEqualTo(TEST_DECK_INITIAL_SIZE - INITIAL_DEAL_COUNT * participantCount);
     }
 
     @Test
@@ -101,20 +99,6 @@ class TableTest {
 
         // then
         assertThat(isBlackjack).isFalse();
-    }
-
-    @Test
-    @DisplayName("전체 플레이어의 배팅 금액 합을 구한다.")
-    void total_bet_amount() {
-        // given
-        Table table = generateTestTable();
-        int expectedBetAmount = 2000;
-
-        // when
-        int totalBetAmount = table.calculateTotalBetAmount();
-
-        // then
-        assertThat(totalBetAmount).isEqualTo(expectedBetAmount);
     }
 
     private Table generateTestTable() {

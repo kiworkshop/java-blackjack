@@ -1,11 +1,10 @@
 package blackjack.domain.card;
 
 public class AceCard {
+    public static final String SIGNATURE = "A";
     private static final int HARD_HAND = 1;
     private static final int SOFT_HAND = 11;
-
     public static final int DEFAULT_RANK = SOFT_HAND;
-    public static final String SIGNATURE = "A";
 
     private AceCard() {
     }

@@ -1,14 +1,14 @@
 package blackjack.service;
 
-import blackjack.domain.game.DeckGenerator;
-import blackjack.domain.game.Table;
+import blackjack.domain.deck.DeckGenerator;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
-import blackjack.domain.prize.ParticipantsPrize;
+import blackjack.domain.profit.ParticipantsProfit;
+import blackjack.domain.table.Table;
 import blackjack.dto.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlackjackService {
     private final Table table;
@@ -29,9 +29,9 @@ public class BlackjackService {
     }
 
     private List<PlayerDto> generatePlayerDto() {
-        List<PlayerDto> playersDto = new ArrayList<>();
-        table.getPlayers().forEach(player -> playersDto.add(new PlayerDto(player)));
-        return playersDto;
+        return table.getPlayers().stream()
+                .map(PlayerDto::new)
+                .collect(Collectors.toList());
     }
 
     public boolean isDealerBlackjack() {
@@ -58,8 +58,8 @@ public class BlackjackService {
         return new FinalDealerDto(dealer);
     }
 
-    public ParticipantsPrize getPrizeResults() {
-        return new ParticipantsPrize(table);
+    public ParticipantsProfit getProfitResults() {
+        return table.calculateParticipantsProfit();
     }
 
     public List<Player> getPlayers() {

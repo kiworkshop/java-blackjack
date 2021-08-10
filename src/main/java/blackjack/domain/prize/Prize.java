@@ -4,7 +4,7 @@ import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.HandsStatus;
 import blackjack.domain.participant.Player;
 
-import static blackjack.domain.game.Table.BLACKJACK_RANK;
+import static blackjack.domain.table.Table.BLACKJACK_RANK;
 
 public enum Prize {
     BLACKJACK(2.5),

@@ -1,10 +1,11 @@
-package blackjack.domain.game;
+package blackjack.domain.deck;
 
 import blackjack.domain.card.Card;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Deck {
     public static final int TOTAL_CARD_COUNT = 52;
@@ -16,11 +17,9 @@ public class Deck {
     }
 
     public List<Card> drawCards(int count) {
-        List<Card> deals = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            deals.add(drawCard());
-        }
-        return deals;
+        return IntStream.range(0, count)
+                .mapToObj(i -> drawCard())
+                .collect(Collectors.toList());
     }
 
     public Card drawCard() {

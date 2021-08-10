@@ -1,6 +1,6 @@
 package blackjack.domain.participant;
 
-import static blackjack.domain.game.Table.BLACKJACK_RANK;
+import static blackjack.domain.table.Table.BLACKJACK_RANK;
 
 public enum HandsStatus {
     BLACKJACK,

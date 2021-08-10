@@ -28,13 +28,15 @@ class BustTest {
     }
 
     @Test
-    @DisplayName("stay하면 런타임에러를 리턴한다")
+    @DisplayName("stay하면 Bust를 반환한다")
     void stay() {
         //given
         State state = new Bust();
 
-        //when //then
-        assertThatThrownBy(() -> state.stay()).isInstanceOf(RuntimeException.class);
+        //when
+        State result = state.stay();
+        // then
+        assertThat(result).isInstanceOf(Bust.class);
 
     }
 

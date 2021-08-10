@@ -1,14 +1,13 @@
 package blackjack.domain.card;
 
-public class AceCard extends Card {
-
+public class AceCard {
     private static final int HARD_HAND = 1;
     private static final int SOFT_HAND = 11;
-    private static final String SIGNATURE = "A";
-    public static final int ACE_CARD_DEFAULT_RANK = HARD_HAND;
 
-    public AceCard(Suit suit) {
-        super(suit, ACE_CARD_DEFAULT_RANK, SIGNATURE);
+    public static final int DEFAULT_RANK = SOFT_HAND;
+    public static final String SIGNATURE = "A";
+
+    private AceCard() {
     }
 
     public static int softOrHardSum(int sumExceptAceCards, int aceCardCount) {
@@ -31,5 +30,4 @@ public class AceCard extends Card {
     private static int hardSum(int sumExceptAceCards, int aceCardCount) {
         return sumExceptAceCards + (aceCardCount * HARD_HAND);
     }
-
 }

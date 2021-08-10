@@ -12,7 +12,7 @@ public class Deck {
     private final Deque<Card> cards;
 
     public Deck(DeckGenerator deckGenerator) {
-        this.cards = deckGenerator.generateCards();
+        this.cards = deckGenerator.generateDeck();
     }
 
     public List<Card> drawCards(int count) {

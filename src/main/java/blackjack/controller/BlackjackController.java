@@ -12,8 +12,10 @@ import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static blackjack.exception.ExceptionMessage.INVALID_BET_AMOUNT_MESSAGE;
+import static blackjack.exception.ExceptionMessage.INVALID_CARD_KEY_MESSAGE;
 
 public class BlackjackController {
 
@@ -27,6 +29,8 @@ public class BlackjackController {
             gameResult();
         } catch (NumberFormatException e) {
             OutputView.printError(INVALID_BET_AMOUNT_MESSAGE);
+        } catch (NoSuchElementException e) {
+            OutputView.printError(INVALID_CARD_KEY_MESSAGE);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             OutputView.printError(e.getMessage());
         }

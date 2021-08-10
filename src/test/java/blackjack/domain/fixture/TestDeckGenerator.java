@@ -13,7 +13,7 @@ public class TestDeckGenerator implements DeckGenerator {
     public static final int TEST_DECK_INITIAL_SIZE = 10;
 
     @Override
-    public Deque<Card> generateCards() {
+    public Deque<Card> generateDeck() {
         Deque<Card> cards = new ArrayDeque<>();
 
         cards.offerLast(ACE_1);

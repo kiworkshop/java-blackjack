@@ -23,13 +23,13 @@ public class GameService {
         return participant;
     }
 
-    public GameTotalReuslt getGameTotalResult(Dealer dealer, List<Player> players) {
+    public GameTotalResult getGameTotalResult(Dealer dealer, List<Player> players) {
         List<GamePlayerResult> playerResults = new ArrayList<>();
         players.forEach(player -> {
             playerResults.add(new GamePlayerResult(player, dealer));
         });
 
-        return new GameTotalReuslt(playerResults, dealer);
+        return new GameTotalResult(playerResults, dealer);
     }
 
     public GameBettingResult getGameBettingResult(Dealer dealer, List<Player> players) {

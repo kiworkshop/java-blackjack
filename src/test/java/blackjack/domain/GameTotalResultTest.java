@@ -34,10 +34,10 @@ public class GameTotalResultTest {
 
         //when
         ;
-        GameTotalReuslt gameTotalReuslt = new GameTotalReuslt(gamePlayerResults, dealer);
+        GameTotalResult gameTotalResult = new GameTotalResult(gamePlayerResults, dealer);
         //then
-        assertThat(gameTotalReuslt.getDealerWinCount()).isEqualTo(1);
-        assertThat(gameTotalReuslt.getDealerLoseCount()).isEqualTo(1);
-        assertThat(gameTotalReuslt.getDealerTieCount()).isEqualTo(0);
+        assertThat(gameTotalResult.getDealerWinCount()).isEqualTo(1);
+        assertThat(gameTotalResult.getDealerLoseCount()).isEqualTo(1);
+        assertThat(gameTotalResult.getDealerTieCount()).isEqualTo(0);
     }
 }

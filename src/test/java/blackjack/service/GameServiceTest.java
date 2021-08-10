@@ -2,7 +2,7 @@ package blackjack.service;
 
 import blackjack.domain.Card;
 import blackjack.domain.Dealer;
-import blackjack.domain.GameTotalReuslt;
+import blackjack.domain.GameTotalResult;
 import blackjack.domain.Player;
 import blackjack.enums.Denomination;
 import blackjack.enums.Suit;
@@ -86,12 +86,12 @@ class GameServiceTest {
         dealer.hit(new Card(Denomination.EIGHT, Suit.CLUB));
         dealer.stay();
         //when
-        GameTotalReuslt gameTotalReuslt = gameService.getGameTotalResult(dealer, players);
+        GameTotalResult gameTotalResult = gameService.getGameTotalResult(dealer, players);
 
         //then
-        assertThat(gameTotalReuslt.getDealerLoseCount()).isEqualTo(0);
-        assertThat(gameTotalReuslt.getDealerWinCount()).isEqualTo(1);
-        assertThat(gameTotalReuslt.getPlayerResults().get(0).getResult()).isEqualTo("패");
+        assertThat(gameTotalResult.getDealerLoseCount()).isEqualTo(0);
+        assertThat(gameTotalResult.getDealerWinCount()).isEqualTo(1);
+        assertThat(gameTotalResult.getPlayerResults().get(0).getResult()).isEqualTo("패");
 
     }
 

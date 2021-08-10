@@ -3,13 +3,13 @@ package blackjack.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameTotalReuslt {
+public class GameTotalResult {
     List<GamePlayerResult> playerResults = new ArrayList<>();
     private int dealerWinCount;
     private int dealerLoseCount;
     private int dealerTieCount;
 
-    public GameTotalReuslt(List<GamePlayerResult> playerResults, Dealer dealer) {
+    public GameTotalResult(List<GamePlayerResult> playerResults, Dealer dealer) {
         this.playerResults = playerResults;
         dealerWinCount = (int) playerResults.stream()
                 .filter(gamePlayerResult -> gamePlayerResult.getResult().equals("패"))

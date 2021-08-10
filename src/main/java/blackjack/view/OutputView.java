@@ -26,11 +26,11 @@ public class OutputView {
         System.out.printf("%s카드: %s - 결과: %d\n", participant.getName(), String.join(COMMA_DELIMITER, cardNames), participant.getScore());
     }
 
-    public static void printTotalResult(GameTotalReuslt gameTotalReuslt) {
+    public static void printTotalResult(GameTotalResult gameTotalResult) {
         System.out.println();
         System.out.println("## 최종 승패");
-        System.out.printf("딜러: %d승 %d패\n", gameTotalReuslt.getDealerWinCount(), gameTotalReuslt.getDealerLoseCount());
-        gameTotalReuslt.getPlayerResults().forEach(OutputView::printPlayersResult);
+        System.out.printf("딜러: %d승 %d패\n", gameTotalResult.getDealerWinCount(), gameTotalResult.getDealerLoseCount());
+        gameTotalResult.getPlayerResults().forEach(OutputView::printPlayersResult);
     }
 
     public static void printPlayersCards(Player player) {

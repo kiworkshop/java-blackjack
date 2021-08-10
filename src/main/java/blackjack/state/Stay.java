@@ -2,7 +2,7 @@ package blackjack.state;
 
 import blackjack.domain.Cards;
 
-public class Stay implements State{
+public class Stay implements State {
     @Override
     public State hit(Cards cards) {
         throw new RuntimeException("더이상 hit이 불가능합니다.");

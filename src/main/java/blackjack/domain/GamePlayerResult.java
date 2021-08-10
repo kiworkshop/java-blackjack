@@ -36,35 +36,36 @@ public class GamePlayerResult {
         return "패";
     }
 
-    public double getEarnMoney(){
+    public double getEarnMoney() {
         //블랙잭
-        if(isBlackJack()){
-            return player.getBettingMoney()*1.5;
+        if (isBlackJack()) {
+            return player.getBettingMoney() * 1.5;
         }
         //승
-        if(isWin()){
-            return player.getBettingMoney()*1;
+        if (isWin()) {
+            return player.getBettingMoney() * 1;
         }
         //패
-        if(isLosebyBlackJack() || isLose()){
-            return player.getBettingMoney()*-1;
+        if (isLosebyBlackJack() || isLose()) {
+            return player.getBettingMoney() * -1;
         }
         //무
         return 0;
     }
 
-    private boolean isBlackJack(){
+    private boolean isBlackJack() {
         return !dealer.isBlackjack() && player.isBlackjack();
     }
 
-    private boolean isWin(){
+    private boolean isWin() {
         return dealer.getScore() < player.getScore() && !player.isBust();
     }
-    private  boolean isLosebyBlackJack(){
+
+    private boolean isLosebyBlackJack() {
         return (dealer.isBlackjack() && !player.isBlackjack());
     }
 
-    private boolean isLose(){
+    private boolean isLose() {
         return (dealer.getScore() > player.getScore() || player.isBust());
     }
 }

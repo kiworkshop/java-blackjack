@@ -1,7 +1,5 @@
 package blackjack.domain;
 
-import blackjack.enums.Denomination;
-import blackjack.enums.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

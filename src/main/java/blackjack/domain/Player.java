@@ -11,6 +11,7 @@ public class Player extends Participant {
         super(name);
         bettingMoney = 0;
     }
+
     public Player(String name, int bettingMoney) {
         super(name);
         this.bettingMoney = bettingMoney;

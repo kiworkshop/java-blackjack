@@ -15,15 +15,16 @@ public class Cards {
         return cards;
     }
 
-    public boolean isBust(){
+    public boolean isBust() {
         return getCardScore() > GameService.BLACKJACK;
     }
-    public boolean isStay(){
-        return getCardScore() == GameService.BLACKJACK &&  cards.size() > 2;
+
+    public boolean isStay() {
+        return getCardScore() == GameService.BLACKJACK && cards.size() > 2;
     }
 
-    public boolean isBlackJack(){
-        return (getCardScore() == GameService.BLACKJACK) && hasAce() &&  cards.size() == 2;
+    public boolean isBlackJack() {
+        return (getCardScore() == GameService.BLACKJACK) && hasAce() && cards.size() == 2;
     }
 
     public int getCardScore() {

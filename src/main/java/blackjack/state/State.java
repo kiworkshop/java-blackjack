@@ -1,9 +1,6 @@
 package blackjack.state;
 
-import blackjack.domain.Card;
 import blackjack.domain.Cards;
-
-import java.util.List;
 
 public interface State {
 

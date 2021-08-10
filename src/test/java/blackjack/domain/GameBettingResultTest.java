@@ -20,7 +20,7 @@ public class GameBettingResultTest {
         player.hit(new Card(Denomination.EIGHT, Suit.CLUB));
         player.hit(new Card(Denomination.TWO, Suit.CLUB));
         player.stay();
-        Player player2 = new Player("pibo",1000);
+        Player player2 = new Player("pibo", 1000);
         player2.hit(new Card(Denomination.Q, Suit.CLUB));
         player2.hit(new Card(Denomination.A, Suit.CLUB));
         Dealer dealer = new Dealer();

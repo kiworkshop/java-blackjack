@@ -19,6 +19,7 @@ public class GameController {
         GameController gameController = new GameController();
         gameController.play();
     }
+
     public void play() {
         setUp();
         setFirstTwoCards();
@@ -33,7 +34,7 @@ public class GameController {
 
         List<String> playersNames = InputView.getPlayerNames();
         playersNames.forEach(
-                playersName -> players.add(new Player(playersName,InputView.getBettingMoney(playersName)))
+                playersName -> players.add(new Player(playersName, InputView.getBettingMoney(playersName)))
         );
     }
 
@@ -43,8 +44,8 @@ public class GameController {
         OutputView.printFirstTwoCards(dealer, players);
     }
 
-    private void hitOrStay(Player player){
-        if(player.isBust() || player.isBlackjack()) {
+    private void hitOrStay(Player player) {
+        if (player.isBust() || player.isBlackjack()) {
             return;
         }
         String answer = InputView.getAdditionalCard(player);
@@ -52,16 +53,17 @@ public class GameController {
         while (answer.equals("Y")) {
             gameService.hit(player);
             OutputView.printPlayersCards(player);
-            if(player.isBust() || player.isBlackjack()) break;
+            if (player.isBust() || player.isBlackjack()) break;
             answer = InputView.getAdditionalCard(player);
             cards = new Cards(player.getCards());
         }
-        if(!player.isBust() || !player.isBlackjack()) {
+        if (!player.isBust() || !player.isBlackjack()) {
             player.stay();
         }
     }
+
     private void playPlayerTurns() {
-        players.forEach(player->hitOrStay(player));
+        players.forEach(player -> hitOrStay(player));
     }
 
     private void playDealerTurn() {
@@ -69,7 +71,7 @@ public class GameController {
             gameService.hit(dealer);
             OutputView.printDealerAdditionCard();
         }
-        if(!dealer.isBust() || !dealer.isBlackjack()){
+        if (!dealer.isBust() || !dealer.isBlackjack()) {
             dealer.stay();
         }
     }
@@ -85,6 +87,7 @@ public class GameController {
     private void printGameResult() {
         OutputView.printTotalResult(gameService.getGameTotalResult(dealer, players));
     }
+
     private void printBettingResult() {
         OutputView.printBettingResult(gameService.getGameBettingResult(dealer, players));
     }

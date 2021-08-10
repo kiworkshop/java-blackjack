@@ -28,28 +28,33 @@ public class Participant {
         return name;
     }
 
-    public void addFirstTwoCards(Cards cards){
+    public void addFirstTwoCards(Cards cards) {
         this.cards.addAll(cards.getCards());
         this.state = state.hit(cards);
     }
-    public void hit(Card card){
+
+    public void hit(Card card) {
         cards.add(card);
         this.state = state.hit(new Cards(cards));
     }
-    public boolean isBlackjack(){
+
+    public boolean isBlackjack() {
         return this.state instanceof BlackJack;
     }
-    public boolean isBust(){
+
+    public boolean isBust() {
         return this.state instanceof Bust;
     }
-    public void stay(){
+
+    public void stay() {
         this.state = state.stay();
     }
 
-    public int getScore(){
+    public int getScore() {
         return state.getScore(new Cards(cards));
     }
-    public int getSum(){
+
+    public int getSum() {
         Cards cards = new Cards(this.cards);
         return cards.getCardScore();
     }

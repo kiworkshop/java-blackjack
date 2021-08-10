@@ -23,9 +23,14 @@ public class GameTotalResultTest {
         Player player2 = new Player("pibo");
         player2.hit(new Card(Denomination.Q, Suit.CLUB));
         player2.hit(new Card(Denomination.A, Suit.CLUB));
+        Dealer dealer = new Dealer();
+        dealer.hit(new Card(Denomination.TEN, Suit.CLUB));
+        dealer.hit(new Card(Denomination.SEVEN, Suit.HEART));
+        dealer.stay();
+
         List<GamePlayerResult> gamePlayerResults = new ArrayList<>();
-        gamePlayerResults.add(new GamePlayerResult(player, 17));
-        gamePlayerResults.add(new GamePlayerResult(player2, 17));
+        gamePlayerResults.add(new GamePlayerResult(player, dealer));
+        gamePlayerResults.add(new GamePlayerResult(player2, dealer));
 
         //when
         ;

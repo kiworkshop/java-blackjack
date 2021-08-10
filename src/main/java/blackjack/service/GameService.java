@@ -26,7 +26,7 @@ public class GameService {
     public GameTotalReuslt getGameTotalResult(Dealer dealer, List<Player> players) {
         List<GamePlayerResult> playerResults = new ArrayList<>();
         players.forEach(player -> {
-            playerResults.add(new GamePlayerResult(player, dealer.getScore()));
+            playerResults.add(new GamePlayerResult(player, dealer));
         });
 
         return new GameTotalReuslt(playerResults);

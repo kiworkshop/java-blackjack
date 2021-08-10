@@ -6,11 +6,15 @@ public class GamePlayerResult {
     private String name;
     private int score;
     private String result;
+    private Player player;
+    private Dealer dealer;
 
-    public GamePlayerResult(Player player, int dealerScore) {
+    public GamePlayerResult(Player player, Dealer dealer) {
+        this.player = player;
+        this.dealer = dealer;
         this.name = player.getName();
         this.score = player.getScore();
-        this.result = getResult(dealerScore);
+        this.result = getResult(dealer.getScore());
     }
 
     public String getResult() {
@@ -32,4 +36,35 @@ public class GamePlayerResult {
         return "패";
     }
 
+    public double getEarnMoney(){
+        //블랙잭
+        if(isBlackJack()){
+            return player.getBettingMoney()*1.5;
+        }
+        //승
+        if(isWin()){
+            return player.getBettingMoney()*1;
+        }
+        //패
+        if(isLosebyBlackJack() || isLose()){
+            return player.getBettingMoney()*-1;
+        }
+        //무
+        return 0;
+    }
+
+    private boolean isBlackJack(){
+        return !dealer.isBlackjack() && player.isBlackjack();
+    }
+
+    private boolean isWin(){
+        return dealer.getScore() < player.getScore() && !player.isBust();
+    }
+    private  boolean isLosebyBlackJack(){
+        return (dealer.isBlackjack() && !player.isBlackjack());
+    }
+
+    private boolean isLose(){
+        return (dealer.getScore() > player.getScore() || player.isBust());
+    }
 }

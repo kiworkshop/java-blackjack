@@ -1,5 +1,7 @@
 package blackjack.domain;
 
+import blackjack.state.BlackJack;
+import blackjack.state.Bust;
 import blackjack.state.Hit;
 import blackjack.state.State;
 
@@ -34,7 +36,12 @@ public class Participant {
         cards.add(card);
         this.state = state.hit(new Cards(cards));
     }
-
+    public boolean isBlackjack(){
+        return this.state instanceof BlackJack;
+    }
+    public boolean isBust(){
+        return this.state instanceof Bust;
+    }
     public void stay(){
         this.state = state.stay();
     }

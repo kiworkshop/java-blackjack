@@ -1,5 +1,6 @@
 package blackjack.controller;
 
+import blackjack.domain.Cards;
 import blackjack.domain.Dealer;
 import blackjack.domain.Player;
 import blackjack.service.GameService;
@@ -42,10 +43,13 @@ public class GameController {
 
     private void hitOrStay(Player player){
         String answer = InputView.getAdditionalCard(player);
+        Cards cards = new Cards(player.getCards());
         while (answer.equals("Y")) {
             gameService.hit(player);
             OutputView.printPlayersCards(player);
             answer = InputView.getAdditionalCard(player);
+            cards = new Cards(player.getCards());
+
         }
         player.stay();
     }

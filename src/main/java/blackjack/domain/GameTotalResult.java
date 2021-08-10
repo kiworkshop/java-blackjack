@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameTotalResult {
-    List<GamePlayerResult> playerResults = new ArrayList<>();
+    List<GamePlayerResult> playerResults;
     private int dealerWinCount;
     private int dealerLoseCount;
     private int dealerTieCount;

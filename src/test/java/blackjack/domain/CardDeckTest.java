@@ -16,7 +16,7 @@ public class CardDeckTest {
         CardDeck cardDeck = new CardDeck();
 
         //when
-        int size = cardDeck.getSize();
+        int size = cardDeck.getIndex();
 
         //then
         assertThat(size).isEqualTo(52);

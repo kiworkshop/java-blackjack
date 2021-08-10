@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CardDeck {
-    private int size;
+    private int index;
     private static final List<Card> CARD_DECK_CACHE = new ArrayList<>();
 
     static {
@@ -24,18 +24,20 @@ public class CardDeck {
     }
 
     public Card getAdditionalCard() {
-        if (size < 1) {
+        if (index < 1) {
             throw new IndexOutOfBoundsException("더이상 카드가 없습니다.");
         }
-        return CARD_DECK_CACHE.get(--size);
+        return CARD_DECK_CACHE.get(--index);
     }
 
-    public int getSize() {
-        return size;
+    public int getIndex() {
+        return index;
     }
 
-    private void init() {
-        size = CARD_DECK_CACHE.size();
+    private void init(
+
+    ) {
+        index = CARD_DECK_CACHE.size();
         suffleCard();
     }
 

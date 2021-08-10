@@ -29,6 +29,14 @@ public class GameService {
             playerResults.add(new GamePlayerResult(player, dealer));
         });
 
-        return new GameTotalReuslt(playerResults);
+        return new GameTotalReuslt(playerResults, dealer);
+    }
+
+    public GameBettingResult getGameBettingResult(Dealer dealer, List<Player> players) {
+        List<GamePlayerResult> playerResults = new ArrayList<>();
+        players.forEach(player -> {
+            playerResults.add(new GamePlayerResult(player, dealer));
+        });
+        return new GameBettingResult(playerResults);
     }
 }

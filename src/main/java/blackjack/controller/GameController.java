@@ -26,9 +26,11 @@ public class GameController {
         playDealerTurn();
         printPlayersScore();
         printGameResult();
+        printBettingResult();
     }
 
     private void setUp() {
+
         List<String> playersNames = InputView.getPlayerNames();
         playersNames.forEach(
                 playersName -> players.add(new Player(playersName,InputView.getBettingMoney(playersName)))
@@ -42,27 +44,34 @@ public class GameController {
     }
 
     private void hitOrStay(Player player){
+        if(player.isBust() || player.isBlackjack()) {
+            return;
+        }
         String answer = InputView.getAdditionalCard(player);
         Cards cards = new Cards(player.getCards());
         while (answer.equals("Y")) {
             gameService.hit(player);
             OutputView.printPlayersCards(player);
+            if(player.isBust() || player.isBlackjack()) break;
             answer = InputView.getAdditionalCard(player);
             cards = new Cards(player.getCards());
-
         }
-        player.stay();
+        if(!player.isBust() || !player.isBlackjack()) {
+            player.stay();
+        }
     }
     private void playPlayerTurns() {
         players.forEach(player->hitOrStay(player));
     }
 
     private void playDealerTurn() {
-        while (dealer.isUnder16()) {
+        if (dealer.isUnder16()) {
             gameService.hit(dealer);
             OutputView.printDealerAdditionCard();
         }
-        dealer.stay();
+        if(!dealer.isBust() || !dealer.isBlackjack()){
+            dealer.stay();
+        }
     }
 
     private void printPlayersScore() {
@@ -75,5 +84,8 @@ public class GameController {
 
     private void printGameResult() {
         OutputView.printTotalResult(gameService.getGameTotalResult(dealer, players));
+    }
+    private void printBettingResult() {
+        OutputView.printBettingResult(gameService.getGameBettingResult(dealer, players));
     }
 }

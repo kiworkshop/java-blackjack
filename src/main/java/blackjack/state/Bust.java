@@ -14,7 +14,7 @@ public class Bust implements State{
 
     @Override
     public State stay() {
-        throw new RuntimeException("더이상 stay가 불가능합니다.");
+        return new Bust();
     }
 
     @Override

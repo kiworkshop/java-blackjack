@@ -5,11 +5,11 @@ import java.util.List;
 
 public class GameTotalReuslt {
     List<GamePlayerResult> playerResults = new ArrayList<>();
-    int dealerWinCount;
-    int dealerLoseCount;
-    int dealerTieCount;
+    private int dealerWinCount;
+    private int dealerLoseCount;
+    private int dealerTieCount;
 
-    public GameTotalReuslt(List<GamePlayerResult> playerResults) {
+    public GameTotalReuslt(List<GamePlayerResult> playerResults, Dealer dealer) {
         this.playerResults = playerResults;
         dealerWinCount = (int) playerResults.stream()
                 .filter(gamePlayerResult -> gamePlayerResult.getResult().equals("패"))

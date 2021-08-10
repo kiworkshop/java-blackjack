@@ -41,4 +41,14 @@ public class OutputView {
     private static void printPlayersResult(GamePlayerResult gamePlayerResult) {
         System.out.printf("%s: %s\n", gamePlayerResult.getName(), gamePlayerResult.getResult());
     }
+    private static void printPlayersBettingResult(GamePlayerResult gamePlayerResult) {
+        System.out.printf("%s: %.0f\n", gamePlayerResult.getName(), gamePlayerResult.getEarnMoney());
+    }
+
+    public static void printBettingResult(GameBettingResult gameBettingResult) {
+        System.out.println();
+        System.out.println("## 최종 수익");
+        System.out.printf("딜러: %.0f\n", gameBettingResult.getDealerEarnMoney());
+        gameBettingResult.getPlayerResults().forEach(OutputView::printPlayersBettingResult);
+    }
 }

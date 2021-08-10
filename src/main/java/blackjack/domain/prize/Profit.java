@@ -10,7 +10,7 @@ public class Profit {
     }
 
     private int calculateReceiveAmount(int betAmount, Prize prize) {
-        return (int) (betAmount * prize.getMultiple());
+        return (int) (betAmount * prize.getDividendRate());
     }
 
     private int calculateProfit(int betAmount) {

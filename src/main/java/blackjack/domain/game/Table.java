@@ -40,7 +40,7 @@ public class Table {
     }
 
     public void finalDeal() {
-        while (dealer.hit()) {
+        while (dealer.needMoreCard()) {
             hit(dealer);
         }
     }

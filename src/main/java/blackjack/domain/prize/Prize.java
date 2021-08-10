@@ -12,15 +12,15 @@ public enum Prize {
     TIE(1),
     LOSE(0);
 
-    private final double multiple;
+    private final double dividendRate;
 
-    Prize(double multiple) {
-        this.multiple = multiple;
+    Prize(double dividendRate) {
+        this.dividendRate = dividendRate;
     }
 
     public static Prize of(Player player, Dealer dealer) {
-        final HandsStatus dealerStatus = HandsStatus.of(dealer);
-        final HandsStatus playerStatus = HandsStatus.of(player);
+        HandsStatus dealerStatus = HandsStatus.of(dealer);
+        HandsStatus playerStatus = HandsStatus.of(player);
 
         if (dealerStatus.isBlackjack()) {
             return findPlayerPrizeOnDealerBlackjack(playerStatus);
@@ -57,7 +57,7 @@ public enum Prize {
         return WIN;
     }
 
-    public double getMultiple() {
-        return multiple;
+    public double getDividendRate() {
+        return dividendRate;
     }
 }

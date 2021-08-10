@@ -52,7 +52,7 @@ class DealerTest {
         Dealer dealer = new Dealer(cards);
 
         //then
-        assertThat(dealer.hit()).isTrue();
+        assertThat(dealer.needMoreCard()).isTrue();
     }
 
     @Test
@@ -65,7 +65,7 @@ class DealerTest {
         Dealer dealer = new Dealer(cards);
 
         //then
-        assertThat(dealer.hit()).isFalse();
+        assertThat(dealer.needMoreCard()).isFalse();
     }
 
     @Test

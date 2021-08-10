@@ -2,11 +2,10 @@ package blackjack.domain.prize;
 
 import blackjack.domain.game.Table;
 import blackjack.domain.participant.Dealer;
-import blackjack.domain.participant.Player;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlayersPrize {
     private final List<PlayerPrize> playerPrizes;
@@ -16,13 +15,10 @@ public class PlayersPrize {
     }
 
     private List<PlayerPrize> findPlayersPrize(Table table) {
-        final Dealer dealer = table.getDealer();
-        List<PlayerPrize> playersPrize = new ArrayList<>();
-        for (Player player : table.getPlayers()) {
-            PlayerPrize playerPrize = new PlayerPrize(player, dealer);
-            playersPrize.add(playerPrize);
-        }
-        return playersPrize;
+        Dealer dealer = table.getDealer();
+        return table.getPlayers().stream()
+                .map(player -> new PlayerPrize(player, dealer))
+                .collect(Collectors.toList());
     }
 
     public int calculateTotalAmount() {

@@ -1,6 +1,7 @@
 package blackjack.domain.card;
 
 import blackjack.domain.deck.Deck;
+import blackjack.exception.NoSuchCardException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,7 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collection;
-import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -78,7 +78,7 @@ public class CardTest {
         int rank = 0;
 
         // when, then
-        assertThrows(NoSuchElementException.class, () -> {
+        assertThrows(NoSuchCardException.class, () -> {
             Card.get(suit, rank);
         });
     }

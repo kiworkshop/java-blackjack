@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static blackjack.exception.ExceptionMessage.EMPTY_DECK;
+
 public class Deck {
     public static final int TOTAL_CARD_COUNT = 52;
 
@@ -24,7 +26,7 @@ public class Deck {
 
     public Card drawCard() {
         if (cards.isEmpty()) {
-            throw new IndexOutOfBoundsException("남아있는 카드가 없습니다.");
+            throw new IndexOutOfBoundsException(EMPTY_DECK);
         }
 
         return cards.pop();

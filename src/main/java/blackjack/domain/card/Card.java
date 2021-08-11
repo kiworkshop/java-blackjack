@@ -1,5 +1,7 @@
 package blackjack.domain.card;
 
+import blackjack.exception.NoSuchCardException;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -49,10 +51,11 @@ public class Card {
     }
 
     public static Card get(Suit suit, String signature) {
-        Card card = CARD_CACHE.get(generateKey(suit, signature));
+        String key = generateKey(suit, signature);
+        Card card = CARD_CACHE.get(key);
 
         if (Objects.isNull(card)) {
-            throw new NoSuchElementException();
+            throw new NoSuchCardException(key);
         }
 
         return card;

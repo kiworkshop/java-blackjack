@@ -7,15 +7,13 @@ import blackjack.domain.profit.ParticipantsProfit;
 import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 import blackjack.dto.PlayerInput;
+import blackjack.exception.InvalidInputException;
 import blackjack.service.BlackjackService;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import static blackjack.exception.ExceptionMessage.INVALID_BET_AMOUNT_MESSAGE;
-import static blackjack.exception.ExceptionMessage.INVALID_KEY_MESSAGE;
 
 public class BlackjackController {
 
@@ -27,11 +25,7 @@ public class BlackjackController {
             initialDeal();
             deal();
             gameResult();
-        } catch (NumberFormatException e) {
-            OutputView.printError(INVALID_BET_AMOUNT_MESSAGE);
-        } catch (NoSuchElementException e) {
-            OutputView.printError(INVALID_KEY_MESSAGE);
-        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+        } catch (InvalidInputException | NoSuchElementException | IndexOutOfBoundsException e) {
             OutputView.printError(e.getMessage());
         }
     }

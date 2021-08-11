@@ -2,13 +2,13 @@ package blackjack.domain.prize;
 
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
+import blackjack.exception.NoSuchPlayerException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static blackjack.domain.fixture.TestCards.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,7 +66,7 @@ class PlayersPrizeTest {
         String playerName = "no_such_player";
 
         // when, then
-        assertThrows(NoSuchElementException.class, () -> {
+        assertThrows(NoSuchPlayerException.class, () -> {
             playersPrize.getPrize(playerName);
         });
     }

@@ -1,6 +1,6 @@
 package blackjack.dto;
 
-import static blackjack.exception.ExceptionMessage.INVALID_BET_AMOUNT_MESSAGE;
+import blackjack.exception.InvalidInputException;
 
 public class PlayerInput {
     public static final int MINIMUM_BET_AMOUNT = 1;
@@ -17,7 +17,7 @@ public class PlayerInput {
 
     private void validateBetAmount(int betAmount) {
         if (betAmount < MINIMUM_BET_AMOUNT) {
-            throw new IllegalArgumentException(INVALID_BET_AMOUNT_MESSAGE);
+            throw InvalidInputException.NEGATIVE_BET_AMOUNT;
         }
     }
 

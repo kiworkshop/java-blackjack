@@ -1,5 +1,6 @@
 package blackjack.dto;
 
+import blackjack.exception.InvalidInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class PlayerInputTest {
         String name = "name";
 
         // when, then
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(InvalidInputException.class, () -> {
             new PlayerInput(name, betAmount);
         });
     }

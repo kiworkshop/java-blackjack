@@ -2,6 +2,7 @@ package blackjack.domain.prize;
 
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
+import blackjack.exception.NoSuchPlayerException;
 
 import java.util.*;
 
@@ -26,7 +27,7 @@ public class PlayersPrize {
         Prize prize = prizes.get(playerName);
 
         if (Objects.isNull(prize)) {
-            throw new NoSuchElementException();
+            throw new NoSuchPlayerException(playerName);
         }
 
         return prize;

@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DeckTest {
-
     @Test
     @DisplayName("총 52장의 카드를 갖는다.")
     void generator() {

@@ -1,12 +1,12 @@
 package blackjack.domain.table;
 
 import blackjack.dto.PlayerInput;
+import blackjack.exception.NoSuchPlayerException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,20 +36,9 @@ class BettingTableTest {
         String playerName = "no_such_player";
 
         // when, then
-        assertThrows(NoSuchElementException.class, () -> {
+        assertThrows(NoSuchPlayerException.class, () -> {
             bettingTable.getBetAmount(playerName);
         });
-    }
-
-    @Test
-    @DisplayName("전체 플레이어의 이익을 계산한다.")
-    void calculate_players_profit() {
-        // given
-
-
-        // when
-
-        // then
     }
 
     @Test

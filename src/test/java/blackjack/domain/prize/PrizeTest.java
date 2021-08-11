@@ -15,7 +15,21 @@ import static blackjack.domain.fixture.TestCards.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PrizeTest {
-    private static final String PLAYER_NAME = "name";
+
+    @ParameterizedTest
+    @MethodSource("generateDealerAndPlayerCards")
+    @DisplayName("딜러와 플레이어가 주어지면 플레이어의 상을 찾는다.")
+    void find_player_prize(List<Card> dealerCards, List<Card> playerCards, Prize expectedPrize) {
+        // given
+        Dealer dealer = new Dealer(dealerCards);
+        Player player = new Player("name", playerCards);
+
+        // when
+        Prize prize = Prize.of(player, dealer);
+
+        // then
+        assertThat(prize).isEqualTo(expectedPrize);
+    }
 
     private static Stream<Arguments> generateDealerAndPlayerCards() {
         return Stream.of(
@@ -41,20 +55,5 @@ class PrizeTest {
                 Arguments.of(holdCardsForLose(), holdCardsForWin(), Prize.WIN),
                 Arguments.of(holdCardsForWin(), holdCardsForLose(), Prize.LOSE)
         );
-    }
-
-    @ParameterizedTest
-    @MethodSource("generateDealerAndPlayerCards")
-    @DisplayName("딜러와 플레이어가 주어지면 플레이어의 상을 찾는다.")
-    void find_player_prize(List<Card> dealerCards, List<Card> playerCards, Prize expectedPrize) {
-        // given
-        Dealer dealer = new Dealer(dealerCards);
-        Player player = new Player(PLAYER_NAME, playerCards);
-
-        // when
-        Prize prize = Prize.of(player, dealer);
-
-        // then
-        assertThat(prize).isEqualTo(expectedPrize);
     }
 }

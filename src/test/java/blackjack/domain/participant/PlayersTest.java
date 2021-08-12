@@ -149,7 +149,8 @@ class PlayersTest {
         Card card3 = Card.from(score1, Suit.HEART);
         Card card4 = Card.from(score2, Suit.HEART);
         Card card5 = Card.from(score3, Suit.HEART);
-        Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4, card5)));
+        Person player2 = new Player("player2", new GivenCards(Arrays.asList(card3, card4)));
+        player2.hit(card5);
         Card card6 = Card.from(Score.A, Suit.DIAMOND);
         Card card7 = Card.from(Score.NINE, Suit.DIAMOND);
         GivenCards dealerCards = new GivenCards(Arrays.asList(card6, card7));
@@ -170,7 +171,8 @@ class PlayersTest {
         Card card1 = Card.from(Score.A, Suit.CLUB);
         Card card2 = Card.from(Score.FIVE, Suit.CLUB);
         Card card3 = Card.from(Score.FIVE, Suit.CLUB);
-        Person player = new Player("player", new GivenCards(Arrays.asList(card1, card2, card3)));
+        Person player = new Player("player", new GivenCards(Arrays.asList(card1, card2)));
+        player.hit(card3);
         Card card4 = Card.from(Score.A, Suit.DIAMOND);
         Card card5 = Card.from(Score.EIGHT, Suit.DIAMOND);
         Card card6 = Card.from(Score.TWO, Suit.DIAMOND);

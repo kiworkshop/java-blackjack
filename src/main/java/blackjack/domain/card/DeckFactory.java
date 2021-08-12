@@ -6,7 +6,11 @@ import java.util.List;
 
 public class DeckFactory {
 
-    private static List<Card> cardsDeck = createCardsDeck();
+    private static final List<Card> cardsDeck;
+
+    static {
+        cardsDeck = createCardsDeck();
+    }
 
     private static List<Card> createCardsDeck() {
         List<Card> cards = new ArrayList<>();

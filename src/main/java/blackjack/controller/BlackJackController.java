@@ -7,35 +7,29 @@ import blackjack.domain.participant.PlayersFactory;
 import blackjack.domain.result.GameResult;
 import blackjack.dto.DrawCardRequestDto;
 import blackjack.dto.PlayersNameInputDto;
-import blackjack.utils.StringUtil;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.List;
 
 public class BlackJackController {
-    private final List<Player> players;
-    private final Dealer dealer;
-    private final Deck deck;
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
-    public BlackJackController() {
-        PlayersNameInputDto namesInput = inputView.getPlayersName();
-        this.players = PlayersFactory.createPlayers(namesInput.getPlayersName());
-        this.dealer = new Dealer();
-        this.deck = new Deck();
-    }
-
     public void run() {
-        drawTowCards();
-        drawCardToPlayers();
-        drawCardToDealer();
+        PlayersNameInputDto namesInput = inputView.getPlayersName();
+        Dealer dealer = new Dealer();
+        Deck deck = new Deck();
+        List<Player> players = PlayersFactory.createPlayers(namesInput.getPlayersName());
+
+        drawTowCards(dealer, players, deck);
+        drawCardToPlayers(players, deck);
+        drawCardToDealer(dealer, deck);
         outputView.printCardsResult(dealer, players);
         outputView.printGameResult(GameResult.of(dealer, players));
     }
 
-    private void drawTowCards() {
+    private void drawTowCards(Dealer dealer, List<Player> players, Deck deck) {
         for (Player player : players) {
             player.receiveCard(deck.drawCard());
             player.receiveCard(deck.drawCard());
@@ -47,13 +41,13 @@ public class BlackJackController {
         outputView.printPlayersCard(players);
     }
 
-    private void drawCardToPlayers() {
+    private void drawCardToPlayers(List<Player> players, Deck deck) {
         for (Player player : players) {
-            drawCardToPlayer(player);
+            drawCardToPlayer(player, deck);
         }
     }
 
-    private void drawCardToPlayer(Player player) {
+    private void drawCardToPlayer(Player player, Deck deck) {
         DrawCardRequestDto drawCardRequest = inputView.getPlayersResponse(player);
         while (player.drawable() && drawCardRequest.isYes()) {
             player.receiveCard(deck.drawCard());
@@ -63,7 +57,7 @@ public class BlackJackController {
         }
     }
 
-    private void drawCardToDealer() {
+    private void drawCardToDealer(Dealer dealer, Deck deck) {
         while (dealer.drawable()) {
             dealer.receiveCard(deck.drawCard());
             outputView.printDealerCardGiven();

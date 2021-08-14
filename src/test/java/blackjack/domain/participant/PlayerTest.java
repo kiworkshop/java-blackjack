@@ -4,7 +4,6 @@ import blackjack.domain.card.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +18,7 @@ class PlayerTest {
     void create_() {
         //given
         String name = "name";
-        List<Card> cards = generateCards();
+        List<Card> cards = Arrays.asList(CARD_10, CARD_K);
 
         //when
         Player player = new Player(name, cards);
@@ -33,9 +32,8 @@ class PlayerTest {
     @DisplayName("카드를 여러 장 받는다.")
     void take_card() {
         //given
-        String name = "name";
-        List<Card> initialCards = generateCards();
-        Player player = new Player(name, initialCards);
+        List<Card> initialCards = Arrays.asList(CARD_2, CARD_5);
+        Player player = new Player("name", initialCards);
         List<Card> additionalCards = Arrays.asList(CARD_3, CARD_Q);
         int handSize = initialCards.size() + additionalCards.size();
 
@@ -50,11 +48,11 @@ class PlayerTest {
     @DisplayName("카드를 추가로 받지 않았는지 확인한다.")
     void never_hit() {
         //given
-        Player neverHitPlayer = new Player("name", generateCards());
-        Player hitPlayer = new Player("name", generateCards());
+        Player neverHitPlayer = new Player("name", Arrays.asList(CARD_8, CARD_K));
+        Player hitPlayer = new Player("name", Arrays.asList(CARD_3, CARD_J));
 
         //when
-        hitPlayer.take(generateCards());
+        hitPlayer.take(CARD_9);
 
         //then
         assertThat(neverHitPlayer.neverHit()).isTrue();
@@ -65,9 +63,7 @@ class PlayerTest {
     @DisplayName("블랙잭인지 확인한다.")
     void is_blackjack() {
         // given
-        List<Card> blackjackCards = new ArrayList<>();
-        blackjackCards.add(ACE_1);
-        blackjackCards.add(CARD_K);
+        List<Card> blackjackCards = Arrays.asList(CARD_K, ACE_1);
         Player player = new Player("name", blackjackCards);
 
         // when
@@ -75,12 +71,5 @@ class PlayerTest {
 
         // then
         assertThat(isBlackjack).isTrue();
-    }
-
-    private List<Card> generateCards() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(CARD_8);
-        cards.add(CARD_9);
-        return cards;
     }
 }

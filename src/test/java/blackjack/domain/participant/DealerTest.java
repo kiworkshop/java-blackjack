@@ -18,7 +18,7 @@ class DealerTest {
     @DisplayName("딜러 객체를 생성한다.")
     void create() {
         //given
-        List<Card> cards = generateHitHands();
+        List<Card> cards = Arrays.asList(CARD_10, CARD_3);
 
         //when
         Dealer dealer = new Dealer(cards);
@@ -46,7 +46,7 @@ class DealerTest {
     @DisplayName("카드 합이 16 이하인 경우 true를 리턴한다.")
     void final_deal_on_hit() {
         //given
-        List<Card> cards = generateHitHands();
+        List<Card> cards = Arrays.asList(CARD_9, CARD_7);
 
         //when
         Dealer dealer = new Dealer(cards);
@@ -59,7 +59,7 @@ class DealerTest {
     @DisplayName("카드 합이 16 초과인 경우 false를 리턴한다.")
     void final_deal_on_stand() {
         //given
-        List<Card> cards = generateStandHands();
+        List<Card> cards = Arrays.asList(CARD_10, CARD_7);
 
         //when
         Dealer dealer = new Dealer(cards);
@@ -88,7 +88,7 @@ class DealerTest {
     @DisplayName("카드를 여러 장 받는다.")
     void take_card() {
         //given
-        List<Card> initialCards = generateStandHands();
+        List<Card> initialCards = Arrays.asList(CARD_J, CARD_K);
         List<Card> additionalCards = Arrays.asList(CARD_3, CARD_Q);
         int handSize = initialCards.size() + additionalCards.size();
         Dealer dealer = new Dealer(initialCards);
@@ -98,19 +98,5 @@ class DealerTest {
 
         // then
         assertThat(dealer.countHands()).isEqualTo(handSize);
-    }
-
-    private List<Card> generateHitHands() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(CARD_2);
-        cards.add(CARD_Q);
-        return cards;
-    }
-
-    private List<Card> generateStandHands() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(CARD_J);
-        cards.add(CARD_K);
-        return cards;
     }
 }

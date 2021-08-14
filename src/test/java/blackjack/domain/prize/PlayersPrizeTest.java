@@ -49,8 +49,7 @@ class PlayersPrizeTest {
 
         // then
         assertThat(playerNames).hasSize(2)
-                .contains("a")
-                .contains("b");
+                .containsExactlyInAnyOrder("a", "b");
     }
 
     @Test

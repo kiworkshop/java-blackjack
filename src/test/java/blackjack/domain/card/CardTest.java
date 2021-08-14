@@ -33,7 +33,7 @@ public class CardTest {
         Suit suit = Suit.DIAMOND;
 
         // when
-        Card card = Card.get(suit, rank);
+        Card card = Card.of(suit, rank);
 
         // then
         assertThat(card.getRank()).isEqualTo(rank);
@@ -48,7 +48,7 @@ public class CardTest {
         Suit suit = Suit.DIAMOND;
 
         // when
-        Card card = Card.get(suit, signature);
+        Card card = Card.of(suit, signature);
 
         // then
         assertThat(card.getSignature()).isEqualTo(signature);
@@ -63,8 +63,8 @@ public class CardTest {
         int rank = 2;
 
         // when
-        Card first = Card.get(suit, rank);
-        Card second = Card.get(suit, rank);
+        Card first = Card.of(suit, rank);
+        Card second = Card.of(suit, rank);
 
         // then
         assertThat(first).isSameAs(second);
@@ -79,7 +79,7 @@ public class CardTest {
 
         // when, then
         assertThrows(NoSuchCardException.class, () -> {
-            Card.get(suit, rank);
+            Card.of(suit, rank);
         });
     }
 
@@ -88,7 +88,7 @@ public class CardTest {
     @DisplayName("메이저 카드인지 확인한다.")
     void is_major_card(String signature, boolean expected) {
         // given
-        Card card = Card.get(Suit.SPADE, signature);
+        Card card = Card.of(Suit.SPADE, signature);
 
         // when
         boolean isMajorCard = card.isMajorCard();
@@ -102,7 +102,7 @@ public class CardTest {
     @DisplayName("에이스 카드인지 확인한다.")
     void is_ace_card(String signature, boolean expected) {
         // given
-        Card card = Card.get(Suit.SPADE, signature);
+        Card card = Card.of(Suit.SPADE, signature);
 
         // when
         boolean isAceCard = card.isAceCard();
@@ -116,7 +116,7 @@ public class CardTest {
     @DisplayName("에이스 카드가 아닌지 확인한다.")
     void is_not_ace_card(String signature, boolean expected) {
         // given
-        Card card = Card.get(Suit.SPADE, signature);
+        Card card = Card.of(Suit.SPADE, signature);
 
         // when
         boolean isNotAceCard = card.isNotAceCard();

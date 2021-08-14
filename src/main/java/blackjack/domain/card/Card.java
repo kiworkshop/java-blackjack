@@ -17,10 +17,10 @@ public class Card {
         Arrays.stream(Suit.values())
                 .forEach(suit -> {
                     IntStream.rangeClosed(NUMBER_CARD_MIN_RANK, NUMBER_CARD_MAX_RANK).forEach(
-                            rank -> CARD_CACHE.put(generateKey(suit, rank), new Card(suit, rank)));
+                            rank -> CARD_CACHE.put(generateKey(suit, rank), numberCardOf(suit, rank)));
                     MAJOR_CARD_SIGNATURES.forEach(
-                            signature -> CARD_CACHE.put(generateKey(suit, signature), new Card(suit, signature)));
-                    CARD_CACHE.put(generateKey(suit, AceCard.SIGNATURE), new Card(suit, AceCard.DEFAULT_RANK, AceCard.SIGNATURE));
+                            signature -> CARD_CACHE.put(generateKey(suit, signature), majorCardOf(suit, signature)));
+                    CARD_CACHE.put(generateKey(suit, AceCard.SIGNATURE), aceCardOf(suit));
                 });
     }
 
@@ -34,12 +34,16 @@ public class Card {
         this.signature = signature;
     }
 
-    private Card(Suit suit, int rank) {
-        this(suit, rank, String.valueOf(rank));
+    private static Card numberCardOf(Suit suit, int rank) {
+        return new Card(suit, rank, String.valueOf(rank));
     }
 
-    private Card(Suit suit, String signature) {
-        this(suit, MAJOR_CARD_RANK, signature);
+    private static Card majorCardOf(Suit suit, String signature) {
+        return new Card(suit, MAJOR_CARD_RANK, signature);
+    }
+
+    private static Card aceCardOf(Suit suit) {
+        return new Card(suit, AceCard.DEFAULT_RANK, AceCard.SIGNATURE);
     }
 
     private static String generateKey(Suit suit, String signature) {
@@ -50,7 +54,7 @@ public class Card {
         return generateKey(suit, String.valueOf(rank));
     }
 
-    public static Card get(Suit suit, String signature) {
+    public static Card of(Suit suit, String signature) {
         String key = generateKey(suit, signature);
         Card card = CARD_CACHE.get(key);
 
@@ -61,8 +65,8 @@ public class Card {
         return card;
     }
 
-    public static Card get(Suit suit, int rank) {
-        return get(suit, String.valueOf(rank));
+    public static Card of(Suit suit, int rank) {
+        return of(suit, String.valueOf(rank));
     }
 
     public static Collection<Card> getAll() {

@@ -1,6 +1,7 @@
 package blackjack.domain.profit;
 
 import blackjack.domain.prize.PlayersPrize;
+import blackjack.domain.prize.Prize;
 import blackjack.domain.table.BettingTable;
 
 import java.util.Collections;
@@ -16,10 +17,14 @@ public class PlayersProfit {
 
     private List<PlayerProfit> calculatePlayersProfit(BettingTable bettingTable, PlayersPrize prizes) {
         return prizes.getPlayerNames().stream()
-                .map(playerName -> new PlayerProfit(playerName,
-                        bettingTable.getBetAmount(playerName),
-                        prizes.getPrize(playerName)))
+                .map(playerName -> calculatePlayerProfit(bettingTable, prizes, playerName))
                 .collect(Collectors.toList());
+    }
+
+    private PlayerProfit calculatePlayerProfit(BettingTable bettingTable, PlayersPrize prizes, String playerName) {
+        int betAmount = bettingTable.getBetAmount(playerName);
+        Prize prize = prizes.getPrize(playerName);
+        return new PlayerProfit(playerName, betAmount, prize);
     }
 
     public int calculateTotalAmount() {

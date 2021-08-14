@@ -1,6 +1,7 @@
 package blackjack.domain.participant;
 
 import blackjack.domain.result.Rule;
+import blackjack.domain.result.RuleComparator;
 import blackjack.domain.result.WinningResult;
 import lombok.Getter;
 
@@ -30,7 +31,10 @@ public class Player extends Participant {
     }
 
     public WinningResult resultVersusDealer(Dealer dealer) {
+        RuleComparator ruleComparator = new RuleComparator();
+
         return Arrays.stream(Rule.values())
+                .sorted((rule1, rule2) -> ruleComparator.compare(rule1, rule2))
                 .filter(rule -> rule.findMatchingRule(this, dealer))
                 .findFirst()
                 .get()

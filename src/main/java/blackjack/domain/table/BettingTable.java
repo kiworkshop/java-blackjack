@@ -6,7 +6,6 @@ import blackjack.exception.NoSuchPlayerException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class BettingTable {
     private final Map<String, Integer> bettingTable = new HashMap<>();
@@ -26,7 +25,7 @@ public class BettingTable {
     public int getBetAmount(String playerName) {
         Integer betAmount = bettingTable.get(playerName);
 
-        if (Objects.isNull(betAmount)) {
+        if (betAmount == null) {
             throw new NoSuchPlayerException(playerName);
         }
 

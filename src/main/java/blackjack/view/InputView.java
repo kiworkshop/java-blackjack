@@ -3,7 +3,10 @@ package blackjack.view;
 import blackjack.dto.PlayerInput;
 import blackjack.exception.InvalidInputException;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -35,7 +38,7 @@ public class InputView {
     }
 
     private static void validateInputNullOrEmpty(String input) {
-        if (Objects.isNull(input) || input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             throw InvalidInputException.EMPTY_INPUT;
         }
     }

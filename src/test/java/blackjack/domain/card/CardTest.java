@@ -42,16 +42,16 @@ public class CardTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"A", "K", "Q", "J"})
-    @DisplayName("suit와 signature가 주어지면 해당 카드를 반환한다.")
-    void get_with_suit_and_rank(String signature) {
+    @DisplayName("suit와 symbol이 주어지면 해당 카드를 반환한다.")
+    void get_with_suit_and_rank(String symbol) {
         // given
         Suit suit = Suit.DIAMOND;
 
         // when
-        Card card = Card.of(suit, signature);
+        Card card = Card.of(suit, symbol);
 
         // then
-        assertThat(card.getSignature()).isEqualTo(signature);
+        assertThat(card.getSymbol()).isEqualTo(symbol);
         assertThat(card.getSuit()).isEqualTo(suit);
     }
 

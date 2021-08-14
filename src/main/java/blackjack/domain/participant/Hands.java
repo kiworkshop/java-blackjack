@@ -1,10 +1,11 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.card.AceCard;
 import blackjack.domain.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static blackjack.domain.card.Signature.sumAceCards;
 
 public class Hands {
     private final List<Card> hands;
@@ -30,8 +31,9 @@ public class Hands {
         int aceCardCount = countAceCards();
 
         if (aceCardCount > 0) {
-            return AceCard.softOrHardSum(sumExceptAceCards, aceCardCount);
+            return sumAceCards(sumExceptAceCards, aceCardCount) + sumExceptAceCards;
         }
+
         return sumExceptAceCards;
     }
 

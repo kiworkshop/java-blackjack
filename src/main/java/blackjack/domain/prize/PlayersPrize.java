@@ -26,7 +26,7 @@ public class PlayersPrize {
     public Prize getPrize(String playerName) {
         Prize prize = prizes.get(playerName);
 
-        if (Objects.isNull(prize)) {
+        if (prize == null) {
             throw new NoSuchPlayerException(playerName);
         }
 

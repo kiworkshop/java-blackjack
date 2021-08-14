@@ -1,0 +1,193 @@
+package blackjack.domain.card;
+
+import blackjack.domain.enums.Score;
+import blackjack.domain.enums.Suit;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class GivenCardsTest {
+
+    @Test
+    @DisplayName("가지고 있는 카드의 합을 반환한다.")
+    void sum() {
+        //given
+        Card card1 = Card.from(Score.EIGHT, Suit.CLUB);
+        Card card2 = Card.from(Score.TWO, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+
+        //when
+        int sum = givenCards.sum();
+
+        //then
+        assertThat(sum).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("Ace가 1로 계산된 카드의 합을 반환한다.")
+    void sum_with_ace_value_1() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.CLUB);
+        Card card3 = Card.from(Score.A, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2, card3));
+
+        //when
+        int sum = givenCards.sum();
+
+        //then
+        assertThat(sum).isEqualTo(21);
+    }
+
+    @Test
+    @DisplayName("Ace가 11로 계산된 카드의 합을 반환한다.")
+    void sum_with_ace_value_11() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+
+        //when
+        int sum = givenCards.sum();
+
+        //then
+        assertThat(sum).isEqualTo(21);
+    }
+
+    @Test
+    @DisplayName("카드 2장이 21일 경우, 참을 반환한다.")
+    void isBlackjack() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+
+        //when
+        boolean isBlackjack = givenCards.isBlackjack();
+
+        //then
+        assertThat(isBlackjack).isTrue();
+    }
+
+    @Test
+    @DisplayName("카드의 합이 21을 초과할 경우, 참을 반환한다.")
+    void isBurst() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.TEN, Suit.HEART);
+        Card card3 = Card.from(Score.TWO, Suit.HEART);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2, card3));
+
+        //when
+        boolean isBurst = givenCards.isBurst();
+
+        //then
+        assertThat(isBurst).isTrue();
+    }
+
+    @Test
+    @DisplayName("가지고 있는 카드 목록을 반환한다.")
+    void list() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.A, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+
+        //when
+        List<Card> cards = givenCards.list();
+
+        //then
+        assertThat(cards).hasSize(2)
+                .containsOnly(card1, card2);
+    }
+
+    @Test
+    @DisplayName("인자로 받은 카드를 추가한다.")
+    void add() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
+        GivenCards givenCards = new GivenCards(Arrays.asList(card1, card2));
+        Card newCard = Card.from(Score.TWO, Suit.CLUB);
+
+        //when
+        givenCards.add(newCard);
+
+        //then
+        assertThat(givenCards.list()).hasSize(3)
+                .containsOnly(card1, card2, newCard);
+    }
+
+    @Test
+    @DisplayName("인자로 받은 카드보다 자신의 카드 합이 더 클 경우, 참을 반환한다.")
+    void isGreaterThan() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
+        Card card3 = Card.from(Score.SEVEN, Suit.CLUB);
+        GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
+
+        //when
+        boolean result = myCards.isGreaterThan(otherCards);
+
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("인자로 받은 카드보다 자신의 카드 합보다 작을 경우, 참을 반환한다.")
+    void isLessThan() {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
+        Card card3 = Card.from(Score.TEN, Suit.HEART);
+        GivenCards otherCards = new GivenCards(Arrays.asList(card1, card3));
+
+        //when
+        boolean result = myCards.isLessThan(otherCards);
+
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"18, false", "19, true"})
+    @DisplayName("인자로 받은 값보다 자신의 카드 합이 작거나 같을 경우, 참을 반환한다.")
+    void isLessThanEqualTo(int sum, boolean expected) {
+        //given
+        Card card1 = Card.from(Score.TEN, Suit.CLUB);
+        Card card2 = Card.from(Score.NINE, Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2));
+
+        //when
+        boolean result = myCards.isLessThanEqualTo(sum);
+
+        //then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"TEN, NINE, TWO, true", "TEN, EIGHT, TWO, false"})
+    @DisplayName("카드의 합이 21일 경우, 참을 반환한다.")
+    void isMaximumThreshhold(Score score1, Score score2, Score score3, boolean expected) {
+        //given
+        Card card1 = Card.from(score1, Suit.CLUB);
+        Card card2 = Card.from(score2, Suit.CLUB);
+        Card card3 = Card.from(score3, Suit.CLUB);
+        GivenCards myCards = new GivenCards(Arrays.asList(card1, card2, card3));
+
+        //when
+        boolean result = myCards.isMaximumThreshold();
+
+        //then
+        assertThat(result).isEqualTo(expected);
+    }
+}

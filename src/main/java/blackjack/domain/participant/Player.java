@@ -31,13 +31,12 @@ public class Player extends Participant {
     }
 
     public WinningResult resultVersusDealer(Dealer dealer) {
-        RuleComparator ruleComparator = new RuleComparator();
 
         return Arrays.stream(Rule.values())
-                .sorted((rule1, rule2) -> ruleComparator.compare(rule1, rule2))
+                .sorted(new RuleComparator())
                 .filter(rule -> rule.findMatchingRule(this, dealer))
                 .findFirst()
-                .get()
+                .orElseThrow(() -> new RuntimeException("일치하는 결과를 찾을 수 없습니다."))
                 .getWinningResult();
     }
 }

@@ -4,7 +4,6 @@ import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import lombok.Getter;
 
-import java.util.Comparator;
 import java.util.function.BiFunction;
 
 public enum Rule{

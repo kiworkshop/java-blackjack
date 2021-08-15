@@ -1,11 +1,6 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.result.Rule;
-import blackjack.domain.result.RuleComparator;
-import blackjack.domain.result.WinningResult;
 import lombok.Getter;
-
-import java.util.Arrays;
 
 @Getter
 public class Player extends Participant {
@@ -28,15 +23,5 @@ public class Player extends Participant {
     @Override
     public boolean drawable() {
         return getCardsSum() < PLAYER_DRAW_THRESHOLD;
-    }
-
-    public WinningResult resultVersusDealer(Dealer dealer) {
-
-        return Arrays.stream(Rule.values())
-                .sorted(new RuleComparator())
-                .filter(rule -> rule.findMatchingRule(this, dealer))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("일치하는 결과를 찾을 수 없습니다."))
-                .getWinningResult();
     }
 }

@@ -4,6 +4,7 @@ import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Rule{
@@ -35,5 +36,15 @@ public enum Rule{
 
     public WinningResult getWinningResult() {
         return winningResult;
+    }
+
+    public static WinningResult resultPlayerVersusDealer(Player player, Dealer dealer) {
+
+        return Arrays.stream(Rule.values())
+                .sorted(new RuleComparator())
+                .filter(rule -> rule.findMatchingRule(player, dealer))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("일치하는 결과를 찾을 수 없습니다."))
+                .getWinningResult();
     }
 }

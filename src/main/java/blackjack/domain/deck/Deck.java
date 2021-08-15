@@ -1,10 +1,13 @@
-package blackjack.domain.game;
+package blackjack.domain.deck;
 
 import blackjack.domain.card.Card;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static blackjack.exception.ExceptionMessage.EMPTY_DECK;
 
 public class Deck {
     public static final int TOTAL_CARD_COUNT = 52;
@@ -12,20 +15,18 @@ public class Deck {
     private final Deque<Card> cards;
 
     public Deck(DeckGenerator deckGenerator) {
-        this.cards = deckGenerator.generateCards();
+        this.cards = deckGenerator.generateDeck();
     }
 
     public List<Card> drawCards(int count) {
-        List<Card> deals = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            deals.add(drawCard());
-        }
-        return deals;
+        return IntStream.range(0, count)
+                .mapToObj(i -> drawCard())
+                .collect(Collectors.toList());
     }
 
     public Card drawCard() {
         if (cards.isEmpty()) {
-            throw new IndexOutOfBoundsException("남아있는 카드가 없습니다.");
+            throw new IndexOutOfBoundsException(EMPTY_DECK);
         }
 
         return cards.pop();

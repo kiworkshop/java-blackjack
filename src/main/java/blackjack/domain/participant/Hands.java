@@ -1,11 +1,11 @@
-package blackjack.domain.game;
+package blackjack.domain.participant;
 
-import blackjack.domain.card.AceCard;
 import blackjack.domain.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+
+import static blackjack.domain.card.Signature.sumAceCards;
 
 public class Hands {
     private final List<Card> hands;
@@ -31,27 +31,36 @@ public class Hands {
         int aceCardCount = countAceCards();
 
         if (aceCardCount > 0) {
-            return AceCard.softOrHardSum(sumExceptAceCards, aceCardCount);
+            return sumAceCards(sumExceptAceCards, aceCardCount) + sumExceptAceCards;
         }
+
         return sumExceptAceCards;
     }
 
     private int calculateSumExceptAceCards() {
         return hands.stream()
-                .filter(((Predicate<? super Card>) AceCard.class::isInstance).negate())
+                .filter(Card::isNotAceCard)
                 .mapToInt(Card::getRank)
                 .sum();
     }
 
-    public int countAceCards() {
+    public boolean hasOneAceCard() {
+        return countAceCards() == 1;
+    }
+
+    private int countAceCards() {
         return (int) hands.stream()
-                .filter(AceCard.class::isInstance)
+                .filter(Card::isAceCard)
                 .count();
     }
 
-    public int countMajorCards() {
+    public boolean hasOneMajorCard() {
+        return countMajorCards() == 1;
+    }
+
+    private int countMajorCards() {
         return (int) hands.stream()
-                .filter(Card::majorCard)
+                .filter(Card::isMajorCard)
                 .count();
     }
 

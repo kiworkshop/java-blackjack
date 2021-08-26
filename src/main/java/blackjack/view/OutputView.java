@@ -5,7 +5,6 @@ import blackjack.domain.prize.DealerPrize;
 import blackjack.domain.prize.PlayersPrize;
 import blackjack.domain.prize.PrizeResults;
 import blackjack.dto.DealerDto;
-import blackjack.dto.FinalDealerDto;
 import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 
@@ -36,7 +35,7 @@ public class OutputView {
     }
 
     private static String generateDealerHandsMessage(DealerDto dto) {
-        return String.format(PARTICIPANTS_HANDS, dto.getName(), printCards(dto.getCards()));
+        return String.format(PARTICIPANTS_HANDS, dto.name(), dto.faceUpCard().key());
     }
 
     private static String generatePlayerHandsMessage(PlayerDto dto) {
@@ -49,7 +48,7 @@ public class OutputView {
 
     private static String printCards(List<Card> cards) {
         List<String> cardSignatures = cards.stream()
-                .map(card -> card.getSignature() + card.getSuit().getName())
+                .map(Card::key)
                 .collect(Collectors.toList());
         return String.join(", ", cardSignatures);
     }
@@ -58,21 +57,21 @@ public class OutputView {
         System.out.println();
         printFinalDealMessage(participants.getDealerDto());
 
-        printFinalDealerHands((FinalDealerDto) participants.getDealerDto());
+        printFinalDealerHands(participants.getDealerDto());
         printFinalPlayersHands(participants.getPlayers());
         System.out.println();
     }
 
     private static void printFinalDealMessage(DealerDto dealer) {
-        if (dealer.getCards().size() == MAX_DEALER_CARDS_COUNT) {
+        if (dealer.cards().size() == MAX_DEALER_CARDS_COUNT) {
             System.out.println("딜러는 16 이하라 한 장의 카드를 더 받았습니다.");
         }
     }
 
-    private static void printFinalDealerHands(FinalDealerDto finalDealerDto) {
+    private static void printFinalDealerHands(DealerDto dealerDto) {
         System.out.printf(PARTICIPANTS_FINAL_HANDS,
-                generateDealerHandsMessage(finalDealerDto),
-                finalDealerDto.getRankSum());
+                generateDealerHandsMessage(dealerDto),
+                dealerDto.rankSum());
     }
 
     private static void printFinalPlayersHands(List<PlayerDto> players) {
@@ -85,8 +84,8 @@ public class OutputView {
     public static void printPrizeResults(PrizeResults prizeResults) {
         System.out.println();
         System.out.println("## 최종 승패");
-        printDealerPrize(prizeResults.getDealerPrize());
-        printPlayersPrize(prizeResults.getPlayersPrize());
+        printDealerPrize(prizeResults.dealerPrize());
+        printPlayersPrize(prizeResults.playersPrize());
     }
 
     private static void printDealerPrize(DealerPrize dealerPrize) {
@@ -94,6 +93,6 @@ public class OutputView {
     }
 
     private static void printPlayersPrize(PlayersPrize playersPrize) {
-        playersPrize.getPlayerPrizes().forEach(playerPrize -> System.out.printf("%s: %s%n", playerPrize.getPlayerName(), playerPrize.getPrize().getTitle()));
+        playersPrize.values().forEach(playerPrize -> System.out.printf("%s: %s%n", playerPrize.name(), playerPrize.value().getTitle()));
     }
 }

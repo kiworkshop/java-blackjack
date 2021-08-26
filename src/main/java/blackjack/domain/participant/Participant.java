@@ -15,23 +15,18 @@ public class Participant implements BlackjackRule {
     }
 
     @Override
-    public int sumRank() {
-        return hands.sumRanks();
-    }
-
-    @Override
     public void draw(Card card) {
         hands.addCard(card);
     }
 
     @Override
     public boolean hit() {
-        return hands.sumRanks() < BLACKJACK_RANK;
+        return hands.sumRank() < BLACKJACK_RANK;
     }
 
     @Override
     public boolean bust() {
-        return hands.sumRanks() > BLACKJACK_RANK;
+        return hands.sumRank() > BLACKJACK_RANK;
     }
 
     @Override
@@ -45,7 +40,11 @@ public class Participant implements BlackjackRule {
     }
 
     @Override
-    public List<Card> getCards() {
-        return hands.getHands();
+    public List<Card> cards() {
+        return hands.cards();
+    }
+
+    public Hands hands() {
+        return hands;
     }
 }

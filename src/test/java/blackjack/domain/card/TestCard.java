@@ -2,21 +2,16 @@ package blackjack.domain.card;
 
 public class TestCard {
 
-    public static final Card ACE_1 = new AceCard(Suit.CLUB);
-    public static final Card ACE_2 = new AceCard(Suit.DIAMOND);
-    public static final Card ACE_3 = new AceCard(Suit.HEART);
-    public static final Card ACE_4 = new AceCard(Suit.SPADE);
-
-    public static final Card CARD_1 = new Card(Suit.SPADE, 1);
-    public static final Card CARD_2 = new Card(Suit.SPADE, 2);
-    public static final Card CARD_3 = new Card(Suit.SPADE, 3);
-    public static final Card CARD_4 = new Card(Suit.SPADE, 4);
-    public static final Card CARD_5 = new Card(Suit.SPADE, 5);
-    public static final Card CARD_6 = new Card(Suit.SPADE, 6);
-    public static final Card CARD_7 = new Card(Suit.SPADE, 7);
-    public static final Card CARD_8 = new Card(Suit.SPADE, 8);
-    public static final Card CARD_9 = new Card(Suit.SPADE, 9);
-    public static final Card CARD_K = new Card(Suit.SPADE, "K");
-    public static final Card CARD_J = new Card(Suit.SPADE, "J");
-    public static final Card CARD_Q = new Card(Suit.SPADE, "Q");
+    public static final Card SPADE_A = Card.of(Suit.SPADE, Denomination.ACE);
+    public static final Card SPADE_2 = Card.of(Suit.SPADE, Denomination.TWO);
+    public static final Card SPADE_3 = Card.of(Suit.SPADE, Denomination.THREE);
+    public static final Card SPADE_4 = Card.of(Suit.SPADE, Denomination.FOUR);
+    public static final Card SPADE_5 = Card.of(Suit.SPADE, Denomination.FIVE);
+    public static final Card SPADE_6 = Card.of(Suit.SPADE, Denomination.SIX);
+    public static final Card SPADE_7 = Card.of(Suit.SPADE, Denomination.SEVEN);
+    public static final Card SPADE_8 = Card.of(Suit.SPADE, Denomination.EIGHT);
+    public static final Card SPADE_9 = Card.of(Suit.SPADE, Denomination.NINE);
+    public static final Card SPADE_K = Card.of(Suit.SPADE, Denomination.KING);
+    public static final Card SPADE_J = Card.of(Suit.SPADE, Denomination.JACK);
+    public static final Card SPADE_Q = Card.of(Suit.SPADE, Denomination.QUEEN);
 }

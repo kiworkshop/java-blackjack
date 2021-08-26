@@ -5,7 +5,6 @@ import blackjack.domain.card.Card;
 import java.util.List;
 
 public interface BlackjackRule {
-    int sumRank();
 
     void draw(Card card);
 
@@ -17,5 +16,6 @@ public interface BlackjackRule {
 
     int countHands();
 
-    List<Card> getCards();
+    List<Card> cards();
+
 }

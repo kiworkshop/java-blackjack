@@ -28,8 +28,8 @@ class PrizeResultsTest {
                           List<String> playersResults) {
         //given, when
         PrizeResults prizeResults = new PrizeResults(dealer, players);
-        DealerPrize dealerPrize = prizeResults.getDealerPrize();
-        PlayersPrize playersPrize = prizeResults.getPlayersPrize();
+        DealerPrize dealerPrize = prizeResults.dealerPrize();
+        PlayersPrize playersPrize = prizeResults.playersPrize();
 
         //then
         assertThat(dealerPrize.getWinCount()).isEqualTo(winCount);
@@ -37,37 +37,36 @@ class PrizeResultsTest {
         assertThat(dealerPrize.getTieCount()).isEqualTo(tieCount);
 
         for (int i = 0; i < players.size(); i++) {
-            PlayerPrize playerPrize = playersPrize.getPlayerPrizes().get(i);
-            assertThat(playerPrize.getPrize().getTitle()).isEqualTo(playersResults.get(i));
+            PlayerPrize playerPrize = playersPrize.values().get(i);
+            assertThat(playerPrize.value().getTitle()).isEqualTo(playersResults.get(i));
         }
     }
 
     private static List<Player> generatePlayers() {
         return Arrays.asList(
-                new Player("1", new Hands(Arrays.asList(CARD_2, CARD_8, CARD_6))),   // 16
-                new Player("2", new Hands(Arrays.asList(CARD_K, CARD_7))),           // 17
-                new Player("3", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))),   // 19
-                new Player("4", new Hands(Arrays.asList(CARD_3, CARD_Q, CARD_6))),   // 19
-                new Player("블랙잭", new Hands(Arrays.asList(CARD_Q, ACE_1))),        // blackjack
-                new Player("5", new Hands(Arrays.asList(CARD_Q, CARD_8, CARD_9)))    // 27
+                new Player("1", new Hands(Arrays.asList(SPADE_2, SPADE_8, SPADE_6))),   // 16
+                new Player("2", new Hands(Arrays.asList(SPADE_K, SPADE_7))),            // 17
+                new Player("3", new Hands(Arrays.asList(SPADE_3, SPADE_Q, SPADE_6))),   // 19
+                new Player("4", new Hands(Arrays.asList(SPADE_3, SPADE_Q, SPADE_6))),   // 19
+                new Player("블랙잭", new Hands(Arrays.asList(SPADE_Q, SPADE_A))),         // blackjack
+                new Player("5", new Hands(Arrays.asList(SPADE_Q, SPADE_8, SPADE_9)))    // 27
         );
-//        return new Players(players);
     }
 
     private static Dealer generateDealer() { // 19
-        return new Dealer(new Hands(Arrays.asList(CARD_9, CARD_K)));
+        return new Dealer(new Hands(Arrays.asList(SPADE_9, SPADE_K)));
     }
 
     private static Dealer generateWinDealer() { // 21
-        return new Dealer(new Hands(Arrays.asList(CARD_6, CARD_7, CARD_8)));
+        return new Dealer(new Hands(Arrays.asList(SPADE_6, SPADE_7, SPADE_8)));
     }
 
     private static Dealer generateBlackjackDealer() { // 21
-        return new Dealer(new Hands(Arrays.asList(ACE_3, CARD_Q)));
+        return new Dealer(new Hands(Arrays.asList(SPADE_A, SPADE_Q)));
     }
 
     private static Dealer generateBustDealer() { // 23
-        return new Dealer(new Hands(Arrays.asList(CARD_6, CARD_7, CARD_Q)));
+        return new Dealer(new Hands(Arrays.asList(SPADE_6, SPADE_7, SPADE_Q)));
     }
 
     private static Stream<Arguments> generateCompareHands() {

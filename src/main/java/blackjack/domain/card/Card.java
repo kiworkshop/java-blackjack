@@ -1,39 +1,27 @@
 package blackjack.domain.card;
 
 public class Card {
-    static final int MAJOR_CARD_RANK = 10;
-
     private final Suit suit;
-    private final int rank;
-    private final String signature;
+    private final Denomination denomination;
 
-    public Card(Suit suit, int rank, String signature) {
+    private Card(Suit suit, Denomination denomination) {
         this.suit = suit;
-        this.rank = rank;
-        this.signature = signature;
+        this.denomination = denomination;
     }
 
-    public Card(Suit suit, int rank) {
-        this(suit, rank, String.valueOf(rank));
+    public static Card of(Suit suit, Denomination denomination) {
+        return new Card(suit, denomination);
     }
 
-    public Card(Suit suit, String signature) {
-        this(suit, MAJOR_CARD_RANK, signature);
+    public Denomination denomination() {
+        return denomination;
     }
 
-    public boolean majorCard() {
-        return rank == MAJOR_CARD_RANK;
+    public int rank() {
+        return denomination.rank();
     }
 
-    public int getRank() {
-        return rank;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public Suit getSuit() {
-        return suit;
+    public String key() {
+        return suit + "_" + denomination.signature();
     }
 }

@@ -20,7 +20,7 @@ public class BlackjackController {
         OutputView.printInitialDeal(initialParticipants);
 
         deal(blackjackService);
-        ParticipantsDto finalParticipants = blackjackService.getFinalParticipants();
+        ParticipantsDto finalParticipants = blackjackService.getParticipants();
         OutputView.printFinalHands(finalParticipants);
 
         PrizeResults prizeResults = blackjackService.calculatePrizeResults();

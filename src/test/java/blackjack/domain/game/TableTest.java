@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
+import static blackjack.domain.card.Deck.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TableTest {
@@ -19,11 +19,11 @@ class TableTest {
 
         // when
         Table table = new Table(playerNames);
-        List<Player> players = table.getPlayers();
+        List<Player> players = table.players();
 
         // then
-        assertThat(table.getDeckSize()).isEqualTo(46);
-        assertThat(table.getDealer().countHands()).isEqualTo(INITIAL_DEAL_COUNT);
+        assertThat(table.deck().size()).isEqualTo(46);
+        assertThat(table.dealer().countHands()).isEqualTo(INITIAL_DEAL_COUNT);
         players.forEach(player -> assertThat(player.countHands()).isEqualTo(INITIAL_DEAL_COUNT));
     }
 
@@ -33,14 +33,14 @@ class TableTest {
         //given
         List<String> playerNames = generatePlayerNames();
         Table table = new Table(playerNames);
-        List<Player> players = table.getPlayers();
+        List<Player> players = table.players();
 
         //when
         Player player = table.hit(players.get(0));
 
         //then
-        assertThat(player.getCards().size()).isEqualTo(3);
-        assertThat(table.getDeckSize()).isEqualTo(45);
+        assertThat(player.cards().size()).isEqualTo(3);
+        assertThat(table.deck().size()).isEqualTo(45);
     }
 
     private List<String> generatePlayerNames() {

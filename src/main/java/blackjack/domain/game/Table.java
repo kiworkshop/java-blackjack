@@ -1,6 +1,8 @@
 package blackjack.domain.game;
 
 import blackjack.domain.card.Card;
+import blackjack.domain.card.Deck;
+import blackjack.domain.card.DeckInitializer;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 
@@ -13,7 +15,7 @@ public class Table {
     private final List<Player> players;
 
     public Table(List<String> playerNames) {
-        this.deck = new Deck();
+        this.deck = Deck.of(DeckInitializer.init());
         this.dealer = new Dealer(deck.drawInitialHands());
         this.players = generatePlayers(playerNames);
     }
@@ -37,15 +39,15 @@ public class Table {
         }
     }
 
-    public int getDeckSize() {
-        return deck.size();
+    public Deck deck() {
+        return deck;
     }
 
-    public Dealer getDealer() {
+    public Dealer dealer() {
         return dealer;
     }
 
-    public List<Player> getPlayers() {
+    public List<Player> players() {
         return players;
     }
 }

@@ -2,7 +2,7 @@ package blackjack.domain.participant;
 
 import blackjack.domain.game.Hands;
 
-import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
+import static blackjack.domain.card.Deck.INITIAL_DEAL_COUNT;
 
 public class Player extends Participant {
     private final String name;

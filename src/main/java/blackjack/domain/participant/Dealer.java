@@ -11,10 +11,11 @@ public class Dealer extends Participant {
     }
 
     public Card getFaceUpCard() {
-        return hands.getFirstHand();
+        return hands.firstHand();
     }
 
+    @Override
     public boolean hit() {
-        return sumRank() <= HIT_THRESHOLD;
+        return hands.sumRank() <= HIT_THRESHOLD;
     }
 }

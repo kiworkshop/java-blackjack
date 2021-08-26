@@ -14,8 +14,8 @@ public class PlayerDto {
 
     public PlayerDto(Player player) {
         this.name = player.getName();
-        this.cards = Collections.unmodifiableList(new ArrayList<>(player.getCards()));
-        this.rankSum = player.sumRank();
+        this.cards = Collections.unmodifiableList(new ArrayList<>(player.cards()));
+        this.rankSum = player.hands().sumRank();
     }
 
     public String getName() {

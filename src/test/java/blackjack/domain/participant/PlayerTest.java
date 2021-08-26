@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static blackjack.domain.card.Deck.INITIAL_DEAL_COUNT;
 import static blackjack.domain.card.TestCard.*;
-import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PlayerTest {
@@ -39,7 +39,7 @@ class PlayerTest {
 
         //when
         Player player = new Player(name, hands);
-        player.draw(CARD_8);
+        player.draw(SPADE_8);
 
         //then
         assertThat(player.countHands()).isEqualTo(3);
@@ -53,7 +53,7 @@ class PlayerTest {
         Player hitPlayer = new Player("name", generateHands());
 
         //when
-        hitPlayer.draw(CARD_8);
+        hitPlayer.draw(SPADE_8);
 
         //then
         assertThat(neverHitPlayer.neverHit()).isTrue();
@@ -64,8 +64,8 @@ class PlayerTest {
     @DisplayName("블랙잭인 것을 확인한다.")
     void blackjack() {
         // given
-        Player blackjackPlayer = new Player("blackjack", new Hands(Arrays.asList(ACE_1, CARD_Q)));
-        Player notBlackjackPlayer = new Player("notBlackjack", new Hands(Arrays.asList(ACE_1, CARD_9)));
+        Player blackjackPlayer = new Player("blackjack", new Hands(Arrays.asList(SPADE_A, SPADE_Q)));
+        Player notBlackjackPlayer = new Player("notBlackjack", new Hands(Arrays.asList(SPADE_A, SPADE_9)));
 
         // when
         boolean blackjack = blackjackPlayer.blackjack();
@@ -80,8 +80,8 @@ class PlayerTest {
     @DisplayName("버스트인 것을 확인한다.")
     void bust() {
         // given
-        Player bustPlayer = new Player("bust", new Hands(Arrays.asList(CARD_3, CARD_K, CARD_Q)));
-        Player notBustPlayer = new Player("notBust", new Hands(Arrays.asList(ACE_1, CARD_9)));
+        Player bustPlayer = new Player("bust", new Hands(Arrays.asList(SPADE_3, SPADE_K, SPADE_Q)));
+        Player notBustPlayer = new Player("notBust", new Hands(Arrays.asList(SPADE_A, SPADE_9)));
 
         // when
         boolean bust = bustPlayer.bust();
@@ -94,8 +94,8 @@ class PlayerTest {
 
     private Hands generateHands() {
         List<Card> cards = new ArrayList<>();
-        cards.add(CARD_8);
-        cards.add(CARD_9);
+        cards.add(SPADE_8);
+        cards.add(SPADE_9);
         return new Hands(cards);
     }
 }

@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static blackjack.domain.card.Deck.INITIAL_DEAL_COUNT;
 import static blackjack.domain.card.TestCard.*;
-import static blackjack.domain.game.Deck.INITIAL_DEAL_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DealerTest {
@@ -38,7 +38,7 @@ class DealerTest {
         Card faceUpCard = dealer.getFaceUpCard();
 
         //then
-        assertThat(faceUpCard.getRank()).isEqualTo(1);
+        assertThat(faceUpCard.rank()).isEqualTo(10);
     }
 
     @Test
@@ -75,7 +75,7 @@ class DealerTest {
         Dealer dealer = new Dealer(hands);
 
         //when
-        dealer.draw(CARD_3);
+        dealer.draw(SPADE_3);
 
         // then
         assertThat(dealer.countHands()).isEqualTo(3);
@@ -83,15 +83,15 @@ class DealerTest {
 
     private Hands generateHitHands() {
         List<Card> cards = new ArrayList<>();
-        cards.add(CARD_1);
-        cards.add(CARD_Q);
+        cards.add(SPADE_Q);
+        cards.add(SPADE_6);
         return new Hands(cards);
     }
 
     private Hands generateStandHands() {
         List<Card> cards = new ArrayList<>();
-        cards.add(CARD_J);
-        cards.add(CARD_K);
+        cards.add(SPADE_J);
+        cards.add(SPADE_K);
         return new Hands(cards);
     }
 }

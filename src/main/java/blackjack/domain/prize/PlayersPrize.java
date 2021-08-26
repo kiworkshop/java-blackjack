@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class PlayersPrize {
-    private final List<PlayerPrize> playerPrizes;
+    private final List<PlayerPrize> prizes;
 
     public PlayersPrize(List<PlayerPrize> playerPrizes) {
-        this.playerPrizes = Collections.unmodifiableList(new ArrayList<>(playerPrizes));
+        this.prizes = Collections.unmodifiableList(new ArrayList<>(playerPrizes));
     }
 
-    public List<PlayerPrize> getPlayerPrizes() {
-        return playerPrizes;
+    public List<PlayerPrize> values() {
+        return prizes;
     }
 }

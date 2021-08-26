@@ -1,16 +1,14 @@
 package blackjack.service;
 
 import blackjack.domain.game.Table;
-import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.domain.prize.PrizeResults;
 import blackjack.dto.DealerDto;
-import blackjack.dto.FinalDealerDto;
 import blackjack.dto.ParticipantsDto;
 import blackjack.dto.PlayerDto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlackjackService {
     private final Table table;
@@ -20,31 +18,11 @@ public class BlackjackService {
     }
 
     public ParticipantsDto getParticipants() {
-        DealerDto dealerDto = generateDealerDto();
-        List<PlayerDto> playersDto = generatePlayerDto();
+        DealerDto dealerDto = new DealerDto(table.dealer());
+        List<PlayerDto> playersDto = table.players().stream()
+                .map(PlayerDto::new)
+                .collect(Collectors.toList());
         return new ParticipantsDto(dealerDto, playersDto);
-    }
-
-    public ParticipantsDto getFinalParticipants() {
-        DealerDto finalDealerDto = generateFinalDealerDto();
-        List<PlayerDto> playersDto = generatePlayerDto();
-        return new ParticipantsDto(finalDealerDto, playersDto);
-    }
-
-    private DealerDto generateDealerDto() {
-        Dealer dealer = table.getDealer();
-        return new DealerDto(dealer.getFaceUpCard());
-    }
-
-    private FinalDealerDto generateFinalDealerDto() {
-        Dealer dealer = table.getDealer();
-        return new FinalDealerDto(dealer);
-    }
-
-    private List<PlayerDto> generatePlayerDto() {
-        List<PlayerDto> playersDto = new ArrayList<>();
-        table.getPlayers().forEach(player -> playersDto.add(new PlayerDto(player)));
-        return playersDto;
     }
 
     public PlayerDto hit(Player player) {
@@ -60,6 +38,6 @@ public class BlackjackService {
     }
 
     public List<Player> getPlayers() {
-        return table.getPlayers();
+        return table.players();
     }
 }

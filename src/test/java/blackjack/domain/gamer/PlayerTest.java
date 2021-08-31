@@ -1,4 +1,4 @@
-package blackjack.domain.participant;
+package blackjack.domain.gamer;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.game.Hands;
@@ -26,7 +26,7 @@ class PlayerTest {
         Player player = new Player(name, hands);
 
         //then
-        assertThat(player.getName()).isEqualTo(name);
+        assertThat(player.name()).isEqualTo(name);
         assertThat(player.countHands()).isEqualTo(INITIAL_DEAL_COUNT);
     }
 
@@ -39,7 +39,7 @@ class PlayerTest {
 
         //when
         Player player = new Player(name, hands);
-        player.draw(SPADE_8);
+        player.hit(SPADE_8);
 
         //then
         assertThat(player.countHands()).isEqualTo(3);
@@ -53,7 +53,7 @@ class PlayerTest {
         Player hitPlayer = new Player("name", generateHands());
 
         //when
-        hitPlayer.draw(SPADE_8);
+        hitPlayer.hit(SPADE_8);
 
         //then
         assertThat(neverHitPlayer.neverHit()).isTrue();
@@ -68,8 +68,8 @@ class PlayerTest {
         Player notBlackjackPlayer = new Player("notBlackjack", new Hands(Arrays.asList(SPADE_A, SPADE_9)));
 
         // when
-        boolean blackjack = blackjackPlayer.blackjack();
-        boolean notBlackjack = notBlackjackPlayer.blackjack();
+        boolean blackjack = blackjackPlayer.isBlackjack();
+        boolean notBlackjack = notBlackjackPlayer.isBlackjack();
 
         // then
         assertThat(blackjack).isTrue();
@@ -84,8 +84,8 @@ class PlayerTest {
         Player notBustPlayer = new Player("notBust", new Hands(Arrays.asList(SPADE_A, SPADE_9)));
 
         // when
-        boolean bust = bustPlayer.bust();
-        boolean notBust = notBustPlayer.bust();
+        boolean bust = bustPlayer.isBust();
+        boolean notBust = notBustPlayer.isBust();
 
         // then
         assertThat(bust).isTrue();

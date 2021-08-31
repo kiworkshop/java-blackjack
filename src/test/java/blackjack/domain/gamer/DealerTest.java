@@ -1,4 +1,4 @@
-package blackjack.domain.participant;
+package blackjack.domain.gamer;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.game.Hands;
@@ -51,7 +51,7 @@ class DealerTest {
         Dealer dealer = new Dealer(hands);
 
         //then
-        assertThat(dealer.hit()).isTrue();
+        assertThat(dealer.canHit()).isTrue();
     }
 
     @Test
@@ -64,7 +64,7 @@ class DealerTest {
         Dealer dealer = new Dealer(hands);
 
         //then
-        assertThat(dealer.hit()).isFalse();
+        assertThat(dealer.canHit()).isFalse();
     }
 
     @Test
@@ -75,7 +75,7 @@ class DealerTest {
         Dealer dealer = new Dealer(hands);
 
         //when
-        dealer.draw(SPADE_3);
+        dealer.hit(SPADE_3);
 
         // then
         assertThat(dealer.countHands()).isEqualTo(3);

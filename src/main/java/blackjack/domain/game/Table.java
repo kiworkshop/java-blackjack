@@ -3,8 +3,8 @@ package blackjack.domain.game;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.DeckInitializer;
-import blackjack.domain.participant.Dealer;
-import blackjack.domain.participant.Player;
+import blackjack.domain.gamer.Dealer;
+import blackjack.domain.gamer.Player;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,14 +28,14 @@ public class Table {
 
     public Player hit(Player player) {
         Card card = deck.draw();
-        player.draw(card);
+        player.hit(card);
         return player;
     }
 
     public void finalDeal() {
-        if (dealer.hit()) {
+        if (dealer.canHit()) {
             Card card = deck.draw();
-            dealer.draw(card);
+            dealer.hit(card);
         }
     }
 

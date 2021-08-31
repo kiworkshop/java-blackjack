@@ -1,6 +1,6 @@
 package blackjack.domain.game;
 
-import blackjack.domain.participant.Player;
+import blackjack.domain.gamer.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,7 @@ class TableTest {
         Player player = table.hit(players.get(0));
 
         //then
-        assertThat(player.cards().size()).isEqualTo(3);
+        assertThat(player.countHands()).isEqualTo(3);
         assertThat(table.deck().size()).isEqualTo(45);
     }
 

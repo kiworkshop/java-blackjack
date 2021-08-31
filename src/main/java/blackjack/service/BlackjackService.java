@@ -1,10 +1,10 @@
 package blackjack.service;
 
 import blackjack.domain.game.Table;
-import blackjack.domain.participant.Player;
+import blackjack.domain.gamer.Player;
 import blackjack.domain.prize.PrizeResults;
 import blackjack.dto.DealerDto;
-import blackjack.dto.ParticipantsDto;
+import blackjack.dto.GamerDto;
 import blackjack.dto.PlayerDto;
 
 import java.util.List;
@@ -17,12 +17,12 @@ public class BlackjackService {
         this.table = new Table(playerNames);
     }
 
-    public ParticipantsDto getParticipants() {
+    public GamerDto generateGamer() {
         DealerDto dealerDto = new DealerDto(table.dealer());
         List<PlayerDto> playersDto = table.players().stream()
                 .map(PlayerDto::new)
                 .collect(Collectors.toList());
-        return new ParticipantsDto(dealerDto, playersDto);
+        return new GamerDto(dealerDto, playersDto);
     }
 
     public PlayerDto hit(Player player) {
@@ -37,7 +37,7 @@ public class BlackjackService {
         return new PrizeResults(table);
     }
 
-    public List<Player> getPlayers() {
+    public List<Player> players() {
         return table.players();
     }
 }

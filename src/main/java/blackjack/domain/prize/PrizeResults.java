@@ -2,8 +2,8 @@ package blackjack.domain.prize;
 
 import blackjack.domain.game.Hands;
 import blackjack.domain.game.Table;
-import blackjack.domain.participant.Dealer;
-import blackjack.domain.participant.Player;
+import blackjack.domain.gamer.Dealer;
+import blackjack.domain.gamer.Player;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,20 +30,20 @@ public class PrizeResults {
     }
 
     private PlayerPrize matchPrize(Dealer dealer, Player player) {
-        if (dealer.bust() || player.bust()) {
-            Prize prize = bustPrize(dealer.bust(), player.bust());
-            return new PlayerPrize(player.getName(), prize);
+        if (dealer.isBust() || player.isBust()) {
+            Prize prize = bustPrize(dealer.isBust(), player.isBust());
+            return new PlayerPrize(player.name(), prize);
         }
 
-        if (dealer.blackjack() || player.blackjack()) {
-            Prize prize = blackjackPrize(dealer.blackjack(), player.blackjack());
-            return new PlayerPrize(player.getName(), prize);
+        if (dealer.isBlackjack() || player.isBlackjack()) {
+            Prize prize = blackjackPrize(dealer.isBlackjack(), player.isBlackjack());
+            return new PlayerPrize(player.name(), prize);
         }
 
         int dealerScore = getDifference(dealer.hands());
         int playerScore = getDifference(player.hands());
         Prize prize = generalPrize(dealerScore, playerScore);
-        return new PlayerPrize(player.getName(), prize);
+        return new PlayerPrize(player.name(), prize);
     }
 
     private int getDifference(Hands hands) {

@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ParticipantsDto {
+public class GamerDto {
     private final DealerDto dealerDto;
     private final List<PlayerDto> playersDto;
 
-    public ParticipantsDto(DealerDto dealerDto, List<PlayerDto> playersDto) {
+    public GamerDto(DealerDto dealerDto, List<PlayerDto> playersDto) {
         this.dealerDto = dealerDto;
         this.playersDto = Collections.unmodifiableList(new ArrayList<>(playersDto));
     }
 
-    public DealerDto getDealerDto() {
+    public DealerDto dealerDto() {
         return dealerDto;
     }
 
-    public List<PlayerDto> getPlayers() {
+    public List<PlayerDto> playersDto() {
         return playersDto;
     }
 }

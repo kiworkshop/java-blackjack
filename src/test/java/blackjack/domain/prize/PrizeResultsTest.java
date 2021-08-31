@@ -1,11 +1,8 @@
-package blackjack.domain.game;
+package blackjack.domain.prize;
 
-import blackjack.domain.participant.Dealer;
-import blackjack.domain.participant.Player;
-import blackjack.domain.prize.DealerPrize;
-import blackjack.domain.prize.PlayerPrize;
-import blackjack.domain.prize.PlayersPrize;
-import blackjack.domain.prize.PrizeResults;
+import blackjack.domain.game.Hands;
+import blackjack.domain.gamer.Dealer;
+import blackjack.domain.gamer.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

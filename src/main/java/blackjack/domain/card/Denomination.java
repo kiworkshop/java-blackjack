@@ -25,12 +25,6 @@ public enum Denomination {
         this.rank = rank;
     }
 
-    public static boolean isNumberCard(Card card) {
-        EnumSet<Denomination> major = EnumSet.of(Denomination.TWO, Denomination.THREE, Denomination.FOUR, Denomination.FIVE,
-                Denomination.SIX, Denomination.SEVEN, Denomination.EIGHT, Denomination.NINE, Denomination.TEN);
-        return major.contains(card.denomination());
-    }
-
     public static boolean isAceCard(Card card) {
         EnumSet<Denomination> major = EnumSet.of(Denomination.ACE);
         return major.contains(card.denomination());

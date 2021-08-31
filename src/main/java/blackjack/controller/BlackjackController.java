@@ -1,8 +1,8 @@
 package blackjack.controller;
 
-import blackjack.domain.participant.Player;
+import blackjack.domain.gamer.Player;
 import blackjack.domain.prize.PrizeResults;
-import blackjack.dto.ParticipantsDto;
+import blackjack.dto.GamerDto;
 import blackjack.dto.PlayerDto;
 import blackjack.service.BlackjackService;
 import blackjack.view.InputView;
@@ -14,32 +14,29 @@ public class BlackjackController {
 
     public void run() {
         List<String> players = InputView.getPlayers();
-        BlackjackService blackjackService = new BlackjackService(players);
+        BlackjackService service = new BlackjackService(players);
 
-        ParticipantsDto initialParticipants = blackjackService.getParticipants();
-        OutputView.printInitialDeal(initialParticipants);
+        GamerDto initialGamer = service.generateGamer();
+        OutputView.printInitialDeal(initialGamer);
 
-        deal(blackjackService);
-        ParticipantsDto finalParticipants = blackjackService.getParticipants();
-        OutputView.printFinalHands(finalParticipants);
+        dealEachPlayer(service);
+        service.dealDealer();
 
-        PrizeResults prizeResults = blackjackService.calculatePrizeResults();
+        GamerDto finalGamer = service.generateGamer();
+        OutputView.printFinalHands(finalGamer);
+
+        PrizeResults prizeResults = service.calculatePrizeResults();
         OutputView.printPrizeResults(prizeResults);
     }
 
-    private void deal(BlackjackService blackjackService) {
-        dealEachPlayer(blackjackService);
-        blackjackService.dealDealer();
+    private void dealEachPlayer(BlackjackService service) {
+        service.players()
+                .forEach(player -> hitOrStand(service, player));
     }
 
-    private void dealEachPlayer(BlackjackService blackjackService) {
-        blackjackService.getPlayers()
-                .forEach(player -> hitOrStand(blackjackService, player));
-    }
-
-    private void hitOrStand(BlackjackService blackjackService, Player player) {
-        while (InputView.hit(player.getName())) {
-            PlayerDto playerDto = blackjackService.hit(player);
+    private void hitOrStand(BlackjackService service, Player player) {
+        while (InputView.hit(player.name())) {
+            PlayerDto playerDto = service.hit(player);
             OutputView.printPlayerHandsMessage(playerDto);
         }
 
